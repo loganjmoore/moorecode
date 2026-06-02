@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hobbies · Logan Moore</title>
+<meta name="description" content="The hands-on hobbies Logan Moore loves: flower farming, light shows, 3D printing, ham radio, robotics, and landscaping." />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<meta property="og:title" content="Hobbies · Logan Moore" />
+<meta property="og:description" content="Flower farming, light shows, 3D printing, ham radio, robotics, and landscaping." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://moorecode.com/hobbies.html" />
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="consulting.html">Consulting</a>
+    <a href="hobbies.html" class="active">Hobbies</a>
+    <a href="youtube.html">YouTube</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="page-head">
+  <h1>Hobbies</h1>
+  <p class="lead">When I am not writing code, I am usually making something with my hands. Here is what keeps me busy.</p>
+</section>
+
+<section class="hobby">
+
+  <div class="hobby-block">
+    <div class="hobby-badge">🌸</div>
+    <div class="hobby-body">
+      <h3>Flower Farming</h3>
+      <p>Flower farming has turned into one of the most therapeutic parts of my life. There is something grounding about working the soil, planning beds, and watching a season come up out of the ground. It is the slow, patient counterweight to a job spent in front of screens.</p>
+    </div>
+  </div>
+
+  <div class="hobby-block">
+    <div class="hobby-badge">💡</div>
+    <div class="hobby-body">
+      <h3>Animated Light Shows</h3>
+      <p>I design and run animated light shows, sequencing music to thousands of individually controllable lights. It blends the programming and electronics I love with a result the whole neighborhood can enjoy.</p>
+    </div>
+  </div>
+
+  <div class="hobby-block">
+    <div class="hobby-badge">🖨️</div>
+    <div class="hobby-body">
+      <h3>3D Printing</h3>
+      <p>My 3D printers rarely sit idle. I print functional parts for other projects, custom mounts and brackets, replacement pieces, and the occasional fun build. It is the fastest way I know to turn an idea into a real object.</p>
+    </div>
+  </div>
+
+  <div class="hobby-block">
+    <div class="hobby-badge">📻</div>
+    <div class="hobby-body">
+      <h3>Ham Radio</h3>
+      <p>I am a licensed amateur radio operator. Ham radio scratches the itch of understanding how things work all the way down to the signal, and it is a reminder that you can still reach people directly without the internet in the middle.</p>
+      <span class="callsign">KQ4VGM</span>
+    </div>
+  </div>
+
+  <div class="hobby-block">
+    <div class="hobby-badge">🤖</div>
+    <div class="hobby-body">
+      <h3>Arduino &amp; Robotics</h3>
+      <p>I tinker constantly with Arduino, microcontrollers, sensors, and small robotics builds. A lot of my other hobbies, from the light shows to the garden automation, lean on the electronics and code I get to play with here.</p>
+    </div>
+  </div>
+
+  <div class="hobby-block">
+    <div class="hobby-badge">🌿</div>
+    <div class="hobby-body">
+      <h3>Gardening, Landscaping &amp; Turf</h3>
+      <p>I spend a good amount of time on gardening, landscaping, and turf management around the property. Healthy soil, a sharp lawn, and a well planned landscape are their own kind of long running project, and I enjoy every part of it.</p>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>

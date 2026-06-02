@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About · Logan Moore</title>
+<meta name="description" content="About Logan Moore: faith, family, solo development, and a long list of hands-on hobbies." />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<meta property="og:title" content="About · Logan Moore" />
+<meta property="og:description" content="Faith, family, solo development, and a long list of hands-on hobbies." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://moorecode.com/about.html" />
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="consulting.html">Consulting</a>
+    <a href="hobbies.html">Hobbies</a>
+    <a href="youtube.html">YouTube</a>
+    <a href="about.html" class="active">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="page-head">
+  <h1>About</h1>
+  <p class="lead">A little about who I am and how I spend my days.</p>
+</section>
+
+<section class="prose">
+  <p class="lede">First things first: I love Jesus, and I love my family. Everything else I build and tinker with sits underneath those two things. They are the reason I work the way I do and the measure I use for what is worth my time.</p>
+
+  <p>I am a solo developer. That means one person designs, builds, ships, and supports every app with my name on it. I work across iOS with Swift and SwiftUI and across the web, and I like the freedom of being small. When you email about one of my apps, you are emailing me.</p>
+
+  <p>Outside of code I am happiest making things with my hands. Flower farming has become a genuinely therapeutic part of my life, a slow and quiet counterweight to screens. I run animated light shows, print all kinds of useful and ridiculous things on my 3D printers, and I am a licensed ham radio operator (call sign KQ4VGM). I tinker constantly with Arduino and robotics, and I spend a good amount of time on gardening, landscaping, and turf management around the property.</p>
+
+  <p>The thread through all of it is the same: take an idea, build the real thing, and keep it useful. Whether it is an app, a flower bed, or a controller wired to a string of lights, I would rather make something that works than talk about making it.</p>
+</section>
+
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>

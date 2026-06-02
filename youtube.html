@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>YouTube · Logan Moore</title>
+<meta name="description" content="Logan Moore's YouTube channels are coming soon." />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<meta property="og:title" content="YouTube · Logan Moore" />
+<meta property="og:description" content="Channels coming soon." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://moorecode.com/youtube.html" />
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="consulting.html">Consulting</a>
+    <a href="hobbies.html">Hobbies</a>
+    <a href="youtube.html" class="active">YouTube</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="page-head">
+  <h1>YouTube</h1>
+</section>
+
+<section class="coming-soon">
+  <div class="cs-badge">📺</div>
+  <h2>Channels coming soon</h2>
+  <p>I am putting together YouTube channels for project builds, light shows, and maker content. They are not live yet, but they are on the way. Want to know when they launch?</p>
+  <a class="btn primary" href="contact.html">Get in touch</a>
+</section>
+
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>

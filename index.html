@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Logan Moore — moorecode</title>
-<meta name="description" content="Logan Moore — indie developer building useful iOS and web apps for real people." />
+<title>Logan Moore · moorecode</title>
+<meta name="description" content="Logan Moore, solo developer building useful iOS and web apps. Faith, family, and a lot of side projects." />
 <meta name="theme-color" content="#0b0c10" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
-<meta property="og:title" content="Logan Moore — moorecode" />
-<meta property="og:description" content="Indie developer building useful iOS and web apps for real people." />
+<meta property="og:title" content="Logan Moore · moorecode" />
+<meta property="og:description" content="Solo developer building useful iOS and web apps for real people." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://moorecode.com" />
 </head>
@@ -23,10 +23,17 @@
     <span class="brand-mark">M</span>
     <span class="brand-text">moorecode</span>
   </a>
-  <nav>
-    <a href="#apps">Apps</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/" class="active">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="consulting.html">Consulting</a>
+    <a href="hobbies.html">Hobbies</a>
+    <a href="youtube.html">YouTube</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
   </nav>
 </header>
 
@@ -34,126 +41,64 @@
 
 <section class="hero">
   <h1>Logan Moore</h1>
-  <p class="tagline">Indie iOS &amp; web developer.</p>
-  <p class="sub">Building useful apps for real people — money, habits, parenting, and the occasional game.</p>
+  <p class="tagline">Solo developer, maker, and lifelong tinkerer.</p>
+  <p class="sub">I build useful iOS and web apps for real people, run a small consulting practice, and spend my free time on flower farming, light shows, 3D printing, and ham radio. Grounded in faith and family.</p>
   <div class="cta">
-    <a class="btn primary" href="#apps">See the apps</a>
-    <a class="btn ghost" href="#contact">Get in touch</a>
+    <a class="btn primary" href="projects.html">See the projects</a>
+    <a class="btn ghost" href="contact.html">Get in touch</a>
   </div>
 </section>
 
-<section id="apps" class="apps">
-  <h2>Apps &amp; Products</h2>
-  <p class="section-sub">A growing portfolio of small, opinionated tools.</p>
+<section class="explore">
+  <div class="explore-grid">
 
-  <div class="grid">
-
-    <a class="card" href="https://apps.apple.com/app/waffleinvoice" target="_blank" rel="noopener">
-      <div class="icon icon-waffle">W</div>
-      <h3>WaffleInvoice</h3>
-      <p>Dead-simple invoicing for service businesses. Send polished invoices in seconds.</p>
-      <span class="platform">iOS</span>
+    <a class="explore-card" href="projects.html">
+      <h3>Projects</h3>
+      <p>A growing portfolio of small, opinionated apps across iOS and the web.</p>
+      <span class="arrow">Browse projects ›</span>
     </a>
 
-    <a class="card" href="https://apps.apple.com/app/pancakebudget" target="_blank" rel="noopener">
-      <div class="icon icon-pancake">P</div>
-      <h3>PancakeBudget</h3>
-      <p>A budget app couples actually use together. Shared money, less friction.</p>
-      <span class="platform">iOS</span>
+    <a class="explore-card" href="consulting.html">
+      <h3>Consulting</h3>
+      <p>BrightPrompt Consulting LLC. Product and software help for a handful of clients.</p>
+      <span class="arrow">See the work ›</span>
     </a>
 
-    <a class="card" href="https://apps.apple.com/app/blackjack-now" target="_blank" rel="noopener">
-      <div class="icon icon-blackjack">21</div>
-      <h3>Blackjack Now</h3>
-      <p>A free, ad-light Blackjack trainer. Learn basic strategy by playing.</p>
-      <span class="platform">iOS</span>
+    <a class="explore-card" href="hobbies.html">
+      <h3>Hobbies</h3>
+      <p>Flower farming, animated light shows, 3D printing, ham radio, robotics, and more.</p>
+      <span class="arrow">What I tinker with ›</span>
     </a>
 
-    <a class="card" href="https://apps.apple.com/app/tilt" target="_blank" rel="noopener">
-      <div class="icon icon-tilt">◣</div>
-      <h3>TILT</h3>
-      <p>A satisfying physics puzzler. Tilt the world, guide the ball, beat the clock.</p>
-      <span class="platform">iOS</span>
+    <a class="explore-card" href="about.html">
+      <h3>About</h3>
+      <p>Faith, family, and the story behind a one person software shop.</p>
+      <span class="arrow">Read more ›</span>
     </a>
 
-    <a class="card" href="https://apps.apple.com/app/drifta" target="_blank" rel="noopener">
-      <div class="icon icon-drifta">D</div>
-      <h3>Drifta</h3>
-      <p>A pocket ADHD coach. Gentle structure for brains that resist it.</p>
-      <span class="platform">iOS</span>
+    <a class="explore-card" href="youtube.html">
+      <h3>YouTube</h3>
+      <p>Channels are on the way. Project builds, light shows, and maker content.</p>
+      <span class="arrow">Coming soon ›</span>
     </a>
 
-    <a class="card" href="https://apps.apple.com/app/debtless" target="_blank" rel="noopener">
-      <div class="icon icon-debtless">$</div>
-      <h3>Debtless</h3>
-      <p>A no-nonsense debt payoff coach. Snowball, avalanche, or your own plan.</p>
-      <span class="platform">iOS</span>
-    </a>
-
-    <a class="card" href="https://apps.apple.com/app/math-prizes" target="_blank" rel="noopener">
-      <div class="icon icon-math">+</div>
-      <h3>Math Prizes</h3>
-      <p>A math game kids actually want to play. Earn prizes, build fluency.</p>
-      <span class="platform">iOS</span>
-    </a>
-
-    <a class="card" href="https://apps.apple.com/app/pare-parent" target="_blank" rel="noopener">
-      <div class="icon icon-pare">P</div>
-      <h3>PARE — Parent &amp; Kids</h3>
-      <p>Kid-safe video curation parents control. Just the videos you approved.</p>
-      <span class="platform">iOS</span>
-    </a>
-
-    <a class="card" href="https://apps.apple.com/app/loxapm" target="_blank" rel="noopener">
-      <div class="icon icon-loxa">L</div>
-      <h3>LoxaPM</h3>
-      <p>Property management for landlords with a handful of units. No spreadsheet required.</p>
-      <span class="platform">iOS</span>
-    </a>
-
-    <a class="card" href="https://apps.apple.com/app/roastmybudget" target="_blank" rel="noopener">
-      <div class="icon icon-roast">🔥</div>
-      <h3>RoastMyBudget</h3>
-      <p>Upload your budget, get roasted. A surprisingly motivating way to face your money.</p>
-      <span class="platform">iOS</span>
-    </a>
-
-    <a class="card" href="https://apps.apple.com/app/notipper" target="_blank" rel="noopener">
-      <div class="icon icon-notipper">N</div>
-      <h3>NoTipper</h3>
-      <p>Pushback on forced tipping. Know which businesses respect your wallet.</p>
-      <span class="platform">iOS</span>
+    <a class="explore-card" href="contact.html">
+      <h3>Contact</h3>
+      <p>Email, GitHub, or find me on the air. Always happy to talk shop.</p>
+      <span class="arrow">Say hello ›</span>
     </a>
 
   </div>
-</section>
-
-<section id="about" class="about">
-  <h2>About</h2>
-  <p>
-    I'm Logan — a solo developer building a portfolio of small apps that solve real problems for
-    real people. Some are tools I needed myself. Some started as silly ideas that turned out to
-    be useful. All of them are made by one person who actually responds to your email.
-  </p>
-  <p>
-    I work across iOS (Swift / SwiftUI) and the web. If you're working on something interesting
-    or need help shipping a product, I take on a small number of consulting projects each year.
-  </p>
-</section>
-
-<section id="contact" class="contact">
-  <h2>Get in touch</h2>
-  <p>Pick whichever's easiest:</p>
-  <ul class="links">
-    <li><a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a></li>
-    <li><a href="https://github.com/loganjmoore" target="_blank" rel="noopener">github.com/loganjmoore</a></li>
-  </ul>
 </section>
 
 </main>
 
 <footer>
-  <p>&copy; <span id="year"></span> Logan Moore · moorecode.com</p>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
 </footer>
 
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>

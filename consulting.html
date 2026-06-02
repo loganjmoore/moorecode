@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Consulting · BrightPrompt Consulting LLC</title>
+<meta name="description" content="BrightPrompt Consulting LLC, product and software consulting by Logan Moore." />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<meta property="og:title" content="Consulting · BrightPrompt Consulting LLC" />
+<meta property="og:description" content="Product and software consulting by Logan Moore." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://moorecode.com/consulting.html" />
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="consulting.html" class="active">Consulting</a>
+    <a href="hobbies.html">Hobbies</a>
+    <a href="youtube.html">YouTube</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="page-head">
+  <h1>BrightPrompt Consulting LLC</h1>
+  <p class="lead">I take on a small number of consulting projects through BrightPrompt Consulting LLC, helping clients design, build, and ship software and digital products. Here are a few of the people and businesses I work with.</p>
+</section>
+
+<section class="apps">
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon icon-bubba">B</div>
+      <h3>Bubba On The Lake</h3>
+      <p>Web and digital product work for Bubba On The Lake, building an online presence and the tools behind it.</p>
+      <div class="card-links">
+        <a class="store" href="https://bubbaonthelake.com" target="_blank" rel="noopener">Visit website</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon icon-jpking">J</div>
+      <h3>J.P. King</h3>
+      <p>Software and platform consulting for J.P. King, supporting their web presence and internal tooling.</p>
+      <div class="card-links">
+        <a class="store" href="https://jpking.com" target="_blank" rel="noopener">Visit website</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon icon-tailgate">T</div>
+      <h3>The Tailgate Tailgate Show</h3>
+      <p>Digital and web support for The Tailgate Tailgate Show, helping the show reach and grow its audience.</p>
+      <div class="card-links">
+        <a class="store" href="https://thetailgatetailgateshow.com" target="_blank" rel="noopener">Visit website</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="prose">
+  <p>Interested in working together through BrightPrompt? <a href="contact.html" style="color:var(--accent);font-weight:600;">Reach out here</a> and tell me what you are building.</p>
+</section>
+
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
