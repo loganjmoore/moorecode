@@ -8,13 +8,13 @@ function browser(overrides = {}) {
   const windowListeners = new Map(), documentListeners = new Map(), values = new Map(), session = new Map(), requests = [], nodes = [];
   const storage = (map) => ({ getItem: (k) => map.get(k) ?? null, setItem: (k, v) => map.set(k, v), removeItem: (k) => map.delete(k) });
   const config = { key: 'phc_test', host: 'https://us.i.posthog.com', product: 'venuebill.com', surface: 'marketing', consentKey: '', ...overrides };
-  const context = { window: { addEventListener: (k, fn) => windowListeners.set(k, fn) }, document: {
+  const context = { window: { addEventListener: (k, fn) => windowListeners.set(k, fn), dispatchEvent: e => { windowListeners.get(e.type)?.(e); return true; } }, document: {
     cookie: '', readyState: 'complete', referrer: 'https://google.com/search?q=private', documentElement: { lang: 'en' },
     addEventListener: (k, fn) => documentListeners.set(k, fn),
     createElement: () => { const n = { setAttribute() {}, style: {}, append() {}, addEventListener(k, fn) { this[k] = fn; } }; nodes.push(n); return n; },
     body: { append() {} },
   }, navigator: { webdriver: false, globalPrivacyControl: false }, location: { hostname: 'venuebill.com', pathname: '/pricing', href: 'https://venuebill.com/pricing?code=secret' },
-    history: { pushState() {}, replaceState() {} }, localStorage: storage(values), sessionStorage: storage(session), crypto: { randomUUID }, innerWidth: 390, AbortController, AbortSignal, setTimeout, clearTimeout, URL, Date,
+    history: { pushState() {}, replaceState() {} }, localStorage: storage(values), sessionStorage: storage(session), crypto: { randomUUID }, innerWidth: 390, Event, AbortController, AbortSignal, setTimeout, clearTimeout, URL, Date,
     fetch: async (url, options) => { if (url === '/posthog-config.json') return { ok: true, json: async () => config }; requests.push({ url, options, data: JSON.parse(options.body) }); return { ok: true }; },
   };
   const cookies = new Map();
@@ -64,6 +64,9 @@ for (const config of [{ key: '' }, { host: 'https://untrusted.example' }, { prod
 const existing = browser({ consentKey: 'venuebill_consent', consentKind: 'analytics' }); await tick();
 existing.values.set('venuebill_consent', JSON.stringify({ analytics: true })); existing.windows.get('venuebill:consent-updated')(); await tick();
 assert.equal(existing.requests.length, 1, 'Existing categorized consent is reused');
+existing.nodes.find(n => n.textContent === 'Turn analytics off').click();
+assert.equal(JSON.parse(existing.values.get('venuebill_consent')).analytics, false);
+assert.equal(existing.values.has('website_posthog_identity_v1'), false);
 existing.values.set('venuebill_consent', JSON.stringify({ analytics: false })); existing.windows.get('storage')();
 assert.equal(existing.values.has('website_posthog_identity_v1'), false);
 const internal = browser(); internal.values.set('website_posthog_consent_v1', 'accepted'); internal.values.set('website_posthog_internal', '1'); await tick();

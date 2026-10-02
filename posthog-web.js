@@ -125,6 +125,8 @@
       const value = await response.json();
       if (!/^phc_[a-zA-Z0-9_-]+$/.test(value.key || '') || !['https://us.i.posthog.com', 'https://eu.i.posthog.com'].includes(value.host) || !/^[a-z0-9.-]+$/.test(value.product || '') || value.product === 'pancakebudget.com' || !(value.hosts || [value.product, `www.${value.product}`]).includes(location.hostname) || !['marketing', 'web_app'].includes(value.surface)) return;
       config = value;
+      window.websitePosthogConfigured = true;
+      window.dispatchEvent(new Event('website:analytics-ready'));
       pageview();
       const section = document.createElement('aside');
       section.setAttribute('aria-label', 'Website analytics choices');
@@ -150,7 +152,8 @@
             const current = JSON.parse(localStorage.getItem(config.consentKey) || '{}');
             localStorage.setItem(config.consentKey, JSON.stringify({ ...current, analytics: false }));
           } else localStorage.setItem(config.consentKey, 'declined');
-          window.dispatchEvent(new Event('venuebill:consent-updated'));
+          window.dispatchEvent(new Event('website:analytics-withdrawal'));
+          refresh();
           text.textContent = 'Website analytics is off.';
         } catch { text.textContent = 'Use your browser settings to clear this site’s storage and withdraw consent.'; } });
         section.append(button);
