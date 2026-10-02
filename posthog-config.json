@@ -1,0 +1,15 @@
+{
+  "key": "",
+  "host": "https://us.i.posthog.com",
+  "product": "moorecode.com",
+  "surface": "marketing",
+  "hosts": [
+    "moorecode.com",
+    "www.moorecode.com"
+  ],
+  "consentKey": "",
+  "consentKind": "",
+  "sharedDomain": "",
+  "release": "",
+  "publicOnly": false
+}
