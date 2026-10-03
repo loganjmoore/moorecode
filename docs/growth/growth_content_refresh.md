@@ -31,3 +31,19 @@ US listing absence does not establish worldwide availability. No outbound
 message, purchase, tracking configuration or provider key was used. Debtless
 is free; its installs are not paying customers. Existing anonymous opt-in
 website analytics can measure navigation, not attribute subscriptions.
+
+## Offline regression CI, 2026-10-03
+
+`Verify portfolio destinations` checks pull requests and pushes to main or
+the growth branch. It uses read-only repository permissions and has no deploy
+step. Python's standard-library HTML parser checks all ten root HTML pages:
+local files and anchors must resolve, and Apple destinations require numeric
+IDs. The portfolio also retains its four distinct store URLs, Math/Pancake
+inquiry links, Blackjack support link and contact email destination.
+
+All six checks pass locally, including negative checks proving detection of
+a missing file, missing anchor and slug-only Apple URL. Both browser scripts
+pass syntax checks; the existing PostHog browser contract passes using mocked
+network transport. CI does not request external websites or establish store
+availability, inbox delivery, installs or revenue. This adds regression
+protection to the existing rendered acquisition paths without changing UI.
