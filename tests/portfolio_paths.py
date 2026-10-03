@@ -1,7 +1,7 @@
 """Offline checks for the static site's acquisition destinations."""
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import unquote, urlsplit, parse_qs
 import re
 import unittest
 
@@ -52,6 +52,22 @@ class PortfolioPaths(unittest.TestCase):
         pages = {path.name: Page(path.read_text()) for path in ROOT.glob("*.html")}
         self.assertGreaterEqual(len(pages), 10)
         self.assertEqual(destination_errors(pages, lambda path: (ROOT / path).is_file()), [])
+
+    def test_consulting_brief_keeps_draft_recipient_and_outline(self):
+        page = Page((ROOT / "contact.html").read_text())
+        drafts = [urlsplit(link) for link in page.links if link.startswith("mailto:") and urlsplit(link).query]
+        self.assertEqual(len(drafts), 1)
+        self.assertEqual(drafts[0].path, "loganjmoore@gmail.com")
+        query = parse_qs(drafts[0].query)
+        self.assertEqual(set(query), {"subject", "body"})
+        self.assertEqual(query["subject"], ["Consulting project inquiry"])
+        brief = (ROOT / "project-brief.txt").read_text()
+        for prompt in ("Goal:", "Current workflow and tools:", "Useful first result:", "Timing:", "Budget"):
+            self.assertIn(prompt, query["body"][0])
+            self.assertIn(prompt, brief)
+        self.assertIn("project-brief.txt", page.links)
+        self.assertIn("contact.html#project-inquiry", Page((ROOT / "consulting.html").read_text()).links)
+        self.assertNotIn("<form", (ROOT / "contact.html").read_text())
 
     def test_missing_destination_is_detected(self):
         self.assertIn("missing destination", destination_errors({"index.html": Page('<a href="missing.html">Ask</a>')}, lambda _: False)[0])

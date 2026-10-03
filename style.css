@@ -598,3 +598,10 @@ footer .foot-links a:hover { color: var(--accent); }
 @media (max-width: 760px) {
   .card-links a { min-height: 44px; display: inline-flex; align-items: center; }
 }
+
+/* Consulting inquiries use the existing reading surface, with explicit draft actions. */
+.consulting-inquiry-link { display:inline-flex; align-items:center; min-height:44px; color:var(--accent); font-weight:600; }
+.inquiry-actions { display:flex; flex-wrap:wrap; gap:8px 20px; margin:20px 0; }
+.inquiry-actions a { display:inline-flex; align-items:center; min-height:44px; color:var(--accent); font-weight:600; text-decoration:underline; text-underline-offset:4px; }
+.inquiry-actions a:focus-visible, .consulting-inquiry-link:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+.project-inquiry .inquiry-help { font-size:14px; }
