@@ -592,3 +592,9 @@ footer .foot-links a:hover { color: var(--accent); }
 
   footer { flex-direction: column; align-items: flex-start; }
 }
+
+/* Comfortable mobile menu target; keep the existing navigation styling. */
+.nav-toggle { min-width: 44px; min-height: 44px; }
+@media (max-width: 760px) {
+  .card-links a { min-height: 44px; display: inline-flex; align-items: center; }
+}
