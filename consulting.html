@@ -21,14 +21,29 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://moorecode.com/consulting.html#org",
-  "name": "BrightPrompt Consulting LLC",
-  "url": "https://moorecode.com/consulting.html",
-  "description": "Product and software consulting by Logan Moore.",
-  "founder": {
-    "@id": "https://moorecode.com/#logan"
-  }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://moorecode.com/consulting.html#org",
+      "name": "BrightPrompt Consulting LLC",
+      "url": "https://moorecode.com/consulting.html",
+      "description": "Product and software consulting by Logan Moore.",
+      "founder": {
+        "@id": "https://moorecode.com/#logan"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://moorecode.com/consulting.html#service",
+      "name": "Product and software consulting",
+      "serviceType": "Product and software consulting",
+      "description": "Helping clients design, build, and ship software and digital products.",
+      "url": "https://moorecode.com/consulting.html",
+      "provider": {
+        "@id": "https://moorecode.com/consulting.html#org"
+      }
+    }
+  ]
 }
 </script>
 </head>
