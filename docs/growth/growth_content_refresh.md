@@ -51,3 +51,7 @@ protection to the existing rendered acquisition paths without changing UI.
 ## Main integration, 2026-10-04
 
 Integrated main 7497e05 with its blog, feed, verification files, entity schema and semantic project list. Preserved the existing reviewed portfolio links and consulting brief. The newly imported project schema was aligned with the visible card descriptions and actual destinations, including closed/unverified app paths. Added a parity check to prevent schema reintroducing stale store URLs. The link checker now preserves directory trailing slashes and checks the new blog pages; nine offline checks and analytics consent contract pass. All four new blog pages reuse the existing keyboard/escape menu handler and expanded state. Rendered 390px consulting → project inquiry and menu → blog journeys passed without overflow or errors; fresh blog menu Enter/Escape passed. Local screenshot: /tmp/moorecode-integrated-inquiry-mobile.png. No email was sent and no production release occurred.
+
+## Second main integration, October 4
+
+Main62c2f4a definition/title/nonblocking-font/lazy-image changes coexist with directory-safe project links and consulting draft preservation. Nine offline destination checks and analytics consent/privacy contract pass. Actual homepage renders at390px with390px document width and the revised solo-developer title. No new mailbox login, inquiry send, listing transaction or availability claim. Existing bounded delivery/release requirements remain.
