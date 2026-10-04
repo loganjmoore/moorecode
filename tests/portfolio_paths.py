@@ -3,6 +3,9 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit, parse_qs
 import re
+import json
+from html import unescape
+from urllib.parse import urljoin
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,7 +40,7 @@ def destination_errors(pages, exists):
                     errors.append(f"{filename}: App Store destination needs a numeric ID: {link}")
                 continue
             path = unquote(url.path)
-            target = path.lstrip("/") if path.startswith("/") else str(Path(filename).parent / path) if path else filename
+            target = path.lstrip("/") if path.startswith("/") else str(Path(filename).parent / path) + ("/" if path.endswith("/") else "") if path else filename
             if not target or target.endswith("/"):
                 target += "index.html"
             if not exists(target):
@@ -49,7 +52,8 @@ def destination_errors(pages, exists):
 
 class PortfolioPaths(unittest.TestCase):
     def test_all_public_pages_resolve_local_destinations(self):
-        pages = {path.name: Page(path.read_text()) for path in ROOT.glob("*.html")}
+        paths = [*ROOT.glob("*.html"), *(ROOT / "blog").glob("*.html")]
+        pages = {str(path.relative_to(ROOT)): Page(path.read_text()) for path in paths}
         self.assertGreaterEqual(len(pages), 10)
         self.assertEqual(destination_errors(pages, lambda path: (ROOT / path).is_file()), [])
 
@@ -69,8 +73,25 @@ class PortfolioPaths(unittest.TestCase):
         self.assertIn("contact.html#project-inquiry", Page((ROOT / "consulting.html").read_text()).links)
         self.assertNotIn("<form", (ROOT / "contact.html").read_text())
 
+    def test_structured_projects_match_visible_descriptions_and_destinations(self):
+        source = (ROOT / "projects.html").read_text()
+        data = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', source, re.S)[1])
+        listing = next(item for item in data["@graph"] if item["@type"] == "ItemList")
+        cards = re.findall(r'<li class="card">(.*?)</li>', source, re.S)
+        self.assertEqual(len(cards), listing["numberOfItems"])
+        self.assertEqual(len(cards), len(listing["itemListElement"]))
+        for card, entry in zip(cards, listing["itemListElement"]):
+            self.assertEqual(entry["item"]["name"], unescape(re.search(r'<h3>(.*?)</h3>', card, re.S)[1]))
+            self.assertEqual(entry["item"]["description"], unescape(re.search(r'<p>(.*?)</p>', card, re.S)[1]))
+            destination = unescape(re.search(r'<a class="store" href="(.*?)"', card)[1])
+            self.assertEqual(entry["item"]["url"], urljoin("https://moorecode.com/", destination))
+
     def test_missing_destination_is_detected(self):
         self.assertIn("missing destination", destination_errors({"index.html": Page('<a href="missing.html">Ask</a>')}, lambda _: False)[0])
+
+    def test_directory_destination_uses_its_index(self):
+        page = Page('<a href="blog/">Read</a>')
+        self.assertEqual(destination_errors({"index.html": page}, lambda path: path == "blog/index.html"), [])
 
     def test_missing_anchor_is_detected(self):
         self.assertIn("missing anchor", destination_errors({"index.html": Page('<a href="#missing">Ask</a>')}, lambda _: True)[0])

@@ -1,0 +1,29 @@
+# moorecode
+
+> Logan Moore is a solo developer who builds useful iOS and web apps for real people. He runs BrightPrompt Consulting LLC and spends his free time on flower farming, light shows, 3D printing, and ham radio.
+
+## Pages
+
+- [Home](https://moorecode.com/): Introduction, with links to every section of the site.
+- [Projects](https://moorecode.com/projects.html): Apps and products Logan built across iOS and the web, including WaffleInvoice, PancakeBudget, Blackjack Now, TILT, Drifta, Debtless, Math Prizes, PARE, LoxaPM, RoastMyBudget, and NoTipper.
+- [Consulting](https://moorecode.com/consulting.html): Product and software consulting through BrightPrompt Consulting LLC.
+- [Hobbies](https://moorecode.com/hobbies.html): Flower farming, animated light shows, 3D printing, ham radio (call sign KQ4VGM), Arduino and robotics, and gardening, landscaping, and turf care.
+- [YouTube](https://moorecode.com/youtube.html): Channels for project builds, light shows, and maker content, not yet launched.
+- [About](https://moorecode.com/about.html): Faith, family, and the story behind a one person software shop.
+- [Contact](https://moorecode.com/contact.html): Email, GitHub, and ham radio contact options.
+
+## Blog
+
+- [Blog](https://moorecode.com/blog/): Practical notes on apps, pricing, and taxes from a solo developer.
+- [Free blackjack basic strategy trainer for iPhone compared](https://moorecode.com/blog/free-blackjack-basic-strategy-trainer-iphone.html): Five free iPhone blackjack trainers compared on ads, purchases, and rule settings.
+- [Invoicing app pricing for service businesses, compared](https://moorecode.com/blog/simple-invoicing-app-pricing-service-businesses.html): Five invoicing tools priced for a two-person shop sending 60 invoices a month.
+- [Mileage tracker for delivery drivers: what the IRS lets you deduct](https://moorecode.com/blog/mileage-tracker-delivery-drivers-tax-deduction.html): Which delivery miles count, the 2026 IRS mileage rates, and what a log needs.
+
+## Blackjack Now
+
+- [Privacy Policy](https://moorecode.com/blackjack-privacy.html): Privacy policy for the Blackjack Now iOS app.
+- [Support](https://moorecode.com/blackjack-support.html): Help, FAQ, and contact for the Blackjack Now iOS app.
+
+## Optional
+
+- [Website analytics details](https://moorecode.com/posthog-privacy.html): What the optional, consent-based website analytics collect.
