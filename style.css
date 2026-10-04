@@ -126,6 +126,14 @@ main { flex: 1 0 auto; width: 100%; }
   margin: 0 0 18px;
 }
 
+.hero .intro {
+  font-size: 19px;
+  color: var(--text);
+  line-height: 1.5;
+  max-width: 620px;
+  margin: 0 0 16px;
+}
+
 .hero .tagline {
   font-size: clamp(20px, 2.4vw, 26px);
   color: var(--text);
@@ -267,6 +275,9 @@ section h2 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .card {
