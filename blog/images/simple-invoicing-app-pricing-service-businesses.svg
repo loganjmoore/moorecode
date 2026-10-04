@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="85%" cy="-10%" r="70%">
+      <stop offset="0%" stop-color="#f5b942" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#f5b942" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5b942"/>
+      <stop offset="100%" stop-color="#e07a5f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b0c10"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="80" y="80" width="120" height="120" rx="26" fill="url(#tile)"/>
+  <text x="140" y="164" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="72" font-weight="800" fill="#1a1208">$</text>
+  <text x="80" y="290" font-family="Inter, Helvetica, Arial, sans-serif" font-size="70" font-weight="800" letter-spacing="-2" fill="#e8eaef">Invoicing app pricing</text>
+  <text x="80" y="370" font-family="Inter, Helvetica, Arial, sans-serif" font-size="70" font-weight="800" letter-spacing="-2" fill="#e8eaef">for service businesses</text>
+  <text x="80" y="454" font-family="Inter, Helvetica, Arial, sans-serif" font-size="70" font-weight="800" letter-spacing="-2" fill="#f5b942">what 60 invoices cost</text>
+  <text x="80" y="530" font-family="Inter, Helvetica, Arial, sans-serif" font-size="30" font-weight="500" fill="#9aa1ad">Five tools compared on plans, free tiers, and invoice limits</text>
+  <text x="80" y="580" font-family="Inter, Helvetica, Arial, sans-serif" font-size="24" font-weight="600" fill="#e8eaef">moorecode</text>
+  <text x="236" y="580" font-family="Inter, Helvetica, Arial, sans-serif" font-size="24" font-weight="400" fill="#9aa1ad">Logan Moore · moorecode.com/blog</text>
+</svg>

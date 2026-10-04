@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>moorecode blog</title>
+    <link>https://moorecode.com/blog/</link>
+    <description>Notes from Logan Moore on blackjack trainers, invoicing app pricing, and mileage deductions for delivery drivers.</description>
+    <language>en-us</language>
+    <atom:link href="https://moorecode.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Free blackjack basic strategy trainer for iPhone compared</title>
+      <link>https://moorecode.com/blog/free-blackjack-basic-strategy-trainer-iphone.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/free-blackjack-basic-strategy-trainer-iphone.html</guid>
+      <pubDate>Sun, 04 Oct 2026 12:00:00 +0000</pubDate>
+      <description>Five free iPhone blackjack basic strategy trainers compared on ads, in-app purchases, and rule settings. One of them is my own app.</description>
+      <enclosure url="https://moorecode.com/blog/images/free-blackjack-basic-strategy-trainer-iphone.png" length="88219" type="image/png" />
+    </item>
+    <item>
+      <title>Invoicing app pricing for service businesses, compared</title>
+      <link>https://moorecode.com/blog/simple-invoicing-app-pricing-service-businesses.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/simple-invoicing-app-pricing-service-businesses.html</guid>
+      <pubDate>Sun, 04 Oct 2026 11:00:00 +0000</pubDate>
+      <description>Five invoicing tools compared on plans, free-plan limits, and what 60 invoices a month cost on each.</description>
+      <enclosure url="https://moorecode.com/blog/images/simple-invoicing-app-pricing-service-businesses.png" length="99014" type="image/png" />
+    </item>
+    <item>
+      <title>Mileage tracker for delivery drivers: what the IRS lets you deduct</title>
+      <link>https://moorecode.com/blog/mileage-tracker-delivery-drivers-tax-deduction.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/mileage-tracker-delivery-drivers-tax-deduction.html</guid>
+      <pubDate>Sun, 04 Oct 2026 10:00:00 +0000</pubDate>
+      <description>Which delivery miles count as business miles, the 2026 IRS rates, and what a mileage log needs.</description>
+      <enclosure url="https://moorecode.com/blog/images/mileage-tracker-delivery-drivers-tax-deduction.png" length="90811" type="image/png" />
+    </item>
+  </channel>
+</rss>

@@ -12,6 +12,13 @@
 - [About](https://moorecode.com/about.html): Faith, family, and the story behind a one person software shop.
 - [Contact](https://moorecode.com/contact.html): Email, GitHub, and ham radio contact options.
 
+## Blog
+
+- [Blog](https://moorecode.com/blog/): Practical notes on apps, pricing, and taxes from a solo developer.
+- [Free blackjack basic strategy trainer for iPhone compared](https://moorecode.com/blog/free-blackjack-basic-strategy-trainer-iphone.html): Five free iPhone blackjack trainers compared on ads, purchases, and rule settings.
+- [Invoicing app pricing for service businesses, compared](https://moorecode.com/blog/simple-invoicing-app-pricing-service-businesses.html): Five invoicing tools priced for a two-person shop sending 60 invoices a month.
+- [Mileage tracker for delivery drivers: what the IRS lets you deduct](https://moorecode.com/blog/mileage-tracker-delivery-drivers-tax-deduction.html): Which delivery miles count, the 2026 IRS mileage rates, and what a log needs.
+
 ## Blackjack Now
 
 - [Privacy Policy](https://moorecode.com/blackjack-privacy.html): Privacy policy for the Blackjack Now iOS app.
