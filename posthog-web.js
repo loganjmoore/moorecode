@@ -1,6 +1,8 @@
 /* Vendored from seo-command-center/integrations/posthog-web.js.
  * Anonymous, explicit website events via PostHog's capture API. No replay,
- * autocapture, form values, account IDs, URL queries or third-party scripts. */
+ * autocapture, form values, account IDs, URL queries or third-party scripts.
+ * Renders no UI: the site's own cookie banner and footer Cookie settings own
+ * consent and withdrawal. */
 (() => {
   if (window.productAnalytics) return;
   const events = new Set(['$pageview', 'cta_clicked', 'signup_started', 'signup_completed', 'lead_submitted', 'activation_completed', 'checkout_started', 'subscription_started', 'app_store_clicked', 'contact_clicked', 'form_failed']);
@@ -9,7 +11,6 @@
   const controllers = new Set();
   const privateKey = 'website_posthog_identity_v1';
   const sessionKey = 'website_posthog_session_v1';
-  const choiceKey = 'website_posthog_consent_v1';
   const cookie = (key) => document.cookie?.split('; ').find((entry) => entry.startsWith(`${key}=`))?.slice(key.length + 1);
   const shared = () => Boolean(config?.sharedDomain && config.sharedDomain === config.product && location.hostname.endsWith(config.product));
   function share(key, value, seconds = 1800) {
@@ -18,7 +19,10 @@
   const optOut = () => navigator.globalPrivacyControl === true || ['1', 'yes'].includes(navigator.doNotTrack || window.doNotTrack);
   const storedChoice = () => {
     try {
-      if (!config?.consentKey) return (shared() ? cookie(choiceKey) : null) || localStorage.getItem(choiceKey);
+      // Consent comes only from the site's own cookie banner; a site without
+      // one never enables capture, including for visitors who accepted the
+      // former built-in choices box (it no longer exists to withdraw from).
+      if (!config?.consentKey) return null;
       const raw = localStorage.getItem(config.consentKey);
       if (config.consentKind === 'analytics') return raw ? (JSON.parse(raw).analytics === true ? 'accepted' : 'declined') : null;
       return raw === 'accepted' ? 'accepted' : raw ? 'declined' : null;
@@ -128,37 +132,6 @@
       window.websitePosthogConfigured = true;
       window.dispatchEvent(new Event('website:analytics-ready'));
       pageview();
-      const section = document.createElement('aside');
-      section.setAttribute('aria-label', 'Website analytics choices');
-      section.style.cssText = 'margin:24px auto;padding:16px;max-width:65ch;border:1px solid currentColor;font:inherit;line-height:1.5;';
-      const text = document.createElement('p');
-      text.textContent = 'Allow PostHog to measure anonymous website visits and completed actions? We exclude form contents and private account data.';
-      const policy = document.createElement('a'); policy.href = '/posthog-privacy.html'; policy.textContent = 'Website analytics details';
-      section.append(text, policy);
-      if (!config.consentKey) {
-        for (const [value, label] of [['declined', 'No thanks'], ['accepted', 'Allow analytics']]) {
-          const button = document.createElement('button'); button.type = 'button'; button.textContent = label;
-          button.style.cssText = 'font:inherit;margin:8px;padding:10px 14px;min-height:44px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;';
-          button.addEventListener('click', () => { try { reset(); localStorage.setItem(choiceKey, value); share(choiceKey, value, 180 * 86400); refresh(); text.textContent = value === 'accepted' && !optOut() ? 'Website analytics is allowed. You can change your choice here.' : 'Website analytics is off.'; } catch { text.textContent = 'Your choice could not be saved. Analytics stays off.'; } });
-          section.append(button);
-        }
-      } else {
-        const note = document.createElement('p'); note.textContent = 'Use this site’s existing analytics/cookie settings to allow analytics. Browser opt-out signals override consent.'; section.append(note);
-        const button = document.createElement('button'); button.type = 'button'; button.textContent = 'Turn analytics off';
-        button.style.cssText = 'font:inherit;padding:10px 14px;min-height:44px;';
-        button.addEventListener('click', () => { try {
-          reset();
-          if (config.consentKind === 'analytics') {
-            const current = JSON.parse(localStorage.getItem(config.consentKey) || '{}');
-            localStorage.setItem(config.consentKey, JSON.stringify({ ...current, analytics: false }));
-          } else localStorage.setItem(config.consentKey, 'declined');
-          window.dispatchEvent(new Event('website:analytics-withdrawal'));
-          refresh();
-          text.textContent = 'Website analytics is off.';
-        } catch { text.textContent = 'Use your browser settings to clear this site’s storage and withdraw consent.'; } });
-        section.append(button);
-      }
-      document.body.append(section);
     } catch { /* Missing configuration leaves analytics off. */ }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();

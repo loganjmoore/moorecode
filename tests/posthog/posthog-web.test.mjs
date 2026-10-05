@@ -7,7 +7,7 @@ const source = readFileSync(new URL('../../posthog-web.js', import.meta.url), 'u
 function browser(overrides = {}) {
   const windowListeners = new Map(), documentListeners = new Map(), values = new Map(), session = new Map(), requests = [], nodes = [];
   const storage = (map) => ({ getItem: (k) => map.get(k) ?? null, setItem: (k, v) => map.set(k, v), removeItem: (k) => map.delete(k) });
-  const config = { key: 'phc_test', host: 'https://us.i.posthog.com', product: 'venuebill.com', surface: 'marketing', consentKey: '', ...overrides };
+  const config = { key: 'phc_test', host: 'https://us.i.posthog.com', product: 'venuebill.com', surface: 'marketing', consentKey: 'site_consent', consentKind: 'accepted', ...overrides };
   const context = { window: { addEventListener: (k, fn) => windowListeners.set(k, fn), dispatchEvent: e => { windowListeners.get(e.type)?.(e); return true; } }, document: {
     cookie: '', readyState: 'complete', referrer: 'https://google.com/search?q=private', documentElement: { lang: 'en' },
     addEventListener: (k, fn) => documentListeners.set(k, fn),
@@ -29,9 +29,10 @@ function browser(overrides = {}) {
 const tick = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 const b = browser(); await tick();
+assert.equal(b.nodes.length, 0, 'No PostHog choices box is injected; the site cookie banner owns consent');
 assert.equal(b.requests.length, 0, 'No external capture before consent');
 assert.equal(b.values.has('website_posthog_identity_v1'), false);
-b.values.set('website_posthog_consent_v1', 'accepted'); b.context.window.productAnalytics.refresh(); await tick();
+b.values.set('site_consent', 'accepted'); b.context.window.productAnalytics.refresh(); await tick();
 assert.equal(b.requests.length, 1);
 assert.equal(b.requests[0].data.event, '$pageview');
 assert.equal(b.requests[0].data.properties.device, 'mobile');
@@ -47,42 +48,45 @@ const link = { href: 'https://apps.apple.com/app/id123?token=secret' };
 b.documents.get('click')({ target: { closest: () => link } }); await tick();
 assert.deepEqual(b.requests.slice(-2).map((r) => r.data.event), ['cta_clicked', 'app_store_clicked']);
 const oldId = b.requests.at(-1).data.distinct_id;
-b.values.set('website_posthog_consent_v1', 'declined'); b.windows.get('storage')();
+b.values.set('site_consent', 'declined'); b.windows.get('storage')();
 const count = b.requests.length;
 b.context.window.productAnalytics.capture('signup_completed');
 assert.equal(b.requests.length, count, 'Withdrawal stops capture');
 assert.equal(b.values.has('website_posthog_identity_v1'), false);
-b.values.set('website_posthog_consent_v1', 'accepted'); b.context.window.productAnalytics.refresh(); await tick();
+b.values.set('site_consent', 'accepted'); b.context.window.productAnalytics.refresh(); await tick();
 assert.notEqual(b.requests.at(-1).data.distinct_id, oldId, 'Reaccept creates a fresh identity');
 b.context.navigator.globalPrivacyControl = true; b.context.window.productAnalytics.refresh();
 b.context.window.productAnalytics.capture('signup_completed');
 assert.equal(b.requests.length, count + 1, 'GPC overrides stored consent');
 for (const config of [{ key: '' }, { host: 'https://untrusted.example' }, { product: 'pancakebudget.com' }]) {
-  const disabled = browser(config); disabled.values.set('website_posthog_consent_v1', 'accepted'); await tick();
+  const disabled = browser(config); disabled.values.set('site_consent', 'accepted'); await tick();
   assert.equal(disabled.requests.length, 0);
 }
 const existing = browser({ consentKey: 'venuebill_consent', consentKind: 'analytics' }); await tick();
 existing.values.set('venuebill_consent', JSON.stringify({ analytics: true })); existing.windows.get('venuebill:consent-updated')(); await tick();
 assert.equal(existing.requests.length, 1, 'Existing categorized consent is reused');
-existing.nodes.find(n => n.textContent === 'Turn analytics off').click();
-assert.equal(JSON.parse(existing.values.get('venuebill_consent')).analytics, false);
-assert.equal(existing.values.has('website_posthog_identity_v1'), false);
+existing.values.set('venuebill_consent', JSON.stringify({ analytics: false })); existing.windows.get('venuebill:consent-updated')();
+assert.equal(existing.values.has('website_posthog_identity_v1'), false, 'Site cookie settings withdrawal stops capture');
+existing.values.set('venuebill_consent', JSON.stringify({ analytics: true })); existing.windows.get('venuebill:consent-updated')(); await tick();
 existing.values.set('venuebill_consent', JSON.stringify({ analytics: false })); existing.windows.get('storage')();
 assert.equal(existing.values.has('website_posthog_identity_v1'), false);
-const internal = browser(); internal.values.set('website_posthog_consent_v1', 'accepted'); internal.values.set('website_posthog_internal', '1'); await tick();
+const noBanner = browser({ consentKey: '' }); noBanner.values.set('website_posthog_consent_v1', 'accepted'); noBanner.context.window.productAnalytics.refresh(); await tick();
+assert.equal(noBanner.requests.length, 0, 'A site without its own consent banner never captures, even with a legacy box acceptance');
+assert.equal(noBanner.nodes.length, 0);
+const internal = browser(); internal.values.set('site_consent', 'accepted'); internal.values.set('website_posthog_internal', '1'); await tick();
 assert.equal(internal.requests.length, 0, 'Explicit internal browser exclusion');
 const shared = browser({ sharedDomain: 'venuebill.com' }); await tick();
-shared.nodes.find((n) => n.textContent === 'Allow analytics').click(); await tick();
+shared.values.set('site_consent', 'accepted'); shared.context.window.productAnalytics.refresh(); await tick();
 const sharedId = shared.requests.at(-1).data.distinct_id;
 shared.context.location.hostname = 'app.venuebill.com';
 shared.context.location.pathname = '/register';
 shared.context.history.pushState(); await tick();
 assert.equal(shared.requests.at(-1).data.distinct_id, sharedId, 'Cross-subdomain visitor remains anonymous and continuous');
 assert.equal(shared.requests.at(-1).data.properties.$session_id, shared.requests[0].data.properties.$session_id);
-shared.nodes.find((n) => n.textContent === 'No thanks').click();
+shared.values.set('site_consent', 'declined'); shared.context.window.productAnalytics.refresh();
 assert.equal(shared.context.document.cookie.includes('website_posthog_identity_v1'), false);
 const publicOnly = browser({ publicOnly: true });
-publicOnly.values.set('website_posthog_consent_v1', 'accepted'); await tick();
+publicOnly.values.set('site_consent', 'accepted'); await tick();
 publicOnly.context.location.pathname = '/guides/a-public-guide'; publicOnly.context.history.pushState(); await tick();
 assert.equal(publicOnly.requests.at(-1).data.properties.page_path, '/guides/a-public-guide');
 const publicCount = publicOnly.requests.length;
