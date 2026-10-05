@@ -8,7 +8,7 @@ Product: `moorecode.com`. Independent products use separate PostHog projects. Th
 
 Set `POSTHOG_PROJECT_TOKEN` to the project's public `phc_` ingestion token and `POSTHOG_REGION` to `us` or `eu` in the production build environment. Never put a personal API key in the website. Build hooks generate `/posthog-config.json` and stamp the published HTML tree. On static sites without npm builds, the Render build must invoke `node configure-posthog.mjs`; Debtless invokes `node public/configure-posthog.mjs` from `marketing/site`. TurfPlanner instead reads runtime `POSTHOG_PROJECT_TOKEN_TURFPLANNER_COM` and `POSTHOG_REGION_TURFPLANNER_COM` on brightprompt-hub and only serves config to its three approved hosts.
 
-Keep ingestion disabled until provider region/retention and the disclosure are verified. Reuse the existing consent controls when present; other sites provide Allow/No thanks controls. A permanent off control supports withdrawal. Visit `/posthog-privacy.html` for the data contract.
+Keep ingestion disabled until provider region/retention and the disclosure are verified. `posthog-web.js` renders no UI of its own. Capture runs only after this site's own cookie banner records consent; a site without one never enables capture. Visit `/posthog-privacy.html` for the data contract.
 
 ## Check
 
