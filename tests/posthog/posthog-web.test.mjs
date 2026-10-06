@@ -4,6 +4,9 @@ import vm from 'node:vm';
 import { randomUUID } from 'node:crypto';
 
 const source = readFileSync(new URL('../../posthog-web.js', import.meta.url), 'utf8');
+const homepage = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
+const siteConfig = JSON.parse(readFileSync(new URL('../../posthog-site.json', import.meta.url), 'utf8'));
+const publicConfig = JSON.parse(readFileSync(new URL('../../posthog-config.json', import.meta.url), 'utf8'));
 function browser(overrides = {}) {
   const windowListeners = new Map(), documentListeners = new Map(), values = new Map(), session = new Map(), requests = [], nodes = [];
   const storage = (map) => ({ getItem: (k) => map.get(k) ?? null, setItem: (k, v) => map.set(k, v), removeItem: (k) => map.delete(k) });
@@ -47,6 +50,9 @@ assert.equal(b.requests.at(-1).data.properties.page_path, '/:private');
 const link = { href: 'https://apps.apple.com/app/id123?token=secret' };
 b.documents.get('click')({ target: { closest: () => link } }); await tick();
 assert.deepEqual(b.requests.slice(-2).map((r) => r.data.event), ['cta_clicked', 'app_store_clicked']);
+const contactLink = { href: 'https://venuebill.com/contact' };
+b.documents.get('click')({ target: { closest: () => contactLink } }); await tick();
+assert.deepEqual(b.requests.slice(-2).map((r) => r.data.event), ['cta_clicked', 'contact_clicked']);
 const oldId = b.requests.at(-1).data.distinct_id;
 b.values.set('site_consent', 'declined'); b.windows.get('storage')();
 const count = b.requests.length;
@@ -93,4 +99,27 @@ const publicCount = publicOnly.requests.length;
 publicOnly.context.location.pathname = '/children/private-id'; publicOnly.context.history.pushState();
 publicOnly.context.window.productAnalytics.capture('activation_completed');
 assert.equal(publicOnly.requests.length, publicCount, 'Adult acquisition scope excludes private child pages entirely');
+assert.equal(siteConfig.consentKey, 'website_posthog_consent_v1');
+assert.equal(publicConfig.consentKey, siteConfig.consentKey);
+assert.equal(siteConfig.consentKind, 'accepted');
+assert.match(homepage, /id="analytics-consent"/);
+assert.match(homepage, /data-analytics-choice="accepted"/);
+assert.match(homepage, /href="contact\.html">Contact<\/a>/, 'The primary Contact link is present for delegated event capture');
 console.log('PostHog browser contract passed: consent, withdrawal, reaccept, opt-outs, routes, privacy, exclusions and ordered store events.');
+
+const moore = browser({product:'moorecode.com',hosts:['venuebill.com','moorecode.com']}); await tick();
+moore.values.set('site_consent','accepted');
+for (const pathname of ['/projects.html','/consulting.html','/blog/mileage-tracker-delivery-drivers-tax-deduction.html']) {
+  moore.context.location.pathname=pathname;
+  moore.context.window.productAnalytics.refresh(); await tick();
+  assert.equal(moore.requests.at(-1).data.properties.page_path,pathname);
+}
+moore.context.location.pathname='/children/private-id';
+moore.context.window.productAnalytics.refresh(); await tick();
+assert.equal(moore.requests.at(-1).data.properties.page_path,'/:private');
+const prior=moore.requests.length;
+moore.context.window.websiteAnalyticsConsentDenied=true;
+moore.context.window.productAnalytics.refresh();
+moore.context.window.productAnalytics.capture('contact_clicked'); await tick();
+assert.equal(moore.requests.length,prior,'In-memory withdrawal stops events even while accepted consent remains in storage');
+assert.equal(moore.values.has('website_posthog_identity_v1'),false);

@@ -28,11 +28,12 @@
       return raw === 'accepted' ? 'accepted' : raw ? 'declined' : null;
     } catch { return 'declined'; }
   };
-  const allowed = () => { try { return Boolean(config && !optOut() && storedChoice() === 'accepted' && navigator.webdriver !== true && localStorage.getItem('website_posthog_internal') !== '1'); } catch { return false; } };
+  const allowed = () => { try { return Boolean(config && window.websiteAnalyticsConsentDenied !== true && !optOut() && storedChoice() === 'accepted' && navigator.webdriver !== true && localStorage.getItem('website_posthog_internal') !== '1'); } catch { return false; } };
   function path() {
     // Public editorial slugs are authored content. Unknown/private app paths
     // deliberately lose their identifiers instead of guessing how to redact.
     const p = location.pathname.replace(/^\/turf(?:planner)?(?=\/)/, '').replace(/\/+$/, '') || '/';
+    if (config?.product === 'moorecode.com' && new Set(['/projects.html', '/consulting.html', '/hobbies.html', '/youtube.html', '/blackjack-privacy.html', '/blackjack-support.html', '/blog/free-blackjack-basic-strategy-trainer-iphone.html', '/blog/simple-invoicing-app-pricing-service-businesses.html', '/blog/mileage-tracker-delivery-drivers-tax-deduction.html']).has(p)) return p;
     return /^(\/|\/(?:es|en))$/.test(p) || /^\/(?:es\/|en\/)?(?:pricing|features|about|contact|demo|book|get-started|start|plumber|roofer|electrician|cleaner|landscaper|register|signup|sign-up|login|support|privacy|terms|cookies|blog|journal|debt-payoff-calculator|invoice-generator|posthog-privacy)(?:\.html)?$/.test(p) || /^\/(?:es\/|en\/)?(?:blog|journal|guides|glossary|help|compare|services|industries|templates)\/[a-z0-9-]{1,120}$/.test(p) ? p : '/:private';
   }
   function identity() {
@@ -119,7 +120,7 @@
       const sameProduct = (config?.hosts || [config?.product, `www.${config?.product}`]).includes(url.hostname);
       const contact = url.protocol === 'mailto:' || url.protocol === 'tel:';
       const target = store ? 'app_store' : contact ? 'contact' : sameProduct ? /\/(register|signup|sign-up)/.test(url.pathname) ? 'signup' : /\/pricing/.test(url.pathname) || url.hash === '#pricing' ? 'pricing' : /\/contact/.test(url.pathname) || url.hash === '#contact' ? 'contact' : /\/(demo|book)/.test(url.pathname) ? 'demo' : null : null;
-      if (target) { capture('cta_clicked', target); if (store) capture('app_store_clicked'); if (contact) capture('contact_clicked'); }
+      if (target) { capture('cta_clicked', target); if (store) capture('app_store_clicked'); if (target === 'contact') capture('contact_clicked'); }
     } catch { /* Not an analytics target. */ }
   });
   async function boot() {
