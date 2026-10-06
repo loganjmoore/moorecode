@@ -698,6 +698,7 @@ footer .foot-links a {
 footer .foot-links a:hover { color: var(--accent); }
 
 .footer-button {
+  min-height: 44px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -732,6 +733,7 @@ footer .foot-links a:hover { color: var(--accent); }
 .analytics-consent strong { display: block; margin-bottom: 4px; }
 .analytics-consent p { margin: 0; color: var(--text-dim); font-size: 14px; line-height: 1.5; }
 .analytics-consent p a { color: var(--accent); border-bottom: 1px solid rgba(245,185,66,0.35); }
+.analytics-consent-actions button { min-height: 44px; }
 .analytics-consent-actions { display: flex; flex: 0 0 auto; gap: 8px; }
 
 /* ---------- Mobile ---------- */

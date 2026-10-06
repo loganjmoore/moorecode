@@ -140,7 +140,7 @@
 
 <aside class="analytics-consent" id="analytics-consent" aria-label="Website analytics choices" hidden>
   <div>
-    <strong>Anonymous website analytics</strong>
+    <strong>Optional website analytics</strong>
     <p id="analytics-consent-status">May I measure page visits and Contact clicks? I do not collect form contents or personal details. <a href="/posthog-privacy.html">Read the details.</a></p>
   </div>
   <div class="analytics-consent-actions">
@@ -159,23 +159,31 @@
   const show = () => {
     try {
       const choice = localStorage.getItem(key);
-      status.firstChild.textContent = choice === 'accepted' && !privacySignal()
-        ? 'Anonymous analytics is allowed. Choose No thanks to turn it off. '
+      status.firstChild.textContent = choice === 'accepted' && window.websiteAnalyticsConsentDenied !== true && !privacySignal()
+        ? 'Website analytics is allowed. Choose No thanks to turn it off. '
         : privacySignal()
-          ? 'Your browser privacy preference keeps anonymous analytics off. '
-          : 'Anonymous analytics is off. Choose Allow analytics to turn it on. ';
+          ? 'Your browser privacy preference keeps website analytics off. '
+          : 'Website analytics is off. Choose Allow analytics to turn it on. ';
     } catch {
       status.firstChild.textContent = 'Analytics is off because this browser does not allow the choice to be saved. ';
     }
     panel.hidden = false;
   };
   document.querySelectorAll('[data-analytics-choice]').forEach((button) => button.addEventListener('click', () => {
+    const declined = button.dataset.analyticsChoice === 'declined';
+    if (declined) {
+      window.websiteAnalyticsConsentDenied = true;
+      window.dispatchEvent(new Event('website:analytics-consent'));
+    }
     try {
       localStorage.setItem(key, button.dataset.analyticsChoice);
+      if (!declined) window.websiteAnalyticsConsentDenied = false;
       window.dispatchEvent(new Event('website:analytics-consent'));
       panel.hidden = true;
     } catch {
-      status.firstChild.textContent = 'Your choice could not be saved, so analytics remains off. ';
+      status.firstChild.textContent = declined
+        ? 'Your choice could not be saved. Analytics is off on this page; try again before leaving. '
+        : 'Your choice could not be saved, so analytics remains off. ';
     }
   }));
   document.getElementById('analytics-settings').addEventListener('click', show);

@@ -1,0 +1,16 @@
+name: Public site checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - run: node --test tests/posthog/consent-ui.test.mjs tests/posthog/posthog-web.test.mjs tests/seo/static-pages.test.mjs

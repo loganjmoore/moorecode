@@ -106,3 +106,20 @@ assert.match(homepage, /id="analytics-consent"/);
 assert.match(homepage, /data-analytics-choice="accepted"/);
 assert.match(homepage, /href="contact\.html">Contact<\/a>/, 'The primary Contact link is present for delegated event capture');
 console.log('PostHog browser contract passed: consent, withdrawal, reaccept, opt-outs, routes, privacy, exclusions and ordered store events.');
+
+const moore = browser({product:'moorecode.com',hosts:['venuebill.com','moorecode.com']}); await tick();
+moore.values.set('site_consent','accepted');
+for (const pathname of ['/projects.html','/consulting.html','/blog/mileage-tracker-delivery-drivers-tax-deduction.html']) {
+  moore.context.location.pathname=pathname;
+  moore.context.window.productAnalytics.refresh(); await tick();
+  assert.equal(moore.requests.at(-1).data.properties.page_path,pathname);
+}
+moore.context.location.pathname='/children/private-id';
+moore.context.window.productAnalytics.refresh(); await tick();
+assert.equal(moore.requests.at(-1).data.properties.page_path,'/:private');
+const prior=moore.requests.length;
+moore.context.window.websiteAnalyticsConsentDenied=true;
+moore.context.window.productAnalytics.refresh();
+moore.context.window.productAnalytics.capture('contact_clicked'); await tick();
+assert.equal(moore.requests.length,prior,'In-memory withdrawal stops events even while accepted consent remains in storage');
+assert.equal(moore.values.has('website_posthog_identity_v1'),false);

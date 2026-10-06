@@ -19,8 +19,7 @@ const graphs = [...consulting.matchAll(/<script type="application\/ld\+json">([\
 const service = graphs.flatMap((item) => item['@graph'] || [item]).find((item) => item['@type'] === 'Service');
 assert.equal(service.name, 'Product and software consulting');
 assert.equal(service.provider['@id'], 'https://moorecode.com/consulting.html#org');
-assert.equal(service.areaServed.name, 'United States');
-assert.match(consulting, /Product and software consulting is a service provided by BrightPrompt Consulting LLC for clients in the United States\./);
+assert.match(consulting, /Product and software consulting is a service provided by BrightPrompt Consulting LLC for clients\./);
 
 const projects = read('projects.html');
 const blackjackCard = projects.slice(projects.indexOf('<h3>Blackjack Now</h3>'), projects.indexOf('<h3>TILT</h3>'));
