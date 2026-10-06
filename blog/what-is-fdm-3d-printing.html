@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>What Is FDM 3D Printing? FDM vs. SLA and SLS</title>
+<meta name="description" content="FDM 3D printing melts filament into layers. See how FDM works, where it fits, and how it compares with SLA resin and SLS powder printing." />
+<link rel="canonical" href="https://moorecode.com/blog/what-is-fdm-3d-printing.html" />
+<meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="What Is FDM 3D Printing? FDM vs. SLA and SLS" />
+<meta property="og:description" content="A plain-language guide to FDM, plus a practical comparison with SLA and SLS." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moorecode.com/blog/what-is-fdm-3d-printing.html" />
+<meta property="og:image" content="https://moorecode.com/blog/images/what-is-fdm-3d-printing.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://moorecode.com/blog/what-is-fdm-3d-printing.html#post",
+      "headline": "What Is FDM 3D Printing? FDM vs. SLA and SLS",
+      "description": "A plain-language guide to FDM, plus a practical comparison with SLA and SLS.",
+      "url": "https://moorecode.com/blog/what-is-fdm-3d-printing.html",
+      "mainEntityOfPage": "https://moorecode.com/blog/what-is-fdm-3d-printing.html",
+      "datePublished": "2026-10-06",
+      "dateModified": "2026-10-06",
+      "image": "https://moorecode.com/blog/images/what-is-fdm-3d-printing.svg",
+      "author": { "@id": "https://moorecode.com/#logan" },
+      "publisher": { "@id": "https://moorecode.com/#logan" },
+      "isPartOf": { "@id": "https://moorecode.com/blog/#blog" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://moorecode.com/blog/what-is-fdm-3d-printing.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does FDM mean in 3D printing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "FDM means fused deposition modeling. An FDM printer heats thermoplastic filament and deposits it in paths that join into layers and then a complete part." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is FDM the same as filament 3D printing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "In normal desktop-printer conversation, FDM usually means filament 3D printing. Fused filament fabrication, or FFF, describes the same basic material-extrusion process." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is FDM better than SLA?",
+          "acceptedAnswer": { "@type": "Answer", "text": "FDM is usually better for lower-cost, larger, and less messy functional parts. SLA is usually better for fine features and smooth surfaces, but it requires washing and post-curing." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does FDM need support material?",
+          "acceptedAnswer": { "@type": "Answer", "text": "FDM needs supports under some steep overhangs, bridges, and isolated features. Orientation and part design can reduce how much support a model needs." }
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://moorecode.com/#logan",
+      "name": "Logan Moore",
+      "url": "https://moorecode.com/",
+      "jobTitle": "Solo developer",
+      "sameAs": ["https://github.com/loganjmoore"],
+      "worksFor": { "@type": "Organization", "name": "BrightPrompt Consulting LLC" }
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://moorecode.com/blog/#blog",
+      "name": "moorecode blog",
+      "url": "https://moorecode.com/blog/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/consulting.html">Consulting</a>
+    <a href="/hobbies.html">Hobbies</a>
+    <a href="/youtube.html">YouTube</a>
+    <a href="/about.html">About</a>
+    <a href="/blog/" class="active">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<article>
+<header class="post-head">
+  <p class="post-meta">October 6, 2026 · By Logan Moore</p>
+  <h1>What Is FDM 3D Printing? FDM vs. SLA and SLS</h1>
+  <p class="entity-definition">FDM 3D printing, short for fused deposition modeling, builds a part by melting thermoplastic filament and placing it in stacked paths.</p>
+</header>
+
+<section class="prose">
+  <img class="post-cover" src="/blog/images/what-is-fdm-3d-printing.svg" width="1200" height="630" alt="Cutaway diagram of an FDM nozzle laying stacked orange lines beside SLA resin and SLS powder symbols." />
+
+  <p class="lede">FDM 3D printing melts a solid plastic filament, pushes it through a nozzle, and deposits the plastic one layer at a time. It is usually the practical choice for affordable prototypes, fixtures, organizers, and medium-to-large functional parts. Choose SLA for finer surface detail and SLS for complex nylon parts that should print without attached supports.</p>
+
+  <h2>How does FDM 3D printing work?</h2>
+  <p>FDM 3D printing turns a digital model into nozzle movements, temperatures, and extrusion commands. A slicer divides the model into horizontal layers and writes those instructions into machine code, usually G-code on a desktop printer.</p>
+
+  <ol>
+    <li>A drive gear pulls filament from the spool and pushes it into the hot end.</li>
+    <li>The heater softens the thermoplastic inside the nozzle.</li>
+    <li>The nozzle lays down perimeters, infill, and support paths for one layer.</li>
+    <li>The printer moves one layer height and repeats until the object is complete.</li>
+  </ol>
+
+  <p>The National Institute for Occupational Safety and Health describes fused filament fabrication in the same direct terms: it melts thermoplastic filament and places the molten plastic with a moving extruder. NIOSH also says hazards vary by process and material, so ventilation and the manufacturer's safety instructions still matter for a desktop FDM machine.</p>
+
+  <h2>What is FDM suitable for?</h2>
+  <p>FDM is suitable for parts where cost, size, material choice, and fast iteration matter more than a perfectly smooth surface. Common jobs include brackets, enclosures, drill guides, electronics mounts, organizers, cosplay forms, and fit-check prototypes.</p>
+
+  <p>FDM also lets a designer change how a part behaves without changing its outside shape. More perimeters strengthen the shell. Sparse infill cuts material and weight. Rotate the same model, and its layers meet the load differently. Those choices make the process useful for the physical tinkering shown on my <a href="/hobbies.html">hobbies page</a>.</p>
+
+  <p>A desktop machine can switch among PLA, PETG, TPU, ABS, ASA, nylon, and filled blends if its hot end, nozzle, bed, and enclosure support them. My <a href="/blog/3d-printing-filament-pla-petg-tpu.html">PLA, PETG, and TPU guide</a> covers the beginner-friendly choices and their starting temperatures.</p>
+
+  <h2>What is FDM not suitable for?</h2>
+  <p>FDM is not the best fit for tiny embossed text, jewelry-scale texture, optically smooth surfaces, or shapes whose supports would ruin the visible face. Layer lines remain part of the process, even on a well-tuned printer.</p>
+
+  <p>Thin features also reach a practical limit. Formlabs' published comparison puts a typical FDM minimum supported wall near 0.8 mm and minimum embossed detail near 0.6 mm wide and 2 mm high. Those are design guidelines rather than promises for every machine, but they explain why a small miniature face usually reads better in resin.</p>
+
+  <p>FDM parts are direction-dependent. A load that tries to separate layers can expose a weaker axis, and an apparently solid model can fail at a sharp corner or thin neck. Food contact, pressure, electrical insulation, medical use, and load-bearing safety parts need application-specific material and process validation.</p>
+
+  <h2>How do FDM, SLA, and SLS compare?</h2>
+  <p>FDM, SLA, and SLS differ most in feedstock, support strategy, finish, and the work required after printing. The short table below matches the format readers usually need before choosing a process.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Process</th>
+        <th>How it forms a layer</th>
+        <th>Supports</th>
+        <th>Best fit</th>
+        <th>Main tradeoff</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>FDM / FFF</strong></td>
+        <td>Nozzle deposits melted filament</td>
+        <td>Added under some overhangs</td>
+        <td>Affordable, larger functional parts</td>
+        <td>Visible layers and limited tiny detail</td>
+      </tr>
+      <tr>
+        <td><strong>SLA</strong></td>
+        <td>Light cures liquid photopolymer resin</td>
+        <td>Attached support structures</td>
+        <td>Fine features and smooth surfaces</td>
+        <td>Washing, curing, and resin handling</td>
+      </tr>
+      <tr>
+        <td><strong>SLS</strong></td>
+        <td>Laser fuses polymer powder</td>
+        <td>Loose powder supports the part</td>
+        <td>Complex nylon parts and nested builds</td>
+        <td>Industrial equipment and powder workflow</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Formlabs' <a href="https://formlabs.com/blog/fdm-vs-sla-vs-sls-how-to-choose-the-right-3d-printing-technology/">FDM, SLA, and SLS comparison</a> says the self-supporting SLS powder bed can produce intricate geometry without attached support structures. The same source describes SLA as the highest-resolution option of the three and FDM as the process that struggles most with very small features.</p>
+
+  <h2>How much finer can SLA detail be than FDM detail?</h2>
+  <p>SLA's published minimum embossed detail can be six times smaller than the FDM comparison value. Formlabs lists 0.1 mm embossed detail for its SLA process and 0.6 mm width for the representative FDM guideline, so 0.6 divided by 0.1 equals 6.</p>
+
+  <table>
+    <thead>
+      <tr><th>Example design rule</th><th>FDM</th><th>SLA</th><th>Computed difference</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Minimum embossed detail</td><td>0.6 mm wide</td><td>0.1 mm</td><td>SLA value is 6× smaller</td></tr>
+      <tr><td>Minimum supported wall</td><td>0.8 mm</td><td>0.2 mm</td><td>SLA value is 4× smaller</td></tr>
+    </tbody>
+  </table>
+
+  <p>Those two values are design guides, not finish-line guarantees. Resin chemistry, light source, nozzle diameter, calibration, orientation, and geometry all matter. The calculation still shows the scale of the choice before a brand-specification argument takes over.</p>
+
+  <h2>How should you choose a 3D printing process?</h2>
+  <p>You should choose a 3D printing process by the hardest requirement in the part. Start with FDM if the part is large, functional, low-cost, or likely to go through several revisions. Choose SLA when the visible finish or small detail controls success. Send a part to SLS when complex geometry, nylon behavior, and support-free nesting justify a service bureau or industrial machine.</p>
+
+  <ul>
+    <li><strong>Pick FDM</strong> for a 180 mm electronics enclosure that will be revised three times.</li>
+    <li><strong>Pick SLA</strong> for a 35 mm figure whose face and fabric texture must remain legible.</li>
+    <li><strong>Pick SLS</strong> for an interlocking nylon assembly with internal motion and no accessible support faces.</li>
+  </ul>
+
+  <p>I use the same constraint-first approach across the work on my <a href="/projects.html">projects page</a>. I start with the requirement that could sink the result, and that requirement chooses the tool.</p>
+
+  <h2>Frequently asked questions</h2>
+
+  <h3>What does FDM mean in 3D printing?</h3>
+  <p>FDM means fused deposition modeling. An FDM printer heats thermoplastic filament and deposits it in paths that join into layers and then a complete part.</p>
+
+  <h3>Is FDM the same as filament 3D printing?</h3>
+  <p>In normal desktop-printer conversation, FDM usually means filament 3D printing. Fused filament fabrication, or FFF, describes the same basic material-extrusion process.</p>
+
+  <h3>Is FDM better than SLA?</h3>
+  <p>FDM is usually better for lower-cost, larger, and less messy functional parts. SLA is usually better for fine features and smooth surfaces, but it requires washing and post-curing.</p>
+
+  <h3>Does FDM need support material?</h3>
+  <p>FDM needs supports under some steep overhangs, bridges, and isolated features. Orientation and part design can reduce how much support a model needs.</p>
+</section>
+</article>
+
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>

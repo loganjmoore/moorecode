@@ -14,7 +14,10 @@
 
 ## Blog
 
-- [Blog](https://moorecode.com/blog/): Practical notes on apps, pricing, and taxes from a solo developer.
+- [Blog](https://moorecode.com/blog/): Practical notes on 3D printing, apps, pricing, and taxes from a solo developer.
+- [3D Printing Filament: PLA, PETG, or TPU?](https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html): A practical material guide with print temperatures, use cases, and spool-yield math.
+- [What Is FDM 3D Printing? FDM vs. SLA and SLS](https://moorecode.com/blog/what-is-fdm-3d-printing.html): A plain-language process guide with a technology comparison and design-rule example.
+- [When Resin 3D Printing Beats FDM](https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html): A decision guide covering detail, safety, post-processing, and workspace requirements.
 - [Free blackjack basic strategy trainer for iPhone compared](https://moorecode.com/blog/free-blackjack-basic-strategy-trainer-iphone.html): Five free iPhone blackjack trainers compared on ads, purchases, and rule settings.
 - [Invoicing app pricing for service businesses, compared](https://moorecode.com/blog/simple-invoicing-app-pricing-service-businesses.html): Five invoicing tools priced for a two-person shop sending 60 invoices a month.
 - [Mileage tracker for delivery drivers: what the IRS lets you deduct](https://moorecode.com/blog/mileage-tracker-delivery-drivers-tax-deduction.html): Which delivery miles count, the 2026 IRS mileage rates, and what a log needs.

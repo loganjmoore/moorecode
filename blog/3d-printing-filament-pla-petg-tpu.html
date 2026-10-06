@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Printing Filament: PLA, PETG, or TPU?</title>
+<meta name="description" content="Choose PLA, PETG, or TPU by the job. Compare print temperatures, strengths, tradeoffs, and beginner settings in one practical guide." />
+<link rel="canonical" href="https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html" />
+<meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="3D Printing Filament: PLA, PETG, or TPU?" />
+<meta property="og:description" content="Choose PLA, PETG, or TPU by the job, with temperatures and practical tradeoffs." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html" />
+<meta property="og:image" content="https://moorecode.com/blog/images/3d-printing-filament-pla-petg-tpu.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html#post",
+      "headline": "3D Printing Filament: PLA, PETG, or TPU?",
+      "description": "Choose PLA, PETG, or TPU by the job, with temperatures and practical tradeoffs.",
+      "url": "https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html",
+      "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html",
+      "datePublished": "2026-10-06",
+      "dateModified": "2026-10-06",
+      "image": "https://moorecode.com/blog/images/3d-printing-filament-pla-petg-tpu.svg",
+      "author": { "@id": "https://moorecode.com/#logan" },
+      "publisher": { "@id": "https://moorecode.com/#logan" },
+      "isPartOf": { "@id": "https://moorecode.com/blog/#blog" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which 3D printing filament should a beginner buy first?",
+          "acceptedAnswer": { "@type": "Answer", "text": "PLA is the best first filament for most beginners because it prints at a relatively low temperature, resists warping, and works well for models, organizers, and prototypes." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is PETG stronger than PLA?",
+          "acceptedAnswer": { "@type": "Answer", "text": "PETG is usually the better choice when a part needs toughness, layer adhesion, or moderate heat resistance. PLA is stiffer and often gives cleaner detail, so stronger is not a complete description." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is TPU filament used for?",
+          "acceptedAnswer": { "@type": "Answer", "text": "TPU is used for flexible parts such as feet, bumpers, seals, grips, protective sleeves, and RC tires. It prints more slowly than PLA or PETG." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a heated bed for PLA, PETG, or TPU?",
+          "acceptedAnswer": { "@type": "Answer", "text": "PLA can print without a heated bed, although 60 degrees Celsius is a common profile. PETG and TPU generally benefit from heated beds, with the exact setting taken from the spool maker's profile." }
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://moorecode.com/#logan",
+      "name": "Logan Moore",
+      "url": "https://moorecode.com/",
+      "jobTitle": "Solo developer",
+      "sameAs": ["https://github.com/loganjmoore"],
+      "worksFor": { "@type": "Organization", "name": "BrightPrompt Consulting LLC" }
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://moorecode.com/blog/#blog",
+      "name": "moorecode blog",
+      "url": "https://moorecode.com/blog/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/consulting.html">Consulting</a>
+    <a href="/hobbies.html">Hobbies</a>
+    <a href="/youtube.html">YouTube</a>
+    <a href="/about.html">About</a>
+    <a href="/blog/" class="active">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<article>
+<header class="post-head">
+  <p class="post-meta">October 6, 2026 · By Logan Moore</p>
+  <h1>3D Printing Filament: PLA, PETG, or TPU?</h1>
+  <p class="entity-definition">3D printing filament is thermoplastic feedstock that an FDM printer melts and deposits layer by layer.</p>
+</header>
+
+<section class="prose">
+  <img class="post-cover" src="/blog/images/3d-printing-filament-pla-petg-tpu.svg" width="1200" height="630" alt="Three filament spools labeled PLA, PETG, and TPU beside a heated 3D printer nozzle." />
+
+  <p class="lede">Choose PLA 3D printing filament for clean models and easy first prints, PETG for tougher brackets and outdoor utility parts, and TPU for parts that must flex. PLA is the sensible first spool for most people; move to PETG or TPU only when the part needs a property PLA lacks. The temperature printed on your spool remains the final authority because blends and printers vary.</p>
+
+  <h2>How do PLA, PETG, and TPU compare?</h2>
+  <p>PLA, PETG, and TPU solve different jobs, and the most useful comparison starts with the finished part rather than the label on the spool. These starting temperatures come from Prusa Research's published material profiles, not a universal setting for every brand.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Filament</th>
+        <th>Good for</th>
+        <th>Avoid it when</th>
+        <th>Prusa nozzle profile</th>
+        <th>Prusa bed profile</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>PLA</strong></td>
+        <td>Models, prototypes, organizers, signs, detailed parts</td>
+        <td>The part will sit in heat or take repeated impact</td>
+        <td>215°C first layer, 210°C after</td>
+        <td>60°C</td>
+      </tr>
+      <tr>
+        <td><strong>PETG</strong></td>
+        <td>Holders, clamps, printer parts, boxes, moderate outdoor use</td>
+        <td>You need the crispest bridges or easiest support removal</td>
+        <td>230°C first layer, 240°C after</td>
+        <td>85°C first layer, 90°C after</td>
+      </tr>
+      <tr>
+        <td><strong>TPU / flex</strong></td>
+        <td>Feet, seals, grips, bumpers, sleeves, tires</td>
+        <td>The design depends on rigid spans or fast printing</td>
+        <td>230-245°C</td>
+        <td>60-75°C</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Prusa's broader <a href="https://help.prusa3d.com/filament-material-guide">Filament Material Guide</a> shows how wide brand and blend ranges can be: 185-235°C for PLA, 215-270°C for PETG, and 220-260°C for flexible materials. Treat the narrower profiles above as tested starting points for Prusa materials, then use the maker's range on your own spool.</p>
+
+  <h2>Why is PLA the best first filament?</h2>
+  <p>PLA is the best first filament because it is forgiving, inexpensive, and capable of fine detail without an enclosure. Prusa Research calls PLA “one of the easiest materials to print” and recommends it for detailed models, figures, and quick prototypes in its <a href="https://help.prusa3d.com/article/pla_2062">PLA material guide</a>.</p>
+
+  <p>Use PLA for a drawer organizer, board-game insert, cosplay pattern, visual prototype, or display model. It tends to bridge more cleanly than PETG and does not fight the printer with TPU's soft feed path. A PLA part can still be sturdy, especially with enough walls, but it is a poor choice for a hot car, a sun-baked fixture, or a clip that gets bent over and over.</p>
+
+  <p>I would rather learn bed leveling, first-layer height, and slicer basics on PLA before adding a material problem. That practical bias shows up in the 3D printing projects on my <a href="/hobbies.html">hobbies page</a>. I want a repeatable process first, and then the material has to earn its extra fuss.</p>
+
+  <h2>When is printing PETG worth the extra setup?</h2>
+  <p>Printing PETG is worth the extra setup when a useful part needs more toughness, stronger layer bonding, or better temperature resistance than ordinary PLA. Prusa's <a href="https://help.prusa3d.com/article/petg_2059">PETG guide</a> lists holders, clamps, waterproof parts, and mechanical components as common uses, and says its parts are suitable below 80°C.</p>
+
+  <p>PETG's annoyances are practical too. It strings more easily, makes rougher bridges, and can grip a smooth PEI sheet hard enough to damage it. Use the surface and release layer recommended by the printer and filament makers. Dry the spool if strings persist after basic temperature and retraction checks.</p>
+
+  <p>PETG fits a garage hook; PLA will usually serve a tabletop miniature more cleanly. The hook benefits from toughness and layer adhesion, while the miniature benefits more from crisp detail and easy cleanup.</p>
+
+  <h2>When does TPU 3D printing filament make sense?</h2>
+  <p>TPU 3D printing filament makes sense when flexibility is a requirement that geometry alone cannot provide. Prusa's <a href="https://help.prusa3d.com/article/flexible-materials_2057">flexible materials guide</a> names spacing washers, stamps, RC tires, shoe parts, belts, and protective sleeves as suitable uses.</p>
+
+  <p>Soft filament can buckle between the extruder gears and nozzle, so speed matters. Prusa gives 20 mm/s as a typical flexible-filament speed and puts the practical maximum around 30-40 mm/s. It also recommends loosening the idler pressure, keeping the path clear, reducing retraction, and keeping the spool dry. A direct-drive extruder usually gives the filament less room to fold, though a tuned Bowden machine can still print firmer TPU.</p>
+
+  <h2>How much can one spool actually print?</h2>
+  <p>A 1 kg spool can produce eight 100 g parts when each job uses another 15 g for supports, purge, and failed starts. The calculation is simple: 1,000 g divided by 115 g per finished part equals 8 complete parts with 80 g left.</p>
+
+  <table>
+    <thead>
+      <tr><th>Per-part estimate</th><th>Material</th><th>Allowance</th><th>Yield from 1 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Slicer model</td><td>100 g</td><td>0 g</td><td>10 parts</td></tr>
+      <tr><td>Realistic batch</td><td>100 g</td><td>15 g</td><td>8 parts, 80 g left</td></tr>
+    </tbody>
+  </table>
+
+  <p>This planning example cannot promise a real yield. Supports, purge towers, brims, calibration pieces, and mistakes all consume filament. Slice the actual model before buying, then leave margin. The last few loops on a spool rarely become a perfect tenth part.</p>
+
+  <h2>What should you set before the first print?</h2>
+  <p>Your first filament profile should match the spool maker, printer, nozzle, and build surface before you tune anything else. Start with these checks:</p>
+
+  <ol>
+    <li>Confirm the filament diameter, normally 1.75 mm on a desktop machine.</li>
+    <li>Select the exact material profile in the slicer and compare its temperature with the spool label.</li>
+    <li>Clean the build surface using the printer maker's method.</li>
+    <li>Print a small temperature or first-layer test before a long job.</li>
+    <li>Change one setting at a time and write down what improved.</li>
+  </ol>
+
+  <p>The same habit applies to my <a href="/projects.html">software projects</a>: a small repeatable test tells me more than changing five variables at once. With filament, the first layer is that test.</p>
+
+  <h2>Frequently asked questions</h2>
+
+  <h3>Which 3D printing filament should a beginner buy first?</h3>
+  <p>PLA is the best first filament for most beginners because it prints at a relatively low temperature, resists warping, and works well for models, organizers, and prototypes.</p>
+
+  <h3>Is PETG stronger than PLA?</h3>
+  <p>PETG is usually the better choice when a part needs toughness, layer adhesion, or moderate heat resistance. PLA is stiffer and often gives cleaner detail, so stronger is not a complete description.</p>
+
+  <h3>What is TPU filament used for?</h3>
+  <p>TPU is used for flexible parts such as feet, bumpers, seals, grips, protective sleeves, and RC tires. It prints more slowly than PLA or PETG.</p>
+
+  <h3>Do I need a heated bed for PLA, PETG, or TPU?</h3>
+  <p>PLA can print without a heated bed, although 60°C is a common profile. PETG and TPU generally benefit from heated beds, with the exact setting taken from the spool maker's profile.</p>
+</section>
+</article>
+
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
