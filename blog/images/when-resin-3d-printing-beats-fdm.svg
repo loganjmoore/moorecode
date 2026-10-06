@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">When resin 3D printing beats FDM</title>
+  <desc id="desc">A detailed resin part rises from a liquid vat beside a wash, dry, and cure timeline.</desc>
+  <rect width="1200" height="630" fill="#0b0c10"/>
+  <path d="M0 486c190-52 322 71 518 24 221-54 384-105 682-26v146H0Z" fill="#14161c"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="72" y="95" font-size="24" font-weight="600" fill="#f5b942">RESIN OR FDM?</text>
+    <text x="72" y="164" font-size="58" font-weight="800" fill="#e8eaef">Choose detail with a plan</text>
+    <text x="74" y="207" font-size="23" fill="#9aa1ad">Print, wash, dry, cure, then finish.</text>
+  </g>
+  <g transform="translate(90 284)">
+    <path d="M0 102h400v194c0 27-21 48-48 48H48c-27 0-48-21-48-48Z" fill="#1b1e26" stroke="#9aa1ad" stroke-width="7"/>
+    <path d="M8 196c92-28 183 31 384-5v101c0 24-19 43-43 43H51c-24 0-43-19-43-43Z" fill="#e07a5f" opacity=".65"/>
+    <path d="M200 0v126" stroke="#f5b942" stroke-width="10"/>
+    <path d="M133 125h134l-12 63-22-12-14 32-21-22-24 22-16-35-29 16Z" fill="#f5b942"/>
+    <path d="M150 122c14-58 28-79 50-79s36 21 50 79" fill="none" stroke="#f5b942" stroke-width="10"/>
+  </g>
+  <g transform="translate(594 305)" font-family="Inter,Arial,sans-serif">
+    <path d="M30 73h450" stroke="#262a35" stroke-width="8" stroke-linecap="round"/>
+    <g>
+      <circle cx="50" cy="73" r="42" fill="#f5b942"/>
+      <text x="50" y="81" text-anchor="middle" font-size="24" font-weight="800" fill="#1a1208">1</text>
+      <text x="50" y="146" text-anchor="middle" font-size="20" font-weight="700" fill="#e8eaef">Wash</text>
+    </g>
+    <g>
+      <circle cx="200" cy="73" r="42" fill="#1b1e26" stroke="#e07a5f" stroke-width="7"/>
+      <text x="200" y="81" text-anchor="middle" font-size="24" font-weight="800" fill="#e8eaef">2</text>
+      <text x="200" y="146" text-anchor="middle" font-size="20" font-weight="700" fill="#e8eaef">Dry</text>
+    </g>
+    <g>
+      <circle cx="350" cy="73" r="42" fill="#1b1e26" stroke="#e07a5f" stroke-width="7"/>
+      <text x="350" y="81" text-anchor="middle" font-size="24" font-weight="800" fill="#e8eaef">3</text>
+      <text x="350" y="146" text-anchor="middle" font-size="20" font-weight="700" fill="#e8eaef">Cure</text>
+    </g>
+    <g>
+      <circle cx="500" cy="73" r="42" fill="#1b1e26" stroke="#9aa1ad" stroke-width="7"/>
+      <text x="500" y="81" text-anchor="middle" font-size="24" font-weight="800" fill="#e8eaef">4</text>
+      <text x="500" y="146" text-anchor="middle" font-size="20" font-weight="700" fill="#e8eaef">Finish</text>
+    </g>
+    <rect x="22" y="205" width="506" height="110" rx="14" fill="#14161c" stroke="#262a35" stroke-width="2"/>
+    <text x="48" y="247" font-size="20" font-weight="700" fill="#f5b942">The hidden requirement</text>
+    <text x="48" y="282" font-size="20" fill="#9aa1ad">A controlled workspace for resin and solvent.</text>
+  </g>
+</svg>

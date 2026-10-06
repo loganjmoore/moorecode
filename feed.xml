@@ -3,9 +3,30 @@
   <channel>
     <title>moorecode blog</title>
     <link>https://moorecode.com/blog/</link>
-    <description>Notes from Logan Moore on blackjack trainers, invoicing app pricing, and mileage deductions for delivery drivers.</description>
+    <description>Practical guides from Logan Moore on 3D printing, software projects, pricing, and tools.</description>
     <language>en-us</language>
     <atom:link href="https://moorecode.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>3D Printing Filament: PLA, PETG, or TPU?</title>
+      <link>https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html</guid>
+      <pubDate>Tue, 06 Oct 2026 12:00:00 +0000</pubDate>
+      <description>Choose PLA, PETG, or TPU by the job, with temperatures and practical tradeoffs.</description>
+    </item>
+    <item>
+      <title>What Is FDM 3D Printing? FDM vs. SLA and SLS</title>
+      <link>https://moorecode.com/blog/what-is-fdm-3d-printing.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/what-is-fdm-3d-printing.html</guid>
+      <pubDate>Tue, 06 Oct 2026 11:00:00 +0000</pubDate>
+      <description>A plain-language guide to FDM, plus a practical comparison with SLA and SLS.</description>
+    </item>
+    <item>
+      <title>When Resin 3D Printing Beats FDM</title>
+      <link>https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html</guid>
+      <pubDate>Tue, 06 Oct 2026 10:00:00 +0000</pubDate>
+      <description>A direct resin-versus-FDM guide covering detail, safety, washing, curing, and cleanup.</description>
+    </item>
     <item>
       <title>Free blackjack basic strategy trainer for iPhone compared</title>
       <link>https://moorecode.com/blog/free-blackjack-basic-strategy-trainer-iphone.html</link>

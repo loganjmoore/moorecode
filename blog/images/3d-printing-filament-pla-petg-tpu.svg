@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">3D printing filament guide</title>
+  <desc id="desc">Three filament spools labeled PLA, PETG, and TPU beside a heated printer nozzle.</desc>
+  <rect width="1200" height="630" fill="#0b0c10"/>
+  <path d="M0 530C270 440 446 592 700 516C884 461 1018 421 1200 462V630H0Z" fill="#14161c"/>
+  <g font-family="Inter,Arial,sans-serif" fill="#e8eaef">
+    <text x="72" y="94" font-size="24" font-weight="600" fill="#f5b942">MATERIAL GUIDE</text>
+    <text x="72" y="165" font-size="58" font-weight="800">PLA, PETG, or TPU?</text>
+    <text x="74" y="208" font-size="23" fill="#9aa1ad">Pick the filament by the job.</text>
+  </g>
+  <g transform="translate(90 305)">
+    <g>
+      <circle cx="108" cy="108" r="104" fill="#1b1e26" stroke="#f5b942" stroke-width="10"/>
+      <circle cx="108" cy="108" r="36" fill="#0b0c10" stroke="#262a35" stroke-width="10"/>
+      <path d="M56 46c58-36 126-5 145 52M39 81c19-37 63-55 101-47M44 151c31 48 108 63 150 15" fill="none" stroke="#f5b942" stroke-width="10" stroke-linecap="round" opacity=".8"/>
+      <text x="108" y="225" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#e8eaef">PLA</text>
+    </g>
+    <g transform="translate(255)">
+      <circle cx="108" cy="108" r="104" fill="#1b1e26" stroke="#e07a5f" stroke-width="10"/>
+      <circle cx="108" cy="108" r="36" fill="#0b0c10" stroke="#262a35" stroke-width="10"/>
+      <path d="M56 46c58-36 126-5 145 52M39 81c19-37 63-55 101-47M44 151c31 48 108 63 150 15" fill="none" stroke="#e07a5f" stroke-width="10" stroke-linecap="round" opacity=".8"/>
+      <text x="108" y="225" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#e8eaef">PETG</text>
+    </g>
+    <g transform="translate(510)">
+      <circle cx="108" cy="108" r="104" fill="#1b1e26" stroke="#9aa1ad" stroke-width="10"/>
+      <circle cx="108" cy="108" r="36" fill="#0b0c10" stroke="#262a35" stroke-width="10"/>
+      <path d="M56 46c58-36 126-5 145 52M39 81c19-37 63-55 101-47M44 151c31 48 108 63 150 15" fill="none" stroke="#9aa1ad" stroke-width="10" stroke-linecap="round" opacity=".9"/>
+      <text x="108" y="225" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#e8eaef">TPU</text>
+    </g>
+  </g>
+  <g transform="translate(965 282)">
+    <path d="M18 0h108l-16 105H34Z" fill="#1b1e26" stroke="#e8eaef" stroke-width="7"/>
+    <path d="M48 105h48l-11 46H59Z" fill="#f5b942"/>
+    <path d="M72 151v95" stroke="#f5b942" stroke-width="8" stroke-linecap="round"/>
+    <path d="M15 259h114" stroke="#e07a5f" stroke-width="9" stroke-linecap="round"/>
+    <path d="M29 280h86" stroke="#e07a5f" stroke-width="9" stroke-linecap="round" opacity=".7"/>
+  </g>
+</svg>
