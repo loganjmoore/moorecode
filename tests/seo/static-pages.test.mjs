@@ -25,6 +25,14 @@ const projects = read('projects.html');
 const blackjackCard = projects.slice(projects.indexOf('<h3>Blackjack Now</h3>'), projects.indexOf('<h3>TILT</h3>'));
 assert.match(blackjackCard, /href="blackjack-support\.html">Support<\/a>/);
 
+const analyticsPrivacy = read('posthog-privacy.html');
+assert.match(analyticsPrivacy, /<link rel="canonical" href="https:\/\/moorecode\.com\/posthog-privacy\.html">/);
+const analyticsDescription = analyticsPrivacy.match(/<meta name="description" content="([^"]+)">/)?.[1];
+assert.ok(analyticsDescription?.length >= 50 && analyticsDescription.length <= 160, 'Analytics privacy description must be 50–160 characters');
+const analyticsSchema = JSON.parse(analyticsPrivacy.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+assert.equal(analyticsSchema['@type'], 'WebPage');
+assert.equal(analyticsSchema.url, 'https://moorecode.com/posthog-privacy.html');
+
 const posts = [
   ['free-blackjack-basic-strategy-trainer-iphone.html', 'Free blackjack basic strategy trainer for iPhone compared'],
   ['simple-invoicing-app-pricing-service-businesses.html', 'Invoicing app pricing for service businesses, compared'],
@@ -36,4 +44,4 @@ for (const [path, title] of posts) {
 }
 assert.match(read('index.html'), /href="blog\/">Blog<\/a>/);
 
-console.log('SEO static-page contract passed: definitions, Service entity, support path and blog discovery.');
+console.log('SEO static-page contract passed: definitions, Service entity, analytics privacy metadata, support path and blog discovery.');
