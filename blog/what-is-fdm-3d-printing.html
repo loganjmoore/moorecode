@@ -114,7 +114,7 @@
 <header class="post-head">
   <p class="post-meta">October 6, 2026 · By Logan Moore</p>
   <h1>What Is FDM 3D Printing? FDM vs. SLA and SLS</h1>
-  <p class="entity-definition">FDM 3D printing, short for fused deposition modeling, builds a part by melting thermoplastic filament and placing it in stacked paths.</p>
+  <p class="entity-definition">FDM 3D printing is a material-extrusion process, short for fused deposition modeling, that builds a part by melting thermoplastic filament and placing it in stacked paths.</p>
 </header>
 
 <section class="prose">
@@ -146,10 +146,12 @@
 
   <p>Thin features also reach a practical limit. Formlabs' published comparison puts a typical FDM minimum supported wall near 0.8 mm and minimum embossed detail near 0.6 mm wide and 2 mm high. Those are design guidelines rather than promises for every machine, but they explain why a small miniature face usually reads better in resin.</p>
 
+  <p>For the complete workflow behind that detail advantage, including washing, curing, ventilation, and waste handling, read the <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin 3D printing versus FDM guide</a>.</p>
+
   <p>FDM parts are direction-dependent. A load that tries to separate layers can expose a weaker axis, and an apparently solid model can fail at a sharp corner or thin neck. Food contact, pressure, electrical insulation, medical use, and load-bearing safety parts need application-specific material and process validation.</p>
 
-  <h2>How do FDM, SLA, and SLS compare?</h2>
-  <p>FDM, SLA, and SLS differ most in feedstock, support strategy, finish, and the work required after printing. The short table below matches the format readers usually need before choosing a process.</p>
+  <h2>How do FDM, SLA 3D printing, and SLS 3D printing compare?</h2>
+  <p>FDM deposits melted filament, SLA 3D printing cures liquid resin, and SLS 3D printing fuses polymer powder. They differ most in feedstock, support strategy, finish, and the work required after printing. The short table below matches the format readers usually need before choosing a process.</p>
 
   <table>
     <thead>
@@ -187,6 +189,8 @@
   </table>
 
   <p>Formlabs' <a href="https://formlabs.com/blog/fdm-vs-sla-vs-sls-how-to-choose-the-right-3d-printing-technology/">FDM, SLA, and SLS comparison</a> says the self-supporting SLS powder bed can produce intricate geometry without attached support structures. The same source describes SLA as the highest-resolution option of the three and FDM as the process that struggles most with very small features.</p>
+
+  <p>The same Formlabs comparison lists budget FDM printers starting at about $200, professional desktop FDM printers from $2,000 to $8,000, and industrial systems from $15,000. Those are market examples rather than a buying recommendation, but they put “affordable” into concrete numbers.</p>
 
   <h2>How much finer can SLA detail be than FDM detail?</h2>
   <p>SLA's published minimum embossed detail can be six times smaller than the FDM comparison value. Formlabs lists 0.1 mm embossed detail for its SLA process and 0.6 mm width for the representative FDM guideline, so 0.6 divided by 0.1 equals 6.</p>
