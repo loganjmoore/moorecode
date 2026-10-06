@@ -7,6 +7,9 @@ const firstParagraphAfterH1 = (html) => html.slice(html.indexOf('</h1>') + 5).ma
 for (const path of [
   'hobbies.html',
   'blackjack-privacy.html',
+  'blog/3d-printing-filament-pla-petg-tpu.html',
+  'blog/what-is-fdm-3d-printing.html',
+  'blog/when-resin-3d-printing-beats-fdm.html',
   'blog/free-blackjack-basic-strategy-trainer-iphone.html',
   'blog/simple-invoicing-app-pricing-service-businesses.html',
   'blog/mileage-tracker-delivery-drivers-tax-deduction.html',
@@ -44,4 +47,24 @@ for (const [path, title] of posts) {
 }
 assert.match(read('index.html'), /href="blog\/">Blog<\/a>/);
 
-console.log('SEO static-page contract passed: definitions, Service entity, analytics privacy metadata, support path and blog discovery.');
+const filamentGuide = read('blog/3d-printing-filament-pla-petg-tpu.html');
+assert.match(filamentGuide, /<h1>3D Printing Filament:/);
+assert.match(filamentGuide, /<h2>Which 3D printing materials fit a desktop or home printer\?<\/h2>/);
+assert.match(filamentGuide, /<h2>Why is PLA 3D printing the best place to start\?<\/h2>/);
+assert.match(filamentGuide, /<h2>When is printing PETG worth the extra setup\?<\/h2>/);
+assert.match(filamentGuide, /<h2>Which 3D printing accessories belong in a basic setup\?<\/h2>/);
+assert.match(filamentGuide, /href="\/blog\/what-is-fdm-3d-printing\.html">FDM 3D printing process comparison<\/a>/);
+assert.match(filamentGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing guide<\/a>/);
+
+const fdmGuide = read('blog/what-is-fdm-3d-printing.html');
+assert.match(fdmGuide, /<h1>What Is FDM 3D Printing\?/);
+assert.match(fdmGuide, /<h2>How do FDM, SLA 3D printing, and SLS 3D printing compare\?<\/h2>/);
+assert.match(fdmGuide, /budget FDM printers starting at about \$200/);
+assert.match(fdmGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing versus FDM guide<\/a>/);
+
+const resinGuide = read('blog/when-resin-3d-printing-beats-fdm.html');
+assert.match(resinGuide, /<h1>When Resin 3D Printing Beats FDM<\/h1>/);
+assert.match(resinGuide, /<h2>What is resin 3D printing\?<\/h2>/);
+assert.match(resinGuide, /href="\/blog\/what-is-fdm-3d-printing\.html">FDM explainer<\/a>/);
+
+console.log('SEO static-page contract passed: definitions, 3D-printing topic coverage and citations, Service entity, analytics privacy metadata, support path and blog discovery.');
