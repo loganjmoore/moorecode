@@ -119,7 +119,7 @@
       const sameProduct = (config?.hosts || [config?.product, `www.${config?.product}`]).includes(url.hostname);
       const contact = url.protocol === 'mailto:' || url.protocol === 'tel:';
       const target = store ? 'app_store' : contact ? 'contact' : sameProduct ? /\/(register|signup|sign-up)/.test(url.pathname) ? 'signup' : /\/pricing/.test(url.pathname) || url.hash === '#pricing' ? 'pricing' : /\/contact/.test(url.pathname) || url.hash === '#contact' ? 'contact' : /\/(demo|book)/.test(url.pathname) ? 'demo' : null : null;
-      if (target) { capture('cta_clicked', target); if (store) capture('app_store_clicked'); if (contact) capture('contact_clicked'); }
+      if (target) { capture('cta_clicked', target); if (store) capture('app_store_clicked'); if (target === 'contact') capture('contact_clicked'); }
     } catch { /* Not an analytics target. */ }
   });
   async function boot() {

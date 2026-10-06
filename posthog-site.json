@@ -5,8 +5,8 @@
     "moorecode.com",
     "www.moorecode.com"
   ],
-  "consentKey": "",
-  "consentKind": "",
+  "consentKey": "website_posthog_consent_v1",
+  "consentKind": "accepted",
   "publicDir": ".",
   "distDir": "../dist"
 }
