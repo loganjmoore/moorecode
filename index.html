@@ -130,9 +130,9 @@
 
 <section class="hero">
   <h1>Logan Moore</h1>
-  <p class="intro">MooreCode is Logan Moore's personal website for his iOS and web apps, consulting work, and hands-on projects.</p>
+  <p class="intro">MooreCode is a personal website by Logan Moore for his iOS and web apps, consulting work, and hands-on projects.</p>
   <p class="tagline">Solo developer, maker, and lifelong tinkerer.</p>
-  <p class="sub">I build useful iOS and web apps for real people, run a small consulting practice, and spend my free time on flower farming, light shows, 3D printing, and ham radio. Grounded in faith and family.</p>
+  <p class="sub">I build useful iOS and web apps for real people, run a small consulting practice, and spend my free time on flower farming, light shows, 3D printing, and ham radio. Grounded in faith and family. As of October 7, 2026, the <a href="blog/">MooreCode blog</a> includes nine posts, with six focused on 3D-printing processes, materials, and projects.</p>
   <div class="cta">
     <a class="btn primary" href="projects.html">See the projects</a>
     <a class="btn ghost" href="contact.html">Get in touch</a>
@@ -225,62 +225,10 @@
   <div class="foot-links">
     <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
     <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
-    <button class="footer-button" id="analytics-settings" type="button">Analytics settings</button>
   </div>
 <address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address>
 </footer>
 
-<aside class="analytics-consent" id="analytics-consent" aria-label="Website analytics choices" hidden>
-  <div>
-    <strong>Optional website analytics</strong>
-    <p id="analytics-consent-status">May I measure page visits and Contact clicks? I do not collect form contents or personal details. <a href="/posthog-privacy.html">Read the details.</a></p>
-  </div>
-  <div class="analytics-consent-actions">
-    <button class="btn ghost" type="button" data-analytics-choice="declined">No thanks</button>
-    <button class="btn primary" type="button" data-analytics-choice="accepted">Allow analytics</button>
-  </div>
-</aside>
-
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-<script>
-(() => {
-  const key = 'website_posthog_consent_v1';
-  const panel = document.getElementById('analytics-consent');
-  const status = document.getElementById('analytics-consent-status');
-  const privacySignal = () => navigator.globalPrivacyControl === true || ['1', 'yes'].includes(navigator.doNotTrack || window.doNotTrack);
-  const show = () => {
-    try {
-      const choice = localStorage.getItem(key);
-      status.firstChild.textContent = choice === 'accepted' && window.websiteAnalyticsConsentDenied !== true && !privacySignal()
-        ? 'Website analytics is allowed. Choose No thanks to turn it off. '
-        : privacySignal()
-          ? 'Your browser privacy preference keeps website analytics off. '
-          : 'Website analytics is off. Choose Allow analytics to turn it on. ';
-    } catch {
-      status.firstChild.textContent = 'Analytics is off because this browser does not allow the choice to be saved. ';
-    }
-    panel.hidden = false;
-  };
-  document.querySelectorAll('[data-analytics-choice]').forEach((button) => button.addEventListener('click', () => {
-    const declined = button.dataset.analyticsChoice === 'declined';
-    if (declined) {
-      window.websiteAnalyticsConsentDenied = true;
-      window.dispatchEvent(new Event('website:analytics-consent'));
-    }
-    try {
-      localStorage.setItem(key, button.dataset.analyticsChoice);
-      if (!declined) window.websiteAnalyticsConsentDenied = false;
-      window.dispatchEvent(new Event('website:analytics-consent'));
-      panel.hidden = true;
-    } catch {
-      status.firstChild.textContent = declined
-        ? 'Your choice could not be saved. Analytics is off on this page; try again before leaving. '
-        : 'Your choice could not be saved, so analytics remains off. ';
-    }
-  }));
-  document.getElementById('analytics-settings').addEventListener('click', show);
-  try { panel.hidden = localStorage.getItem(key) !== null; } catch { panel.hidden = false; }
-})();
-</script>
 </body>
 </html>

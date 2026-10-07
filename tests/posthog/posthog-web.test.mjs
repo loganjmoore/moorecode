@@ -8,14 +8,23 @@ const homepage = readFileSync(new URL('../../index.html', import.meta.url), 'utf
 const siteConfig = JSON.parse(readFileSync(new URL('../../posthog-site.json', import.meta.url), 'utf8'));
 const publicConfig = JSON.parse(readFileSync(new URL('../../posthog-config.json', import.meta.url), 'utf8'));
 function browser(overrides = {}) {
-  const windowListeners = new Map(), documentListeners = new Map(), values = new Map(), session = new Map(), requests = [], nodes = [];
+  const windowListeners = new Map(), documentListeners = new Map(), values = new Map(), session = new Map(), requests = [], nodes = [], appended = [];
   const storage = (map) => ({ getItem: (k) => map.get(k) ?? null, setItem: (k, v) => map.set(k, v), removeItem: (k) => map.delete(k) });
   const config = { key: 'phc_test', host: 'https://us.i.posthog.com', product: 'venuebill.com', surface: 'marketing', consentKey: 'site_consent', consentKind: 'accepted', ...overrides };
+  const status = { firstChild: { textContent: '' } };
+  const choiceButton = analyticsChoice => ({ dataset: { analyticsChoice }, addEventListener() {} });
+  const choices = [choiceButton('declined'), choiceButton('accepted')];
   const context = { window: { addEventListener: (k, fn) => windowListeners.set(k, fn), dispatchEvent: e => { windowListeners.get(e.type)?.(e); return true; } }, document: {
     cookie: '', readyState: 'complete', referrer: 'https://google.com/search?q=private', documentElement: { lang: 'en' },
     addEventListener: (k, fn) => documentListeners.set(k, fn),
-    createElement: () => { const n = { setAttribute() {}, style: {}, append() {}, addEventListener(k, fn) { this[k] = fn; } }; nodes.push(n); return n; },
-    body: { append() {} },
+    getElementById: () => null,
+    querySelector: selector => selector === 'footer .foot-links' ? { append: node => appended.push(node) } : null,
+    createElement: tag => { const n = {
+      tag, setAttribute() {}, style: {}, append() {}, addEventListener(k, fn) { this[k] = fn; },
+      querySelector: selector => selector === '#analytics-consent-status' ? status : null,
+      querySelectorAll: selector => selector === '[data-analytics-choice]' ? choices : [],
+    }; nodes.push(n); return n; },
+    body: { append: node => appended.push(node) },
   }, navigator: { webdriver: false, globalPrivacyControl: false }, location: { hostname: 'venuebill.com', pathname: '/pricing', href: 'https://venuebill.com/pricing?code=secret' },
     history: { pushState() {}, replaceState() {} }, localStorage: storage(values), sessionStorage: storage(session), crypto: { randomUUID }, innerWidth: 390, Event, AbortController, AbortSignal, setTimeout, clearTimeout, URL, Date,
     fetch: async (url, options) => { if (url === '/posthog-config.json') return { ok: true, json: async () => config }; requests.push({ url, options, data: JSON.parse(options.body) }); return { ok: true }; },
@@ -27,12 +36,12 @@ function browser(overrides = {}) {
   });
   vm.runInNewContext(source, context);
   context.history.pushState(); // A route can change before async configuration arrives.
-  return { context, requests, values, session, nodes, windows: windowListeners, documents: documentListeners };
+  return { context, requests, values, session, nodes, appended, windows: windowListeners, documents: documentListeners };
 }
 const tick = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 const b = browser(); await tick();
-assert.equal(b.nodes.length, 0, 'No PostHog choices box is injected; the site cookie banner owns consent');
+assert.deepEqual(b.nodes.map(node => node.tag), ['button', 'aside'], 'The shared loader injects settings and the consent panel');
 assert.equal(b.requests.length, 0, 'No external capture before consent');
 assert.equal(b.values.has('website_posthog_identity_v1'), false);
 b.values.set('site_consent', 'accepted'); b.context.window.productAnalytics.refresh(); await tick();
@@ -78,7 +87,7 @@ existing.values.set('venuebill_consent', JSON.stringify({ analytics: false })); 
 assert.equal(existing.values.has('website_posthog_identity_v1'), false);
 const noBanner = browser({ consentKey: '' }); noBanner.values.set('website_posthog_consent_v1', 'accepted'); noBanner.context.window.productAnalytics.refresh(); await tick();
 assert.equal(noBanner.requests.length, 0, 'A site without its own consent banner never captures, even with a legacy box acceptance');
-assert.equal(noBanner.nodes.length, 0);
+assert.deepEqual(noBanner.nodes.map(node => node.tag), ['button', 'aside']);
 const internal = browser(); internal.values.set('site_consent', 'accepted'); internal.values.set('website_posthog_internal', '1'); await tick();
 assert.equal(internal.requests.length, 0, 'Explicit internal browser exclusion');
 const shared = browser({ sharedDomain: 'venuebill.com' }); await tick();
@@ -102,14 +111,15 @@ assert.equal(publicOnly.requests.length, publicCount, 'Adult acquisition scope e
 assert.equal(siteConfig.consentKey, 'website_posthog_consent_v1');
 assert.equal(publicConfig.consentKey, siteConfig.consentKey);
 assert.equal(siteConfig.consentKind, 'accepted');
-assert.match(homepage, /id="analytics-consent"/);
-assert.match(homepage, /data-analytics-choice="accepted"/);
+assert.match(homepage, /src="\/posthog-web\.js"/);
+assert.match(source, /id = 'analytics-consent'/);
+assert.match(source, /data-analytics-choice="accepted"/);
 assert.match(homepage, /href="contact\.html">Contact<\/a>/, 'The primary Contact link is present for delegated event capture');
 console.log('PostHog browser contract passed: consent, withdrawal, reaccept, opt-outs, routes, privacy, exclusions and ordered store events.');
 
 const moore = browser({product:'moorecode.com',hosts:['venuebill.com','moorecode.com']}); await tick();
 moore.values.set('site_consent','accepted');
-for (const pathname of ['/projects.html','/consulting.html','/blog/mileage-tracker-delivery-drivers-tax-deduction.html']) {
+for (const pathname of ['/projects.html','/consulting.html','/blog/mileage-tracker-delivery-drivers-tax-deduction.html','/blog/3d-printmaking-checklist-mirrored-art-inked-proof.html']) {
   moore.context.location.pathname=pathname;
   moore.context.window.productAnalytics.refresh(); await tick();
   assert.equal(moore.requests.at(-1).data.properties.page_path,pathname);
