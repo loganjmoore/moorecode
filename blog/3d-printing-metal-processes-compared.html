@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Printing Metal: Four Processes Compared</title>
+<meta name="description" content="Compare metal powder bed fusion, binder jetting, metal FFF, and directed energy deposition by feedstock, finish, shrinkage, and best use." />
+<link rel="canonical" href="https://moorecode.com/blog/3d-printing-metal-processes-compared.html" />
+<meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="3D Printing Metal: Four Processes Compared" />
+<meta property="og:description" content="Choose among powder bed fusion, binder jetting, metal FFF, and directed energy deposition." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moorecode.com/blog/3d-printing-metal-processes-compared.html" />
+<meta property="og:image" content="https://moorecode.com/blog/images/3d-printing-metal-processes-compared.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://moorecode.com/blog/3d-printing-metal-processes-compared.html#post",
+      "headline": "3D Printing Metal: Four Processes Compared",
+      "description": "Choose among powder bed fusion, binder jetting, metal FFF, and directed energy deposition.",
+      "url": "https://moorecode.com/blog/3d-printing-metal-processes-compared.html",
+      "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-metal-processes-compared.html",
+      "datePublished": "2026-10-07",
+      "dateModified": "2026-10-07",
+      "image": "https://moorecode.com/blog/images/3d-printing-metal-processes-compared.svg",
+      "author": { "@id": "https://moorecode.com/#logan" },
+      "publisher": { "@id": "https://moorecode.com/#logan" },
+      "isPartOf": { "@id": "https://moorecode.com/blog/#blog" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://moorecode.com/blog/3d-printing-metal-processes-compared.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can a home 3D printer make a solid metal part?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A compatible FFF printer can shape some metal-filled feedstocks, but the printed green part still requires controlled debinding and sintering to become metal. Ordinary decorative metal-filled PLA remains a polymer composite." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is DMLS the same as metal powder bed fusion?",
+          "acceptedAnswer": { "@type": "Answer", "text": "DMLS is a commonly used label within laser-based metal powder bed fusion. Supplier terms vary, so the useful questions are whether powder is fully melted, which alloy and parameters are qualified, and what post-processing is required." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do binder-jetted metal parts shrink?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Binder-jetted parts shrink during sintering as metal particles consolidate and pores close. The workflow compensates for predictable shrinkage and distortion before the final part is produced." }
+        },
+        {
+          "@type": "Question",
+          "name": "Which metal 3D printing process is best for repair?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Directed energy deposition is a strong starting point for adding material to an existing metal component, although the alloy, geometry, qualification, machining, and economics still control the decision." }
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://moorecode.com/#logan",
+      "name": "Logan Moore",
+      "url": "https://moorecode.com/",
+      "jobTitle": "Solo developer",
+      "sameAs": ["https://github.com/loganjmoore"],
+      "worksFor": { "@type": "Organization", "name": "BrightPrompt Consulting LLC" }
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://moorecode.com/blog/#blog",
+      "name": "moorecode blog",
+      "url": "https://moorecode.com/blog/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/consulting.html">Consulting</a>
+    <a href="/hobbies.html">Hobbies</a>
+    <a href="/youtube.html">YouTube</a>
+    <a href="/about.html">About</a>
+    <a href="/blog/" class="active">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<article>
+<header class="post-head">
+  <p class="post-meta">October 7, 2026 · By Logan Moore</p>
+  <h1>3D Printing Metal: Four Processes Compared</h1>
+  <p class="entity-definition">3D printing metal is a group of additive manufacturing processes that shape metal feedstock into parts layer by layer.</p>
+</header>
+
+<section class="prose">
+  <img class="post-cover" src="/blog/images/3d-printing-metal-processes-compared.svg" width="1200" height="630" alt="Four metal 3D printing process diagrams comparing a laser powder bed, binder droplets, metal filament, and directed energy nozzle." />
+
+  <p class="lede">For 3D printing metal, choose laser powder bed fusion for dense, intricate production parts; binder jetting for batches that can tolerate a separate sintering step; metal FFF for accessible shaping before outsourced debinding and sintering; and directed energy deposition for large builds or repair. These processes differ in feedstock, heat, supports, shrinkage, finish, and facility needs. A metal-looking filament print is not automatically a metal part.</p>
+
+  <p>Metal printing sits far beyond the ordinary desktop workflow described in my <a href="/blog/what-is-fdm-3d-printing.html">FDM explainer</a>. I would start with the finished part's alloy and qualification requirements, then ask which process can hold the geometry and tolerance at the required quantity.</p>
+
+  <h2>How do the main metal 3D printing processes compare?</h2>
+  <p>The main metal 3D printing processes compare most clearly by when the metal becomes dense. Powder bed fusion and directed energy deposition melt metal during the build, while binder jetting and metal FFF shape a fragile bound part that becomes metal in a furnace.</p>
+
+  <table>
+    <thead>
+      <tr><th>Process</th><th>Feedstock</th><th>Build action</th><th>Required next step</th><th>Strong fit</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Laser powder bed fusion</strong></td><td>Loose metal powder</td><td>Laser melts selected regions</td><td>Stress relief, support removal, finishing</td><td>Intricate, dense parts</td></tr>
+      <tr><td><strong>Binder jetting</strong></td><td>Loose metal powder</td><td>Liquid binder joins selected regions</td><td>Depowder, debind, sinter</td><td>Batched production</td></tr>
+      <tr><td><strong>Metal FFF</strong></td><td>Metal powder in polymer filament or rod</td><td>Nozzle extrudes a bound shape</td><td>Debind and sinter</td><td>Fixtures and accessible prototypes</td></tr>
+      <tr><td><strong>Directed energy deposition</strong></td><td>Metal powder or wire</td><td>Energy beam melts material as it lands</td><td>Machining and heat treatment as specified</td><td>Repair and large features</td></tr>
+    </tbody>
+  </table>
+
+  <p>The National Institute of Standards and Technology separates powder bed fusion, directed energy deposition, binder jetting, and material extrusion in its <a href="https://www.nist.gov/additive-manufacturing/research-areas/technologies">additive manufacturing technology overview</a>. Those category names are more useful than vendor acronyms because they describe what the machine actually does.</p>
+
+  <h2>When is laser powder bed fusion the right choice?</h2>
+  <p>Laser powder bed fusion is the right choice when a small or medium metal part needs intricate channels, consolidated geometry, or a high-density qualified process. A recoater spreads powder, a laser melts each cross-section, and the build repeats inside a controlled atmosphere.</p>
+
+  <p>NIST describes the process as fusing powder until a “fully dense 3D metal part is formed.” That line captures the advantage, but the finished build still needs work. Supports anchor heat-sensitive geometry, residual stress may require treatment, and critical faces are often machined or inspected after printing.</p>
+
+  <p>Published machine specifications show the scale of the process. The 3D Systems DMP Flex 350 Dual uses two 500 W lasers and offers 30, 60, and 90 micrometer layer options. The company reports 99.9% density for titanium and 99.7% for aluminum on that system. Those are vendor results for a specific machine and parameter set, not universal guarantees for every powder bed part.</p>
+
+  <h2>When does metal binder jetting make sense?</h2>
+  <p>Metal binder jetting makes sense when many parts can share a powder bed and the production plan includes depowdering, debinding, sintering, and dimensional compensation. The print head places binder instead of tracing every section with a laser.</p>
+
+  <p>The surrounding powder supports geometry during printing, so attached build supports are often unnecessary at that stage. Furnace work changes the design problem. Desktop Metal's binder-jet design guide says shrinkage may reach 20% depending on material, and long overhangs may need support during sintering because the hot part can sag.</p>
+
+  <p>That shrinkage is large enough to make a simple worked example useful. If a process predicts 20% linear shrinkage and the desired final dimension is 80 mm, dividing 80 by 0.80 gives a nominal 100 mm green dimension. Real compensation depends on axis and geometry, and production software also predicts distortion. The calculation shows why the furnace belongs in the dimensional plan from the beginning.</p>
+
+  <h2>Can an FDM printer produce a metal part?</h2>
+  <p>An FDM printer can shape approved metal-filled feedstock into a green part, but controlled debinding and sintering are needed to produce the final metal component. Decorative PLA with metal particles remains mostly plastic and does not become structural metal after extrusion.</p>
+
+  <p>Fraunhofer IFAM describes metal FFF as a sequence: extrusion makes a metal-and-polymer green part, debinding removes part of the polymer, and heat treatment burns out the rest while the component densifies. Its published process data lists 0.05 mm resolution in the Z print direction, green-part build rates of 5 to 12 cm³ per hour per €1,000 of printer technology, and final relative density of 95% to 99%.</p>
+
+  <p>The accessible printer is only one station in that chain. Feedstock compatibility, a wear-resistant nozzle, support strategy, qualified furnace cycle, setters, shrinkage compensation, and inspection still matter. For ordinary polymer parts, my <a href="/blog/3d-printing-filament-pla-petg-tpu.html">filament guide</a> covers the simpler PLA, PETG, and TPU route.</p>
+
+  <h2>What is directed energy deposition best at?</h2>
+  <p>Directed energy deposition is best at adding metal to an existing component, building large near-net shapes, or changing material as powder or wire enters a melt pool. The deposition head and energy source move together rather than working across a flat powder bed.</p>
+
+  <p>NIST explains that DED feeds material into a laser or electron beam, where it melts and fuses to the target. The process can reach places a fixed powder bed cannot and can restore worn regions, but its deposited surface and broad bead usually need machining when tight dimensions or a smooth finish matter.</p>
+
+  <h2>How should a metal printing process be selected?</h2>
+  <p>A metal printing process should be selected from the finished requirement backward. Confirm the alloy and material standard first, then test geometry, annual quantity, tolerance, surface, inspection, post-processing, and total delivered cost.</p>
+
+  <ul>
+    <li><strong>Choose powder bed fusion</strong> for a compact titanium manifold with internal channels and a documented parameter set.</li>
+    <li><strong>Choose binder jetting</strong> for a batch of stainless parts whose geometry and furnace plan support repeatable sintering.</li>
+    <li><strong>Choose metal FFF</strong> for a low-volume fixture when accessible shaping and qualified external furnace service fit the schedule.</li>
+    <li><strong>Choose DED</strong> to rebuild a worn edge on a large component that will be machined afterward.</li>
+  </ul>
+
+  <p>Resin does not offer a shortcut to structural metal either. The <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin-versus-FDM guide</a> explains vat photopolymerization, which cures polymer resin and serves a different set of detail and finish requirements.</p>
+
+  <h2>Frequently asked questions</h2>
+
+  <h3>Can a home 3D printer make a solid metal part?</h3>
+  <p>A compatible FFF printer can shape some metal-filled feedstocks, but the printed green part still requires controlled debinding and sintering to become metal. Ordinary decorative metal-filled PLA remains a polymer composite.</p>
+
+  <h3>Is DMLS the same as metal powder bed fusion?</h3>
+  <p>DMLS is a commonly used label within laser-based metal powder bed fusion. Supplier terms vary, so the useful questions are whether powder is fully melted, which alloy and parameters are qualified, and what post-processing is required.</p>
+
+  <h3>Why do binder-jetted metal parts shrink?</h3>
+  <p>Binder-jetted parts shrink during sintering as metal particles consolidate and pores close. The workflow compensates for predictable shrinkage and distortion before the final part is produced.</p>
+
+  <h3>Which metal 3D printing process is best for repair?</h3>
+  <p>Directed energy deposition is a strong starting point for adding material to an existing metal component, although the alloy, geometry, qualification, machining, and economics still control the decision.</p>
+</section>
+</article>
+
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+<address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
