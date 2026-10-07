@@ -7,6 +7,9 @@ const firstParagraphAfterH1 = (html) => html.slice(html.indexOf('</h1>') + 5).ma
 for (const path of [
   'hobbies.html',
   'blackjack-privacy.html',
+  'blog/3d-printmaking-checklist-mirrored-art-inked-proof.html',
+  'blog/fused-deposition-modelling-mistakes-to-fix.html',
+  'blog/3d-printing-metal-processes-compared.html',
   'blog/3d-printing-filament-pla-petg-tpu.html',
   'blog/what-is-fdm-3d-printing.html',
   'blog/when-resin-3d-printing-beats-fdm.html',
@@ -37,6 +40,9 @@ assert.equal(analyticsSchema['@type'], 'WebPage');
 assert.equal(analyticsSchema.url, 'https://moorecode.com/posthog-privacy.html');
 
 const posts = [
+  ['3d-printmaking-checklist-mirrored-art-inked-proof.html', '3D Printmaking Checklist: Mirrored Art to Inked Proof'],
+  ['fused-deposition-modelling-mistakes-to-fix.html', '7 Fused Deposition Modelling Mistakes to Fix'],
+  ['3d-printing-metal-processes-compared.html', '3D Printing Metal: Four Processes Compared'],
   ['free-blackjack-basic-strategy-trainer-iphone.html', 'Free blackjack basic strategy trainer for iPhone compared'],
   ['simple-invoicing-app-pricing-service-businesses.html', 'Invoicing app pricing for service businesses, compared'],
   ['mileage-tracker-delivery-drivers-tax-deduction.html', 'Mileage tracker for delivery drivers: what the IRS lets you deduct'],
@@ -66,5 +72,21 @@ const resinGuide = read('blog/when-resin-3d-printing-beats-fdm.html');
 assert.match(resinGuide, /<h1>When Resin 3D Printing Beats FDM<\/h1>/);
 assert.match(resinGuide, /<h2>What is resin 3D printing\?<\/h2>/);
 assert.match(resinGuide, /href="\/blog\/what-is-fdm-3d-printing\.html">FDM explainer<\/a>/);
+
+for (const path of [
+  'blog/3d-printmaking-checklist-mirrored-art-inked-proof.html',
+  'blog/fused-deposition-modelling-mistakes-to-fix.html',
+  'blog/3d-printing-metal-processes-compared.html',
+]) {
+  const html = read(path);
+  const schemas = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+  const post = schemas.find((item) => item['@type'] === 'BlogPosting');
+  const faq = schemas.find((item) => item['@type'] === 'FAQPage');
+  assert.equal(post.datePublished, '2026-10-07');
+  assert.equal(post.dateModified, '2026-10-07');
+  assert.match(post.image, /^https:\/\/moorecode\.com\/blog\/images\/.+\.svg$/);
+  assert.ok(faq.mainEntity.length >= 3 && faq.mainEntity.length <= 5);
+  assert.match(html, /<link rel="alternate" type="application\/rss\+xml" title="moorecode" href="\/feed\.xml" \/>/);
+}
 
 console.log('SEO static-page contract passed: definitions, 3D-printing topic coverage and citations, Service entity, analytics privacy metadata, support path and blog discovery.');

@@ -15,6 +15,9 @@
 ## Blog
 
 - [Blog](https://moorecode.com/blog/): Practical notes on 3D printing, apps, pricing, and taxes from a solo developer.
+- [3D Printmaking Checklist: Mirrored Art to Inked Proof](https://moorecode.com/blog/3d-printmaking-checklist-mirrored-art-inked-proof.html): A practical relief-printing checklist from mirrored digital art through an inked proof.
+- [7 Fused Deposition Modelling Mistakes to Fix](https://moorecode.com/blog/fused-deposition-modelling-mistakes-to-fix.html): A symptom-first guide to first layers, flow limits, orientation, supports, and safe printer placement.
+- [3D Printing Metal: Four Processes Compared](https://moorecode.com/blog/3d-printing-metal-processes-compared.html): Powder bed fusion, binder jetting, metal FFF, and directed energy deposition compared by workflow and best use.
 - [3D Printing Filament: PLA, PETG, or TPU?](https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html): A practical material guide with print temperatures, use cases, and spool-yield math.
 - [What Is FDM 3D Printing? FDM vs. SLA and SLS](https://moorecode.com/blog/what-is-fdm-3d-printing.html): A plain-language process guide with a technology comparison and design-rule example.
 - [When Resin 3D Printing Beats FDM](https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html): A decision guide covering detail, safety, post-processing, and workspace requirements.
