@@ -3,10 +3,12 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
 
-const homepage = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
-const consentScript = [...homepage.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)]
-  .map(match => match[1]).find(script => script.includes("const key = 'website_posthog_consent_v1'"));
-assert.ok(consentScript, 'Execute the actual homepage consent handlers');
+const loader = readFileSync(new URL('../../posthog-web.js', import.meta.url), 'utf8');
+const optOutScript = loader.match(/const optOut = \(\) => .*?;\n/)?.[0];
+const renderScript = loader.match(/function renderConsent\(\) \{[\s\S]*?\n  \}\n  async function boot/)?.[0]
+  .replace(/\n  async function boot$/, '');
+assert.ok(optOutScript && renderScript, 'Execute the actual shared consent handlers');
+const consentScript = `${optOutScript}${renderScript}\nrenderConsent();`;
 const consentKey = 'website_posthog_consent_v1';
 
 function browser(savedChoice, navigatorOverrides = {}) {
@@ -20,14 +22,18 @@ function browser(savedChoice, navigatorOverrides = {}) {
     }, click: () => handlers.forEach(handler => handler()) };
   };
   const decline = button('declined'), accept = button('accepted'), settings = button();
-  const panel = { hidden: true }, status = { firstChild: { textContent: 'Optional analytics' } };
+  const status = { firstChild: { textContent: 'Optional analytics' } };
+  const panel = {
+    hidden: true,
+    querySelector: selector => { assert.equal(selector, '#analytics-consent-status'); return status; },
+    querySelectorAll: selector => { assert.equal(selector, '[data-analytics-choice]'); return [decline, accept]; },
+  };
   const window = { dispatchEvent: event => events.push(event.type) };
   vm.runInNewContext(consentScript, {
     window, navigator: { globalPrivacyControl: false, ...navigatorOverrides },
     Event: class { constructor(type) { this.type = type; } },
     document: {
       getElementById: id => ({ 'analytics-consent': panel, 'analytics-consent-status': status, 'analytics-settings': settings })[id],
-      querySelectorAll: selector => { assert.equal(selector, '[data-analytics-choice]'); return [decline, accept]; },
     },
     localStorage: { getItem: key => values.get(key) ?? null, setItem: (key, value) => {
       if (failWrites) throw new Error('Storage write denied');
@@ -38,7 +44,7 @@ function browser(savedChoice, navigatorOverrides = {}) {
     failWrites: value => { failWrites = value; } };
 }
 
-test('actual homepage controls persist consent, reopen settings, withdraw and reaccept', () => {
+test('shared controls persist consent, reopen settings, withdraw and reaccept', () => {
   const b = browser();
   assert.equal(b.panel.hidden, false);
   b.accept.click();
