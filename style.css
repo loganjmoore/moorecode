@@ -264,6 +264,37 @@ section h2 {
   font-weight: 600;
 }
 
+/* ---------- Home 3D printing answers ---------- */
+.home-faq {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px 72px;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 48px;
+}
+
+.faq-item {
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+}
+
+.faq-item h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.faq-item p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
 /* ---------- Apps / Projects grid ---------- */
 .apps {
   max-width: var(--max);
@@ -769,7 +800,8 @@ footer .foot-links a:hover { color: var(--accent); }
 
   .hero { padding: 60px 24px 40px; }
   .page-head { padding: 48px 24px 16px; }
-  .apps, .explore, .prose, .contact, .hobby { padding-left: 20px; padding-right: 20px; }
+  .apps, .explore, .home-faq, .prose, .contact, .hobby { padding-left: 20px; padding-right: 20px; }
+  .faq-grid { grid-template-columns: 1fr; }
 
   footer { flex-direction: column; align-items: flex-start; }
 
