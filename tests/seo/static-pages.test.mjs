@@ -74,6 +74,9 @@ for (const [path, title] of posts) {
 assert.match(read('index.html'), /href="blog\/">Blog<\/a>/);
 assert.match(read('index.html'), /MooreCode is a personal website by Logan Moore/);
 assert.match(read('index.html'), /includes nine posts, with six focused on 3D-printing processes/);
+assert.match(read('index.html'), /<h2 id="printing-questions-heading">What MooreCode does and who it is for<\/h2>/);
+assert.match(read('index.html'), /For 3D printing rates, compare total delivered quotes/);
+assert.match(read('index.html'), /A 3D printing price calculator is best used for an initial estimate/);
 assert.match(read('blog/3d-printmaking-checklist-mirrored-art-inked-proof.html'), /covers six stages from SVG to finished impression/);
 
 const hobbies = read('hobbies.html');
@@ -89,8 +92,25 @@ assert.match(filamentGuide, /<h2>Which 3D printing materials fit a desktop or ho
 assert.match(filamentGuide, /<h2>Why is PLA 3D printing the best place to start\?<\/h2>/);
 assert.match(filamentGuide, /<h2>When is printing PETG worth the extra setup\?<\/h2>/);
 assert.match(filamentGuide, /<h2>Which 3D printing accessories belong in a basic setup\?<\/h2>/);
+assert.match(filamentGuide, /<h2 id="painting-and-finishing">Painting and finishing printed parts<\/h2>/);
+assert.match(filamentGuide, /The best way to paint an FDM print is to remove supports and rough edges/);
 assert.match(filamentGuide, /href="\/blog\/what-is-fdm-3d-printing\.html">FDM 3D printing process comparison<\/a>/);
 assert.match(filamentGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing guide<\/a>/);
+
+for (const question of [
+  'Which 3D printing material should I use?',
+  'Which metal printing process fits the job?',
+  'How do I paint and finish a filament print?',
+  'How do I diagnose an FDM setup problem?',
+  'How should a service business compare invoicing app pricing?',
+]) assert.ok(blog.includes(question), `Blog guide map needs: ${question}`);
+
+const metalGuide = read('blog/3d-printing-metal-processes-compared.html');
+assert.match(metalGuide, /<tr><th>Process<\/th><th>Typical material<\/th><th>Best-fit application<\/th><\/tr>/);
+for (const linkedGuide of ['what-is-fdm-3d-printing.html', 'when-resin-3d-printing-beats-fdm.html']) {
+  assert.match(metalGuide, new RegExp(`href="/blog/${linkedGuide.replaceAll('.', '\\.')}`));
+  assert.match(read(`blog/${linkedGuide}`), /href="\/blog\/3d-printing-metal-processes-compared\.html"/);
+}
 
 const fdmGuide = read('blog/what-is-fdm-3d-printing.html');
 assert.match(fdmGuide, /<h1>What Is FDM 3D Printing\?/);
@@ -113,7 +133,7 @@ for (const path of [
   const post = schemas.find((item) => item['@type'] === 'BlogPosting');
   const faq = schemas.find((item) => item['@type'] === 'FAQPage');
   assert.equal(post.datePublished, '2026-10-07');
-  assert.equal(post.dateModified, '2026-10-07');
+  assert.ok(post.dateModified >= post.datePublished);
   assert.match(post.image, /^https:\/\/moorecode\.com\/blog\/images\/.+\.svg$/);
   assert.ok(faq.mainEntity.length >= 3 && faq.mainEntity.length <= 5);
   assert.match(html, /<link rel="alternate" type="application\/rss\+xml" title="moorecode" href="\/feed\.xml" \/>/);

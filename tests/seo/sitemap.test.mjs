@@ -22,9 +22,14 @@ for (const location of entries.keys()) {
 }
 
 for (const [location, contentDate] of [
-  ['https://moorecode.com/', '2026-10-07'],
+  ['https://moorecode.com/', '2026-10-08'],
   ['https://moorecode.com/hobbies.html', '2026-10-07'],
   ['https://moorecode.com/posthog-privacy.html', '2026-10-06'],
+  ['https://moorecode.com/blog/', '2026-10-08'],
+  ['https://moorecode.com/blog/3d-printing-metal-processes-compared.html', '2026-10-08'],
+  ['https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html', '2026-10-08'],
+  ['https://moorecode.com/blog/what-is-fdm-3d-printing.html', '2026-10-08'],
+  ['https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html', '2026-10-08'],
 ]) {
   assert.ok(entries.has(location), `${location} must be listed in sitemap.xml`);
   assert.ok(entries.get(location) >= contentDate, `${location} lastmod must not predate ${contentDate}`);
