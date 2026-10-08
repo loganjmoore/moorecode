@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Four-stage 3D printing prototype test plan</title>
+  <desc id="desc">Four connected prototype stages show visual, fit, functional, and pilot testing.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b0c10"/><stop offset="1" stop-color="#1b1e26"/></linearGradient>
+    <linearGradient id="hot" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5b942"/><stop offset="1" stop-color="#e07a5f"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="70" y="92" fill="#f5b942" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3">3D PRINTING A PROTOTYPE</text>
+  <text x="70" y="157" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800">Four stages. One test plan.</text>
+  <text x="70" y="201" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="22">Choose the process from the question the part must answer</text>
+  <path d="M165 384h870" stroke="#343946" stroke-width="10" stroke-linecap="round"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <g transform="translate(78 280)"><circle cx="87" cy="104" r="87" fill="#14161c" stroke="#f5b942" stroke-width="5"/><path d="M52 112l35-57 35 57z" fill="none" stroke="#f5b942" stroke-width="6"/><circle cx="87" cy="106" r="15" fill="#e07a5f"/><text x="87" y="214" text-anchor="middle" fill="#e8eaef" font-size="20" font-weight="800">1 · VISUAL</text><text x="87" y="240" text-anchor="middle" fill="#9aa1ad" font-size="15">shape + handling</text></g>
+    <g transform="translate(352 280)"><circle cx="87" cy="104" r="87" fill="#14161c" stroke="#f5b942" stroke-width="5"/><path d="M45 85h57v57H45zM85 66h44v44h-27" fill="none" stroke="#f5b942" stroke-width="6"/><path d="M80 108h27" stroke="#e07a5f" stroke-width="8" stroke-linecap="round"/><text x="87" y="214" text-anchor="middle" fill="#e8eaef" font-size="20" font-weight="800">2 · FIT</text><text x="87" y="240" text-anchor="middle" fill="#9aa1ad" font-size="15">interfaces + tolerance</text></g>
+    <g transform="translate(626 280)"><circle cx="87" cy="104" r="87" fill="#14161c" stroke="#f5b942" stroke-width="5"/><path d="M46 123h82M61 123l16-57h22l16 57" fill="none" stroke="#f5b942" stroke-width="7" stroke-linecap="round"/><path d="M87 53v56" stroke="#e07a5f" stroke-width="8"/><path d="M75 94l12 15 12-15" fill="none" stroke="#e07a5f" stroke-width="6"/><text x="87" y="214" text-anchor="middle" fill="#e8eaef" font-size="20" font-weight="800">3 · FUNCTION</text><text x="87" y="240" text-anchor="middle" fill="#9aa1ad" font-size="15">load + cycles</text></g>
+    <g transform="translate(900 280)"><circle cx="87" cy="104" r="87" fill="url(#hot)"/><g fill="#1a1208"><rect x="44" y="67" width="34" height="34" rx="5"/><rect x="96" y="67" width="34" height="34" rx="5"/><rect x="44" y="119" width="34" height="34" rx="5"/><rect x="96" y="119" width="34" height="34" rx="5"/></g><text x="87" y="214" text-anchor="middle" fill="#e8eaef" font-size="20" font-weight="800">4 · PILOT</text><text x="87" y="240" text-anchor="middle" fill="#9aa1ad" font-size="15">repeat + inspect</text></g>
+  </g>
+  <text x="70" y="584" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="18">A successful print is evidence only when the requirement is measurable.</text>
+</svg>
