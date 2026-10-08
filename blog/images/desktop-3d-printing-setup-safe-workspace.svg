@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Desktop 3D printing workspace</title>
+  <desc id="desc">A workbench diagram labels printer, ventilation, clean tools, and dry material storage.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b0c10"/><stop offset="1" stop-color="#1b1e26"/></linearGradient>
+    <linearGradient id="hot" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5b942"/><stop offset="1" stop-color="#e07a5f"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="70" y="92" fill="#f5b942" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3">DESKTOP 3D PRINTING</text>
+  <text x="70" y="157" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800">Build the workspace first</text>
+  <text x="70" y="201" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="22">Space, source control, tools, and material storage</text>
+  <g transform="translate(70 250)">
+    <rect x="0" y="250" width="1060" height="38" rx="8" fill="#343946"/>
+    <rect x="42" y="288" width="34" height="80" fill="#262a35"/><rect x="984" y="288" width="34" height="80" fill="#262a35"/>
+    <g transform="translate(76 0)">
+      <rect width="360" height="250" rx="22" fill="#14161c" stroke="#343946" stroke-width="3"/>
+      <rect x="44" y="42" width="272" height="164" rx="10" fill="#1b1e26" stroke="#f5b942" stroke-width="4"/>
+      <path d="M104 176h152M180 63v35M137 98h86l-15 20h-56z" fill="none" stroke="#e07a5f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M122 176l58-42 58 42" fill="none" stroke="#f5b942" stroke-width="5"/>
+      <text x="180" y="235" text-anchor="middle" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">RIGID PRINTER ZONE</text>
+    </g>
+    <g transform="translate(492 0)">
+      <rect width="230" height="118" rx="18" fill="#14161c" stroke="#343946" stroke-width="3"/>
+      <circle cx="68" cy="58" r="34" fill="none" stroke="#f5b942" stroke-width="5"/><path d="M68 31c20 17 17 28 0 54M42 58c25-10 36-4 52 15" fill="none" stroke="#e07a5f" stroke-width="5" stroke-linecap="round"/>
+      <path d="M113 58h82" stroke="#f5b942" stroke-width="7" stroke-linecap="round"/><path d="M180 43l18 15-18 15" fill="none" stroke="#f5b942" stroke-width="6"/>
+      <text x="115" y="102" text-anchor="middle" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="15">SOURCE CONTROL</text>
+    </g>
+    <g transform="translate(492 142)"><rect width="230" height="108" rx="18" fill="#14161c" stroke="#343946" stroke-width="3"/><path d="M56 25v50m28-38v38m28-26v26" stroke="#f5b942" stroke-width="8" stroke-linecap="round"/><rect x="42" y="75" width="84" height="10" rx="5" fill="#e07a5f"/><text x="169" y="62" text-anchor="middle" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">CLEAN</text><text x="169" y="83" text-anchor="middle" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="15">TOOLS</text></g>
+    <g transform="translate(778 0)"><rect width="230" height="250" rx="22" fill="#14161c" stroke="#343946" stroke-width="3"/><rect x="38" y="38" width="154" height="146" rx="16" fill="#1b1e26" stroke="url(#hot)" stroke-width="5"/><circle cx="115" cy="111" r="46" fill="none" stroke="#f5b942" stroke-width="12"/><circle cx="115" cy="111" r="13" fill="#e07a5f"/><path d="M153 62h34v36" fill="none" stroke="#e07a5f" stroke-width="5"/><text x="115" y="225" text-anchor="middle" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">DRY STORAGE</text></g>
+  </g>
+  <text x="70" y="584" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="18">Measure the full operating envelope and service space.</text>
+</svg>
