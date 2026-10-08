@@ -7,6 +7,9 @@ const firstParagraphAfterH1 = (html) => html.slice(html.indexOf('</h1>') + 5).ma
 for (const path of [
   'index.html', 'projects.html', 'consulting.html', 'hobbies.html', 'youtube.html', 'about.html', 'contact.html',
   'blackjack-support.html', 'blackjack-privacy.html', 'posthog-privacy.html', 'blog/index.html',
+  'blog/best-3d-printing-websites-files-2026.html',
+  'blog/desktop-3d-printing-setup-safe-workspace.html',
+  'blog/3d-printing-prototype-four-stage-test-plan.html',
   'blog/3d-printmaking-checklist-mirrored-art-inked-proof.html',
   'blog/fused-deposition-modelling-mistakes-to-fix.html',
   'blog/3d-printing-metal-processes-compared.html',
@@ -23,6 +26,9 @@ for (const path of [
   'blog/index.html',
   'hobbies.html',
   'blackjack-privacy.html',
+  'blog/best-3d-printing-websites-files-2026.html',
+  'blog/desktop-3d-printing-setup-safe-workspace.html',
+  'blog/3d-printing-prototype-four-stage-test-plan.html',
   'blog/3d-printmaking-checklist-mirrored-art-inked-proof.html',
   'blog/fused-deposition-modelling-mistakes-to-fix.html',
   'blog/3d-printing-metal-processes-compared.html',
@@ -56,6 +62,9 @@ assert.equal(analyticsSchema['@type'], 'WebPage');
 assert.equal(analyticsSchema.url, 'https://moorecode.com/posthog-privacy.html');
 
 const posts = [
+  ['best-3d-printing-websites-files-2026.html', 'Best 3D Printing Websites for Files: 2026 Maker Guide'],
+  ['desktop-3d-printing-setup-safe-workspace.html', 'Desktop 3D Printing Setup: A Safe Beginner Workspace'],
+  ['3d-printing-prototype-four-stage-test-plan.html', '3D Printing a Prototype: Four Stages, One Test Plan'],
   ['3d-printmaking-checklist-mirrored-art-inked-proof.html', '3D Printmaking Checklist: Mirrored Art to Inked Proof'],
   ['fused-deposition-modelling-mistakes-to-fix.html', '7 Fused Deposition Modelling Mistakes to Fix'],
   ['3d-printing-metal-processes-compared.html', '3D Printing Metal: Four Processes Compared'],
@@ -66,14 +75,14 @@ const posts = [
 const blog = read('blog/index.html');
 assert.match(blog, /<title>3D Printing Guides and Project Notes · MooreCode<\/title>/);
 assert.match(blog, /<h1>3D printing guides and project notes<\/h1>/);
-assert.match(blog, /The MooreCode blog is a collection of nine practical guides/);
-assert.equal((blog.match(/class="post-card"/g) || []).length, 9);
+assert.match(blog, /The MooreCode blog is a collection of twelve practical guides/);
+assert.equal((blog.match(/class="post-card"/g) || []).length, 12);
 for (const [path, title] of posts) {
   assert.match(blog, new RegExp(`href="/blog/${path.replaceAll('.', '\\.')}">${title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}<\\/a>`));
 }
 assert.match(read('index.html'), /href="blog\/">Blog<\/a>/);
 assert.match(read('index.html'), /MooreCode is a personal website by Logan Moore/);
-assert.match(read('index.html'), /includes nine posts, with six focused on 3D-printing processes/);
+assert.match(read('index.html'), /includes twelve posts, with nine focused on 3D-printing processes/);
 assert.match(read('blog/3d-printmaking-checklist-mirrored-art-inked-proof.html'), /covers six stages from SVG to finished impression/);
 
 const hobbies = read('hobbies.html');

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Printing a Prototype: Four Stages, One Test Plan</title>
+<meta name="description" content="Choose a 3D printing process and material for visual, fit, functional, and pilot prototypes by starting with the test result." />
+<link rel="canonical" href="https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html" />
+<meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="3D Printing a Prototype: Four Stages, One Test Plan" />
+<meta property="og:description" content="Map visual, fit, functional, and pilot prototypes to a process, material, and pass/fail test." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html" />
+<meta property="og:image" content="https://moorecode.com/blog/images/3d-printing-prototype-four-stage-test-plan.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html#post",
+      "headline": "3D Printing a Prototype: Four Stages, One Test Plan",
+      "description": "Choose a 3D printing process and material for visual, fit, functional, and pilot prototypes by starting with the test result.",
+      "url": "https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html",
+      "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html",
+      "datePublished": "2026-10-08",
+      "dateModified": "2026-10-08",
+      "image": "https://moorecode.com/blog/images/3d-printing-prototype-four-stage-test-plan.svg",
+      "author": { "@id": "https://moorecode.com/#logan" },
+      "publisher": { "@id": "https://moorecode.com/#logan" },
+      "isPartOf": { "@id": "https://moorecode.com/blog/#blog" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the best material for a 3D-printed prototype?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The best material is the least expensive one that reproduces the property being tested. PLA often suits visual and basic fit checks, while tougher thermoplastics, engineering resins, nylon powder, or metal may be needed for load, heat, fatigue, or field tests." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is 3D printing the same as rapid prototyping?",
+          "acceptedAnswer": { "@type": "Answer", "text": "3D printing is one tool used in rapid prototyping. Rapid prototyping is the wider cycle of making a testable artifact, measuring a result, changing the design, and repeating; it can also use foam, machining, laser cutting, or molding." }
+        },
+        {
+          "@type": "Question",
+          "name": "How many prototype stages are needed?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Four stages are a useful planning model: visual, form-and-fit, functional, and pilot. A project can combine or skip stages when the unanswered question and risk justify it." }
+        },
+        {
+          "@type": "Question",
+          "name": "Should a prototype use the final production material?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Use the final material or a qualified match when the test depends on its heat, chemical, fatigue, friction, flexibility, or regulatory behavior. A cheaper stand-in is fine for questions about size, appearance, or handling." }
+        }
+      ]
+    },
+    { "@type": "Person", "@id": "https://moorecode.com/#logan", "name": "Logan Moore", "url": "https://moorecode.com/", "jobTitle": "Solo developer", "sameAs": ["https://github.com/loganjmoore"], "worksFor": { "@type": "Organization", "name": "BrightPrompt Consulting LLC" } },
+    { "@type": "Blog", "@id": "https://moorecode.com/blog/#blog", "name": "moorecode blog", "url": "https://moorecode.com/blog/" }
+  ]
+}
+</script>
+<script defer src="/posthog-web.js"></script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">M</span><span class="brand-text">moorecode</span></a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+  <nav class="nav-links" id="navlinks"><a href="/">Home</a><a href="/projects.html">Projects</a><a href="/consulting.html">Consulting</a><a href="/hobbies.html">Hobbies</a><a href="/youtube.html">YouTube</a><a href="/about.html">About</a><a href="/blog/" class="active">Blog</a><a href="/contact.html">Contact</a></nav>
+</header>
+
+<main>
+<article>
+<header class="post-head">
+  <p class="post-meta">October 8, 2026 · By Logan Moore</p>
+  <h1>3D Printing a Prototype: Four Stages, One Test Plan</h1>
+  <p class="entity-definition">A 3D-printed prototype is a physical test part made from a digital model before committing to the final product or manufacturing process.</p>
+</header>
+
+<section class="prose">
+  <img class="post-cover" src="/blog/images/3d-printing-prototype-four-stage-test-plan.svg" width="1200" height="630" alt="A four-stage 3D printing prototype path from visual model to fit check, functional test, and pilot batch." />
+
+  <p class="lede">For a 3D-printed prototype, choose the process and material from the question the part must answer. Use a visual prototype to judge appearance, a form-and-fit prototype to check interfaces, a functional prototype to measure performance, and a pilot prototype to test repeated production and use. Write a pass/fail test before printing so a convincing model cannot hide a failed requirement.</p>
+
+  <p><a href="https://www.nist.gov/additive-manufacturing/what-additive-manufacturing">NIST defines additive manufacturing</a> as building from a digital design layer by layer, instead of cutting material away or molding it. “Printed successfully” is only a machine result. I want the prototype to answer the design question.</p>
+
+  <h2>What are the four stages of a 3D-printed prototype?</h2>
+  <p>The four practical stages are visual, form-and-fit, functional, and pilot prototypes. Each stage removes a different kind of uncertainty, so its material and finish should serve that test rather than imitate a final product by default.</p>
+
+  <table>
+    <thead><tr><th>Stage</th><th>Question</th><th>Useful processes</th><th>Evidence to record</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Visual</strong></td><td>Does the size, shape, control layout, and appearance make sense?</td><td>FDM for quick massing; SLA for fine detail and finish</td><td>Photos, handling notes, marked-up dimensions</td></tr>
+      <tr><td><strong>Form-and-fit</strong></td><td>Do parts, fasteners, hands, and neighboring objects fit?</td><td>FDM, SLA, SLS, or MJF based on size and tolerance</td><td>Measured gaps, insertion force, interference points</td></tr>
+      <tr><td><strong>Functional</strong></td><td>Does it carry the load, flex, seal, move, or survive heat?</td><td>Engineering FDM, tough SLA, SLS/MJF nylon, or metal AM</td><td>Load, deflection, cycles, temperature, leak rate</td></tr>
+      <tr><td><strong>Pilot</strong></td><td>Can several units be built, assembled, inspected, and used consistently?</td><td>Production-intent AM or the planned manufacturing process</td><td>Yield, assembly time, dimensional spread, field failures</td></tr>
+    </tbody>
+  </table>
+
+  <p><a href="https://formlabs.com/blog/validation-testing-product-development-poc-evt-dvt-pvt-mp/">Formlabs describes</a> focused prototypes as “looks-like” or “works-like” models and cites 80 foam models used by IDEO to settle the shape of Microsoft's first ergonomic mouse. That number sticks with me. An early model can earn its keep by making one decision cheaply.</p>
+
+  <h2>How should a visual prototype be printed?</h2>
+  <p>A visual prototype should be printed quickly enough that changing it does not feel expensive. Use it to judge silhouette, scale, button placement, reach, and the way a person understands the object before spending time on production materials.</p>
+
+  <p>FDM with PLA is often enough for a full-size housing or handle study. SLA earns its extra handling when small text, crisp edges, transparent features, or a smooth presentation surface is the question. Sanding and paint can represent color and finish, but document that they are cosmetic; they do not prove molded texture or production durability.</p>
+
+  <p>A visual model can also be split, hollowed, or printed at low infill because it is not carrying service load. If the audience starts bending clips or tightening screws, the model has crossed into a functional test and needs a new plan.</p>
+
+  <h2>How do you test form and fit?</h2>
+  <p>You test form and fit by naming every interface, assigning a measurable acceptance range, and recording where the printed part lands. “It fits” is too vague for a hinge, connector, gasket seat, or screw boss.</p>
+
+  <p>Suppose a sensor bracket must place two pins 50.0 ± 0.2 mm apart and accept an M4 fastener through a 4.2 mm clearance hole. Print a coupon containing the holes before the whole bracket, measure it with calipers, and test the actual pin and screw. If the measured spacing is 50.3 mm, the result fails even if the screw can be forced through.</p>
+
+  <p>Process capability matters here. <a href="https://www.protolabs.com/resources/design-tips/3d-printing-tolerances/">Protolabs publishes</a> typical SLA X/Y tolerance of ±0.002 inch for the first inch plus 0.1% of nominal dimension, while its SLS figure is ±0.010 inch for the first inch plus 0.1%. Those supplier-specific manufacturing capabilities do not apply to a hobby printer. A drawing should identify the two dimensions that matter instead of applying tight tolerance everywhere.</p>
+
+  <h2>What makes a prototype functional?</h2>
+  <p>A prototype becomes functional when it is tested against a load, motion, environment, or use case with a recorded limit. Match the process, orientation, material, and post-cure state to that load path.</p>
+
+  <p>Continue the bracket example. Set a requirement that the mounted bracket carry 100 newtons with less than 2 mm of deflection and survive 50 load cycles without a crack. Print three copies in the chosen orientation, condition them the same way, and test all three with the same fixture. Three results give a better first view of repeatability than one lucky part.</p>
+
+  <p>Layer direction matters in FDM because the roads and layer bonds do not behave identically. Resin properties depend on formulation and post-curing. Powder-bed nylon can suit clips and ducts without attached supports, while a metal process may be justified for heat or production-like load. If the test only needs a plastic bracket, the complexity in <a href="/blog/3d-printing-metal-processes-compared.html">my metal process comparison</a> is unnecessary.</p>
+
+  <h2>What is a pilot prototype supposed to prove?</h2>
+  <p>A pilot prototype is supposed to prove that several units can be made, assembled, inspected, and used with acceptable variation. It shifts the question from “Can this design work once?” to “Can this process repeat it?”</p>
+
+  <p>Print a small batch with controlled settings and serialized parts. Record build position, material lot, orientation, post-processing, critical dimensions, assembly time, and failure. If five units take 8, 9, 9, 13, and 20 minutes to assemble, the last two deserve investigation even when all five eventually work.</p>
+
+  <p>A pilot exposes work the CAD model hides: support removal near a sealing face, a nut that cannot be reached, a label placed on a curve, or a tolerance that requires hand filing. Some teams keep printing at this stage. Others move to machining, urethane casting, or soft tooling because the next uncertainty belongs to the production process.</p>
+
+  <h2>What is the best material for a 3D-printed prototype?</h2>
+  <p>The best material for a 3D-printed prototype is the cheapest material that reproduces the property under test without creating a false answer. Let the requirement choose the property that matters; a generic strength ranking cannot do that.</p>
+
+  <ul>
+    <li>Use PLA for quick visual models, rigid packaging studies, and basic fit checks that stay cool.</li>
+    <li>Use PETG when an FDM test needs more toughness or moisture resistance than PLA.</li>
+    <li>Use TPU for seals, grips, bumpers, and flex behavior, after matching hardness and wall geometry.</li>
+    <li>Use an engineering resin when surface, small detail, temperature, or a documented property set drives the test.</li>
+    <li>Use SLS or MJF nylon for durable functional geometry, clips, and nested parts without attached support scars.</li>
+    <li>Use metal additive manufacturing only when alloy behavior, heat, load, or metal-specific geometry is part of the question.</li>
+  </ul>
+
+  <p>Material names do not erase process effects. <a href="https://www.protolabs.com/resources/guides-and-trend-reports/selecting-the-right-material-for-3d-printing/">Protolabs notes</a> that tensile strength is the maximum stress before break, modulus describes stiffness, elongation describes ductility, and heat-deflection temperature is measured under a specified load. Those properties answer different questions. The <a href="/blog/3d-printing-filament-pla-petg-tpu.html">MooreCode filament guide</a> compares the desktop materials without crowning one winner.</p>
+
+  <h2>How do you turn a prototype question into a test plan?</h2>
+  <p>You turn a prototype question into a test plan by writing one sentence each for the uncertainty, specimen, method, measurement, and decision. Keep the plan beside the CAD file so a design change and its evidence stay connected.</p>
+
+  <ol>
+    <li><strong>Question:</strong> Will the bracket hold the sensor without visible movement?</li>
+    <li><strong>Specimen:</strong> Three PETG brackets printed flat with the same profile and material lot.</li>
+    <li><strong>Method:</strong> Mount each with the intended M4 hardware and apply 100 N at the sensor centerline for 50 cycles.</li>
+    <li><strong>Pass:</strong> Less than 2 mm peak deflection, no crack, and pin spacing still within 50.0 ± 0.2 mm.</li>
+    <li><strong>Next action:</strong> Advance if all three pass; otherwise change one variable and repeat the failed measurement.</li>
+  </ol>
+
+  <p>This plan produces a decision even when the result is bad. If surface detail rather than load is blocking the project, <a href="/blog/when-resin-3d-printing-beats-fdm.html">the resin-versus-FDM guide</a> helps choose the next specimen without changing the question.</p>
+
+  <h2>Frequently asked questions</h2>
+  <h3>What is the best material for a 3D-printed prototype?</h3>
+  <p>The best material is the least expensive one that reproduces the property being tested. PLA often suits visual and basic fit checks, while tougher thermoplastics, engineering resins, nylon powder, or metal may be needed for load, heat, fatigue, or field tests.</p>
+  <h3>Is 3D printing the same as rapid prototyping?</h3>
+  <p>3D printing is one tool used in rapid prototyping. Rapid prototyping is the wider cycle of making a testable artifact, measuring a result, changing the design, and repeating; it can also use foam, machining, laser cutting, or molding.</p>
+  <h3>How many prototype stages are needed?</h3>
+  <p>Four stages are a useful planning model: visual, form-and-fit, functional, and pilot. A project can combine or skip stages when the unanswered question and risk justify it.</p>
+  <h3>Should a prototype use the final production material?</h3>
+  <p>Use the final material or a qualified match when the test depends on its heat, chemical, fatigue, friction, flexibility, or regulatory behavior. A cheaper stand-in is fine for questions about size, appearance, or handling.</p>
+</section>
+</article>
+</main>
+
+<footer><p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p><div class="foot-links"><a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a><a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a></div><address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
