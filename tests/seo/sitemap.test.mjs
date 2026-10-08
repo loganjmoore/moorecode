@@ -1,0 +1,33 @@
+import { strict as assert } from 'node:assert';
+import { existsSync, readFileSync } from 'node:fs';
+
+const root = new URL('../../', import.meta.url);
+const sitemap = readFileSync(new URL('sitemap.xml', root), 'utf8');
+const entries = new Map(
+  [...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>\s*<\/url>/g)]
+    .map(([, location, lastmod]) => [location, lastmod]),
+);
+
+assert.ok(entries.size, 'sitemap.xml must contain URL entries');
+
+for (const location of entries.keys()) {
+  const pathname = new URL(location).pathname;
+  const publicPath = pathname === '/'
+    ? 'index.html'
+    : pathname.endsWith('/')
+      ? `${pathname.slice(1)}index.html`
+      : pathname.slice(1);
+
+  assert.ok(existsSync(new URL(publicPath, root)), `${location} must map to a public file or index`);
+}
+
+for (const [location, contentDate] of [
+  ['https://moorecode.com/', '2026-10-07'],
+  ['https://moorecode.com/hobbies.html', '2026-10-07'],
+  ['https://moorecode.com/posthog-privacy.html', '2026-10-06'],
+]) {
+  assert.ok(entries.has(location), `${location} must be listed in sitemap.xml`);
+  assert.ok(entries.get(location) >= contentDate, `${location} lastmod must not predate ${contentDate}`);
+}
+
+console.log('Sitemap contract passed: every URL resolves locally and changed content dates cannot regress.');
