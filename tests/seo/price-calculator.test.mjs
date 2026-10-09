@@ -41,4 +41,10 @@ assert.throws(() => calculate({ quantity: 1, spoolWeight: 0 }), /Spool weight/);
 assert.throws(() => calculate({ quantity: 1, spoolWeight: 1000, materialGrams: -1 }), /non-negative/);
 assert.throws(() => calculate({ quantity: 1, spoolWeight: 1000, failureRate: 100.1 }), /cannot exceed 100%/);
 
+const complete = { quantity: 1, materialGrams: 100, spoolPrice: 20, spoolWeight: 1000, printHours: 0, printerWatts: 0, energyRate: 0, laborHours: 0, laborRate: 0, machineRate: 0, otherCost: 0, failureRate: 0 };
+assert.throws(() => calculate({ ...complete, quantity: Number.MAX_SAFE_INTEGER + 1 }), /safe whole number/);
+assert.throws(() => calculate({ ...complete, materialGrams: 1e200, spoolPrice: 1e200 }), /too large/);
+assert.throws(() => calculate({ ...complete, materialGrams: '', spoolPrice: 0 }), /required/);
+assert.throws(() => calculate({ ...complete, laborRate: Infinity }), /finite/);
+
 console.log('3D-printing price calculator contract passed: zero, representative, boundary, and invalid inputs.');

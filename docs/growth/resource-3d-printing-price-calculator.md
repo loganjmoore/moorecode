@@ -7,7 +7,7 @@ Deployment URL: https://moorecode.com/calculators/3d-printing-price-calculator.h
 ## Implementation
 
 - `calculators/3d-printing-price-calculator.html`: canonical calculator page, labeled native inputs, editable assumptions, visible formulas, sources, result breakdown, guide links, and consulting handoff.
-- `calculators/3d-printing-price-calculator.js`: validated cost calculation and consent-controlled `resource_completed` event.
+- `calculators/3d-printing-price-calculator.js`: validated cost calculation, consent-controlled `cta_clicked` requests and `resource_completed` events.
 - `style.css`: responsive calculator and topic-index styling in the existing MooreCode visual system.
 - `index.html` and `blog/index.html`: contextual discovery links.
 - `sitemap.xml` and `llms.txt`: crawler and assistant discovery.
@@ -28,12 +28,22 @@ The electricity conversion uses `kWh = watts × hours ÷ 1,000`, as published by
 
 ## Rendered evidence
 
-Rendered keyboard and mobile browser verification is blocked in this workspace. The sandbox rejects local HTTP listeners, and the controlled browser blocks `file://` navigation. Static checks confirm that every input has a matching visible label, native number controls expose limits and steps, the result uses `role="status"` with `aria-live="polite"`, the layout has an explicit single-column mobile fallback, and the calculator function passes zero, representative, boundary, and invalid-input checks.
+The rendered local-source journey passed at 1280 px and 390 px, with the browser retaining the actual HTTPS product origin and intercepting ingestion requests locally. No synthetic events were sent to PostHog. Screenshots and structured results are in `docs/growth/evidence/`; the executable journey is `tests/seo/resource-browser.cjs`.
 
-The page still requires a keyboard and 390 px mobile journey at the deployment URL before status can change from pending.
+Run a local server from the repository with `python3 -m http.server 8798`, then run `PLAYWRIGHT_MODULE_PATH=<installed Playwright module path> node tests/seo/resource-browser.cjs`. The script uses disposable contexts, exercises keyboard entry/submission and repeats, and checks zero costs, decimal/zero quantities, required inputs, finite overflow, stale-result clearing, focus indication, mobile overflow, pre-consent silence, withdrawal, GPC and private-route identity clearing.
+
+The representative job independently totals 38.6584 (38.66 displayed), or 19.3292 per part (19.33 displayed). The allowance is explicitly a cost cushion rather than a failure probability. Very large or unsafe values cannot produce a displayed non-finite estimate or a completion event.
+
+## Existing analytics adapter
+
+The existing public configuration and loader were independently checked against the live site: the product is `moorecode.com`, the original project is configured, and the existing optional-consent key and PostHog region remain unchanged. The canonical emitter core was refreshed while preserving MooreCode's owned consent controls, `.html` public routes, explicit in-memory withdrawal override, and `contact_clicked` mapping. Unknown routes now deny capture and clear attribution. The calculator's exact public route is recognized. No provider key, account, identifier, form value, calculation input, or result was added to event metadata.
+
+The generic worker synchronization helper classifies this customized adapter as uncollected; it must not overwrite the adapter or fabricate collection status. The independent rendered contract demonstrates event production against intercepted responses. It does not prove durable provider ingestion. The configured release is empty, so release-tagged production measurement is still unavailable until a real release is independently established.
+
+The existing Inter typography and native MooreCode spacing/colors are retained under `DESIGN.md`; mechanical font-choice warnings are not grounds to redesign the incumbent site.
 
 ## Outcome coverage
 
-With optional analytics consent, a successful calculation records `resource_completed` through the site's existing anonymous PostHog component. The page path, device class, channel, and existing opaque campaign token can support landing-visit and resource-use counts without collecting calculator values. The existing Contact link records the site's consented contact-click events.
+With optional analytics consent, a submitted calculator request records `cta_clicked` and a successful calculation records `resource_completed` through the site's existing anonymous PostHog component. The page path, device class, channel, and existing opaque campaign token can support landing-visit and resource-use counts without collecting calculator values. The existing Contact link records the site's consented contact-click events.
 
 No signup, lead delivery, paid outcome, or causal conversion lift has been verified. Organic landing visits and conversions remain unknown until the page is deployed and observed separately. Attribution coverage is limited to visitors who consent to analytics and is not complete population measurement.

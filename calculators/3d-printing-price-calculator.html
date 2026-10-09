@@ -69,7 +69,7 @@
         <div class="calculator-fields">
           <div class="calculator-field">
             <label for="quantity">Number of parts</label>
-            <input id="quantity" name="quantity" type="number" min="1" step="1" value="1" required inputmode="numeric" />
+            <input id="quantity" name="quantity" type="number" min="1" max="9007199254740991" step="1" value="1" required inputmode="numeric" />
             <small>Whole parts in this job.</small>
           </div>
           <div class="calculator-field">
@@ -147,7 +147,7 @@
           <div class="calculator-field">
             <label for="failureRate">Failed-print allowance (%)</label>
             <input id="failureRate" name="failureRate" type="number" min="0" max="100" step="0.1" value="0" required inputmode="decimal" />
-            <small>Applied to the direct-cost subtotal. Use zero if unknown.</small>
+            <small>A cost cushion, not a failure probability. Applied to the subtotal; zero adds none.</small>
           </div>
         </div>
       </fieldset>
@@ -157,15 +157,15 @@
 
     <aside class="calculator-result" aria-labelledby="estimate-heading">
       <h2 id="estimate-heading">Estimated direct cost</h2>
-      <p class="result-total" id="job-total">$0.00</p>
-      <p class="result-per-part" id="per-part">$0.00 per part for 1 part</p>
+      <p class="result-total" id="job-total">—</p>
+      <p class="result-per-part" id="per-part">Calculate to see a per-part estimate.</p>
       <dl class="result-breakdown">
-        <div><dt>Material</dt><dd id="result-material">$0.00</dd></div>
-        <div><dt>Electricity</dt><dd id="result-electricity">$0.00</dd></div>
-        <div><dt>Labor</dt><dd id="result-labor">$0.00</dd></div>
-        <div><dt>Machine and upkeep</dt><dd id="result-machine">$0.00</dd></div>
-        <div><dt>Other direct costs</dt><dd id="result-other">$0.00</dd></div>
-        <div><dt>Failed-print allowance</dt><dd id="result-failureAllowance">$0.00</dd></div>
+        <div><dt>Material</dt><dd id="result-material">—</dd></div>
+        <div><dt>Electricity</dt><dd id="result-electricity">—</dd></div>
+        <div><dt>Labor</dt><dd id="result-labor">—</dd></div>
+        <div><dt>Machine and upkeep</dt><dd id="result-machine">—</dd></div>
+        <div><dt>Other direct costs</dt><dd id="result-other">—</dd></div>
+        <div><dt>Failed-print allowance</dt><dd id="result-failureAllowance">—</dd></div>
       </dl>
       <p class="calculator-status" id="calculator-status" role="status" aria-live="polite">Enter your assumptions, then calculate.</p>
     </aside>

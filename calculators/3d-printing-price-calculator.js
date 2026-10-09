@@ -1,5 +1,6 @@
 (() => {
   function number(value) {
+    if (value === null || (typeof value === 'string' && value.trim() === '')) throw new RangeError('Every calculator value is required. Enter zero for a cost you do not include.');
     const parsed = Number(value);
     if (!Number.isFinite(parsed) || parsed < 0) throw new RangeError('Calculator values must be finite and non-negative.');
     return parsed;
@@ -8,7 +9,7 @@
   function calculate3DPrintingPrice(values) {
     const quantity = number(values.quantity);
     const spoolWeight = number(values.spoolWeight);
-    if (!Number.isInteger(quantity) || quantity < 1) throw new RangeError('Quantity must be a whole number of at least one.');
+    if (!Number.isSafeInteger(quantity) || quantity < 1) throw new RangeError('Quantity must be a safe whole number of at least one.');
     if (spoolWeight <= 0) throw new RangeError('Spool weight must be greater than zero.');
     const failureRate = number(values.failureRate);
     if (failureRate > 100) throw new RangeError('Failed-print allowance cannot exceed 100%.');
@@ -22,7 +23,9 @@
     const failureAllowance = subtotal * failureRate / 100;
     const total = subtotal + failureAllowance;
 
-    return { material, electricity, labor, machine, other, failureAllowance, total, perPart: total / quantity };
+    const result = { material, electricity, labor, machine, other, failureAllowance, total, perPart: total / quantity };
+    if (!Object.values(result).every(Number.isFinite)) throw new RangeError('These values are too large to calculate. Reduce the amounts and try again.');
+    return result;
   }
 
   globalThis.calculate3DPrintingPrice = calculate3DPrintingPrice;
@@ -33,8 +36,19 @@
   const money = (value, currency) => new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(value);
   const outputIds = ['material', 'electricity', 'labor', 'machine', 'other', 'failureAllowance'];
 
+  function clearEstimate(message) {
+    document.getElementById('job-total').textContent = '—';
+    document.getElementById('per-part').textContent = 'Calculate to see a per-part estimate.';
+    for (const key of outputIds) document.getElementById(`result-${key}`).textContent = '—';
+    document.getElementById('calculator-status').textContent = message;
+  }
+  form.addEventListener('input', () => clearEstimate('Assumptions changed. Calculate again for a new estimate.'));
+  form.addEventListener('change', () => clearEstimate('Assumptions changed. Calculate again for a new estimate.'));
+  form.addEventListener('invalid', () => clearEstimate('Check the highlighted input, then calculate again.'), true);
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    try { window.productAnalytics?.capture('cta_clicked'); } catch { /* Optional measurement cannot prevent calculation. */ }
     const values = Object.fromEntries(new FormData(form));
     try {
       const result = calculate3DPrintingPrice(values);
@@ -43,9 +57,9 @@
       document.getElementById('per-part').textContent = `${money(result.perPart, currency)} per part for ${values.quantity} ${Number(values.quantity) === 1 ? 'part' : 'parts'}`;
       for (const key of outputIds) document.getElementById(`result-${key}`).textContent = money(result[key], currency);
       document.getElementById('calculator-status').textContent = 'Estimate updated from your assumptions.';
-      window.productAnalytics?.capture('resource_completed');
+      try { window.productAnalytics?.capture('resource_completed'); } catch { /* Optional measurement cannot invalidate a useful estimate. */ }
     } catch (error) {
-      document.getElementById('calculator-status').textContent = error.message;
+      clearEstimate(error.message);
     }
   });
 })();

@@ -13,4 +13,4 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
-      - run: node --test tests/posthog/consent-ui.test.mjs tests/posthog/posthog-web.test.mjs tests/seo/static-pages.test.mjs
+      - run: node --test tests/posthog/consent-ui.test.mjs tests/posthog/posthog-web.test.mjs tests/seo/static-pages.test.mjs tests/seo/price-calculator.test.mjs tests/seo/sitemap.test.mjs
