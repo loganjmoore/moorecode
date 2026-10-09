@@ -1,8 +1,8 @@
 /* Vendored from seo-command-center/integrations/posthog-web.js.
  * Anonymous, explicit website events via PostHog's capture API. No replay,
  * autocapture, form values, account IDs, URL queries or third-party scripts.
- * The shared consent panel and footer settings control own consent and
- * withdrawal on every public page. */
+ * MooreCode adapter: the owned optional consent panel and footer settings
+ * control consent and withdrawal on public pages. */
 (() => {
   if (window.productAnalytics) return;
   const events = new Set(['$pageview', 'cta_clicked', 'signup_started', 'signup_completed', 'lead_submitted', 'activation_completed', 'checkout_started', 'subscription_started', 'app_store_clicked', 'contact_clicked', 'form_failed', 'resource_completed', 'resource_downloaded']);
@@ -10,6 +10,7 @@
   let config = null;
   let lastPath = null;
   const controllers = new Set();
+  const pending = new Set();
   const privateKey = 'website_posthog_identity_v1';
   const sessionKey = 'website_posthog_session_v1';
   // Keep only our opaque campaign token in memory until consent. Never store
@@ -50,13 +51,17 @@
       return raw === 'accepted' ? 'accepted' : raw ? 'declined' : null;
     } catch { return 'declined'; }
   };
-  const allowed = () => { try { return Boolean(config && window.websiteAnalyticsConsentDenied !== true && !optOut() && storedChoice() === 'accepted' && navigator.webdriver !== true && localStorage.getItem('website_posthog_internal') !== '1'); } catch { return false; } };
+  // SPAs may render a private dashboard at an otherwise public URL. Such sites
+  // explicitly opt in each public document; an absent marker denies capture.
+  const publicScope = () => (config?.product !== 'moorecode.com' || path() !== '/:private') && (config?.requirePublicScope !== true || document.documentElement.getAttribute('data-website-analytics-scope') === 'public');
+  const allowed = () => { try { return Boolean(config && window.websiteAnalyticsConsentDenied !== true && publicScope() && !optOut() && storedChoice() === 'accepted' && navigator.webdriver !== true && localStorage.getItem('website_posthog_internal') !== '1'); } catch { return false; } };
   function path() {
     // Public editorial slugs are authored content. Unknown/private app paths
     // deliberately lose their identifiers instead of guessing how to redact.
-    const p = location.pathname.replace(/^\/turf(?:planner)?(?=\/)/, '').replace(/\/+$/, '') || '/';
-    if (config?.product === 'moorecode.com' && new Set(['/projects.html', '/consulting.html', '/hobbies.html', '/youtube.html', '/blackjack-privacy.html', '/blackjack-support.html']).has(p)) return p;
-    return /^(\/|\/(?:es|en))$/.test(p) || /^\/(?:es\/|en\/)?(?:pricing|features|about|contact|demo|book|get-started|start|plumber|roofer|electrician|cleaner|landscaper|register|signup|sign-up|login|support|privacy|terms|cookies|blog|journal|debt-payoff-calculator|invoice-generator|posthog-privacy)(?:\.html)?$/.test(p) || /^\/(?:es\/|en\/)?(?:blog|journal|guides|glossary|help|compare|services|industries|templates|tools|resources|calculators)\/[a-z0-9-]{1,120}(?:\.html)?$/.test(p) ? p : '/:private';
+    const raw = config?.product === 'turfplanner.com' ? location.pathname.replace(/^\/turf(?:planner)?(?=\/|$)/, '') : location.pathname;
+    const p = raw.replace(/\/+$/, '') || '/';
+    if (config?.product === 'moorecode.com' && (new Set(['/projects.html', '/consulting.html', '/hobbies.html', '/youtube.html', '/blackjack-privacy.html', '/blackjack-support.html']).has(p) || /^\/(?:blog|calculators)\/[a-z0-9-]{1,120}\.html$/.test(p))) return p;
+    return /^(\/|\/(?:es|en))$/.test(p) || /^\/(?:es\/|en\/)?(?:pricing|features|about|contact|demo|book|get-started|start|plumber|roofer|electrician|cleaner|landscaper|register|signup|sign-up|login|support|privacy|terms|cookies|blog|journal|debt-payoff-calculator|invoice-generator|posthog-privacy)(?:\.html)?$/.test(p) || /^\/(?:es\/|en\/)?(?:blog|journal|guides|glossary|help|compare|services|industries|templates|tools|resources|calculators)\/[a-z0-9-]{1,120}$/.test(p) ? p : '/:private';
   }
   function identity() {
     const now = Date.now();
@@ -88,7 +93,7 @@
   }
   function capture(name, target) {
     if (!events.has(name)) return false;
-    if (!allowed()) { if (config) reset(storedChoice() === null && !optOut()); return false; }
+    if (!allowed()) { if (config) reset(publicScope() && storedChoice() === null && !optOut()); return false; }
     try {
       const safePath = path();
       if ((config.publicOnly || resourceEvents.has(name)) && safePath === '/:private') return false;
@@ -97,7 +102,7 @@
       const controller = new AbortController();
       controllers.add(controller);
       const timer = setTimeout(() => controller.abort(), 5000);
-      fetch(`${config.host}/i/v0/e/`, {
+      const request = fetch(`${config.host}/i/v0/e/`, {
         method: 'POST', credentials: 'omit', referrerPolicy: 'no-referrer', keepalive: true, signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ api_key: config.key, event: name, distinct_id: visitor.id, timestamp: new Date().toISOString(), properties: {
@@ -110,19 +115,21 @@
           ...(visitor.referrerDomain ? { referrer_domain: visitor.referrerDomain } : {}),
           ...(['signup', 'pricing', 'contact', 'demo', 'app_store'].includes(target) ? { target } : {}),
         } }),
-      }).catch(() => {}).finally(() => { clearTimeout(timer); controllers.delete(controller); });
+      }).then(response => response.ok === true).catch(() => false).finally(() => { clearTimeout(timer); controllers.delete(controller); pending.delete(request); });
+      pending.add(request);
       return true;
     } catch { return false; } // Storage/crypto/network must never break a user action.
   }
   function reset(preserveLandingCampaign = false) {
     for (const controller of controllers) controller.abort();
+    pending.clear();
     try { localStorage.removeItem(privateKey); sessionStorage.removeItem(sessionKey); } catch { /* Storage unavailable. */ }
     share(privateKey, '', 0); share(sessionKey, '', 0);
     lastPath = null;
     if (preserveLandingCampaign !== true) { landingCampaign = null; landingReferrer = null; }
   }
   function pageview() {
-    if (!allowed()) { reset(storedChoice() === null && !optOut()); return; }
+    if (!allowed()) { reset(publicScope() && storedChoice() === null && !optOut()); return; }
     const p = path();
     if (p === lastPath) return;
     if (capture('$pageview')) {
@@ -130,8 +137,20 @@
       if (/\/(register|signup|sign-up)$/.test(p)) capture('signup_started');
     }
   }
-  function refresh() { if (allowed()) pageview(); else reset(storedChoice() === null && !optOut()); }
-  window.productAnalytics = { capture: (name) => capture(name), reset, refresh };
+  function refresh() { if (allowed()) pageview(); else reset(publicScope() && storedChoice() === null && !optOut()); }
+  // A public signup handler can wait before navigating into a private SPA.
+  // This acknowledges HTTP responses only, not durable provider ingestion.
+  function flush(timeoutMs = 2000) {
+    if (!allowed()) { if (config) reset(); return Promise.resolve(false); }
+    const batch = [...pending];
+    if (!batch.length) return Promise.resolve(true);
+    const timeout = Number.isFinite(timeoutMs) ? Math.max(1, Math.min(5000, timeoutMs)) : 2000;
+    return new Promise(resolve => {
+      const timer = setTimeout(() => resolve(false), timeout);
+      Promise.all(batch).then(results => { clearTimeout(timer); resolve(results.every(Boolean)); });
+    });
+  }
+  window.productAnalytics = { capture: (name) => capture(name), reset, refresh, flush };
   window.addEventListener('website:analytics-consent', refresh);
   window.addEventListener('venuebill:consent-updated', refresh);
   window.addEventListener('storage', refresh);

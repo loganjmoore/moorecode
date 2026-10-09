@@ -119,14 +119,19 @@ console.log('PostHog browser contract passed: consent, withdrawal, reaccept, opt
 
 const moore = browser({product:'moorecode.com',hosts:['venuebill.com','moorecode.com']}); await tick();
 moore.values.set('site_consent','accepted');
-for (const pathname of ['/projects.html','/consulting.html','/blog/mileage-tracker-delivery-drivers-tax-deduction.html','/blog/3d-printmaking-checklist-mirrored-art-inked-proof.html']) {
+for (const pathname of ['/projects.html','/consulting.html','/blog/mileage-tracker-delivery-drivers-tax-deduction.html','/blog/3d-printmaking-checklist-mirrored-art-inked-proof.html','/calculators/3d-printing-price-calculator.html']) {
   moore.context.location.pathname=pathname;
   moore.context.window.productAnalytics.refresh(); await tick();
   assert.equal(moore.requests.at(-1).data.properties.page_path,pathname);
 }
+const privateBefore = moore.requests.length;
 moore.context.location.pathname='/children/private-id';
 moore.context.window.productAnalytics.refresh(); await tick();
-assert.equal(moore.requests.at(-1).data.properties.page_path,'/:private');
+assert.equal(moore.requests.length, privateBefore, 'MooreCode only captures authored public static paths');
+assert.equal(moore.values.has('website_posthog_identity_v1'), false, 'Denied private paths clear identity');
+assert.equal(moore.context.window.productAnalytics.capture('resource_completed'), false);
+moore.context.location.pathname='/calculators/3d-printing-price-calculator.html';
+moore.context.window.productAnalytics.refresh(); await tick();
 const prior=moore.requests.length;
 moore.context.window.websiteAnalyticsConsentDenied=true;
 moore.context.window.productAnalytics.refresh();

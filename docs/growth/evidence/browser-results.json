@@ -1,0 +1,38 @@
+{
+  "testedAt": "2026-10-09T08:19:46.255Z",
+  "fixture": "Actual local candidate source served under the approved public hostname; ingestion intercepted, no production accounts or events.",
+  "journeys": [
+    {
+      "width": 1280,
+      "representativeTotal": "38.66",
+      "perPart": "19.33",
+      "zero": true,
+      "repeat": true,
+      "keyboardSubmit": true,
+      "invalidQuantity": true,
+      "overflowRejected": true,
+      "staleCleared": true,
+      "preconsentRequests": 0,
+      "withdrawal": true,
+      "privateValuesCaptured": false,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "representativeTotal": "38.66",
+      "perPart": "19.33",
+      "zero": true,
+      "repeat": true,
+      "keyboardSubmit": true,
+      "invalidQuantity": true,
+      "overflowRejected": true,
+      "staleCleared": true,
+      "preconsentRequests": 0,
+      "withdrawal": true,
+      "privateValuesCaptured": false,
+      "errors": []
+    }
+  ],
+  "privateSuppressed": true,
+  "gpcSuppressed": true
+}

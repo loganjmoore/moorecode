@@ -26,6 +26,7 @@ for (const [location, contentDate] of [
   ['https://moorecode.com/hobbies.html', '2026-10-07'],
   ['https://moorecode.com/posthog-privacy.html', '2026-10-06'],
   ['https://moorecode.com/blog/', '2026-10-08'],
+  ['https://moorecode.com/calculators/3d-printing-price-calculator.html', '2026-10-09'],
   ['https://moorecode.com/blog/best-3d-printing-websites-files-2026.html', '2026-10-08'],
   ['https://moorecode.com/blog/desktop-3d-printing-setup-safe-workspace.html', '2026-10-08'],
   ['https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html', '2026-10-08'],

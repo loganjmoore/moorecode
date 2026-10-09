@@ -11,6 +11,7 @@ const publishedArticlePaths = readdirSync(new URL('../../blog/', import.meta.url
 for (const path of [
   'index.html', 'projects.html', 'consulting.html', 'hobbies.html', 'youtube.html', 'about.html', 'contact.html',
   'blackjack-support.html', 'blackjack-privacy.html', 'posthog-privacy.html', 'blog/index.html',
+  'calculators/3d-printing-price-calculator.html',
   ...publishedArticlePaths,
 ]) assert.match(read(path), /<script defer src="\/posthog-web\.js"><\/script>/, `${path} needs the shared analytics component`);
 
@@ -71,6 +72,14 @@ assert.match(read('index.html'), /href="\/blog\/3d-printing-metal-processes-comp
 assert.match(read('index.html'), /<h2 id="printing-questions-heading">What MooreCode does and who it is for<\/h2>/);
 assert.match(read('index.html'), /For 3D printing rates, compare total delivered quotes/);
 assert.match(read('index.html'), /A 3D printing price calculator is best used for an initial estimate/);
+for (const link of [
+  '/blog/',
+  '/blog/3d-printing-filament-pla-petg-tpu.html',
+  '/blog/what-is-fdm-3d-printing.html',
+  '/blog/when-resin-3d-printing-beats-fdm.html',
+  '/blog/3d-printing-metal-processes-compared.html',
+  '/calculators/3d-printing-price-calculator.html',
+]) assert.match(read('index.html'), new RegExp(`href="${link.replaceAll('.', '\\.')}`), `Homepage coverage needs ${link}`);
 assert.match(read('blog/3d-printmaking-checklist-mirrored-art-inked-proof.html'), /covers six stages from SVG to finished impression/);
 
 const hobbies = read('hobbies.html');
@@ -101,6 +110,26 @@ for (const question of [
   'How do I diagnose an FDM setup problem?',
   'How should a service business compare invoicing app pricing?',
 ]) assert.ok(blog.includes(question), `Blog guide map needs: ${question}`);
+
+for (const topic of ['Materials', 'Processes', 'Setup', 'Projects']) {
+  assert.match(blog, new RegExp(`<h2 id="${topic.toLowerCase()}-topic">${topic}<\\/h2>`), `Blog index needs ${topic} grouping`);
+}
+
+const topicMap = blog.slice(blog.indexOf('<nav class="topic-groups"'), blog.indexOf('<ul class="blog-list">'));
+for (const path of publishedArticlePaths) {
+  assert.equal((topicMap.match(new RegExp(`href="/${path.replaceAll('.', '\\.')}"`, 'g')) || []).length, 1, `${path} must appear in exactly one topic group`);
+}
+
+const calculator = read('calculators/3d-printing-price-calculator.html');
+assert.match(calculator, /<link rel="canonical" href="https:\/\/moorecode\.com\/calculators\/3d-printing-price-calculator\.html"/);
+for (const input of ['quantity', 'materialGrams', 'printHours', 'spoolPrice', 'spoolWeight', 'printerWatts', 'energyRate', 'laborHours', 'laborRate', 'machineRate', 'otherCost', 'failureRate']) {
+  assert.match(calculator, new RegExp(`<label for="${input}">`), `${input} needs a visible label`);
+  assert.match(calculator, new RegExp(`id="${input}" name="${input}"`), `${input} label and control must match`);
+}
+assert.match(calculator, /Total direct cost<\/strong> =/);
+assert.match(calculator, /Department of Energy energy-use lesson/);
+assert.match(calculator, /Prusa's 3D-printing price calculator/);
+assert.match(calculator, /href="\/contact\.html#project-inquiry"/);
 
 const metalGuide = read('blog/3d-printing-metal-processes-compared.html');
 assert.match(metalGuide, /<tr><th>Process<\/th><th>Typical material<\/th><th>Best-fit application<\/th><\/tr>/);
