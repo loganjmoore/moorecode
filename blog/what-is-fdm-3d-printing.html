@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>What Is FDM 3D Printing? FDM vs. SLA and SLS</title>
-<meta name="description" content="FDM 3D printing melts filament into layers. See how FDM works, where it fits, and how it compares with SLA resin and SLS powder printing." />
+<title>FDM vs. SLA vs. SLS 3D Printing: How They Work</title>
+<meta name="description" content="Compare how FDM, SLA, and SLS 3D printing work, including feedstock, layer formation, supports, best-fit parts, post-processing, and limitations." />
 <link rel="canonical" href="https://moorecode.com/blog/what-is-fdm-3d-printing.html" />
 <meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
 <meta name="theme-color" content="#0b0c10" />
@@ -15,8 +15,8 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
 <link rel="stylesheet" href="/style.css" />
 <link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
-<meta property="og:title" content="What Is FDM 3D Printing? FDM vs. SLA and SLS" />
-<meta property="og:description" content="A plain-language guide to FDM, plus a practical comparison with SLA and SLS." />
+<meta property="og:title" content="FDM vs. SLA vs. SLS 3D Printing: How They Work" />
+<meta property="og:description" content="A practical three-process comparison of FDM, SLA, and SLS 3D printing." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://moorecode.com/blog/what-is-fdm-3d-printing.html" />
 <meta property="og:image" content="https://moorecode.com/blog/images/what-is-fdm-3d-printing.svg" />
@@ -30,12 +30,12 @@
     {
       "@type": "BlogPosting",
       "@id": "https://moorecode.com/blog/what-is-fdm-3d-printing.html#post",
-      "headline": "What Is FDM 3D Printing? FDM vs. SLA and SLS",
-      "description": "A plain-language guide to FDM, plus a practical comparison with SLA and SLS.",
+      "headline": "FDM vs. SLA vs. SLS 3D Printing: How They Work",
+      "description": "A practical three-process comparison of FDM, SLA, and SLS 3D printing.",
       "url": "https://moorecode.com/blog/what-is-fdm-3d-printing.html",
       "mainEntityOfPage": "https://moorecode.com/blog/what-is-fdm-3d-printing.html",
       "datePublished": "2026-10-06",
-      "dateModified": "2026-10-06",
+      "dateModified": "2026-10-08",
       "image": "https://moorecode.com/blog/images/what-is-fdm-3d-printing.svg",
       "author": { "@id": "https://moorecode.com/#logan" },
       "publisher": { "@id": "https://moorecode.com/#logan" },
@@ -64,6 +64,16 @@
           "@type": "Question",
           "name": "Does FDM need support material?",
           "acceptedAnswer": { "@type": "Answer", "text": "FDM needs supports under some steep overhangs, bridges, and isolated features. Orientation and part design can reduce how much support a model needs." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between SLA and resin 3D printing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Resin 3D printing is the broader category of processes that cure liquid photopolymer with light. SLA is one resin-printing method, traditionally using a laser to trace each layer." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does SLS need support structures?",
+          "acceptedAnswer": { "@type": "Answer", "text": "SLS usually does not need attached support structures because the surrounding loose powder supports each layer during printing. The finished parts still need cooling and depowdering." }
         }
       ]
     },
@@ -114,7 +124,7 @@
 <article>
 <header class="post-head">
   <p class="post-meta">October 6, 2026 · By Logan Moore</p>
-  <h1>What Is FDM 3D Printing? FDM vs. SLA and SLS</h1>
+  <h1>FDM vs. SLA vs. SLS 3D Printing: How They Work</h1>
   <p class="entity-definition">FDM 3D printing is a material-extrusion process, short for fused deposition modeling, that builds a part by melting thermoplastic filament and placing it in stacked paths.</p>
 </header>
 
@@ -148,6 +158,8 @@
   <p>Thin features also reach a practical limit. Formlabs' published comparison puts a typical FDM minimum supported wall near 0.8 mm and minimum embossed detail near 0.6 mm wide and 2 mm high. Those are design guidelines rather than promises for every machine, but they explain why a small miniature face usually reads better in resin.</p>
 
   <p>For the complete workflow behind that detail advantage, including washing, curing, ventilation, and waste handling, read the <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin 3D printing versus FDM guide</a>.</p>
+
+  <p>When the finished part must be metal rather than polymer, the <a href="/blog/3d-printing-metal-processes-compared.html">metal 3D printing process guide</a> compares powder bed fusion, binder jetting, metal FFF, and directed energy deposition.</p>
 
   <p>FDM parts are direction-dependent. A load that tries to separate layers can expose a weaker axis, and an apparently solid model can fail at a sharp corner or thin neck. Food contact, pressure, electrical insulation, medical use, and load-bearing safety parts need application-specific material and process validation.</p>
 
@@ -186,6 +198,30 @@
         <td>Complex nylon parts and nested builds</td>
         <td>Industrial equipment and powder workflow</td>
       </tr>
+    </tbody>
+  </table>
+
+  <h2>What is SLA 3D printing?</h2>
+  <p>SLA 3D printing is a vat-photopolymerization process that uses light to cure liquid resin into solid layers.</p>
+
+  <table>
+    <thead>
+      <tr><th>Feedstock</th><th>How a layer forms</th><th>Support strategy</th><th>Best-fit parts</th><th>Post-processing</th><th>Main limitation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Liquid photopolymer resin</td><td>Controlled light cures a cross-section in a resin vat</td><td>Attached supports hold overhangs and anchor the part</td><td>Small detailed parts, smooth presentation surfaces, and patterns</td><td>Wash, dry, post-cure, remove supports, and finish as required</td><td>Uncured-resin handling and a longer cleanup workflow</td></tr>
+    </tbody>
+  </table>
+
+  <h2>What is SLS 3D printing?</h2>
+  <p>SLS 3D printing is a powder-bed-fusion process that uses a laser to fuse polymer powder into solid layers.</p>
+
+  <table>
+    <thead>
+      <tr><th>Feedstock</th><th>How a layer forms</th><th>Support strategy</th><th>Best-fit parts</th><th>Post-processing</th><th>Main limitation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Polymer powder</td><td>A laser fuses selected areas of a spread powder layer</td><td>Loose powder supports the build, so attached supports are usually unnecessary</td><td>Complex nylon parts, moving assemblies, and nested batches</td><td>Cool the build, excavate parts, depowder, and finish as required</td><td>Industrial equipment and powder-management requirements</td></tr>
     </tbody>
   </table>
 
@@ -232,6 +268,12 @@
 
   <h3>Does FDM need support material?</h3>
   <p>FDM needs supports under some steep overhangs, bridges, and isolated features. Orientation and part design can reduce how much support a model needs.</p>
+
+  <h3>What is the difference between SLA and resin 3D printing?</h3>
+  <p>Resin 3D printing is the broader category of processes that cure liquid photopolymer with light. SLA is one resin-printing method, traditionally using a laser to trace each layer.</p>
+
+  <h3>Does SLS need support structures?</h3>
+  <p>SLS usually does not need attached support structures because the surrounding loose powder supports each layer during printing. The finished parts still need cooling and depowdering.</p>
 </section>
 </article>
 
