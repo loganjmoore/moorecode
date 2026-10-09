@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Four metal 3D printing processes compared</title>
+  <desc id="desc">Diagrams compare laser powder bed fusion, binder jetting, metal filament extrusion, and directed energy deposition.</desc>
+  <rect width="1200" height="630" fill="#0b0c10"/>
+  <circle cx="1080" cy="40" r="250" fill="#f5b942" opacity=".08"/>
+  <circle cx="80" cy="620" r="250" fill="#e07a5f" opacity=".07"/>
+  <text x="76" y="92" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="3">PROCESS COMPARISON</text>
+  <text x="76" y="158" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800">3D printing metal</text>
+  <text x="76" y="204" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="24">Four routes from feedstock to finished part</text>
+  <g transform="translate(68 270)">
+    <rect width="248" height="230" rx="18" fill="#14161c" stroke="#262a35" stroke-width="3"/>
+    <text x="20" y="38" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">POWDER BED FUSION</text>
+    <path d="M35 181h178M35 164h178M35 147h178M35 130h178" stroke="#9aa1ad" stroke-width="5" stroke-dasharray="4 7"/>
+    <path d="m125 55 18 48h-36Z" fill="#f5b942" opacity=".9"/>
+    <path d="M125 103v25" stroke="#f5b942" stroke-width="5"/>
+    <path d="M86 147c25-33 51-33 77 0" fill="none" stroke="#e07a5f" stroke-width="9"/>
+    <text x="20" y="214" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="15">laser + powder</text>
+  </g>
+  <g transform="translate(338 270)">
+    <rect width="248" height="230" rx="18" fill="#14161c" stroke="#262a35" stroke-width="3"/>
+    <text x="20" y="38" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">BINDER JETTING</text>
+    <path d="M35 181h178M35 164h178M35 147h178M35 130h178" stroke="#9aa1ad" stroke-width="5" stroke-dasharray="4 7"/>
+    <rect x="78" y="65" width="92" height="28" rx="5" fill="#262a35" stroke="#9aa1ad" stroke-width="3"/>
+    <path d="M98 106v10m26-10v10m26-10v10" stroke="#f5b942" stroke-width="7" stroke-linecap="round"/>
+    <path d="M79 147h90" stroke="#e07a5f" stroke-width="10"/>
+    <text x="20" y="214" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="15">binder + powder + furnace</text>
+  </g>
+  <g transform="translate(608 270)">
+    <rect width="248" height="230" rx="18" fill="#14161c" stroke="#262a35" stroke-width="3"/>
+    <text x="20" y="38" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">METAL FFF</text>
+    <path d="M83 60h82l-15 59H98Z" fill="#262a35" stroke="#9aa1ad" stroke-width="3"/>
+    <path d="M112 119h24l-5 24h-14Z" fill="#f5b942"/>
+    <path d="M124 143v16" stroke="#e07a5f" stroke-width="7"/>
+    <path d="M54 180h140M70 164h108" stroke="#f5b942" stroke-width="9" stroke-linecap="round"/>
+    <text x="20" y="214" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="15">bound feedstock + furnace</text>
+  </g>
+  <g transform="translate(878 270)">
+    <rect width="248" height="230" rx="18" fill="#14161c" stroke="#262a35" stroke-width="3"/>
+    <text x="20" y="38" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">DIRECTED ENERGY</text>
+    <path d="M75 64h98l-24 75h-50Z" fill="#262a35" stroke="#9aa1ad" stroke-width="3"/>
+    <path d="M124 139v26" stroke="#f5b942" stroke-width="9"/>
+    <circle cx="124" cy="169" r="13" fill="#e07a5f"/>
+    <path d="M38 184h172" stroke="#9aa1ad" stroke-width="8"/>
+    <path d="M82 184c21-34 63-34 84 0" fill="#e07a5f" opacity=".7"/>
+    <text x="20" y="214" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="15">powder or wire + melt pool</text>
+  </g>
+  <text x="76" y="575" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="20">moorecode · Logan Moore</text>
+</svg>

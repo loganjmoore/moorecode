@@ -1,6 +1,8 @@
 /* Vendored from seo-command-center/integrations/posthog-web.js.
  * Anonymous, explicit website events via PostHog's capture API. No replay,
- * autocapture, form values, account IDs, URL queries or third-party scripts. */
+ * autocapture, form values, account IDs, URL queries or third-party scripts.
+ * The shared consent panel and footer settings control own consent and
+ * withdrawal on every public page. */
 (() => {
   if (window.productAnalytics) return;
   const events = new Set(['$pageview', 'cta_clicked', 'signup_started', 'signup_completed', 'lead_submitted', 'activation_completed', 'checkout_started', 'subscription_started', 'app_store_clicked', 'contact_clicked', 'form_failed']);
@@ -9,7 +11,6 @@
   const controllers = new Set();
   const privateKey = 'website_posthog_identity_v1';
   const sessionKey = 'website_posthog_session_v1';
-  const choiceKey = 'website_posthog_consent_v1';
   const cookie = (key) => document.cookie?.split('; ').find((entry) => entry.startsWith(`${key}=`))?.slice(key.length + 1);
   const shared = () => Boolean(config?.sharedDomain && config.sharedDomain === config.product && location.hostname.endsWith(config.product));
   function share(key, value, seconds = 1800) {
@@ -18,18 +19,22 @@
   const optOut = () => navigator.globalPrivacyControl === true || ['1', 'yes'].includes(navigator.doNotTrack || window.doNotTrack);
   const storedChoice = () => {
     try {
-      if (!config?.consentKey) return (shared() ? cookie(choiceKey) : null) || localStorage.getItem(choiceKey);
+      // Consent comes only from the site's own cookie banner; a site without
+      // one never enables capture, including for visitors who accepted the
+      // former built-in choices box (it no longer exists to withdraw from).
+      if (!config?.consentKey) return null;
       const raw = localStorage.getItem(config.consentKey);
       if (config.consentKind === 'analytics') return raw ? (JSON.parse(raw).analytics === true ? 'accepted' : 'declined') : null;
       return raw === 'accepted' ? 'accepted' : raw ? 'declined' : null;
     } catch { return 'declined'; }
   };
-  const allowed = () => { try { return Boolean(config && !optOut() && storedChoice() === 'accepted' && navigator.webdriver !== true && localStorage.getItem('website_posthog_internal') !== '1'); } catch { return false; } };
+  const allowed = () => { try { return Boolean(config && window.websiteAnalyticsConsentDenied !== true && !optOut() && storedChoice() === 'accepted' && navigator.webdriver !== true && localStorage.getItem('website_posthog_internal') !== '1'); } catch { return false; } };
   function path() {
     // Public editorial slugs are authored content. Unknown/private app paths
     // deliberately lose their identifiers instead of guessing how to redact.
     const p = location.pathname.replace(/^\/turf(?:planner)?(?=\/)/, '').replace(/\/+$/, '') || '/';
-    return /^(\/|\/(?:es|en))$/.test(p) || /^\/(?:es\/|en\/)?(?:pricing|features|about|contact|demo|book|get-started|start|plumber|roofer|electrician|cleaner|landscaper|register|signup|sign-up|login|support|privacy|terms|cookies|blog|journal|debt-payoff-calculator|invoice-generator|posthog-privacy)(?:\.html)?$/.test(p) || /^\/(?:es\/|en\/)?(?:blog|journal|guides|glossary|help|compare|services|industries|templates)\/[a-z0-9-]{1,120}$/.test(p) ? p : '/:private';
+    if (config?.product === 'moorecode.com' && new Set(['/projects.html', '/consulting.html', '/hobbies.html', '/youtube.html', '/blackjack-privacy.html', '/blackjack-support.html']).has(p)) return p;
+    return /^(\/|\/(?:es|en))$/.test(p) || /^\/(?:es\/|en\/)?(?:pricing|features|about|contact|demo|book|get-started|start|plumber|roofer|electrician|cleaner|landscaper|register|signup|sign-up|login|support|privacy|terms|cookies|blog|journal|debt-payoff-calculator|invoice-generator|posthog-privacy)(?:\.html)?$/.test(p) || /^\/(?:es\/|en\/)?(?:blog|journal|guides|glossary|help|compare|services|industries|templates)\/[a-z0-9-]{1,120}(?:\.html)?$/.test(p) ? p : '/:private';
   }
   function identity() {
     const now = Date.now();
@@ -115,9 +120,78 @@
       const sameProduct = (config?.hosts || [config?.product, `www.${config?.product}`]).includes(url.hostname);
       const contact = url.protocol === 'mailto:' || url.protocol === 'tel:';
       const target = store ? 'app_store' : contact ? 'contact' : sameProduct ? /\/(register|signup|sign-up)/.test(url.pathname) ? 'signup' : /\/pricing/.test(url.pathname) || url.hash === '#pricing' ? 'pricing' : /\/contact/.test(url.pathname) || url.hash === '#contact' ? 'contact' : /\/(demo|book)/.test(url.pathname) ? 'demo' : null : null;
-      if (target) { capture('cta_clicked', target); if (store) capture('app_store_clicked'); if (contact) capture('contact_clicked'); }
+      if (target) { capture('cta_clicked', target); if (store) capture('app_store_clicked'); if (target === 'contact') capture('contact_clicked'); }
     } catch { /* Not an analytics target. */ }
   });
+  function renderConsent() {
+    const key = 'website_posthog_consent_v1';
+    let settings = document.getElementById('analytics-settings');
+    if (!settings) {
+      settings = document.createElement('button');
+      settings.className = 'footer-button';
+      settings.id = 'analytics-settings';
+      settings.type = 'button';
+      settings.textContent = 'Analytics settings';
+      const links = document.querySelector('footer .foot-links');
+      if (links) {
+        links.append(settings);
+      } else {
+        const footer = document.createElement('footer');
+        footer.className = 'analytics-only-footer';
+        const settingsLinks = document.createElement('div');
+        settingsLinks.className = 'foot-links';
+        settingsLinks.append(settings);
+        footer.append(settingsLinks);
+        document.body.append(footer);
+      }
+    }
+
+    let panel = document.getElementById('analytics-consent');
+    if (!panel) {
+      panel = document.createElement('aside');
+      panel.className = 'analytics-consent';
+      panel.id = 'analytics-consent';
+      panel.setAttribute('aria-label', 'Website analytics choices');
+      panel.hidden = true;
+      panel.innerHTML = '<div><strong>Optional website analytics</strong><p id="analytics-consent-status">May I measure page visits and Contact clicks? I do not collect form contents or personal details. <a href="/posthog-privacy.html">Read the details.</a></p></div><div class="analytics-consent-actions"><button class="btn ghost" type="button" data-analytics-choice="declined">No thanks</button><button class="btn primary" type="button" data-analytics-choice="accepted">Allow analytics</button></div>';
+      document.body.append(panel);
+    }
+
+    const status = panel.querySelector('#analytics-consent-status');
+    const show = () => {
+      try {
+        const choice = localStorage.getItem(key);
+        status.firstChild.textContent = choice === 'accepted' && window.websiteAnalyticsConsentDenied !== true && !optOut()
+          ? 'Website analytics is allowed. Choose No thanks to turn it off. '
+          : optOut()
+            ? 'Your browser privacy preference keeps website analytics off. '
+            : 'Website analytics is off. Choose Allow analytics to turn it on. ';
+      } catch {
+        status.firstChild.textContent = 'Analytics is off because this browser does not allow the choice to be saved. ';
+      }
+      panel.hidden = false;
+    };
+
+    panel.querySelectorAll('[data-analytics-choice]').forEach((button) => button.addEventListener('click', () => {
+      const declined = button.dataset.analyticsChoice === 'declined';
+      if (declined) {
+        window.websiteAnalyticsConsentDenied = true;
+        window.dispatchEvent(new Event('website:analytics-consent'));
+      }
+      try {
+        localStorage.setItem(key, button.dataset.analyticsChoice);
+        if (!declined) window.websiteAnalyticsConsentDenied = false;
+        window.dispatchEvent(new Event('website:analytics-consent'));
+        panel.hidden = true;
+      } catch {
+        status.firstChild.textContent = declined
+          ? 'Your choice could not be saved. Analytics is off on this page; try again before leaving. '
+          : 'Your choice could not be saved, so analytics remains off. ';
+      }
+    }));
+    settings.addEventListener('click', show);
+    try { panel.hidden = localStorage.getItem(key) !== null; } catch { panel.hidden = false; }
+  }
   async function boot() {
     try {
       const response = await fetch('/posthog-config.json', { credentials: 'omit', signal: AbortSignal.timeout(5000) });
@@ -128,38 +202,11 @@
       window.websitePosthogConfigured = true;
       window.dispatchEvent(new Event('website:analytics-ready'));
       pageview();
-      const section = document.createElement('aside');
-      section.setAttribute('aria-label', 'Website analytics choices');
-      section.style.cssText = 'margin:24px auto;padding:16px;max-width:65ch;border:1px solid currentColor;font:inherit;line-height:1.5;';
-      const text = document.createElement('p');
-      text.textContent = 'Allow PostHog to measure anonymous website visits and completed actions? We exclude form contents and private account data.';
-      const policy = document.createElement('a'); policy.href = '/posthog-privacy.html'; policy.textContent = 'Website analytics details';
-      section.append(text, policy);
-      if (!config.consentKey) {
-        for (const [value, label] of [['declined', 'No thanks'], ['accepted', 'Allow analytics']]) {
-          const button = document.createElement('button'); button.type = 'button'; button.textContent = label;
-          button.style.cssText = 'font:inherit;margin:8px;padding:10px 14px;min-height:44px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;';
-          button.addEventListener('click', () => { try { reset(); localStorage.setItem(choiceKey, value); share(choiceKey, value, 180 * 86400); refresh(); text.textContent = value === 'accepted' && !optOut() ? 'Website analytics is allowed. You can change your choice here.' : 'Website analytics is off.'; } catch { text.textContent = 'Your choice could not be saved. Analytics stays off.'; } });
-          section.append(button);
-        }
-      } else {
-        const note = document.createElement('p'); note.textContent = 'Use this site’s existing analytics/cookie settings to allow analytics. Browser opt-out signals override consent.'; section.append(note);
-        const button = document.createElement('button'); button.type = 'button'; button.textContent = 'Turn analytics off';
-        button.style.cssText = 'font:inherit;padding:10px 14px;min-height:44px;';
-        button.addEventListener('click', () => { try {
-          reset();
-          if (config.consentKind === 'analytics') {
-            const current = JSON.parse(localStorage.getItem(config.consentKey) || '{}');
-            localStorage.setItem(config.consentKey, JSON.stringify({ ...current, analytics: false }));
-          } else localStorage.setItem(config.consentKey, 'declined');
-          window.dispatchEvent(new Event('website:analytics-withdrawal'));
-          refresh();
-          text.textContent = 'Website analytics is off.';
-        } catch { text.textContent = 'Use your browser settings to clear this site’s storage and withdraw consent.'; } });
-        section.append(button);
-      }
-      document.body.append(section);
     } catch { /* Missing configuration leaves analytics off. */ }
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
+  function start() {
+    renderConsent();
+    boot();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true }); else start();
 })();

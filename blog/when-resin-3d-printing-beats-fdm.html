@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>When Resin 3D Printing Beats FDM</title>
+<meta name="description" content="Choose resin 3D printing for fine detail and smooth surfaces. Compare it with FDM, then plan the washing, curing, ventilation, and PPE." />
+<link rel="canonical" href="https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html" />
+<meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="When Resin 3D Printing Beats FDM" />
+<meta property="og:description" content="A direct resin-versus-FDM guide covering detail, safety, washing, curing, and cleanup." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html" />
+<meta property="og:image" content="https://moorecode.com/blog/images/when-resin-3d-printing-beats-fdm.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html#post",
+      "headline": "When Resin 3D Printing Beats FDM",
+      "description": "A direct resin-versus-FDM guide covering detail, safety, washing, curing, and cleanup.",
+      "url": "https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html",
+      "mainEntityOfPage": "https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html",
+      "datePublished": "2026-10-06",
+      "dateModified": "2026-10-08",
+      "image": "https://moorecode.com/blog/images/when-resin-3d-printing-beats-fdm.svg",
+      "author": { "@id": "https://moorecode.com/#logan" },
+      "publisher": { "@id": "https://moorecode.com/#logan" },
+      "isPartOf": { "@id": "https://moorecode.com/blog/#blog" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is resin 3D printing better than FDM?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Resin is better for small detail, smooth surfaces, and compact batches of similarly tall parts. FDM is better for many larger functional parts, lower material cost, and simpler cleanup." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do resin prints need to be washed and cured?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Most desktop photopolymer resin prints need washing to remove liquid resin and post-curing to reach the material's intended properties. Follow the resin maker's current instructions for the exact solvent, time, and temperature." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I touch uncured 3D printer resin?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Avoid skin contact with uncured resin. Use ventilation and gloves selected for the specific resin and wash solvent, following the safety data sheets and printer maker's instructions." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is water-washable resin safe to pour down a drain?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Water-washable describes the cleaning method, not drain-safe disposal. Keep resin-contaminated liquid out of drains and follow the resin maker's safety data sheet and local disposal rules." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can any resin 3D printer make dental appliances?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. A general-purpose hobby printer and resin are not substitutes for a validated dental workflow. Patient-contact appliances require a material, printer, processing workflow, intended use, and professional oversight that meet the manufacturer's instructions and applicable regulatory requirements." }
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://moorecode.com/#logan",
+      "name": "Logan Moore",
+      "url": "https://moorecode.com/",
+      "jobTitle": "Solo developer",
+      "sameAs": ["https://github.com/loganjmoore"],
+      "worksFor": { "@type": "Organization", "name": "BrightPrompt Consulting LLC" }
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://moorecode.com/blog/#blog",
+      "name": "moorecode blog",
+      "url": "https://moorecode.com/blog/"
+    }
+  ]
+}
+</script>
+<script defer src="/posthog-web.js"></script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/consulting.html">Consulting</a>
+    <a href="/hobbies.html">Hobbies</a>
+    <a href="/youtube.html">YouTube</a>
+    <a href="/about.html">About</a>
+    <a href="/blog/" class="active">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<article>
+<header class="post-head">
+  <p class="post-meta">October 6, 2026 · By Logan Moore</p>
+  <h1>When Resin 3D Printing Beats FDM</h1>
+  <p class="entity-definition">Resin 3D printing is a process that uses controlled light to cure liquid photopolymer into solid layers.</p>
+</header>
+
+<section class="prose">
+  <img class="post-cover" src="/blog/images/when-resin-3d-printing-beats-fdm.svg" width="1200" height="630" alt="A detailed resin print rising from a liquid vat beside an FDM nozzle and a wash-and-cure timeline." />
+
+  <p class="lede">Choose resin 3D printing over FDM when a small part needs fine text, crisp texture, or a smooth visible surface straight from the printer. Choose FDM when the part is large, inexpensive, repeatedly revised, or easier to make from filament without chemical cleanup. A resin printer also commits you to ventilation, skin protection, washing, drying, curing, and contaminated-waste handling.</p>
+
+  <h2>What is resin 3D printing?</h2>
+  <p>Resin 3D printing is vat photopolymerization: a light source selectively hardens liquid resin into one layer, the build platform moves, and the machine repeats the exposure. Consumer machines often use a masked LCD, while stereolithography, or SLA, traditionally describes a laser-based system.</p>
+
+  <p>The process can resolve small surface features because it does not have to trace them with a round extrusion nozzle. Formlabs' <a href="https://formlabs.com/blog/fdm-vs-sla-vs-sls-how-to-choose-the-right-3d-printing-technology/">technology comparison</a> lists a 0.1 mm minimum embossed detail for its SLA process, compared with a representative 0.6 mm width for FDM. Machine, resin, orientation, exposure, and geometry still control the result.</p>
+
+  <h2>When does resin beat FDM?</h2>
+  <p>Resin beats FDM when the decision is controlled by fine detail, surface finish, or several small parts that fit on one build plate. Miniatures, dental models, jewelry masters, textured knobs, small presentation prototypes, and castable patterns are common examples.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Your requirement</th>
+        <th>Better starting point</th>
+        <th>Reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Readable tiny lettering or skin texture</td><td><strong>Resin</strong></td><td>Finer feature reproduction and smoother faces</td></tr>
+      <tr><td>Large enclosure or organizer</td><td><strong>FDM</strong></td><td>Lower-cost feedstock and simpler workflow</td></tr>
+      <tr><td>Eight small figures of similar height</td><td><strong>Resin</strong></td><td>A full layer is exposed at once on masked-LCD machines</td></tr>
+      <tr><td>Fast fit-check with three revisions</td><td><strong>FDM</strong></td><td>Easy material changes and little post-processing</td></tr>
+      <tr><td>Flexible bumper or grip</td><td><strong>FDM with TPU</strong></td><td>Accessible flexible filament and direct handling</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="dental-work">When is resin 3D printing appropriate for dental work?</h2>
+  <p>General-purpose hobby resin is not a substitute for a validated dental material and workflow. The FDA's Process of 3D Printing Medical Devices guidance explains that it clears or approves finished devices for intended uses rather than materials for unrestricted use, and that some printed dental materials are cleared for specific intended uses.</p>
+
+  <table>
+    <thead>
+      <tr><th>Intended use</th><th>What must be verified</th><th>Who supplies the authoritative instructions</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Study model or non-patient-contact prototype</td><td>That the model stays outside the patient-contact workflow and is accurate enough for its stated planning or demonstration purpose</td><td>The printer and resin manufacturers for processing, plus the dental professional or laboratory for the model's intended use</td></tr>
+      <tr><td>Patient-contact appliance</td><td>The complete material, printer, processing, post-curing, intended-use, and professional workflow requirements for that specific device</td><td>The device manufacturer and the applicable regulator, interpreted and followed by the qualified dental professional or laboratory</td></tr>
+    </tbody>
+  </table>
+
+  <p>A printer that can make a study model is not automatically suitable for an appliance. Start with the device's intended use and authoritative instructions, then verify the full workflow rather than substituting a generic resin or cure process. For the wider choice among filament, vat resin, and powder-bed printing, use the <a href="/blog/what-is-fdm-3d-printing.html">FDM, SLA, and SLS process comparison</a>.</p>
+
+  <p>If the process names are still fuzzy, my <a href="/blog/what-is-fdm-3d-printing.html">FDM explainer</a> compares fused filament printing with SLA and SLS. For a filament job, the <a href="/blog/3d-printing-filament-pla-petg-tpu.html">PLA, PETG, and TPU guide</a> narrows the material choice. Parts that must be metal belong in the separate <a href="/blog/3d-printing-metal-processes-compared.html">metal 3D printing process comparison</a>.</p>
+
+  <h2>When does FDM beat resin?</h2>
+  <p>FDM beats resin when size, cost, material handling, or quick iteration matters more than tiny detail. Filament stays on a spool, finished PLA or PETG parts usually come off the bed ready for support cleanup, and infill can reduce material use inside a large shell.</p>
+
+  <p>Formlabs' own <a href="https://formlabs.com/blog/when-to-choose-sla-vs-fdm/">SLA versus FDM guide</a> puts common filament around $20-$50 per kilogram and says SLA resin can start around $50 per kilogram and rise from there. Prices change, but the structural point holds: a large hollow FDM prototype can use sparse infill, while a resin part needs deliberate hollowing and drain planning to avoid filling the volume.</p>
+
+  <p>FDM is also easier to pause, inspect, and reprint after a dimensional change. That matters in the iterative building I write about on my <a href="/hobbies.html">hobbies page</a>. My second version often teaches me more than the first.</p>
+
+  <h2>What safety steps do resin users underestimate?</h2>
+  <p>Resin users often underestimate exposure during pouring, part removal, washing, curing, sanding, and spill cleanup. The printer's cover is one control, but it does not turn uncured resin or solvent into ordinary household material.</p>
+
+  <p>The CDC's National Institute for Occupational Safety and Health says, “uncured resin contains acrylates and other chemicals that can cause asthma or dermatitis.” Its January 2025 <a href="https://www.cdc.gov/niosh/media/pdfs/2025/01/Safe-3D-Printing.pdf">vat photopolymerization safety guide</a> recommends ventilation, suitable gloves and eye protection, sealed wash containers, and prompt cleanup of drips and splashes. NIOSH also says curing with ultraviolet light and heat can generate particles and gases that should not be inhaled.</p>
+
+  <ul>
+    <li><strong>Read both safety data sheets.</strong> Check the resin and the wash solvent, then select gloves and storage from those documents.</li>
+    <li><strong>Control air at the source.</strong> Use effective exhaust or filtration suited to the printer and room instead of relying on odor.</li>
+    <li><strong>Separate clean and dirty tools.</strong> Keep dedicated scrapers, cutters, funnels, trays, and wipes in the resin area.</li>
+    <li><strong>Plan spills before pouring.</strong> Have disposable absorbent material and a lidded waste container ready.</li>
+    <li><strong>Keep contaminated liquid out of drains.</strong> “Water-washable” resin still leaves resin in the wash water.</li>
+  </ul>
+
+  <h2 id="post-processing">What post-processing does a resin print require?</h2>
+  <p>A resin print usually requires removal, washing, full drying, post-curing, support removal, and optional sanding. The order and settings depend on the exact resin, printer, wash system, cure unit, and intended use.</p>
+
+  <ol>
+    <li>Let excess resin drain in the machine if the workflow permits it.</li>
+    <li>Move the build platform or part to a contained wash station.</li>
+    <li>Wash for the resin maker's specified time and solvent concentration.</li>
+    <li>Let solvent evaporate completely in the controlled work area.</li>
+    <li>Post-cure for the specified time, temperature, and light system.</li>
+    <li>Clip supports with eye protection, then finish support marks as needed.</li>
+  </ol>
+
+  <p>Formlabs' <a href="https://formlabs.com/support/3d-printing-post-processing-faqs/">post-processing guidance</a> says washing removes excess liquid resin and post-curing is often needed for optimal mechanical properties. Its support documentation also recommends cutting supports with flush cutters rather than tearing them from critical surfaces.</p>
+
+  <h2>How much time comes after a resin print finishes?</h2>
+  <p>A documented Tough 2000 Resin V2 workflow adds at least 37 minutes before support cleanup: 15 minutes of washing, at least 10 minutes of air drying, and 12 minutes of curing. That sum comes from Formlabs' current wash guidance and the material data for a Form Cure V2 at 70°C.</p>
+
+  <table>
+    <thead>
+      <tr><th>Post-print step</th><th>Published setting</th><th>Running total</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Wash Tough 2000 Resin V2</td><td>15 minutes</td><td>15 minutes</td></tr>
+      <tr><td>Air dry for best surface finish</td><td>At least 10 minutes</td><td>25 minutes</td></tr>
+      <tr><td>Post-cure in Form Cure V2</td><td>12 minutes at 70°C</td><td>37 minutes</td></tr>
+    </tbody>
+  </table>
+
+  <p>This worked example applies only to one named material and set of Formlabs equipment. Other materials call for different wash cycles, dry times, cure temperatures, or no standard post-cure at all. Setup, draining, support removal, tool cleaning, and waste handling add more hands-on time.</p>
+
+  <h2>How do you choose between resin and FDM?</h2>
+  <p>You should choose resin only after the part's detail advantage outweighs its workspace and cleanup cost. Run this checklist before buying a machine or slicing the model:</p>
+
+  <ul>
+    <li>Does the part contain detail your available FDM nozzle cannot reproduce?</li>
+    <li>Will a smoother surface save enough sanding or finishing work to matter?</li>
+    <li>Do you have a controlled, ventilated area away from food, children, and pets?</li>
+    <li>Can you store resin and solvent and dispose of contaminated waste correctly?</li>
+    <li>Have you budgeted for gloves, wash containers, cure equipment, filters, and replacement solvent?</li>
+  </ul>
+
+  <p>If any workspace answer is no, send the detailed part to a printing service or redesign it for FDM. My <a href="/about.html">about page</a> explains the maker-and-developer context behind these guides. The practical rule here is narrower: budget for the whole workflow before buying the printer.</p>
+
+  <h2>Frequently asked questions</h2>
+
+  <h3>Is resin 3D printing better than FDM?</h3>
+  <p>Resin is better for small detail, smooth surfaces, and compact batches of similarly tall parts. FDM is better for many larger functional parts, lower material cost, and simpler cleanup.</p>
+
+  <h3>Do resin prints need to be washed and cured?</h3>
+  <p>Most desktop photopolymer resin prints need washing to remove liquid resin and post-curing to reach the material's intended properties. Follow the resin maker's current instructions for the exact solvent, time, and temperature.</p>
+
+  <h3>Can I touch uncured 3D printer resin?</h3>
+  <p>Avoid skin contact with uncured resin. Use ventilation and gloves selected for the specific resin and wash solvent, following the safety data sheets and printer maker's instructions.</p>
+
+  <h3>Is water-washable resin safe to pour down a drain?</h3>
+  <p>Water-washable describes the cleaning method, not drain-safe disposal. Keep resin-contaminated liquid out of drains and follow the resin maker's safety data sheet and local disposal rules.</p>
+
+  <h3>Can any resin 3D printer make dental appliances?</h3>
+  <p>No. A general-purpose hobby printer and resin are not substitutes for a validated dental workflow. Patient-contact appliances require a material, printer, processing workflow, intended use, and professional oversight that meet the manufacturer's instructions and applicable regulatory requirements.</p>
+</section>
+</article>
+
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+<address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>

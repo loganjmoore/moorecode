@@ -149,6 +149,11 @@ main { flex: 1 0 auto; width: 100%; }
   margin: 0 0 32px;
 }
 
+.hero .sub a {
+  color: var(--accent);
+  border-bottom: 1px solid rgba(245,185,66,0.35);
+}
+
 .cta { display: flex; gap: 12px; flex-wrap: wrap; }
 
 .btn {
@@ -199,6 +204,27 @@ main { flex: 1 0 auto; width: 100%; }
   line-height: 1.65;
   margin: 0;
 }
+
+.guide-map {
+  max-width: 680px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.guide-map h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.guide-map ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+
+.guide-map a { color: var(--accent); }
 
 /* ---------- Section headers ---------- */
 section h2 {
@@ -262,6 +288,37 @@ section h2 {
   color: var(--accent);
   font-size: 14px;
   font-weight: 600;
+}
+
+/* ---------- Home 3D printing answers ---------- */
+.home-faq {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px 72px;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 48px;
+}
+
+.faq-item {
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+}
+
+.faq-item h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.faq-item p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 /* ---------- Apps / Projects grid ---------- */
@@ -431,6 +488,14 @@ section h2 {
   color: var(--text-dim);
   font-size: 14px;
   margin: 0;
+}
+
+.entity-definition {
+  max-width: 680px;
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 18px;
+  line-height: 1.65;
 }
 
 .post-cover {
@@ -689,6 +754,45 @@ footer .foot-links a {
 
 footer .foot-links a:hover { color: var(--accent); }
 
+.footer-button {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-dim);
+  font: inherit;
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+
+.footer-button:hover { color: var(--accent); }
+
+.analytics-consent {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  box-shadow: 0 16px 40px rgba(5, 6, 8, 0.45);
+}
+
+.analytics-consent[hidden] { display: none; }
+.analytics-consent strong { display: block; margin-bottom: 4px; }
+.analytics-consent p { margin: 0; color: var(--text-dim); font-size: 14px; line-height: 1.5; }
+.analytics-consent p a { color: var(--accent); border-bottom: 1px solid rgba(245,185,66,0.35); }
+.analytics-consent-actions button { min-height: 44px; }
+.analytics-consent-actions { display: flex; flex: 0 0 auto; gap: 8px; }
+
 /* ---------- Mobile ---------- */
 @media (max-width: 760px) {
   .nav-toggle { display: block; }
@@ -722,9 +826,13 @@ footer .foot-links a:hover { color: var(--accent); }
 
   .hero { padding: 60px 24px 40px; }
   .page-head { padding: 48px 24px 16px; }
-  .apps, .explore, .prose, .contact, .hobby { padding-left: 20px; padding-right: 20px; }
+  .apps, .explore, .home-faq, .prose, .contact, .hobby { padding-left: 20px; padding-right: 20px; }
+  .faq-grid { grid-template-columns: 1fr; }
 
   footer { flex-direction: column; align-items: flex-start; }
+
+  .analytics-consent { align-items: stretch; flex-direction: column; gap: 14px; }
+  .analytics-consent-actions { flex-wrap: wrap; }
 
   .post-card { flex-direction: column; }
   .post-card img { flex-basis: auto; width: 100%; }

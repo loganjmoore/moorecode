@@ -1,29 +1,32 @@
-# moorecode
+# MooreCode
 
-> Logan Moore is a solo developer who builds useful iOS and web apps for real people. He runs BrightPrompt Consulting LLC and spends his free time on flower farming, light shows, 3D printing, and ham radio.
+> Logan Moore, solo developer building useful iOS and web apps. Faith, family, and a lot of side projects.
 
-## Pages
+## Main pages
 
-- [Home](https://moorecode.com/): Introduction, with links to every section of the site.
-- [Projects](https://moorecode.com/projects.html): Apps and products Logan built across iOS and the web, including WaffleInvoice, PancakeBudget, Blackjack Now, TILT, Drifta, Debtless, Math Prizes, PARE, LoxaPM, RoastMyBudget, and NoTipper.
-- [Consulting](https://moorecode.com/consulting.html): Product and software consulting through BrightPrompt Consulting LLC.
-- [Hobbies](https://moorecode.com/hobbies.html): Flower farming, animated light shows, 3D printing, ham radio (call sign KQ4VGM), Arduino and robotics, and gardening, landscaping, and turf care.
-- [YouTube](https://moorecode.com/youtube.html): Channels for project builds, light shows, and maker content, not yet launched.
-- [About](https://moorecode.com/about.html): Faith, family, and the story behind a one person software shop.
-- [Contact](https://moorecode.com/contact.html): Email, GitHub, and ham radio contact options.
+- [Logan Moore, solo developer · moorecode](https://moorecode.com/): Logan Moore, solo developer building useful iOS and web apps. Faith, family, and a lot of side projects.
+- [About · Logan Moore](https://moorecode.com/about.html): About Logan Moore: faith, family, solo development, and a long list of hands-on hobbies.
+- [Blog · Logan Moore](https://moorecode.com/blog): Practical guides from Logan Moore on 3D printing, software projects, pricing, and tools, with numbers checked against named sources.
+- [Consulting · BrightPrompt Consulting LLC](https://moorecode.com/consulting.html): BrightPrompt Consulting LLC, product and software consulting by Logan Moore.
+- [Contact · Logan Moore](https://moorecode.com/contact.html): Get in touch with Logan Moore by email, on GitHub, or on the air.
+- [Hobbies · Logan Moore](https://moorecode.com/hobbies.html): The hands-on hobbies Logan Moore loves: flower farming, light shows, 3D printing, ham radio, robotics, and landscaping.
+- [Website analytics details](https://moorecode.com/posthog-privacy.html): Learn what MooreCode’s optional PostHog analytics collect, how consent works, and how to manage your analytics choice.
+- [Projects · Logan Moore](https://moorecode.com/projects.html): Apps and products built by Logan Moore across iOS and the web.
+- [YouTube · Logan Moore](https://moorecode.com/youtube.html): Logan Moore's YouTube channels are coming soon.
+- [Blackjack Now · Privacy Policy](https://moorecode.com/blackjack-privacy.html): Privacy Policy for the Blackjack Now iOS app.
+- [Blackjack Now · Support](https://moorecode.com/blackjack-support.html): Support and help for the Blackjack Now iOS app — contact, FAQ, and how-to.
 
 ## Blog
 
-- [Blog](https://moorecode.com/blog/): Practical notes on apps, pricing, and taxes from a solo developer.
-- [Free blackjack basic strategy trainer for iPhone compared](https://moorecode.com/blog/free-blackjack-basic-strategy-trainer-iphone.html): Five free iPhone blackjack trainers compared on ads, purchases, and rule settings.
-- [Invoicing app pricing for service businesses, compared](https://moorecode.com/blog/simple-invoicing-app-pricing-service-businesses.html): Five invoicing tools priced for a two-person shop sending 60 invoices a month.
-- [Mileage tracker for delivery drivers: what the IRS lets you deduct](https://moorecode.com/blog/mileage-tracker-delivery-drivers-tax-deduction.html): Which delivery miles count, the 2026 IRS mileage rates, and what a log needs.
-
-## Blackjack Now
-
-- [Privacy Policy](https://moorecode.com/blackjack-privacy.html): Privacy policy for the Blackjack Now iOS app.
-- [Support](https://moorecode.com/blackjack-support.html): Help, FAQ, and contact for the Blackjack Now iOS app.
-
-## Optional
-
-- [Website analytics details](https://moorecode.com/posthog-privacy.html): What the optional, consent-based website analytics collect.
+- [Best 3D Printing Websites for Files: 2026 Maker Guide](https://moorecode.com/blog/best-3d-printing-websites-files-2026.html): Compare Printables, MakerWorld, Thingiverse, MyMiniFactory, and Thangs by the job, file detail, and commercial-use path.
+- [Desktop 3D Printing Setup: A Safe Beginner Workspace](https://moorecode.com/blog/desktop-3d-printing-setup-safe-workspace.html): Plan the surface, clearance, ventilation, tools, storage, and separate resin workflow for a home 3D-printing station.
+- [3D Printing a Prototype: Four Stages, One Test Plan](https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html): Choose a process and material for visual, fit, functional, and pilot prototypes by starting with a measurable test.
+- [3D Printing Filament: PLA, PETG, or TPU?](https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html): Choose PLA, PETG, or TPU by the job. Compare print temperatures, strengths, tradeoffs, and beginner settings in one practical guide.
+- [Free blackjack basic strategy trainer for iPhone compared](https://moorecode.com/blog/free-blackjack-basic-strategy-trainer-iphone.html): Five free iPhone blackjack basic strategy trainers compared on ads, in-app purchases, and rule settings. One of them is my own app, Blackjack Now.
+- [Mileage tracker for delivery drivers: IRS deduction rules](https://moorecode.com/blog/mileage-tracker-delivery-drivers-tax-deduction.html): Which delivery miles count as business miles, the 2026 IRS rate of 72.5 and 76 cents, and what a mileage log needs. Includes a worked example.
+- [Invoicing app pricing for service businesses, compared](https://moorecode.com/blog/simple-invoicing-app-pricing-service-businesses.html): Pricing for five invoicing tools a small service business shortlists, with free-plan invoice limits and what 60 invoices a month cost on each.
+- [FDM vs. SLA vs. SLS 3D Printing: How They Work](https://moorecode.com/blog/what-is-fdm-3d-printing.html): Compare how FDM, SLA, and SLS form layers, handle supports, fit different parts, and require different post-processing.
+- [When Resin 3D Printing Beats FDM](https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html): Choose resin 3D printing for fine detail and smooth surfaces. Compare it with FDM, then plan the washing, curing, ventilation, and PPE.
+- [3D Printmaking Checklist: Mirrored Art to Inked Proof](https://moorecode.com/blog/3d-printmaking-checklist-mirrored-art-inked-proof.html): A practical relief-printing checklist from mirrored digital art through an inked proof.
+- [7 Fused Deposition Modelling Mistakes to Fix](https://moorecode.com/blog/fused-deposition-modelling-mistakes-to-fix.html): A symptom-first guide to first layers, flow limits, orientation, supports, and safe printer placement.
+- [3D Printing Metal: Four Processes Compared](https://moorecode.com/blog/3d-printing-metal-processes-compared.html): Powder bed fusion, binder jetting, metal FFF, and directed energy deposition compared by workflow and best use.

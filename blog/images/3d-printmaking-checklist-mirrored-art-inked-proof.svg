@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">3D printmaking from mirrored artwork to inked proof</title>
+  <desc id="desc">A mirrored leaf drawing becomes a raised filament plate and then an orange relief print on paper.</desc>
+  <rect width="1200" height="630" fill="#0b0c10"/>
+  <circle cx="1050" cy="70" r="230" fill="#f5b942" opacity=".08"/>
+  <circle cx="90" cy="575" r="260" fill="#e07a5f" opacity=".08"/>
+  <text x="76" y="95" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="3">CHECKLIST</text>
+  <text x="76" y="160" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="54" font-weight="800">3D printmaking</text>
+  <text x="76" y="207" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="25">mirror · model · print · ink · proof</text>
+  <g transform="translate(78 278)">
+    <rect width="278" height="218" rx="18" fill="#14161c" stroke="#262a35" stroke-width="3"/>
+    <text x="24" y="38" fill="#f5b942" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700">1  MIRROR THE ART</text>
+    <path d="M139 178C82 149 72 87 119 62C153 88 162 136 139 178Z" fill="#e8eaef"/>
+    <path d="M139 177C153 131 178 99 211 79M139 147L96 112M159 130L196 150" fill="none" stroke="#0b0c10" stroke-width="7" stroke-linecap="round"/>
+    <path d="M236 110H259M247 98L259 110L247 122" fill="none" stroke="#e07a5f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(406 278)">
+    <rect width="310" height="218" rx="18" fill="#14161c" stroke="#262a35" stroke-width="3"/>
+    <text x="24" y="38" fill="#f5b942" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700">2  PRINT THE PLATE</text>
+    <path d="M55 167 153 112l112 42-99 57Z" fill="#1b1e26" stroke="#9aa1ad" stroke-width="3"/>
+    <path d="M55 151 153 96l112 42-99 57Z" fill="#262a35" stroke="#e8eaef" stroke-width="3"/>
+    <path d="M155 155C121 142 117 113 144 101C162 116 167 137 155 155Z" fill="#f5b942"/>
+    <path d="M155 154C164 132 178 118 199 109" fill="none" stroke="#0b0c10" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(766 278)">
+    <rect width="356" height="218" rx="18" fill="#14161c" stroke="#262a35" stroke-width="3"/>
+    <text x="24" y="38" fill="#f5b942" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700">3  PULL A PROOF</text>
+    <path d="M64 88H290V195H64Z" fill="#e8eaef" transform="rotate(-3 177 142)"/>
+    <path d="M177 181C130 159 122 113 160 93C188 113 195 151 177 181Z" fill="#e07a5f"/>
+    <path d="M178 179C188 145 207 122 235 105M177 156L143 130M194 143L223 158" fill="none" stroke="#0b0c10" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <text x="78" y="572" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="20">moorecode · Logan Moore</text>
+</svg>
