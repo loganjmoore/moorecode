@@ -15,6 +15,7 @@
 - [YouTube · Logan Moore](https://moorecode.com/youtube.html): Logan Moore's YouTube channels are coming soon.
 - [Blackjack Now · Privacy Policy](https://moorecode.com/blackjack-privacy.html): Privacy Policy for the Blackjack Now iOS app.
 - [Blackjack Now · Support](https://moorecode.com/blackjack-support.html): Support and help for the Blackjack Now iOS app — contact, FAQ, and how-to.
+- [3D Printing Price Calculator](https://moorecode.com/calculators/3d-printing-price-calculator.html): Estimate material, electricity, labor, machine, and failed-print costs from editable assumptions and visible formulas.
 
 ## Blog
 

@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Printing Price Calculator · MooreCode</title>
+<meta name="description" content="Estimate 3D printing material, electricity, labor, machine, and failed-print allowance with editable assumptions and visible formulas." />
+<link rel="canonical" href="https://moorecode.com/calculators/3d-printing-price-calculator.html" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="3D Printing Price Calculator · MooreCode" />
+<meta property="og:description" content="Build a transparent 3D-printing job estimate from your own material, energy, labor, and machine assumptions." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://moorecode.com/calculators/3d-printing-price-calculator.html" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "MooreCode 3D Printing Price Calculator",
+  "url": "https://moorecode.com/calculators/3d-printing-price-calculator.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "A browser calculator for estimating direct 3D-printing job costs from user-provided assumptions.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script src="/navigation.js" defer></script>
+<script defer src="/posthog-web.js"></script>
+<script defer src="/calculators/3d-printing-price-calculator.js"></script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="navlinks" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/consulting.html">Consulting</a>
+    <a href="/hobbies.html">Hobbies</a>
+    <a href="/youtube.html">YouTube</a>
+    <a href="/about.html">About</a>
+    <a href="/blog/">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="page-head">
+    <h1>3D printing price calculator</h1>
+    <p class="lead">A 3D printing price estimate is the sum of material, electricity, labor, machine time, other direct costs, and your chosen failed-print allowance.</p>
+  </section>
+
+  <section class="calculator-shell" aria-label="3D printing job cost calculator">
+    <form class="calculator-form" id="price-calculator">
+      <fieldset>
+        <legend>Print job</legend>
+        <div class="calculator-fields">
+          <div class="calculator-field">
+            <label for="quantity">Number of parts</label>
+            <input id="quantity" name="quantity" type="number" min="1" step="1" value="1" required inputmode="numeric" />
+            <small>Whole parts in this job.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="materialGrams">Material per part (g)</label>
+            <input id="materialGrams" name="materialGrams" type="number" min="0" step="0.1" value="0" required inputmode="decimal" />
+            <small>Use the slicer's material estimate.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="printHours">Print time per part (hours)</label>
+            <input id="printHours" name="printHours" type="number" min="0" step="0.01" value="0" required inputmode="decimal" />
+            <small>Convert minutes to a decimal fraction of an hour.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="currency">Currency</label>
+            <select id="currency" name="currency">
+              <option value="USD">USD</option>
+              <option value="CAD">CAD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+            </select>
+            <small>The calculator does not convert exchange rates.</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Material and energy assumptions</legend>
+        <div class="calculator-fields">
+          <div class="calculator-field">
+            <label for="spoolPrice">Spool or material price</label>
+            <input id="spoolPrice" name="spoolPrice" type="number" min="0" step="0.01" value="0" required inputmode="decimal" />
+            <small>Enter the price in your selected currency.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="spoolWeight">Spool or package weight (g)</label>
+            <input id="spoolWeight" name="spoolWeight" type="number" min="0.01" step="0.01" value="1000" required inputmode="decimal" />
+            <small>Use the net material weight, not the empty spool.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="printerWatts">Average printer power (W)</label>
+            <input id="printerWatts" name="printerWatts" type="number" min="0" step="0.1" value="0" required inputmode="decimal" />
+            <small>Use a measured average when available.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="energyRate">Electricity price per kWh</label>
+            <input id="energyRate" name="energyRate" type="number" min="0" step="0.0001" value="0" required inputmode="decimal" />
+            <small>Use the rate from your bill or provider.</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Time and other assumptions</legend>
+        <div class="calculator-fields">
+          <div class="calculator-field">
+            <label for="laborHours">Hands-on labor for the job (hours)</label>
+            <input id="laborHours" name="laborHours" type="number" min="0" step="0.01" value="0" required inputmode="decimal" />
+            <small>Include preparation, support removal, and cleanup.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="laborRate">Labor rate per hour</label>
+            <input id="laborRate" name="laborRate" type="number" min="0" step="0.01" value="0" required inputmode="decimal" />
+            <small>Use your own rate. No rate is assumed.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="machineRate">Machine and upkeep per print hour</label>
+            <input id="machineRate" name="machineRate" type="number" min="0" step="0.01" value="0" required inputmode="decimal" />
+            <small>Enter your own depreciation and upkeep allowance.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="otherCost">Other direct job costs</label>
+            <input id="otherCost" name="otherCost" type="number" min="0" step="0.01" value="0" required inputmode="decimal" />
+            <small>For packaging, hardware, fees, or other known costs.</small>
+          </div>
+          <div class="calculator-field">
+            <label for="failureRate">Failed-print allowance (%)</label>
+            <input id="failureRate" name="failureRate" type="number" min="0" max="100" step="0.1" value="0" required inputmode="decimal" />
+            <small>Applied to the direct-cost subtotal. Use zero if unknown.</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <button class="btn primary" type="submit">Calculate estimate</button>
+    </form>
+
+    <aside class="calculator-result" aria-labelledby="estimate-heading">
+      <h2 id="estimate-heading">Estimated direct cost</h2>
+      <p class="result-total" id="job-total">$0.00</p>
+      <p class="result-per-part" id="per-part">$0.00 per part for 1 part</p>
+      <dl class="result-breakdown">
+        <div><dt>Material</dt><dd id="result-material">$0.00</dd></div>
+        <div><dt>Electricity</dt><dd id="result-electricity">$0.00</dd></div>
+        <div><dt>Labor</dt><dd id="result-labor">$0.00</dd></div>
+        <div><dt>Machine and upkeep</dt><dd id="result-machine">$0.00</dd></div>
+        <div><dt>Other direct costs</dt><dd id="result-other">$0.00</dd></div>
+        <div><dt>Failed-print allowance</dt><dd id="result-failureAllowance">$0.00</dd></div>
+      </dl>
+      <p class="calculator-status" id="calculator-status" role="status" aria-live="polite">Enter your assumptions, then calculate.</p>
+    </aside>
+  </section>
+
+  <section class="calculator-notes" aria-labelledby="formula-heading">
+    <h2 id="formula-heading">Formula and units</h2>
+    <p class="formula"><strong>Total direct cost</strong> = ((quantity × grams per part ÷ package grams × material price) + (quantity × print hours × average watts ÷ 1,000 × price per kWh) + (labor hours × labor rate) + (quantity × print hours × machine rate) + other direct costs) × (1 + failed-print allowance ÷ 100).</p>
+    <p>The watt-to-kilowatt-hour conversion follows the U.S. Department of Energy formula: kWh = watts × hours ÷ 1,000. Prusa Research's published calculator also treats material, electricity, labor, and machine or upkeep as separate editable inputs. See the <a href="https://www1.eere.energy.gov/education/pdfs/lesson301.pdf">Department of Energy energy-use lesson</a> and <a href="https://blog.prusa3d.com/3d-printing-price-calculator_38905/">Prusa's 3D-printing price calculator</a>.</p>
+    <p>This is an estimate, not a quote. It does not infer design time, taxes, profit, shipping, or a market price. Add known costs in the available fields and confirm the final amount from the actual model, workflow, and supplier or customer requirements.</p>
+  </section>
+
+  <section class="calculator-next" aria-labelledby="next-heading">
+    <h2 id="next-heading">Use the estimate</h2>
+    <p>Check material choice in the <a href="/blog/3d-printing-filament-pla-petg-tpu.html">PLA, PETG, and TPU guide</a>, compare processes in the <a href="/blog/what-is-fdm-3d-printing.html">FDM, SLA, and SLS guide</a>, or <a href="/contact.html#project-inquiry">contact Logan about a custom business calculator</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>

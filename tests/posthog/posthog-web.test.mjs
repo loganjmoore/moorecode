@@ -119,7 +119,7 @@ console.log('PostHog browser contract passed: consent, withdrawal, reaccept, opt
 
 const moore = browser({product:'moorecode.com',hosts:['venuebill.com','moorecode.com']}); await tick();
 moore.values.set('site_consent','accepted');
-for (const pathname of ['/projects.html','/consulting.html','/blog/mileage-tracker-delivery-drivers-tax-deduction.html','/blog/3d-printmaking-checklist-mirrored-art-inked-proof.html']) {
+for (const pathname of ['/projects.html','/consulting.html','/blog/mileage-tracker-delivery-drivers-tax-deduction.html','/blog/3d-printmaking-checklist-mirrored-art-inked-proof.html','/calculators/3d-printing-price-calculator.html']) {
   moore.context.location.pathname=pathname;
   moore.context.window.productAnalytics.refresh(); await tick();
   assert.equal(moore.requests.at(-1).data.properties.page_path,pathname);
