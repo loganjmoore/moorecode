@@ -1,0 +1,26 @@
+name: Verify portfolio destinations
+
+on:
+  pull_request:
+  push:
+    branches: [main, feat/growth-portfolio-paths]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check acquisition links and inquiry paths offline
+        run: python3 tests/portfolio_paths.py
+      - name: Check browser script syntax
+        run: |
+          node --check navigation.js
+          node --check posthog-web.js
+      - name: Verify analytics consent and privacy contract
+        run: node tests/posthog/posthog-web.test.mjs
