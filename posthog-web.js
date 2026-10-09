@@ -5,12 +5,34 @@
  * withdrawal on every public page. */
 (() => {
   if (window.productAnalytics) return;
-  const events = new Set(['$pageview', 'cta_clicked', 'signup_started', 'signup_completed', 'lead_submitted', 'activation_completed', 'checkout_started', 'subscription_started', 'app_store_clicked', 'contact_clicked', 'form_failed']);
+  const events = new Set(['$pageview', 'cta_clicked', 'signup_started', 'signup_completed', 'lead_submitted', 'activation_completed', 'checkout_started', 'subscription_started', 'app_store_clicked', 'contact_clicked', 'form_failed', 'resource_completed', 'resource_downloaded']);
+  const resourceEvents = new Set(['resource_completed', 'resource_downloaded']);
   let config = null;
   let lastPath = null;
   const controllers = new Set();
   const privateKey = 'website_posthog_identity_v1';
   const sessionKey = 'website_posthog_session_v1';
+  // Keep only our opaque campaign token in memory until consent. Never store
+  // arbitrary UTM values, a query string, or a visitor-provided identifier.
+  const campaignPattern = /^cc_[a-f0-9]{16}$/;
+  let landingCampaign = null;
+  function publicReferrerDomain(raw) {
+    try {
+      const url = new URL(raw);
+      const host = url.hostname.toLowerCase().replace(/^www\./, '');
+      const own = location.hostname.toLowerCase().replace(/^www\./, '');
+      if (url.protocol !== 'https:' || url.username || url.password || url.port || host === own || host.endsWith(`.${own}`)
+        || host.length > 253 || !/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/.test(host)
+        || /\.(?:local|localhost|internal|private|test|invalid|example|onion)$/.test(host)) return null;
+      return host;
+    } catch { return null; }
+  }
+  // Retain only a public hostname, never a referrer path, query or credentials.
+  let landingReferrer = publicReferrerDomain(document.referrer);
+  try {
+    const candidates = new URL(location.href).searchParams.getAll('utm_campaign');
+    if (candidates.length === 1 && campaignPattern.test(candidates[0])) landingCampaign = candidates[0];
+  } catch { /* Malformed landing URL has no campaign. */ }
   const cookie = (key) => document.cookie?.split('; ').find((entry) => entry.startsWith(`${key}=`))?.slice(key.length + 1);
   const shared = () => Boolean(config?.sharedDomain && config.sharedDomain === config.product && location.hostname.endsWith(config.product));
   function share(key, value, seconds = 1800) {
@@ -34,7 +56,7 @@
     // deliberately lose their identifiers instead of guessing how to redact.
     const p = location.pathname.replace(/^\/turf(?:planner)?(?=\/)/, '').replace(/\/+$/, '') || '/';
     if (config?.product === 'moorecode.com' && new Set(['/projects.html', '/consulting.html', '/hobbies.html', '/youtube.html', '/blackjack-privacy.html', '/blackjack-support.html']).has(p)) return p;
-    return /^(\/|\/(?:es|en))$/.test(p) || /^\/(?:es\/|en\/)?(?:pricing|features|about|contact|demo|book|get-started|start|plumber|roofer|electrician|cleaner|landscaper|register|signup|sign-up|login|support|privacy|terms|cookies|blog|journal|debt-payoff-calculator|invoice-generator|posthog-privacy)(?:\.html)?$/.test(p) || /^\/(?:es\/|en\/)?(?:blog|journal|guides|glossary|help|compare|services|industries|templates)\/[a-z0-9-]{1,120}(?:\.html)?$/.test(p) ? p : '/:private';
+    return /^(\/|\/(?:es|en))$/.test(p) || /^\/(?:es\/|en\/)?(?:pricing|features|about|contact|demo|book|get-started|start|plumber|roofer|electrician|cleaner|landscaper|register|signup|sign-up|login|support|privacy|terms|cookies|blog|journal|debt-payoff-calculator|invoice-generator|posthog-privacy)(?:\.html)?$/.test(p) || /^\/(?:es\/|en\/)?(?:blog|journal|guides|glossary|help|compare|services|industries|templates|tools|resources|calculators)\/[a-z0-9-]{1,120}(?:\.html)?$/.test(p) ? p : '/:private';
   }
   function identity() {
     const now = Date.now();
@@ -42,12 +64,18 @@
     if (!/^[0-9a-f-]{36}$/.test(id || '')) { id = crypto.randomUUID(); localStorage.setItem(privateKey, id); }
     let session;
     try { session = JSON.parse(shared() ? decodeURIComponent(cookie(sessionKey) || 'null') : sessionStorage.getItem(sessionKey)); } catch { /* New session. */ }
-    if (!session || !/^[0-9a-f-]{36}$/.test(session.id || '') || !Number.isFinite(session.at) || now - session.at >= 30 * 60_000) session = { id: crypto.randomUUID() };
+    if (!session || !/^[0-9a-f-]{36}$/.test(session.id || '') || !Number.isFinite(session.at) || now - session.at >= 30 * 60_000) {
+      session = { id: crypto.randomUUID(), ...(landingCampaign ? { campaign: landingCampaign } : {}), ...(landingReferrer ? { referrerDomain: landingReferrer } : {}) };
+      landingReferrer = null;
+      landingCampaign = null;
+    }
+    if (!campaignPattern.test(session.campaign || '')) delete session.campaign;
+    if (!session.referrerDomain || publicReferrerDomain(`https://${session.referrerDomain}/`) !== session.referrerDomain) delete session.referrerDomain;
     session.at = now;
     sessionStorage.setItem(sessionKey, JSON.stringify(session));
     share(privateKey, id, 180 * 86400);
     share(sessionKey, encodeURIComponent(JSON.stringify(session)));
-    return { id, session: session.id };
+    return { id, session: session.id, campaign: session.campaign, referrerDomain: session.referrerDomain };
   }
   function channel() {
     try {
@@ -60,11 +88,11 @@
   }
   function capture(name, target) {
     if (!events.has(name)) return false;
-    if (!allowed()) { if (config) reset(); return false; }
+    if (!allowed()) { if (config) reset(storedChoice() === null && !optOut()); return false; }
     try {
-      const visitor = identity();
       const safePath = path();
-      if (config.publicOnly && safePath === '/:private') return false;
+      if ((config.publicOnly || resourceEvents.has(name)) && safePath === '/:private') return false;
+      const visitor = identity();
       const device = innerWidth < 768 ? 'mobile' : innerWidth < 1024 ? 'tablet' : 'desktop';
       const controller = new AbortController();
       controllers.add(controller);
@@ -78,20 +106,23 @@
           release: /^[a-f0-9]{7,40}$/.test(config.release || '') ? config.release : 'unknown',
           page_path: safePath, $pathname: safePath, $host: config.product, $current_url: `https://${config.product}${safePath}`,
           device, channel: channel(), language: ['en', 'es'].includes(document.documentElement.lang) ? document.documentElement.lang : 'other',
+          ...(visitor.campaign ? { campaign: visitor.campaign } : {}),
+          ...(visitor.referrerDomain ? { referrer_domain: visitor.referrerDomain } : {}),
           ...(['signup', 'pricing', 'contact', 'demo', 'app_store'].includes(target) ? { target } : {}),
         } }),
       }).catch(() => {}).finally(() => { clearTimeout(timer); controllers.delete(controller); });
       return true;
     } catch { return false; } // Storage/crypto/network must never break a user action.
   }
-  function reset() {
+  function reset(preserveLandingCampaign = false) {
     for (const controller of controllers) controller.abort();
     try { localStorage.removeItem(privateKey); sessionStorage.removeItem(sessionKey); } catch { /* Storage unavailable. */ }
     share(privateKey, '', 0); share(sessionKey, '', 0);
     lastPath = null;
+    if (preserveLandingCampaign !== true) { landingCampaign = null; landingReferrer = null; }
   }
   function pageview() {
-    if (!allowed()) { reset(); return; }
+    if (!allowed()) { reset(storedChoice() === null && !optOut()); return; }
     const p = path();
     if (p === lastPath) return;
     if (capture('$pageview')) {
@@ -99,7 +130,7 @@
       if (/\/(register|signup|sign-up)$/.test(p)) capture('signup_started');
     }
   }
-  function refresh() { if (allowed()) pageview(); else reset(); }
+  function refresh() { if (allowed()) pageview(); else reset(storedChoice() === null && !optOut()); }
   window.productAnalytics = { capture: (name) => capture(name), reset, refresh };
   window.addEventListener('website:analytics-consent', refresh);
   window.addEventListener('venuebill:consent-updated', refresh);
