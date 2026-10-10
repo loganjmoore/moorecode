@@ -122,11 +122,22 @@ for (const path of publishedArticlePaths) {
 
 const calculator = read('calculators/3d-printing-price-calculator.html');
 assert.match(calculator, /<link rel="canonical" href="https:\/\/moorecode\.com\/calculators\/3d-printing-price-calculator\.html"/);
-for (const input of ['quantity', 'materialGrams', 'printHours', 'spoolPrice', 'spoolWeight', 'printerWatts', 'energyRate', 'laborHours', 'laborRate', 'machineRate', 'otherCost', 'failureRate']) {
+for (const input of ['quantity', 'materialGrams', 'printHours', 'spoolPrice', 'spoolWeight', 'printerWatts', 'energyRate', 'laborHours', 'laborRate', 'machineRate', 'otherCost', 'failureRate', 'pricingPercentage']) {
   assert.match(calculator, new RegExp(`<label for="${input}">`), `${input} needs a visible label`);
   assert.match(calculator, new RegExp(`id="${input}" name="${input}"`), `${input} label and control must match`);
 }
 assert.match(calculator, /Total direct cost<\/strong> =/);
+assert.match(calculator, /Price with markup<\/strong> = direct cost × \(1 \+ markup ÷ 100\)/);
+assert.match(calculator, /Price for target gross margin<\/strong> = direct cost ÷ \(1 - margin ÷ 100\)/);
+assert.match(calculator, /Suggested selling price/);
+assert.match(calculator, /Worked fictional example/);
+const calculatorSchemas = JSON.parse(calculator.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+assert.ok(calculatorSchemas.some((item) => item['@type'] === 'WebApplication'));
+const calculatorFaq = calculatorSchemas.find((item) => item['@type'] === 'FAQPage');
+for (const question of ['How much should I charge for a 3D print?', 'What is the difference between markup and margin?', 'Is filament cost the same as the price of a 3D print?']) {
+  assert.ok(calculator.includes(`<h3>${question}</h3>`), `${question} needs a visible answer`);
+  assert.ok(calculatorFaq.mainEntity.some((item) => item.name === question), `${question} needs a structured answer`);
+}
 assert.match(calculator, /Department of Energy energy-use lesson/);
 assert.match(calculator, /Prusa's 3D-printing price calculator/);
 assert.match(calculator, /href="\/contact\.html#project-inquiry"/);
