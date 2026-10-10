@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>3D Printing Price Calculator · MooreCode</title>
-<meta name="description" content="Estimate 3D printing material, electricity, labor, machine, and failed-print allowance with editable assumptions and visible formulas." />
+<title>3D Printing Price Calculator: Cost, Markup &amp; Margin · MooreCode</title>
+<meta name="description" content="Estimate direct 3D printing cost, then calculate a suggested selling price from your markup or target gross margin." />
 <link rel="canonical" href="https://moorecode.com/calculators/3d-printing-price-calculator.html" />
 <meta name="theme-color" content="#0b0c10" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -14,20 +14,44 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
 <link rel="stylesheet" href="/style.css" />
 <link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
-<meta property="og:title" content="3D Printing Price Calculator · MooreCode" />
-<meta property="og:description" content="Build a transparent 3D-printing job estimate from your own material, energy, labor, and machine assumptions." />
+<meta property="og:title" content="3D Printing Price Calculator: Cost, Markup &amp; Margin · MooreCode" />
+<meta property="og:description" content="Build a transparent direct-cost estimate, then calculate a suggested selling price from markup or target gross margin." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://moorecode.com/calculators/3d-printing-price-calculator.html" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "MooreCode 3D Printing Price Calculator",
-  "url": "https://moorecode.com/calculators/3d-printing-price-calculator.html",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Any",
-  "description": "A browser calculator for estimating direct 3D-printing job costs from user-provided assumptions.",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "MooreCode 3D Printing Price Calculator",
+      "url": "https://moorecode.com/calculators/3d-printing-price-calculator.html",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "description": "A browser calculator for estimating direct 3D-printing job costs and suggested selling prices from user-provided assumptions.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much should I charge for a 3D print?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Start with the direct cost of material, electricity, labor, machine time, failed-print allowance, and other known costs. Then use either a markup or target gross margin to calculate a suggested selling price. Confirm taxes, shipping, marketplace fees, and overhead separately before quoting a customer." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between markup and margin?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Markup is profit expressed as a percentage of direct cost. Gross margin is gross profit expressed as a percentage of selling price. A 25% markup on a $100 direct cost produces a $125 price, while a 25% target gross margin produces a $133.33 price." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is filament cost the same as the price of a 3D print?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Filament is one direct-cost input. A useful price estimate can also include electricity, hands-on labor, machine time, failed prints, hardware, packaging, and other costs that apply to the job." }
+        }
+      ]
+    }
+  ]
 }
 </script>
 <script src="/navigation.js" defer></script>
@@ -59,7 +83,7 @@
 <main>
   <section class="page-head">
     <h1>3D printing price calculator</h1>
-    <p class="lead">A 3D printing price estimate is the sum of material, electricity, labor, machine time, other direct costs, and your chosen failed-print allowance.</p>
+    <p class="lead">A 3D printing price estimate is a direct-cost calculation plus an optional markup or target gross margin for a suggested selling price.</p>
   </section>
 
   <section class="calculator-shell" aria-label="3D printing job cost calculator">
@@ -152,21 +176,45 @@
         </div>
       </fieldset>
 
+      <fieldset>
+        <legend>Pricing goal <span class="optional-label">Optional</span></legend>
+        <div class="pricing-goal">
+          <div class="calculator-field">
+            <span class="field-label" id="pricing-method-label">Pricing method</span>
+            <div class="pricing-selector" role="radiogroup" aria-labelledby="pricing-method-label">
+              <label><input type="radio" name="pricingMode" value="markup" checked /> Markup</label>
+              <label><input type="radio" name="pricingMode" value="margin" /> Target gross margin</label>
+            </div>
+          </div>
+          <div class="calculator-field">
+            <label for="pricingPercentage">Markup or target gross margin (%)</label>
+            <input id="pricingPercentage" name="pricingPercentage" type="number" min="0" step="0.1" value="0" required inputmode="decimal" />
+            <small>Use zero to keep the suggested selling price equal to direct cost. Target gross margin must be less than 100%.</small>
+          </div>
+        </div>
+      </fieldset>
+
       <button class="btn primary" type="submit">Calculate estimate</button>
     </form>
 
     <aside class="calculator-result" aria-labelledby="estimate-heading">
       <h2 id="estimate-heading">Estimated direct cost</h2>
-      <p class="result-total" id="job-total">—</p>
-      <p class="result-per-part" id="per-part">Calculate to see a per-part estimate.</p>
+      <p class="result-total" id="job-total">Not calculated</p>
+      <p class="result-per-part" id="per-part">Calculate to see direct cost per part.</p>
       <dl class="result-breakdown">
-        <div><dt>Material</dt><dd id="result-material">—</dd></div>
-        <div><dt>Electricity</dt><dd id="result-electricity">—</dd></div>
-        <div><dt>Labor</dt><dd id="result-labor">—</dd></div>
-        <div><dt>Machine and upkeep</dt><dd id="result-machine">—</dd></div>
-        <div><dt>Other direct costs</dt><dd id="result-other">—</dd></div>
-        <div><dt>Failed-print allowance</dt><dd id="result-failureAllowance">—</dd></div>
+        <div><dt>Material</dt><dd id="result-material">Not calculated</dd></div>
+        <div><dt>Electricity</dt><dd id="result-electricity">Not calculated</dd></div>
+        <div><dt>Labor</dt><dd id="result-labor">Not calculated</dd></div>
+        <div><dt>Machine and upkeep</dt><dd id="result-machine">Not calculated</dd></div>
+        <div><dt>Other direct costs</dt><dd id="result-other">Not calculated</dd></div>
+        <div><dt>Failed-print allowance</dt><dd id="result-failureAllowance">Not calculated</dd></div>
       </dl>
+      <dl class="pricing-result" aria-label="Suggested price">
+        <div><dt>Suggested selling price</dt><dd id="suggested-price">Not calculated</dd></div>
+        <div><dt>Gross profit</dt><dd id="gross-profit">Not calculated</dd></div>
+        <div><dt>Price per part</dt><dd id="selling-price-per-part">Not calculated</dd></div>
+      </dl>
+      <p class="estimate-caveat">Estimate only. Excludes taxes, shipping, marketplace fees, and any overhead you did not enter.</p>
       <p class="calculator-status" id="calculator-status" role="status" aria-live="polite">Enter your assumptions, then calculate.</p>
     </aside>
   </section>
@@ -174,8 +222,26 @@
   <section class="calculator-notes" aria-labelledby="formula-heading">
     <h2 id="formula-heading">Formula and units</h2>
     <p class="formula"><strong>Total direct cost</strong> = ((quantity × grams per part ÷ package grams × material price) + (quantity × print hours × average watts ÷ 1,000 × price per kWh) + (labor hours × labor rate) + (quantity × print hours × machine rate) + other direct costs) × (1 + failed-print allowance ÷ 100).</p>
+    <p class="formula"><strong>Price with markup</strong> = direct cost × (1 + markup ÷ 100).</p>
+    <p class="formula"><strong>Price for target gross margin</strong> = direct cost ÷ (1 - margin ÷ 100).</p>
     <p>The watt-to-kilowatt-hour conversion follows the U.S. Department of Energy formula: kWh = watts × hours ÷ 1,000. Prusa Research's published calculator also treats material, electricity, labor, and machine or upkeep as separate editable inputs. See the <a href="https://www1.eere.energy.gov/education/pdfs/lesson301.pdf">Department of Energy energy-use lesson</a> and <a href="https://blog.prusa3d.com/3d-printing-price-calculator_38905/">Prusa's 3D-printing price calculator</a>.</p>
-    <p>This is an estimate, not a quote. It does not infer design time, taxes, profit, shipping, or a market price. Add known costs in the available fields and confirm the final amount from the actual model, workflow, and supplier or customer requirements.</p>
+    <p>This is an estimate, not a quote. Add known costs in the available fields and confirm the final amount from the actual model, workflow, and supplier or customer requirements.</p>
+  </section>
+
+  <section class="calculator-example" aria-labelledby="example-heading">
+    <h2 id="example-heading">Worked fictional example</h2>
+    <p>Suppose a two-part job uses 100 g per part from a 1,000 g spool priced at $25. Each part prints for four hours on a 120 W printer, electricity costs $0.15 per kWh, hands-on labor is 0.5 hours at $30 per hour, machine time is $1.50 per print hour, other direct costs are $3, and the failed-print allowance is 10%. Those editable assumptions produce a $38.66 direct cost. A 25% markup produces a $48.32 suggested price, $9.66 gross profit, and $24.16 per part.</p>
+    <button class="btn secondary" id="load-example" type="button">Load example assumptions</button>
+  </section>
+
+  <section class="calculator-faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">3D printing price questions</h2>
+    <h3>How much should I charge for a 3D print?</h3>
+    <p>Start with the direct cost of material, electricity, labor, machine time, failed-print allowance, and other known costs. Then use either a markup or target gross margin to calculate a suggested selling price. Confirm taxes, shipping, marketplace fees, and overhead separately before quoting a customer.</p>
+    <h3>What is the difference between markup and margin?</h3>
+    <p>Markup is profit expressed as a percentage of direct cost. Gross margin is gross profit expressed as a percentage of selling price. A 25% markup on a $100 direct cost produces a $125 price, while a 25% target gross margin produces a $133.33 price.</p>
+    <h3>Is filament cost the same as the price of a 3D print?</h3>
+    <p>No. Filament is one direct-cost input. A useful price estimate can also include electricity, hands-on labor, machine time, failed prints, hardware, packaging, and other costs that apply to the job.</p>
   </section>
 
   <section class="calculator-next" aria-labelledby="next-heading">

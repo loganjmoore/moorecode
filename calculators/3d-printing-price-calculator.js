@@ -13,6 +13,10 @@
     if (spoolWeight <= 0) throw new RangeError('Spool weight must be greater than zero.');
     const failureRate = number(values.failureRate);
     if (failureRate > 100) throw new RangeError('Failed-print allowance cannot exceed 100%.');
+    const pricingPercentage = number(values.pricingPercentage);
+    const pricingMode = values.pricingMode;
+    if (!['markup', 'margin'].includes(pricingMode)) throw new RangeError('Choose markup or target gross margin.');
+    if (pricingMode === 'margin' && pricingPercentage >= 100) throw new RangeError('Target gross margin must be less than 100%.');
 
     const material = quantity * number(values.materialGrams) / spoolWeight * number(values.spoolPrice);
     const electricity = quantity * number(values.printHours) * number(values.printerWatts) / 1000 * number(values.energyRate);
@@ -22,8 +26,15 @@
     const subtotal = material + electricity + labor + machine + other;
     const failureAllowance = subtotal * failureRate / 100;
     const total = subtotal + failureAllowance;
+    const suggestedPrice = pricingMode === 'markup'
+      ? total * (1 + pricingPercentage / 100)
+      : total / (1 - pricingPercentage / 100);
+    const grossProfit = suggestedPrice - total;
 
-    const result = { material, electricity, labor, machine, other, failureAllowance, total, perPart: total / quantity };
+    const result = {
+      material, electricity, labor, machine, other, failureAllowance, total,
+      perPart: total / quantity, suggestedPrice, grossProfit, sellingPricePerPart: suggestedPrice / quantity,
+    };
     if (!Object.values(result).every(Number.isFinite)) throw new RangeError('These values are too large to calculate. Reduce the amounts and try again.');
     return result;
   }
@@ -35,11 +46,18 @@
   if (!form) return;
   const money = (value, currency) => new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(value);
   const outputIds = ['material', 'electricity', 'labor', 'machine', 'other', 'failureAllowance'];
+  const example = {
+    quantity: 2, materialGrams: 100, printHours: 4, currency: 'USD', spoolPrice: 25,
+    spoolWeight: 1000, printerWatts: 120, energyRate: 0.15, laborHours: 0.5,
+    laborRate: 30, machineRate: 1.5, otherCost: 3, failureRate: 10,
+    pricingMode: 'markup', pricingPercentage: 25,
+  };
 
   function clearEstimate(message) {
-    document.getElementById('job-total').textContent = '—';
-    document.getElementById('per-part').textContent = 'Calculate to see a per-part estimate.';
-    for (const key of outputIds) document.getElementById(`result-${key}`).textContent = '—';
+    document.getElementById('job-total').textContent = 'Not calculated';
+    document.getElementById('per-part').textContent = 'Calculate to see direct cost per part.';
+    for (const key of outputIds) document.getElementById(`result-${key}`).textContent = 'Not calculated';
+    for (const id of ['suggested-price', 'gross-profit', 'selling-price-per-part']) document.getElementById(id).textContent = 'Not calculated';
     document.getElementById('calculator-status').textContent = message;
   }
   form.addEventListener('input', () => clearEstimate('Assumptions changed. Calculate again for a new estimate.'));
@@ -54,12 +72,26 @@
       const result = calculate3DPrintingPrice(values);
       const currency = values.currency;
       document.getElementById('job-total').textContent = money(result.total, currency);
-      document.getElementById('per-part').textContent = `${money(result.perPart, currency)} per part for ${values.quantity} ${Number(values.quantity) === 1 ? 'part' : 'parts'}`;
+      document.getElementById('per-part').textContent = `${money(result.perPart, currency)} direct cost per part for ${values.quantity} ${Number(values.quantity) === 1 ? 'part' : 'parts'}`;
       for (const key of outputIds) document.getElementById(`result-${key}`).textContent = money(result[key], currency);
+      document.getElementById('suggested-price').textContent = money(result.suggestedPrice, currency);
+      document.getElementById('gross-profit').textContent = money(result.grossProfit, currency);
+      document.getElementById('selling-price-per-part').textContent = money(result.sellingPricePerPart, currency);
       document.getElementById('calculator-status').textContent = 'Estimate updated from your assumptions.';
       try { window.productAnalytics?.capture('resource_completed'); } catch { /* Optional measurement cannot invalidate a useful estimate. */ }
     } catch (error) {
       clearEstimate(error.message);
     }
+  });
+
+  document.getElementById('load-example')?.addEventListener('click', () => {
+    for (const [name, value] of Object.entries(example)) {
+      const control = form.elements.namedItem(name);
+      if (control instanceof RadioNodeList) control.value = String(value);
+      else control.value = String(value);
+    }
+    clearEstimate('Fictional example loaded. Edit any assumption or calculate the example.');
+    form.elements.namedItem('quantity').focus();
+    form.scrollIntoView({ block: 'start' });
   });
 })();
