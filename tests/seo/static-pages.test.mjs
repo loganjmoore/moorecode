@@ -63,15 +63,21 @@ for (const path of publishedArticlePaths) {
   assert.ok(llms.includes(`](${url})`), `${path} must appear in llms.txt`);
   assert.ok(blogPostIds.has(`${url}#post`), `${path} must appear in Blog JSON-LD`);
 }
-assert.match(read('index.html'), /href="blog\/">Blog<\/a>/);
-assert.match(read('index.html'), /MooreCode is a personal website by Logan Moore/);
-assert.match(read('index.html'), /includes twelve posts, with nine focused on 3D-printing processes/);
-assert.match(read('index.html'), /href="\/blog\/3d-printing-filament-pla-petg-tpu\.html#basic-accessories"/);
-assert.match(read('index.html'), /href="\/blog\/when-resin-3d-printing-beats-fdm\.html#dental-work"/);
-assert.match(read('index.html'), /href="\/blog\/3d-printing-metal-processes-compared\.html"/);
-assert.match(read('index.html'), /<h2 id="printing-questions-heading">What MooreCode does and who it is for<\/h2>/);
-assert.match(read('index.html'), /For 3D printing rates, compare total delivered quotes/);
-assert.match(read('index.html'), /A 3D printing price calculator is best used for an initial estimate/);
+const homepage = read('index.html');
+const homepageGraph = JSON.parse(homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+assert.match(homepage, /href="blog\/">Blog<\/a>/);
+assert.match(homepage, /MooreCode is a personal website by Logan Moore/);
+assert.match(homepage, /includes twelve posts, with nine focused on 3D-printing processes/);
+assert.match(homepage, /href="\/blog\/3d-printing-filament-pla-petg-tpu\.html#basic-accessories"/);
+assert.match(homepage, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html#dental-work"/);
+assert.match(homepage, /href="\/blog\/3d-printing-metal-processes-compared\.html"/);
+assert.match(homepage, /<h2 id="coverage-heading">What MooreCode is<\/h2>/);
+assert.match(homepage, /It publishes practical 3D printing guides and a browser-based 3D printing price calculator/);
+assert.ok(homepageGraph.some((item) => item['@type'] === 'Organization' && item.name === 'MooreCode'));
+assert.ok(homepageGraph.some((item) => item['@type'] === 'Person' && item.name === 'Logan Moore'));
+assert.match(homepage, /<h2 id="printing-questions-heading">What MooreCode does and who it is for<\/h2>/);
+assert.match(homepage, /For 3D printing rates, compare total delivered quotes/);
+assert.match(homepage, /A 3D printing price calculator is best used for an initial estimate/);
 for (const link of [
   '/blog/',
   '/blog/3d-printing-filament-pla-petg-tpu.html',
@@ -79,7 +85,7 @@ for (const link of [
   '/blog/when-resin-3d-printing-beats-fdm.html',
   '/blog/3d-printing-metal-processes-compared.html',
   '/calculators/3d-printing-price-calculator.html',
-]) assert.match(read('index.html'), new RegExp(`href="${link.replaceAll('.', '\\.')}`), `Homepage coverage needs ${link}`);
+]) assert.match(homepage, new RegExp(`href="${link.replaceAll('.', '\\.')}`), `Homepage coverage needs ${link}`);
 assert.match(read('blog/3d-printmaking-checklist-mirrored-art-inked-proof.html'), /covers six stages from SVG to finished impression/);
 
 const hobbies = read('hobbies.html');
@@ -121,6 +127,10 @@ for (const path of publishedArticlePaths) {
 }
 
 const calculator = read('calculators/3d-printing-price-calculator.html');
+const calculatorTitle = calculator.match(/<title>([^<]+)<\/title>/)[1].replaceAll('&amp;', '&');
+assert.ok(calculatorTitle.length < 60, `Calculator title must be under 60 characters, got ${calculatorTitle.length}`);
+assert.ok(calculatorTitle.startsWith('3D Printing Price Calculator'));
+assert.match(calculator, /The MooreCode 3D printing price calculator is a browser tool/);
 assert.match(calculator, /<link rel="canonical" href="https:\/\/moorecode\.com\/calculators\/3d-printing-price-calculator\.html"/);
 for (const input of ['quantity', 'materialGrams', 'printHours', 'spoolPrice', 'spoolWeight', 'printerWatts', 'energyRate', 'laborHours', 'laborRate', 'machineRate', 'otherCost', 'failureRate', 'pricingPercentage']) {
   assert.match(calculator, new RegExp(`<label for="${input}">`), `${input} needs a visible label`);
@@ -168,7 +178,14 @@ for (const [question, answer] of [
   assert.ok(fdmGuide.includes(`<p>${answer}</p>`), `${question} needs the same visible and structured answer`);
 }
 assert.match(fdmGuide, /budget FDM printers starting at about \$200/);
+assert.match(fdmGuide, /href="\/blog\/desktop-3d-printing-setup-safe-workspace\.html">safe desktop 3D printing setup guide<\/a>/);
 assert.match(fdmGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing versus FDM guide<\/a>/);
+
+const desktopGuide = read('blog/desktop-3d-printing-setup-safe-workspace.html');
+assert.match(desktopGuide, /<h2>What is the best desktop 3D printing setup\?<\/h2>/);
+for (const requirement of ['rigid, level surface', 'source-control ventilation', 'an enclosure', 'maintained smoke alarm']) {
+  assert.ok(desktopGuide.includes(requirement), `Desktop setup answer needs: ${requirement}`);
+}
 
 const resinGuide = read('blog/when-resin-3d-printing-beats-fdm.html');
 const resinSchemas = JSON.parse(resinGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
