@@ -3,6 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const firstParagraphAfterH1 = (html) => html.slice(html.indexOf('</h1>') + 5).match(/<p[^>]*>(.*?)<\/p>/s)?.[1].replace(/<[^>]+>/g, '');
+const firstProseParagraph = (html) => html.slice(html.indexOf('<section class="prose">')).match(/<p[^>]*>(.*?)<\/p>/s)?.[1].replace(/<[^>]+>/g, '');
 const publishedArticlePaths = readdirSync(new URL('../../blog/', import.meta.url), { withFileTypes: true })
   .filter((entry) => entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html')
   .map((entry) => `blog/${entry.name}`)
@@ -23,6 +24,14 @@ for (const path of [
   ...publishedArticlePaths,
 ]) {
   assert.match(firstParagraphAfterH1(read(path)), /\bis (?:a|an|the)\b/i, `${path} needs a title-adjacent entity definition`);
+}
+
+for (const [path, definition] of [
+  ['blog/3d-printing-filament-pla-petg-tpu.html', /^3D printing filament is a thermoplastic feedstock/],
+  ['blog/what-is-fdm-3d-printing.html', /^FDM 3D printing is a material-extrusion process/],
+  ['blog/when-resin-3d-printing-beats-fdm.html', /^Resin 3D printing is a process/],
+]) {
+  assert.match(firstProseParagraph(read(path)), definition, `${path} needs its entity definition in the opening prose`);
 }
 
 const consulting = read('consulting.html');
