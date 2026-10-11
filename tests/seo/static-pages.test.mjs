@@ -30,6 +30,9 @@ for (const [path, definition] of [
   ['blog/3d-printing-filament-pla-petg-tpu.html', /^3D printing filament is a thermoplastic feedstock/],
   ['blog/what-is-fdm-3d-printing.html', /^FDM 3D printing is a material-extrusion process/],
   ['blog/when-resin-3d-printing-beats-fdm.html', /^Resin 3D printing is a process/],
+  ['blog/best-3d-printing-websites-files-2026.html', /^A 3D printing website is a library or marketplace/],
+  ['blog/desktop-3d-printing-setup-safe-workspace.html', /^A desktop 3D printing setup is a dedicated work area/],
+  ['blog/3d-printing-prototype-four-stage-test-plan.html', /^A 3D-printed prototype is a physical test part/],
 ]) {
   assert.match(firstProseParagraph(read(path)), definition, `${path} needs its entity definition in the opening prose`);
 }
