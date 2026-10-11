@@ -57,6 +57,7 @@ const blog = read('blog/index.html');
 const sitemap = read('sitemap.xml');
 const feed = read('feed.xml');
 const llms = read('llms.txt');
+const decodeHtml = (value) => value.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#39;', "'");
 const blogGraph = JSON.parse(blog.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const blogSchema = blogGraph.find((item) => item['@type'] === 'Blog');
 const blogPostIds = new Set(blogSchema.blogPost.map((item) => item['@id']));
@@ -71,6 +72,16 @@ for (const path of publishedArticlePaths) {
   assert.ok(feed.includes(`<link>${url}</link>`), `${path} must appear in feed.xml`);
   assert.ok(llms.includes(`](${url})`), `${path} must appear in llms.txt`);
   assert.ok(blogPostIds.has(`${url}#post`), `${path} must appear in Blog JSON-LD`);
+}
+for (const match of llms.matchAll(/^- \[([^\]]+)\]\(https:\/\/moorecode\.com\/([^)]*)\): (.+)$/gm)) {
+  let path = match[2] || 'index.html';
+  if (path === 'blog') path = 'blog/index.html';
+  if (path.endsWith('/')) path += 'index.html';
+  const html = read(path);
+  const title = decodeHtml(html.match(/<title>([^<]+)<\/title>/)?.[1] || '');
+  const description = decodeHtml(html.match(/<meta name="description" content="([^"]+)"/)?.[1] || '');
+  assert.equal(match[1], title, `${path} title must stay current in llms.txt`);
+  assert.equal(match[3], description, `${path} description must stay current in llms.txt`);
 }
 const homepage = read('index.html');
 const homepageGraph = JSON.parse(homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
@@ -114,6 +125,7 @@ assert.match(filamentGuide, /<h2 id="painting-and-finishing">Painting and finish
 assert.match(filamentGuide, /The best way to paint an FDM print is to remove supports and rough edges/);
 assert.match(filamentGuide, /href="\/blog\/what-is-fdm-3d-printing\.html">FDM 3D printing process comparison<\/a>/);
 assert.match(filamentGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing guide<\/a>/);
+assert.match(filamentGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
 
 for (const question of [
   'Where should I look for 3D-printing files?',
@@ -207,6 +219,7 @@ assert.match(resinGuide, /<h3>Can any resin 3D printer make dental appliances\?<
 assert.equal(resinFaq.mainEntity.find((item) => item.name === 'Can any resin 3D printer make dental appliances?').acceptedAnswer.text, dentalAnswer);
 assert.ok(resinGuide.includes(`<p>${dentalAnswer}</p>`), 'Dental FAQ needs the same visible and structured answer');
 assert.match(resinGuide, /href="\/blog\/what-is-fdm-3d-printing\.html">FDM explainer<\/a>/);
+assert.match(resinGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
 
 for (const path of [
   'blog/3d-printmaking-checklist-mirrored-art-inked-proof.html',
