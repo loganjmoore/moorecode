@@ -42,7 +42,11 @@ const graphs = [...consulting.matchAll(/<script type="application\/ld\+json">([\
 const service = graphs.flatMap((item) => item['@graph'] || [item]).find((item) => item['@type'] === 'Service');
 assert.equal(service.name, 'Product and software consulting');
 assert.equal(service.provider['@id'], 'https://moorecode.com/consulting.html#org');
-assert.match(consulting, /Product and software consulting is a service provided by BrightPrompt Consulting LLC for clients\./);
+assert.match(consulting, /BrightPrompt Consulting LLC is Logan Moore's product and software consulting practice\./);
+assert.match(consulting, /<h2 id="capabilities-heading">What I can help with<\/h2>/);
+assert.match(consulting, /<h2 id="selected-work-heading">Selected work<\/h2>/);
+assert.match(consulting, /<h2>How to start<\/h2>/);
+assert.equal((consulting.match(/href="\/contact\.html#project-inquiry"/g) || []).length, 2);
 
 const projects = read('projects.html');
 const blackjackCard = projects.slice(projects.indexOf('<h3>Blackjack Now</h3>'), projects.indexOf('<h3>TILT</h3>'));
@@ -90,17 +94,15 @@ const homepage = read('index.html');
 const homepageGraph = JSON.parse(homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 assert.match(homepage, /href="blog\/">Blog<\/a>/);
 assert.match(homepage, /MooreCode is a personal website by Logan Moore/);
-assert.match(homepage, /includes twelve posts, with nine focused on 3D-printing processes/);
-assert.match(homepage, /href="\/blog\/3d-printing-filament-pla-petg-tpu\.html#basic-accessories"/);
-assert.match(homepage, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html#dental-work"/);
-assert.match(homepage, /href="\/blog\/3d-printing-metal-processes-compared\.html"/);
-assert.match(homepage, /<h2 id="coverage-heading">What MooreCode is<\/h2>/);
-assert.match(homepage, /It publishes practical 3D printing guides and a browser-based 3D printing price calculator/);
+assert.match(homepage, /<title>Logan Moore — iOS &amp; Web Developer \| MooreCode<\/title>/);
+assert.match(homepage, /<h2 id="products-heading">iOS and web products I build<\/h2>/);
+assert.match(homepage, /<h2 id="consulting-heading">Product and software consulting<\/h2>/);
+assert.ok(homepage.indexOf('id="products-heading"') < homepage.indexOf('id="coverage-heading"'));
+assert.ok(homepage.indexOf('id="consulting-heading"') < homepage.indexOf('id="coverage-heading"'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Organization' && item.name === 'MooreCode'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Person' && item.name === 'Logan Moore'));
-assert.match(homepage, /<h2 id="printing-questions-heading">What MooreCode does and who it is for<\/h2>/);
-assert.match(homepage, /For 3D printing rates, compare total delivered quotes/);
-assert.match(homepage, /A 3D printing price calculator is best used for an initial estimate/);
+assert.ok(!homepageGraph.some((item) => item['@type'] === 'FAQPage'));
+assert.doesNotMatch(homepage, /What is the best option for 3d printing/i);
 for (const link of [
   '/blog/',
   '/blog/3d-printing-filament-pla-petg-tpu.html',
@@ -109,6 +111,17 @@ for (const link of [
   '/blog/3d-printing-metal-processes-compared.html',
   '/calculators/3d-printing-price-calculator.html',
 ]) assert.match(homepage, new RegExp(`href="${link.replaceAll('.', '\\.')}`), `Homepage coverage needs ${link}`);
+
+const projectCollection = JSON.parse(projects.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const projectList = projectCollection.find((item) => item['@type'] === 'ItemList');
+assert.match(projects, /<h1>iOS and web apps by Logan Moore<\/h1>/);
+assert.match(projects, /<h2 id="ios-apps-heading">Shipped iOS apps<\/h2>/);
+assert.match(projects, /<h2 id="web-products-heading">Web products<\/h2>/);
+assert.match(projects, /<h2 id="project-consulting-heading">How this work translates to client projects<\/h2>/);
+assert.equal((projects.match(/class="card"/g) || []).length, 11);
+assert.equal((projects.match(/class="verified-facts"/g) || []).length, 11);
+assert.equal(projectList.numberOfItems, 11);
+assert.equal(projectList.itemListElement.length, 11);
 assert.match(read('blog/3d-printmaking-checklist-mirrored-art-inked-proof.html'), /covers six stages from SVG to finished impression/);
 
 const hobbies = read('hobbies.html');

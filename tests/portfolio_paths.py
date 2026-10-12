@@ -70,7 +70,7 @@ class PortfolioPaths(unittest.TestCase):
             self.assertIn(prompt, query["body"][0])
             self.assertIn(prompt, brief)
         self.assertIn("project-brief.txt", page.links)
-        self.assertIn("contact.html#project-inquiry", Page((ROOT / "consulting.html").read_text()).links)
+        self.assertIn("/contact.html#project-inquiry", Page((ROOT / "consulting.html").read_text()).links)
         self.assertNotIn("<form", (ROOT / "contact.html").read_text())
 
     def test_structured_projects_match_visible_descriptions_and_destinations(self):
@@ -80,11 +80,14 @@ class PortfolioPaths(unittest.TestCase):
         cards = re.findall(r'<li class="card">(.*?)</li>', source, re.S)
         self.assertEqual(len(cards), listing["numberOfItems"])
         self.assertEqual(len(cards), len(listing["itemListElement"]))
-        for card, entry in zip(cards, listing["itemListElement"]):
-            self.assertEqual(entry["item"]["name"], unescape(re.search(r'<h3>(.*?)</h3>', card, re.S)[1]))
-            self.assertEqual(entry["item"]["description"], unescape(re.search(r'<p>(.*?)</p>', card, re.S)[1]))
+        entries = {entry["item"]["name"]: entry["item"] for entry in listing["itemListElement"]}
+        self.assertEqual(len(entries), len(cards))
+        for card in cards:
+            name = unescape(re.search(r'<h3>(.*?)</h3>', card, re.S)[1])
+            entry = entries[name]
+            self.assertEqual(entry["description"], unescape(re.search(r'<p>(.*?)</p>', card, re.S)[1]))
             destination = unescape(re.search(r'<a class="store" href="(.*?)"', card)[1])
-            self.assertEqual(entry["item"]["url"], urljoin("https://moorecode.com/", destination))
+            self.assertEqual(entry["url"], urljoin("https://moorecode.com/", destination))
 
     def test_missing_destination_is_detected(self):
         self.assertIn("missing destination", destination_errors({"index.html": Page('<a href="missing.html">Ask</a>')}, lambda _: False)[0])
