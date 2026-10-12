@@ -92,6 +92,7 @@ for (const match of llms.matchAll(/^- \[([^\]]+)\]\(https:\/\/moorecode\.com\/([
 }
 const homepage = read('index.html');
 const homepageGraph = JSON.parse(homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const homepageFaq = homepageGraph.find((item) => item['@type'] === 'FAQPage');
 assert.match(homepage, /href="blog\/">Blog<\/a>/);
 assert.match(homepage, /MooreCode is a personal website by Logan Moore/);
 assert.match(homepage, /<title>Logan Moore — iOS &amp; Web Developer \| MooreCode<\/title>/);
@@ -101,8 +102,10 @@ assert.ok(homepage.indexOf('id="products-heading"') < homepage.indexOf('id="cove
 assert.ok(homepage.indexOf('id="consulting-heading"') < homepage.indexOf('id="coverage-heading"'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Organization' && item.name === 'MooreCode'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Person' && item.name === 'Logan Moore'));
-assert.ok(!homepageGraph.some((item) => item['@type'] === 'FAQPage'));
-assert.doesNotMatch(homepage, /What is the best option for 3d printing/i);
+for (const question of ['What does MooreCode publish?', 'Who builds the products featured on MooreCode?']) {
+  assert.ok(homepage.includes(`<h3>${question}</h3>`), `${question} needs a visible answer`);
+  assert.ok(homepageFaq.mainEntity.some((item) => item.name === question), `${question} needs a structured answer`);
+}
 for (const link of [
   '/blog/',
   '/blog/3d-printing-filament-pla-petg-tpu.html',
@@ -114,7 +117,10 @@ for (const link of [
 
 const projectCollection = JSON.parse(projects.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const projectList = projectCollection.find((item) => item['@type'] === 'ItemList');
+const projectFaq = projectCollection.find((item) => item['@type'] === 'FAQPage');
 assert.match(projects, /<h1>iOS and web apps by Logan Moore<\/h1>/);
+assert.match(firstParagraphAfterH1(projects), /^The MooreCode project portfolio is a collection/);
+assert.match(firstParagraphAfterH1(projects), /includes 11 products: 8 iOS apps and 3 web products/);
 assert.match(projects, /<h2 id="ios-apps-heading">Shipped iOS apps<\/h2>/);
 assert.match(projects, /<h2 id="web-products-heading">Web products<\/h2>/);
 assert.match(projects, /<h2 id="project-consulting-heading">How this work translates to client projects<\/h2>/);
@@ -122,6 +128,10 @@ assert.equal((projects.match(/class="card"/g) || []).length, 11);
 assert.equal((projects.match(/class="verified-facts"/g) || []).length, 11);
 assert.equal(projectList.numberOfItems, 11);
 assert.equal(projectList.itemListElement.length, 11);
+for (const question of ['What kinds of products are in the MooreCode portfolio?', 'Which MooreCode projects are publicly available?']) {
+  assert.ok(projects.includes(`<h3>${question}</h3>`), `${question} needs a visible answer`);
+  assert.ok(projectFaq.mainEntity.some((item) => item.name === question), `${question} needs a structured answer`);
+}
 assert.match(read('blog/3d-printmaking-checklist-mirrored-art-inked-proof.html'), /covers six stages from SVG to finished impression/);
 
 const hobbies = read('hobbies.html');
