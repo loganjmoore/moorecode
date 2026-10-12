@@ -1,17 +1,17 @@
 # MooreCode
 
-> Logan Moore, solo developer building useful iOS and web apps. Faith, family, and a lot of side projects.
+> Explore shipped iOS and web products by Logan Moore and product and software consulting through BrightPrompt Consulting LLC.
 
 ## Main pages
 
-- [Logan Moore, solo developer · moorecode](https://moorecode.com/): Logan Moore, solo developer building useful iOS and web apps. Faith, family, and a lot of side projects.
+- [Logan Moore — iOS & Web Developer | MooreCode](https://moorecode.com/): Explore shipped iOS and web products by Logan Moore and product and software consulting through BrightPrompt Consulting LLC.
 - [About · Logan Moore](https://moorecode.com/about.html): About Logan Moore: faith, family, solo development, and a long list of hands-on hobbies.
 - [3D Printing Guides and Project Notes · MooreCode](https://moorecode.com/blog): MooreCode compares 3D-printing processes, materials, and projects in practical guides and project notes.
-- [Consulting · BrightPrompt Consulting LLC](https://moorecode.com/consulting.html): BrightPrompt Consulting LLC, product and software consulting by Logan Moore.
+- [Product & Software Consulting by Logan Moore | BrightPrompt](https://moorecode.com/consulting.html): Product and software consulting by Logan Moore through BrightPrompt Consulting LLC for web presence, digital products, software platforms, and internal tooling.
 - [Contact · Logan Moore](https://moorecode.com/contact.html): Get in touch with Logan Moore by email, on GitHub, or on the air.
 - [Hobbies · Logan Moore](https://moorecode.com/hobbies.html): The hands-on hobbies Logan Moore loves: flower farming, light shows, 3D printing, ham radio, robotics, and landscaping.
 - [Website analytics details](https://moorecode.com/posthog-privacy.html): Learn what MooreCode’s optional PostHog analytics collect, how consent works, and how to manage your analytics choice.
-- [Projects · Logan Moore](https://moorecode.com/projects.html): Apps and products built by Logan Moore across iOS and the web.
+- [iOS and Web Apps by Logan Moore | MooreCode](https://moorecode.com/projects.html): Explore 11 iOS and web apps by Logan Moore, including public App Store products, web products, and clearly labeled private projects.
 - [YouTube · Logan Moore](https://moorecode.com/youtube.html): Logan Moore's YouTube channels are coming soon.
 - [Blackjack Now · Privacy Policy](https://moorecode.com/blackjack-privacy.html): Privacy Policy for the Blackjack Now iOS app.
 - [Blackjack Now · Support](https://moorecode.com/blackjack-support.html): Support and help for the Blackjack Now iOS app — contact, FAQ, and how-to.
