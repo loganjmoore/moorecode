@@ -202,6 +202,9 @@ for (const [question, answer] of [
   assert.ok(fdmGuide.includes(`<p>${answer}</p>`), `${question} needs the same visible and structured answer`);
 }
 assert.match(fdmGuide, /budget FDM printers starting at about \$200/);
+assert.match(fdmGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
+assert.match(fdmGuide, /SLA is the best fit when visible finish or small detail controls success/);
+assert.match(fdmGuide, /SLS is the best fit when complex geometry, nylon behavior, and support-free nesting justify/);
 assert.match(fdmGuide, /href="\/blog\/desktop-3d-printing-setup-safe-workspace\.html">safe desktop 3D printing setup guide<\/a>/);
 assert.match(fdmGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing versus FDM guide<\/a>/);
 
