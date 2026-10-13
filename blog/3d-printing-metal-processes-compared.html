@@ -160,7 +160,7 @@
 
   <p>NIST describes the process as fusing powder until a “fully dense 3D metal part is formed.” That line captures the advantage, but the finished build still needs work. Supports anchor heat-sensitive geometry, residual stress may require treatment, and critical faces are often machined or inspected after printing.</p>
 
-  <p>Published machine specifications show the scale of the process. The 3D Systems DMP Flex 350 Dual uses two 500 W lasers and offers 30, 60, and 90 micrometer layer options. The company reports 99.9% density for titanium and 99.7% for aluminum on that system. Those are vendor results for a specific machine and parameter set, not universal guarantees for every powder bed part.</p>
+  <p>Published machine specifications show the scale of the process. The 3D Systems DMP Flex 350 Dual uses two 500 W lasers and offers 30, 60, and 90 micrometer layer options. In its <a href="https://www.3dsystems.com/blog/2022/2022-08/achieving-productivity-metal-3d-printing">2022 overview of the Dual printers</a>, 3D Systems reports 99.9% density for titanium and 99.7% for aluminum. Those are vendor results for a specific machine and parameter set, not universal guarantees for every powder bed part.</p>
 
   <h2>When does metal binder jetting make sense?</h2>
   <p>Metal binder jetting makes sense when many parts can share a powder bed and the production plan includes depowdering, debinding, sintering, and dimensional compensation. The print head places binder instead of tracing every section with a laser.</p>
@@ -172,7 +172,7 @@
   <h2>Can an FDM printer produce a metal part?</h2>
   <p>An FDM printer can shape approved metal-filled feedstock into a green part, but controlled debinding and sintering are needed to produce the final metal component. Decorative PLA with metal particles remains mostly plastic and does not become structural metal after extrusion.</p>
 
-  <p>Fraunhofer IFAM describes metal FFF as a sequence: extrusion makes a metal-and-polymer green part, debinding removes part of the polymer, and heat treatment burns out the rest while the component densifies. Its published process data lists 0.05 mm resolution in the Z print direction, green-part build rates of 5 to 12 cm³ per hour per €1,000 of printer technology, and final relative density of 95% to 99%.</p>
+  <p>Fraunhofer IFAM describes metal FFF as a sequence: extrusion makes a metal-and-polymer green part, debinding removes part of the polymer, and heat treatment burns out the rest while the component densifies. Its <a href="https://www.ifam.fraunhofer.de/de/Ueberuns/Standorte/Dresden/Zellulare_metallische_Werkstoffe/fused-filament-fabrication.html">published process data (German)</a> lists 0.5 mm resolution in the X/Y print plane and 0.05 mm in the Z print direction, with print accuracy dependent on geometry. It also lists green-part build rates of 5 to 12 cm³ per hour per €1,000 of printer technology and final relative density of 95% to 99%.</p>
 
   <p>The accessible printer is only one station in that chain. Feedstock compatibility, a wear-resistant nozzle, support strategy, qualified furnace cycle, setters, shrinkage compensation, and inspection still matter. For ordinary polymer parts, my <a href="/blog/3d-printing-filament-pla-petg-tpu.html">filament guide</a> covers the simpler PLA, PETG, and TPU route.</p>
 
