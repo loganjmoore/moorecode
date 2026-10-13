@@ -736,6 +736,12 @@ section h2 {
   font-size: 20px;
 }
 
+.topic-groups section > p {
+  margin: 0 0 12px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
 .topic-groups ul {
   margin: 0;
   padding-left: 20px;
@@ -744,6 +750,16 @@ section h2 {
 }
 
 .topic-groups a { color: var(--accent); }
+
+.topic-next-step {
+  max-width: 712px;
+  margin: 0 auto 8px;
+  padding: 0 24px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+.topic-next-step a { color: var(--accent); }
 
 .blog-topic {
   max-width: 760px;

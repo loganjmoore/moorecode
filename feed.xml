@@ -49,18 +49,18 @@
       <description>Choose among powder bed fusion, binder jetting, metal FFF, and directed energy deposition.</description>
     </item>
     <item>
-      <title>3D Printing Filament: PLA, PETG, or TPU?</title>
+      <title>3D Printing Materials Guide: PLA, PETG, TPU</title>
       <link>https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html</link>
       <guid isPermaLink="true">https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html</guid>
       <pubDate>Tue, 06 Oct 2026 12:00:00 +0000</pubDate>
-      <description>Choose PLA, PETG, or TPU by the job, with temperatures and practical tradeoffs.</description>
+      <description>Compare common desktop 3D printing materials, then choose PLA, PETG, or TPU by the part and required properties.</description>
     </item>
     <item>
-      <title>FDM vs. SLA vs. SLS 3D Printing: How They Work</title>
+      <title>What Is FDM 3D Printing? How It Works</title>
       <link>https://moorecode.com/blog/what-is-fdm-3d-printing.html</link>
       <guid isPermaLink="true">https://moorecode.com/blog/what-is-fdm-3d-printing.html</guid>
       <pubDate>Tue, 06 Oct 2026 11:00:00 +0000</pubDate>
-      <description>A plain-language guide to FDM, plus a practical comparison with SLA and SLS.</description>
+      <description>A direct definition of FDM 3D printing, its workflow, suitable parts, limits, and comparison with SLA and SLS.</description>
     </item>
     <item>
       <title>When Resin 3D Printing Beats FDM</title>
