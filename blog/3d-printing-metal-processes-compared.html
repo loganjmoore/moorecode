@@ -35,7 +35,7 @@
       "url": "https://moorecode.com/blog/3d-printing-metal-processes-compared.html",
       "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-metal-processes-compared.html",
       "datePublished": "2026-10-07",
-      "dateModified": "2026-10-08",
+      "dateModified": "2026-10-13",
       "image": "https://moorecode.com/blog/images/3d-printing-metal-processes-compared.svg",
       "author": { "@id": "https://moorecode.com/#logan" },
       "publisher": { "@id": "https://moorecode.com/#logan" },
@@ -124,6 +124,19 @@
   <p class="lede">For 3D printing metal, choose laser powder bed fusion for dense, intricate production parts; binder jetting for batches that can tolerate a separate sintering step; metal FFF for accessible shaping before outsourced debinding and sintering; and directed energy deposition for large builds or repair. These processes differ in feedstock, heat, supports, shrinkage, finish, and facility needs. A metal-looking filament print is not automatically a metal part.</p>
 
   <p>Metal printing sits far beyond the ordinary desktop workflow described in my <a href="/blog/what-is-fdm-3d-printing.html">FDM explainer</a>. I would start with the finished part's alloy and qualification requirements, then ask which process can hold the geometry and tolerance at the required quantity.</p>
+
+  <h2 id="manufacturing">What is 3D printing in manufacturing?</h2>
+  <p>3D printing in manufacturing is additive production: a machine builds a part from digital geometry layer by layer instead of removing stock or forming every part in a dedicated mold or tool. It fits best when geometry, iteration, consolidation, repair, or a low-volume requirement matters more than the speed and unit economics of a mature high-volume process.</p>
+
+  <table>
+    <thead><tr><th>Production question</th><th>Where 3D printing fits</th><th>Where another process may fit better</th></tr></thead>
+    <tbody>
+      <tr><td>Design changes often</td><td>Prototype and revise without a dedicated mold</td><td>Stable high-volume geometry can justify production tooling</td></tr>
+      <tr><td>Geometry contains internal channels or consolidated parts</td><td>Additive processes may build shapes that are difficult to machine or assemble</td><td>Simple prismatic parts may be faster to cut from stock</td></tr>
+      <tr><td>Material and qualification control the result</td><td>Use a documented production-intent material, machine, parameter set, and inspection plan</td><td>Use the established process when additive qualification is not justified</td></tr>
+      <tr><td>A large component needs material added locally</td><td>Directed energy deposition can support repair or near-net features</td><td>Replacement or conventional weld repair may be simpler for the actual part</td></tr>
+    </tbody>
+  </table>
 
   <h2>How do the main metal 3D printing processes compare?</h2>
   <p>The main metal 3D printing processes compare most clearly by when the metal becomes dense. Powder bed fusion and directed energy deposition melt metal during the build, while binder jetting and metal FFF shape a fragile bound part that becomes metal in a furnace.</p>

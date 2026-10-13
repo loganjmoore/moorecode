@@ -35,7 +35,7 @@
       "url": "https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html",
       "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html",
       "datePublished": "2026-10-08",
-      "dateModified": "2026-10-08",
+      "dateModified": "2026-10-13",
       "image": "https://moorecode.com/blog/images/3d-printing-prototype-four-stage-test-plan.svg",
       "author": { "@id": "https://moorecode.com/#logan" },
       "publisher": { "@id": "https://moorecode.com/#logan" },
@@ -94,6 +94,20 @@
   <p class="lede">A 3D-printed prototype is a physical test part made from a digital model before committing to the final product or manufacturing process. Choose the process and material from the question the prototype must answer. Use a visual prototype to judge appearance, a form-and-fit prototype to check interfaces, a functional prototype to measure performance, and a pilot prototype to test repeated production and use. Write a pass/fail test before printing so a convincing model cannot hide a failed requirement.</p>
 
   <p><a href="https://www.nist.gov/additive-manufacturing/what-additive-manufacturing">NIST defines additive manufacturing</a> as building from a digital design layer by layer, instead of cutting material away or molding it. “Printed successfully” is only a machine result. I want the prototype to answer the design question.</p>
+
+  <h2 id="scan-to-print">How do you turn a 3D scan into a printable prototype?</h2>
+  <p>A scan-to-print workflow captures a physical object, repairs the resulting digital surface, sets scale and fit, then slices and prints a test part. A scanner and its software produce a measurement model, not an automatically printable or production-ready file.</p>
+
+  <ol>
+    <li>Define the surfaces and dimensions the copy or mating part must preserve.</li>
+    <li>Capture the object with a scanner and software suited to its size, finish, and required accuracy.</li>
+    <li>Align the captures, remove stray geometry, close unintended holes, and create a printable mesh.</li>
+    <li>Set scale from a known measurement and rebuild critical interfaces as controlled geometry when needed.</li>
+    <li>Choose the print process and material from the prototype question, then orient and slice the file.</li>
+    <li>Print a small fit or surface test first, measure it against the original, and revise before the full part.</li>
+  </ol>
+
+  <p>This repository does not contain a current scanner or software benchmark, so I have not invented model rankings or accuracy claims. The test plan below is the authority for deciding whether the scanned print is good enough.</p>
 
   <h2>What are the four stages of a 3D-printed prototype?</h2>
   <p>The four practical stages are visual, form-and-fit, functional, and pilot prototypes. Each stage removes a different kind of uncertainty, so its material and finish should serve that test rather than imitate a final product by default.</p>

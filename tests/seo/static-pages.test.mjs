@@ -135,7 +135,8 @@ for (const path of [
 ]) assert.match(hobbies, new RegExp(`href="/blog/${path.replaceAll('.', '\\.')}`));
 
 const filamentGuide = read('blog/3d-printing-filament-pla-petg-tpu.html');
-assert.match(filamentGuide, /<h1>3D Printing Filament:/);
+assert.match(filamentGuide, /<h1>3D Printing Materials Guide:/);
+assert.match(filamentGuide, /<th>Rank<\/th><th>Accessory<\/th><th>What it is for<\/th><th>Budget weight<\/th>/);
 assert.match(filamentGuide, /<h2>Which 3D printing materials fit a desktop or home printer\?<\/h2>/);
 assert.match(filamentGuide, /<h2>Why is PLA 3D printing the best place to start\?<\/h2>/);
 assert.match(filamentGuide, /<h2>When is printing PETG worth the extra setup\?<\/h2>/);
@@ -151,15 +152,23 @@ for (const question of [
   'How should I set up a safe desktop printing workspace?',
   'How should I test a 3D-printed prototype?',
   'Which 3D printing material should I use?',
+  'Which 3D printing accessories should I buy first?',
   'Which metal printing process fits the job?',
   'How do I paint and finish a filament print?',
+  'How is 3D printing used in dental work?',
+  'How do I plan a 3D-printed jewelry master?',
+  'Where does 3D printing fit in manufacturing?',
+  'How do I turn a 3D scan into a printable prototype?',
+  'What are my 3D printing rates per part?',
+  'How should I price work for a 3D printing business?',
   'How do I diagnose an FDM setup problem?',
   'How should a service business compare invoicing app pricing?',
 ]) assert.ok(blog.includes(question), `Blog guide map needs: ${question}`);
 
-for (const topic of ['Materials', 'Processes', 'Setup', 'Projects']) {
-  assert.match(blog, new RegExp(`<h2 id="${topic.toLowerCase()}-topic">${topic}<\\/h2>`), `Blog index needs ${topic} grouping`);
-}
+assert.match(blog, /<h2 id="printing-topic">3D printing guides<\/h2>/);
+assert.match(blog, /<h2 id="software-topic">Software and product notes<\/h2>/);
+assert.match(blog, /Use the <a href="\/calculators\/3d-printing-price-calculator\.html">3D printing price calculator<\/a>/);
+assert.match(blog, /<a href="\/consulting\.html">explore product and software consulting<\/a>/);
 
 const topicMap = blog.slice(blog.indexOf('<nav class="topic-groups"'), blog.indexOf('<ul class="blog-list">'));
 for (const path of publishedArticlePaths) {
@@ -181,6 +190,8 @@ assert.match(calculator, /Price with markup<\/strong> = direct cost × \(1 \+ ma
 assert.match(calculator, /Price for target gross margin<\/strong> = direct cost ÷ \(1 - margin ÷ 100\)/);
 assert.match(calculator, /Suggested selling price/);
 assert.match(calculator, /Worked fictional example/);
+assert.match(calculator, /<section class="calculator-faq" id="business-pricing"/);
+assert.match(calculator, /<h3>How do you start pricing a 3D printing business\?<\/h3>/);
 const calculatorSchemas = JSON.parse(calculator.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 assert.ok(calculatorSchemas.some((item) => item['@type'] === 'WebApplication'));
 const calculatorFaq = calculatorSchemas.find((item) => item['@type'] === 'FAQPage');
@@ -193,6 +204,7 @@ assert.match(calculator, /Prusa's 3D-printing price calculator/);
 assert.match(calculator, /href="\/contact\.html#project-inquiry"/);
 
 const metalGuide = read('blog/3d-printing-metal-processes-compared.html');
+assert.match(metalGuide, /<h2 id="manufacturing">What is 3D printing in manufacturing\?<\/h2>/);
 assert.match(metalGuide, /<tr><th>Process<\/th><th>Typical material<\/th><th>Best-fit application<\/th><\/tr>/);
 for (const linkedGuide of ['what-is-fdm-3d-printing.html', 'when-resin-3d-printing-beats-fdm.html']) {
   assert.match(metalGuide, new RegExp(`href="/blog/${linkedGuide.replaceAll('.', '\\.')}`));
@@ -203,8 +215,8 @@ const fdmGuide = read('blog/what-is-fdm-3d-printing.html');
 const fdmSchemas = JSON.parse(fdmGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const fdmFaq = fdmSchemas.find((item) => item['@type'] === 'FAQPage');
 const fdmFaqAnswers = new Map(fdmFaq.mainEntity.map((item) => [item.name, item.acceptedAnswer.text]));
-assert.match(fdmGuide, /<title>FDM vs\. SLA vs\. SLS 3D Printing: How They Work<\/title>/);
-assert.match(fdmGuide, /<h1>FDM vs\. SLA vs\. SLS 3D Printing: How They Work<\/h1>/);
+assert.match(fdmGuide, /<title>What Is FDM 3D Printing\? How It Works<\/title>/);
+assert.match(fdmGuide, /<h1>What Is FDM 3D Printing\?<\/h1>/);
 assert.match(fdmGuide, /<h2>How do FDM, SLA 3D printing, and SLS 3D printing compare\?<\/h2>/);
 assert.match(fdmGuide, /<h2>What is SLA 3D printing\?<\/h2>/);
 assert.match(fdmGuide, /<h2>What is SLS 3D printing\?<\/h2>/);
@@ -225,10 +237,19 @@ assert.match(fdmGuide, /href="\/blog\/desktop-3d-printing-setup-safe-workspace\.
 assert.match(fdmGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing versus FDM guide<\/a>/);
 
 const desktopGuide = read('blog/desktop-3d-printing-setup-safe-workspace.html');
+assert.match(desktopGuide, /<h2>Which type of desktop 3D printer fits the job\?<\/h2>/);
 assert.match(desktopGuide, /<h2>What is the best desktop 3D printing setup\?<\/h2>/);
 for (const requirement of ['rigid, level surface', 'source-control ventilation', 'an enclosure', 'maintained smoke alarm']) {
   assert.ok(desktopGuide.includes(requirement), `Desktop setup answer needs: ${requirement}`);
 }
+
+const scanGuide = read('blog/3d-printing-prototype-four-stage-test-plan.html');
+assert.match(scanGuide, /<h2 id="scan-to-print">How do you turn a 3D scan into a printable prototype\?<\/h2>/);
+
+const invoicingGuide = read('blog/simple-invoicing-app-pricing-service-businesses.html');
+assert.match(invoicingGuide, /Assessment method and date:/);
+assert.match(invoicingGuide, /checked these plans on October 13, 2026/);
+assert.match(invoicingGuide, /The 60-invoice business and its per-invoice results are illustrative calculations, not quotes/);
 
 const resinGuide = read('blog/when-resin-3d-printing-beats-fdm.html');
 const resinSchemas = JSON.parse(resinGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
@@ -237,6 +258,7 @@ const dentalAnswer = "No. A general-purpose hobby printer and resin are not subs
 assert.match(resinGuide, /<h1>When Resin 3D Printing Beats FDM<\/h1>/);
 assert.match(resinGuide, /<h2>What is resin 3D printing\?<\/h2>/);
 assert.match(resinGuide, /<h2 id="dental-work">When is resin 3D printing appropriate for dental work\?<\/h2>/);
+assert.match(resinGuide, /<h2 id="jewelry-work">How should a 3D-printed jewelry master be planned\?<\/h2>/);
 assert.match(resinGuide, /<h3>Can any resin 3D printer make dental appliances\?<\/h3>/);
 assert.equal(resinFaq.mainEntity.find((item) => item.name === 'Can any resin 3D printer make dental appliances?').acceptedAnswer.text, dentalAnswer);
 assert.ok(resinGuide.includes(`<p>${dentalAnswer}</p>`), 'Dental FAQ needs the same visible and structured answer');
