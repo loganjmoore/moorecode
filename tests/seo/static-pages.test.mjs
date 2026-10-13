@@ -4,6 +4,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const firstParagraphAfterH1 = (html) => html.slice(html.indexOf('</h1>') + 5).match(/<p[^>]*>(.*?)<\/p>/s)?.[1].replace(/<[^>]+>/g, '');
 const firstProseParagraph = (html) => html.slice(html.indexOf('<section class="prose">')).match(/<p[^>]*>(.*?)<\/p>/s)?.[1].replace(/<[^>]+>/g, '');
+const questionHeadingCount = (html) => [...html.matchAll(/<h[1-6][^>]*>[^<]*\?[^<]*<\/h[1-6]>/gi)].length;
 const publishedArticlePaths = readdirSync(new URL('../../blog/', import.meta.url), { withFileTypes: true })
   .filter((entry) => entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html')
   .map((entry) => `blog/${entry.name}`)
@@ -101,8 +102,7 @@ assert.ok(homepage.indexOf('id="products-heading"') < homepage.indexOf('id="cove
 assert.ok(homepage.indexOf('id="consulting-heading"') < homepage.indexOf('id="coverage-heading"'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Organization' && item.name === 'MooreCode'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Person' && item.name === 'Logan Moore'));
-assert.ok(!homepageGraph.some((item) => item['@type'] === 'FAQPage'));
-assert.doesNotMatch(homepage, /What is the best option for 3d printing/i);
+assert.ok(questionHeadingCount(homepage) >= 2, 'Homepage needs at least two question-style headings');
 for (const link of [
   '/blog/',
   '/blog/3d-printing-filament-pla-petg-tpu.html',
@@ -115,6 +115,7 @@ for (const link of [
 const projectCollection = JSON.parse(projects.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const projectList = projectCollection.find((item) => item['@type'] === 'ItemList');
 assert.match(projects, /<h1>iOS and web apps by Logan Moore<\/h1>/);
+assert.match(firstParagraphAfterH1(projects), /^The MooreCode project collection is a portfolio/);
 assert.match(projects, /<h2 id="ios-apps-heading">Shipped iOS apps<\/h2>/);
 assert.match(projects, /<h2 id="web-products-heading">Web products<\/h2>/);
 assert.match(projects, /<h2 id="project-consulting-heading">How this work translates to client projects<\/h2>/);
@@ -122,6 +123,8 @@ assert.equal((projects.match(/class="card"/g) || []).length, 11);
 assert.equal((projects.match(/class="verified-facts"/g) || []).length, 11);
 assert.equal(projectList.numberOfItems, 11);
 assert.equal(projectList.itemListElement.length, 11);
+assert.ok(questionHeadingCount(projects) >= 2, 'Projects page needs at least two question-style headings');
+assert.match(projects, /As of October 13, 2026, this page lists 11 products: eight iOS apps and three web products\./);
 assert.match(read('blog/3d-printmaking-checklist-mirrored-art-inked-proof.html'), /covers six stages from SVG to finished impression/);
 
 const hobbies = read('hobbies.html');

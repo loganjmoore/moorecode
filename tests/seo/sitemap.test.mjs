@@ -22,7 +22,8 @@ for (const location of entries.keys()) {
 }
 
 for (const [location, contentDate] of [
-  ['https://moorecode.com/', '2026-10-08'],
+  ['https://moorecode.com/', '2026-10-13'],
+  ['https://moorecode.com/projects.html', '2026-10-13'],
   ['https://moorecode.com/hobbies.html', '2026-10-07'],
   ['https://moorecode.com/posthog-privacy.html', '2026-10-06'],
   ['https://moorecode.com/blog/', '2026-10-08'],

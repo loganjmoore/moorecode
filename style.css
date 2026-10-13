@@ -428,6 +428,34 @@ section h2 {
   line-height: 1.6;
 }
 
+.page-faq {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px 72px;
+}
+
+.faq-list {
+  max-width: 760px;
+  margin-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.faq-list > div {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-list h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.faq-list p {
+  margin: 0;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
 /* ---------- Apps / Projects grid ---------- */
 .apps {
   max-width: var(--max);
