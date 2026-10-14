@@ -11,7 +11,6 @@ Deployment URL: https://moorecode.com/calculators/3d-printing-price-calculator.h
 - `style.css`: responsive calculator and topic-index styling in the existing MooreCode visual system.
 - `index.html` and `blog/index.html`: contextual discovery links.
 - `sitemap.xml` and `llms.txt`: crawler and assistant discovery.
-- `.seo-resources.json`: machine-readable resource, source, event, and rendered-verification receipt.
 
 ## Calculation scope
 
