@@ -102,6 +102,20 @@ assert.ok(homepage.indexOf('id="products-heading"') < homepage.indexOf('id="cove
 assert.ok(homepage.indexOf('id="consulting-heading"') < homepage.indexOf('id="coverage-heading"'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Organization' && item.name === 'MooreCode'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Person' && item.name === 'Logan Moore'));
+const homepageFaq = homepageGraph.find((item) => item['@type'] === 'FAQPage');
+assert.ok(homepageFaq, 'Homepage visible questions need FAQPage structured data');
+for (const question of [
+  'What does MooreCode build?',
+  'Who runs MooreCode?',
+  'Which MooreCode guide fits my 3D printing project?',
+]) {
+  assert.ok(homepage.includes(`<h3>${question}</h3>`), `${question} needs a visible answer`);
+  assert.ok(homepageFaq.mainEntity.some((item) => item.name === question), `${question} needs a structured answer`);
+}
+const printingGuideAnswer = homepageFaq.mainEntity.find((item) => item.name === 'Which MooreCode guide fits my 3D printing project?').acceptedAnswer.text;
+for (const topic of ['accessories', 'PLA', 'PETG', 'TPU', 'price calculator', 'dental', 'jewelry', 'manufacturing', 'automotive parts']) {
+  assert.match(printingGuideAnswer, new RegExp(topic, 'i'), `Homepage guide answer needs to address ${topic}`);
+}
 assert.ok(questionHeadingCount(homepage) >= 2, 'Homepage needs at least two question-style headings');
 for (const link of [
   '/blog/',
