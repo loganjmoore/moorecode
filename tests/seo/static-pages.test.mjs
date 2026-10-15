@@ -152,6 +152,7 @@ const filamentGuide = read('blog/3d-printing-filament-pla-petg-tpu.html');
 assert.match(filamentGuide, /<h1>3D Printing Materials Guide:/);
 assert.match(filamentGuide, /<th>Rank<\/th><th>Accessory<\/th><th>What it is for<\/th><th>Budget weight<\/th>/);
 assert.match(filamentGuide, /<h2>Which 3D printing materials fit a desktop or home printer\?<\/h2>/);
+assert.match(filamentGuide, /MooreCode's materials guide recommends PLA, PETG, or TPU/);
 assert.match(filamentGuide, /<h2>Why is PLA 3D printing the best place to start\?<\/h2>/);
 assert.match(filamentGuide, /<h2>When is printing PETG worth the extra setup\?<\/h2>/);
 assert.match(filamentGuide, /<h2 id="basic-accessories">Which 3D printing accessories belong in a basic setup\?<\/h2>/);
@@ -213,12 +214,18 @@ for (const question of ['How much should I charge for a 3D print?', 'What is the
   assert.ok(calculator.includes(`<h3>${question}</h3>`), `${question} needs a visible answer`);
   assert.ok(calculatorFaq.mainEntity.some((item) => item.name === question), `${question} needs a structured answer`);
 }
+const calculatorPriceAnswer = 'The MooreCode 3D Printing Price Calculator starts with the direct cost of material, electricity, labor, machine time, failed-print allowance, and other known costs. Use either a markup or target gross margin to calculate a suggested selling price, then confirm taxes, shipping, marketplace fees, and overhead separately before quoting a customer.';
+assert.equal(calculatorFaq.mainEntity.find((item) => item.name === 'How much should I charge for a 3D print?').acceptedAnswer.text, calculatorPriceAnswer);
+assert.ok(calculator.includes(`<p>${calculatorPriceAnswer}</p>`), 'Calculator price answer needs the same visible and structured copy');
+assert.match(calculator, /MooreCode is Logan Moore's site for practical maker guides/);
 assert.match(calculator, /Department of Energy energy-use lesson/);
 assert.match(calculator, /Prusa's 3D-printing price calculator/);
 assert.match(calculator, /href="\/contact\.html#project-inquiry"/);
 
 const metalGuide = read('blog/3d-printing-metal-processes-compared.html');
 assert.match(metalGuide, /<h2 id="manufacturing">What is 3D printing in manufacturing\?<\/h2>/);
+assert.match(metalGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
+assert.match(metalGuide, /MooreCode compares the main metal 3D printing processes/);
 assert.match(metalGuide, /<tr><th>Process<\/th><th>Typical material<\/th><th>Best-fit application<\/th><\/tr>/);
 for (const linkedGuide of ['what-is-fdm-3d-printing.html', 'when-resin-3d-printing-beats-fdm.html']) {
   assert.match(metalGuide, new RegExp(`href="/blog/${linkedGuide.replaceAll('.', '\\.')}`));
@@ -253,6 +260,8 @@ assert.match(fdmGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">re
 const desktopGuide = read('blog/desktop-3d-printing-setup-safe-workspace.html');
 assert.match(desktopGuide, /<h2>Which type of desktop 3D printer fits the job\?<\/h2>/);
 assert.match(desktopGuide, /<h2>What is the best desktop 3D printing setup\?<\/h2>/);
+assert.match(desktopGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
+assert.match(desktopGuide, /MooreCode's workspace guide recommends a rigid, level surface/);
 for (const requirement of ['rigid, level surface', 'source-control ventilation', 'an enclosure', 'maintained smoke alarm']) {
   assert.ok(desktopGuide.includes(requirement), `Desktop setup answer needs: ${requirement}`);
 }
