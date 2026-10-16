@@ -201,6 +201,13 @@ for (const input of ['quantity', 'materialGrams', 'printHours', 'spoolPrice', 's
   assert.match(calculator, new RegExp(`id="${input}" name="${input}"`), `${input} label and control must match`);
 }
 assert.match(calculator, /Total direct cost<\/strong> =/);
+const calculatorScopeStart = calculator.indexOf('<section class="calculator-notes"');
+const calculatorScope = calculator.slice(calculatorScopeStart, calculator.indexOf('</section>', calculatorScopeStart));
+assert.match(calculatorScope, /<h2 id="formula-heading">What this calculator estimates<\/h2>/);
+for (const scopeDetail of ['direct job cost', 'suggested selling price', 'part quantity', 'material use and price', 'print time', 'electricity', 'labor', 'machine upkeep', 'other direct costs', 'failed-print allowance', 'markup', 'target gross margin']) {
+  assert.ok(calculatorScope.includes(scopeDetail), `Calculator scope needs to state ${scopeDetail}`);
+}
+assert.match(calculatorScope, /This is an estimate, not a quote\./);
 assert.match(calculator, /Price with markup<\/strong> = direct cost × \(1 \+ markup ÷ 100\)/);
 assert.match(calculator, /Price for target gross margin<\/strong> = direct cost ÷ \(1 - margin ÷ 100\)/);
 assert.match(calculator, /Suggested selling price/);
