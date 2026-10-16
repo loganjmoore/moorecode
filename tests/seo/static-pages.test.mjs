@@ -5,6 +5,7 @@ const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), '
 const firstParagraphAfterH1 = (html) => html.slice(html.indexOf('</h1>') + 5).match(/<p[^>]*>(.*?)<\/p>/s)?.[1].replace(/<[^>]+>/g, '');
 const firstProseParagraph = (html) => html.slice(html.indexOf('<section class="prose">')).match(/<p[^>]*>(.*?)<\/p>/s)?.[1].replace(/<[^>]+>/g, '');
 const questionHeadingCount = (html) => [...html.matchAll(/<h[1-6][^>]*>[^<]*\?[^<]*<\/h[1-6]>/gi)].length;
+const directAnswer = (html) => html.match(/<section class="direct-answer"[\s\S]*?<\/section>/)?.[0] || '';
 const publishedArticlePaths = readdirSync(new URL('../../blog/', import.meta.url), { withFileTypes: true })
   .filter((entry) => entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html')
   .map((entry) => `blog/${entry.name}`)
@@ -223,6 +224,15 @@ assert.match(calculator, /Prusa's 3D-printing price calculator/);
 assert.match(calculator, /href="\/contact\.html#project-inquiry"/);
 
 const metalGuide = read('blog/3d-printing-metal-processes-compared.html');
+const metalAnswer = directAnswer(metalGuide);
+assert.ok(metalGuide.indexOf(metalAnswer) < metalGuide.indexOf('<h2 id="manufacturing">'), 'Metal direct answer needs to stay near the top');
+assert.match(metalAnswer, /<h2[^>]*>Metal 3D printing methods: quick answer<\/h2>/);
+for (const process of ['laser powder bed fusion', 'binder jetting', 'metal FFF', 'directed energy deposition']) {
+  assert.match(metalAnswer, new RegExp(process, 'i'), `Metal direct answer needs ${process}`);
+}
+for (const link of ['/blog/what-is-fdm-3d-printing.html', '/calculators/3d-printing-price-calculator.html']) {
+  assert.ok(metalAnswer.includes(`href="${link}"`), `Metal direct answer needs ${link}`);
+}
 assert.match(metalGuide, /<h2 id="manufacturing">What is 3D printing in manufacturing\?<\/h2>/);
 assert.match(metalGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
 assert.match(metalGuide, /MooreCode compares the main metal 3D printing processes/);
@@ -258,6 +268,15 @@ assert.match(fdmGuide, /href="\/blog\/desktop-3d-printing-setup-safe-workspace\.
 assert.match(fdmGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing versus FDM guide<\/a>/);
 
 const desktopGuide = read('blog/desktop-3d-printing-setup-safe-workspace.html');
+const desktopAnswer = directAnswer(desktopGuide);
+assert.ok(desktopGuide.indexOf(desktopAnswer) < desktopGuide.indexOf('<h2>Which type of desktop 3D printer'), 'Desktop direct answer needs to stay near the top');
+assert.match(desktopAnswer, /<h2[^>]*>Safe desktop 3D printing setup: quick answer<\/h2>/);
+for (const requirement of ['ventilation', 'surface', 'clearance']) {
+  assert.match(desktopAnswer, new RegExp(requirement, 'i'), `Desktop direct answer needs ${requirement}`);
+}
+for (const link of ['/blog/what-is-fdm-3d-printing.html', '/blog/3d-printing-filament-pla-petg-tpu.html']) {
+  assert.ok(desktopAnswer.includes(`href="${link}"`), `Desktop direct answer needs ${link}`);
+}
 assert.match(desktopGuide, /<h2>Which type of desktop 3D printer fits the job\?<\/h2>/);
 assert.match(desktopGuide, /<h2>What is the best desktop 3D printing setup\?<\/h2>/);
 assert.match(desktopGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
@@ -267,7 +286,27 @@ for (const requirement of ['rigid, level surface', 'source-control ventilation',
 }
 
 const scanGuide = read('blog/3d-printing-prototype-four-stage-test-plan.html');
+const prototypeAnswer = directAnswer(scanGuide);
+assert.ok(scanGuide.indexOf(prototypeAnswer) < scanGuide.indexOf('<h2 id="scan-to-print">'), 'Prototype direct answer needs to stay near the top');
+assert.match(prototypeAnswer, /<h2[^>]*>Prototype test plan: quick answer<\/h2>/);
+for (const stage of ['visual', 'form-and-fit', 'functional', 'pilot']) {
+  assert.match(prototypeAnswer, new RegExp(stage, 'i'), `Prototype direct answer needs ${stage}`);
+}
+assert.match(prototypeAnswer, /test form, fit, and function before committing to production/i);
+for (const link of ['/blog/what-is-fdm-3d-printing.html', '/calculators/3d-printing-price-calculator.html']) {
+  assert.ok(prototypeAnswer.includes(`href="${link}"`), `Prototype direct answer needs ${link}`);
+}
 assert.match(scanGuide, /<h2 id="scan-to-print">How do you turn a 3D scan into a printable prototype\?<\/h2>/);
+
+const filamentAnswer = directAnswer(filamentGuide);
+assert.ok(filamentGuide.indexOf(filamentAnswer) < filamentGuide.indexOf('<h2>Which 3D printing materials'), 'Filament direct answer needs to stay near the top');
+assert.match(filamentAnswer, /<h2[^>]*>PLA vs PETG vs TPU: quick answer<\/h2>/);
+for (const material of ['PLA', 'PETG', 'TPU']) {
+  assert.match(filamentAnswer, new RegExp(material), `Filament direct answer needs ${material}`);
+}
+for (const link of ['/blog/what-is-fdm-3d-printing.html', '/calculators/3d-printing-price-calculator.html']) {
+  assert.ok(filamentAnswer.includes(`href="${link}"`), `Filament direct answer needs ${link}`);
+}
 
 const invoicingGuide = read('blog/simple-invoicing-app-pricing-service-businesses.html');
 assert.match(invoicingGuide, /Assessment method and date:/);
