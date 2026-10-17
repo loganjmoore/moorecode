@@ -19,6 +19,7 @@
 
 ## Blog
 
+- [3D Scanning to Printing: Repair, Scale, Slice](https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html): Turn a 3D scan into a printable file: repair the mesh, set scale from a known dimension, verify thin areas, and slice a measured test.
 - [Best 3D Printing Websites for Files: 2026 Guide](https://moorecode.com/blog/best-3d-printing-websites-files-2026.html): Compare five 3D printing websites for free files, print profiles, miniatures, search, and commercial-use licenses.
 - [Desktop 3D Printing Setup: A Safe Beginner Workspace](https://moorecode.com/blog/desktop-3d-printing-setup-safe-workspace.html): Build a practical desktop 3D printing setup with the right space, ventilation, tools, storage, and FDM or resin workflow.
 - [3D Printing a Prototype: Four Stages, One Test Plan](https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html): Choose a 3D printing process and material for visual, fit, functional, and pilot prototypes by starting with the test result.
