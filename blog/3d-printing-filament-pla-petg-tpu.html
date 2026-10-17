@@ -35,7 +35,7 @@
       "url": "https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html",
       "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html",
       "datePublished": "2026-10-06",
-      "dateModified": "2026-10-15",
+      "dateModified": "2026-10-17",
       "image": "https://moorecode.com/blog/images/3d-printing-filament-pla-petg-tpu.svg",
       "author": { "@id": "https://moorecode.com/#logan" },
       "publisher": { "@id": "https://moorecode.com/#logan" },
@@ -123,9 +123,20 @@
   <p class="lede">3D printing filament is a thermoplastic feedstock that an FDM printer melts and deposits layer by layer. Choose PLA for clean models and easy first prints, PETG for tougher brackets and outdoor utility parts, and TPU for parts that must flex. PLA is the sensible first spool for most people; move to PETG or TPU only when the part needs a property PLA lacks. This MooreCode guide gives practical starting points, but the temperature printed on your spool remains the final authority because blends and printers vary.</p>
 
   <section class="direct-answer" aria-labelledby="filament-quick-answer">
-    <h2 id="filament-quick-answer">PLA vs PETG vs TPU: quick answer</h2>
-    <p>Choose PLA for clean models and easy first prints, PETG for tougher brackets and outdoor utility parts, and TPU for parts that must flex.</p>
-    <p>Related: <a href="/blog/what-is-fdm-3d-printing.html">read the FDM explainer</a> and <a href="/calculators/3d-printing-price-calculator.html">estimate a print with the price calculator</a>.</p>
+    <h2 id="filament-quick-answer">PLA vs PETG: quick comparison</h2>
+    <table>
+      <thead>
+        <tr><th>Property</th><th>PLA</th><th>PETG</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Strength</strong></td><td>Stiff, with clean detail</td><td>Tougher, with stronger layer bonding</td></tr>
+        <tr><td><strong>Heat resistance</strong></td><td>Low; avoid hot cars and sun-baked fixtures</td><td>Moderate; suitable below 80°C in Prusa's guidance</td></tr>
+        <tr><td><strong>Ease of printing</strong></td><td>Easiest first filament</td><td>More prone to stringing and rough bridges</td></tr>
+        <tr><td><strong>Typical use</strong></td><td>Models, prototypes, organizers, and signs</td><td>Holders, clamps, boxes, and utility parts</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Verdict:</strong> choose PLA for easier, cleaner prints; choose PETG when the part needs more toughness, layer adhesion, or moderate heat resistance.</p>
+    <p>Need flexibility instead? <a href="#tpu-filament">Jump to the existing TPU guidance</a>.</p>
   </section>
 
   <p>MooreCode is Logan Moore's site for practical 3D printing guides, software projects, and hands-on project notes.</p>
@@ -186,7 +197,7 @@
 
   <p>PETG fits a garage hook; PLA will usually serve a tabletop miniature more cleanly. The hook benefits from toughness and layer adhesion, while the miniature benefits more from crisp detail and easy cleanup.</p>
 
-  <h2>When does TPU 3D printing filament make sense?</h2>
+  <h2 id="tpu-filament">When does TPU 3D printing filament make sense?</h2>
   <p>TPU 3D printing filament makes sense when flexibility is a requirement that geometry alone cannot provide. Prusa's <a href="https://help.prusa3d.com/article/flexible-materials_2057">flexible materials guide</a> names spacing washers, stamps, RC tires, shoe parts, belts, and protective sleeves as suitable uses.</p>
 
   <p>Soft filament can buckle between the extruder gears and nozzle, so speed matters. Prusa gives 20 mm/s as a typical flexible-filament speed and puts the practical maximum around 30-40 mm/s. It also recommends loosening the idler pressure, keeping the path clear, reducing retraction, and keeping the spool dry. A direct-drive extruder usually gives the filament less room to fold, though a tuned Bowden machine can still print firmer TPU.</p>

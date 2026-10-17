@@ -151,6 +151,17 @@ for (const path of [
 
 const filamentGuide = read('blog/3d-printing-filament-pla-petg-tpu.html');
 assert.match(filamentGuide, /<h1>3D Printing Materials Guide:/);
+const filamentLedeEnd = filamentGuide.indexOf('</p>', filamentGuide.indexOf('<p class="lede">')) + 4;
+const filamentFirstSection = filamentGuide.indexOf('<section', filamentLedeEnd);
+assert.equal(filamentFirstSection, filamentGuide.indexOf('<section class="direct-answer"', filamentLedeEnd), 'PLA vs PETG comparison must sit directly under the intro');
+const filamentQuickAnswer = directAnswer(filamentGuide);
+assert.match(filamentQuickAnswer, /<h2 id="filament-quick-answer">PLA vs PETG: quick comparison<\/h2>/);
+for (const property of ['Strength', 'Heat resistance', 'Ease of printing', 'Typical use']) {
+  assert.ok(filamentQuickAnswer.includes(`<strong>${property}</strong>`), `PLA vs PETG comparison needs ${property}`);
+}
+assert.match(filamentQuickAnswer, /<strong>Verdict:<\/strong> choose PLA/);
+assert.match(filamentQuickAnswer, /href="#tpu-filament">Jump to the existing TPU guidance<\/a>/);
+assert.match(filamentGuide, /<h2 id="tpu-filament">When does TPU 3D printing filament make sense\?<\/h2>/);
 assert.match(filamentGuide, /<th>Rank<\/th><th>Accessory<\/th><th>What it is for<\/th><th>Budget weight<\/th>/);
 assert.match(filamentGuide, /<h2>Which 3D printing materials fit a desktop or home printer\?<\/h2>/);
 assert.match(filamentGuide, /MooreCode's materials guide recommends PLA, PETG, or TPU/);
@@ -162,6 +173,13 @@ assert.match(filamentGuide, /The best way to paint an FDM print is to remove sup
 assert.match(filamentGuide, /href="\/blog\/what-is-fdm-3d-printing\.html">FDM 3D printing process comparison<\/a>/);
 assert.match(filamentGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing guide<\/a>/);
 assert.match(filamentGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
+
+const scanToPrintGuide = read('blog/3d-scanning-to-printing-repair-scale-slice.html');
+const scanAnswer = directAnswer(scanToPrintGuide);
+assert.match(scanAnswer, /<h2 id="scan-to-print-quick-answer">What is the best way to turn a 3D scan into a print\?<\/h2>/);
+assert.match(scanAnswer, /The best option is a measured workflow rather than a single scanner or printer/);
+assert.match(scanAnswer, /MooreCode's scan-to-print guide walks through that sequence/);
+assert.match(scanToPrintGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
 
 for (const question of [
   'Where should I look for 3D-printing files?',
@@ -318,13 +336,11 @@ for (const link of [
 
 const filamentAnswer = directAnswer(filamentGuide);
 assert.ok(filamentGuide.indexOf(filamentAnswer) < filamentGuide.indexOf('<h2>Which 3D printing materials'), 'Filament direct answer needs to stay near the top');
-assert.match(filamentAnswer, /<h2[^>]*>PLA vs PETG vs TPU: quick answer<\/h2>/);
+assert.match(filamentAnswer, /<h2[^>]*>PLA vs PETG: quick comparison<\/h2>/);
 for (const material of ['PLA', 'PETG', 'TPU']) {
   assert.match(filamentAnswer, new RegExp(material), `Filament direct answer needs ${material}`);
 }
-for (const link of ['/blog/what-is-fdm-3d-printing.html', '/calculators/3d-printing-price-calculator.html']) {
-  assert.ok(filamentAnswer.includes(`href="${link}"`), `Filament direct answer needs ${link}`);
-}
+assert.ok(filamentAnswer.includes('href="#tpu-filament"'), 'Filament direct answer needs to hand off to the existing TPU section');
 
 const invoicingGuide = read('blog/simple-invoicing-app-pricing-service-businesses.html');
 assert.match(invoicingGuide, /Assessment method and date:/);
