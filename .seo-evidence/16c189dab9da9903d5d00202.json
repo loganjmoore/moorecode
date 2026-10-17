@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "verifier": "seo-worker-v1",
+  "postFile": "blog/3d-scanning-to-printing-repair-scale-slice.html",
+  "artifact": ".seo-evidence/16c189dab9da9903d5d00202.json",
+  "verifiedAt": "2026-10-17T14:55:06.801Z",
+  "sourceFiles": [
+    {
+      "path": "calculators/3d-printing-price-calculator.js",
+      "sha256": "bdc39a9d38e7a1d117cae3654454ce848432d52ba2cdc37eb716d0d6fc744eef",
+      "excerpt": "    const material = quantity * number(values.materialGrams) / spoolWeight * number(values.spoolPrice);\n    const electricity = quantity * number(values.printHours) * number(values.printerWatts) / 1000 * number(values.energyRate);\n    const labor = number(values.laborHours) * number(values.laborRate);\n    const machine = quantity * number(values.printHours) * number(values.machineRate);\n    const other = number(values.otherCost);\n    const subtotal = material + electricity + labor + machine + other;\n    const failureAllowance = subtotal * failureRate / 100;\n    const total = subtotal + failureAllowance;\n    const suggestedPrice = pricingMode === 'markup'\n      ? total * (1 + pricingPercentage / 100)\n      : total / (1 - pricingPercentage / 100);\n    const grossProfit = suggestedPrice - total;\n\n    const result = {\n      material, electricity, labor, machine, other, failureAllowance, total,\n      perPart: total / quantity, suggestedPrice, grossProfit, sellingPricePerPart: suggestedPrice / quantity,\n    };\n    if (!Object.values(result).every(Number.isFinite)) throw new RangeError('These values are too large to calculate. Reduce the amounts and try again.');\n    return result;\n  }\n\n  globalThis.calculate3DPrintingPrice = calculate3DPrintingPrice;\n  if (typeof document === 'undefined') return;\n\n  const form = document.getElementById('price-calculator');\n  if (!form) return;\n  const money = (value, currency) => new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(value);\n  const outputIds = ['material', 'electricity', 'labor', 'machine', 'other', 'failureAllowance'];\n  const example = {\n    quantity: 2, materialGrams: 100, printHours: 4, currency: 'USD', spoolPrice: 25,\n    spoolWeight: 1000, printerWatts: 120, energyRate: 0.15, laborHours: 0.5,\n    laborRate: 30, machineRate: 1.5, otherCost: 3, failureRate: 10,\n    pricingMode: 'markup', pricingPercentage: 25,\n  };"
+    },
+    {
+      "path": "calculators/3d-printing-price-calculator.html",
+      "sha256": "fb1b9a56f4eb96bc29d3c1e78051df59b2965b2a6936f497d4b0661836ec9f37",
+      "excerpt": "            <label for=\"quantity\">Number of parts</label>\n            <input id=\"quantity\" name=\"quantity\" type=\"number\" min=\"1\" max=\"9007199254740991\" step=\"1\" value=\"1\" required inputmode=\"numeric\" />\n            <small>Whole parts in this job.</small>\n          </div>\n          <div class=\"calculator-field\">\n            <label for=\"materialGrams\">Material per part (g)</label>\n            <input id=\"materialGrams\" name=\"materialGrams\" type=\"number\" min=\"0\" step=\"0.1\" value=\"0\" required inputmode=\"decimal\" />\n            <small>Use the slicer's material estimate.</small>\n          </div>\n          <div class=\"calculator-field\">\n            <label for=\"printHours\">Print time per part (hours)</label>\n            <input id=\"printHours\" name=\"printHours\" type=\"number\" min=\"0\" step=\"0.01\" value=\"0\" required inputmode=\"decimal\" />\n            <small>Convert minutes to a decimal fraction of an hour.</small>"
+    }
+  ],
+  "example": {
+    "description": "The tracked calculator labels quantity as number of parts and printHours as print time per part; its built-in example sets them to 2 and 4, and its electricity and machine formulas multiply those fields.",
+    "operation": "product",
+    "inputs": [
+      2,
+      4
+    ],
+    "result": 8,
+    "excerpt": "The MooreCode calculator's built-in fictional example uses 2 parts at 4 print-hours each, which is 8 printer-hours before any failed-print allowance.",
+    "reproducedBy": "worker arithmetic"
+  },
+  "references": [
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender-addons/main/object_print3d_utils/operators.py",
+      "status": 200,
+      "sha256": "e55feac35bcfc9a0df140d6bc6cbe3d2597cc7c09a6095e21c7132f24ba05741",
+      "sourceExcerpt": "    bl_description = \"Check for geometry is solid (has valid inside/outside) and correct normals\"",
+      "supportingClaim": "The official Blender 3D-Print Toolbox source describes its solid check as checking whether geometry has valid inside and outside regions and correct normals.",
+      "primarySourceRationale": "This is the directly fetchable plain-text source for Blender's official 3D-Print Toolbox operator, copyright Blender Foundation; it replaces the inaccessible manual without extending the claim beyond the fetched code."
+    },
+    {
+      "url": "https://3d.nih.gov/workflows",
+      "status": 200,
+      "sha256": "5958dd5c795ba8adf60c2db345d93c1603ee175fb91b06b34e8177be4f05d551",
+      "sourceExcerpt": "As a practical guide: 3D printing: aim for about 300,000–1,000,000 triangles Interactive visualization: aim for under 500,000 triangles per object where practical High-detail scientific surfaces: up to 1–2 million triangles may be reasonable when the additional detail is needed These are guidelines rather than hard limits.",
+      "supportingClaim": "NIH 3D gives about 300,000 to 1,000,000 triangles as a practical 3D-printing range, while calling those numbers guidance rather than hard limits.",
+      "primarySourceRationale": "NIH 3D is a U.S. National Institutes of Health service documenting its own mesh-processing workflow."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/3MFConsortium/spec_core/1.3.0/3MF%20Core%20Specification.md",
+      "status": 200,
+      "sha256": "a088b776133872e48c2f3edfe4c7857e4e91b8f4ab6606ce4dbc5d2ed8067e7c",
+      "sourceExcerpt": "| unit | **ST\\_Unit** | | millimeter | Specifies the unit used to interpret all vertices, locations, or measurements in the model. Valid values are micron, millimeter, centimeter, inch, foot, and meter. |",
+      "supportingClaim": "The 3MF Core Specification version 1.3.0 defines a model unit, uses millimeter as the default, and permits micron, centimeter, inch, foot, and meter.",
+      "primarySourceRationale": "The 3MF Consortium publishes this version-pinned normative specification as directly fetchable plain text; the same source identifies itself as published version 1.3.0."
+    }
+  ],
+  "claimRationale": "The tracked calculator UI defines the two inputs as number of parts and print time per part; the script's built-in fictional example supplies 2 and 4, and its cost formulas multiply quantity by printHours. Their product is exactly 8 printer-hours. This arithmetic does not estimate the featured scan, its cost, or a real job. The Blender source supports only the stated solid-check diagnostic, not a claim that the tool guarantees printability or preserves shape. The NIH 3D excerpt supports an approximate triangle-count guide, not a universal mesh cap or proof that a model will print. The 3MF specification supports only the format's declared unit behavior. The 100.0 mm scaling case remains explicitly labeled as a reproducible exercise, not a customer or scanner result."
+}

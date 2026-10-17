@@ -7,6 +7,13 @@
     <language>en-us</language>
     <atom:link href="https://moorecode.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>3D Scanning to Printing: Repair, Scale, Slice</title>
+      <link>https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html</guid>
+      <pubDate>Sat, 17 Oct 2026 12:00:00 +0000</pubDate>
+      <description>Turn a 3D scan into a printable file by repairing the mesh, correcting scale, and measuring a small test first.</description>
+    </item>
+    <item>
       <title>Best 3D Printing Websites for Files: 2026 Maker Guide</title>
       <link>https://moorecode.com/blog/best-3d-printing-websites-files-2026.html</link>
       <guid isPermaLink="true">https://moorecode.com/blog/best-3d-printing-websites-files-2026.html</guid>

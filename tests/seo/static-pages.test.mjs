@@ -72,7 +72,7 @@ const blogSchema = blogGraph.find((item) => item['@type'] === 'Blog');
 const blogPostIds = new Set(blogSchema.blogPost.map((item) => item['@id']));
 assert.match(blog, /<title>3D Printing Guides and Project Notes · MooreCode<\/title>/);
 assert.match(blog, /<h1>3D printing guides and project notes<\/h1>/);
-assert.match(blog, /The MooreCode blog is a collection of twelve practical guides/);
+assert.match(blog, /The MooreCode blog is a collection of thirteen practical guides/);
 assert.equal((blog.match(/class="post-card"/g) || []).length, publishedArticlePaths.length);
 for (const path of publishedArticlePaths) {
   const url = `https://moorecode.com/${path}`;
@@ -297,6 +297,24 @@ for (const link of ['/blog/what-is-fdm-3d-printing.html', '/calculators/3d-print
   assert.ok(prototypeAnswer.includes(`href="${link}"`), `Prototype direct answer needs ${link}`);
 }
 assert.match(scanGuide, /<h2 id="scan-to-print">How do you turn a 3D scan into a printable prototype\?<\/h2>/);
+
+const scanningGuide = read('blog/3d-scanning-to-printing-repair-scale-slice.html');
+const scanningSchemas = JSON.parse(scanningGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const scanningPost = scanningSchemas.find((item) => item['@type'] === 'BlogPosting');
+const scanningFaq = scanningSchemas.find((item) => item['@type'] === 'FAQPage');
+assert.equal(scanningPost.datePublished, '2026-10-17');
+assert.equal(scanningPost.dateModified, '2026-10-17');
+assert.equal(scanningPost.image, 'https://moorecode.com/blog/images/3d-scanning-to-printing-repair-scale-slice.svg');
+assert.equal(scanningFaq.mainEntity.length, 4);
+assert.match(firstProseParagraph(scanningGuide), /^3D scanning and printing is a workflow/);
+assert.match(scanningGuide, /100\.0 ÷ 94\.6 = 1\.0571/);
+assert.match(scanningGuide, /2 parts at 4 print-hours each, which is 8 printer-hours/);
+for (const link of [
+  '/blog/3d-printing-prototype-four-stage-test-plan.html',
+  '/blog/when-resin-3d-printing-beats-fdm.html',
+  '/blog/3d-printing-filament-pla-petg-tpu.html',
+  '/calculators/3d-printing-price-calculator.html',
+]) assert.match(scanningGuide, new RegExp(`href="${link.replaceAll('.', '\\.')}`));
 
 const filamentAnswer = directAnswer(filamentGuide);
 assert.ok(filamentGuide.indexOf(filamentAnswer) < filamentGuide.indexOf('<h2>Which 3D printing materials'), 'Filament direct answer needs to stay near the top');

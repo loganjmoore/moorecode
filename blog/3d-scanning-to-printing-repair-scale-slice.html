@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Scanning to Printing: Repair, Scale, Slice</title>
+<meta name="description" content="Turn a 3D scan into a printable file: repair the mesh, set scale from a known dimension, verify thin areas, and slice a measured test." />
+<link rel="canonical" href="https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html" />
+<meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="3D Scanning to Printing: Repair, Scale, Slice" />
+<meta property="og:description" content="A practical workflow for repairing, scaling, and testing a scanned mesh before the full print." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html" />
+<meta property="og:image" content="https://moorecode.com/blog/images/3d-scanning-to-printing-repair-scale-slice.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html#post",
+      "headline": "3D Scanning to Printing: Repair, Scale, Slice",
+      "description": "Turn a 3D scan into a printable file: repair the mesh, set scale from a known dimension, verify thin areas, and slice a measured test.",
+      "url": "https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html",
+      "mainEntityOfPage": "https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html",
+      "datePublished": "2026-10-17",
+      "dateModified": "2026-10-17",
+      "image": "https://moorecode.com/blog/images/3d-scanning-to-printing-repair-scale-slice.svg",
+      "author": { "@id": "https://moorecode.com/#logan" },
+      "publisher": { "@id": "https://moorecode.com/#logan" },
+      "isPartOf": { "@id": "https://moorecode.com/blog/#blog" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can a 3D scan be printed directly?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A 3D scan can be printed directly only when its mesh is already closed, correctly scaled, free of unwanted geometry, thick enough, and accepted by the slicer. Most scans need at least cleanup, a scale check, and a layer-by-layer preview first." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is STL or 3MF better for a repaired scan?",
+          "acceptedAnswer": { "@type": "Answer", "text": "3MF is safer when the software supports it because the format records a unit of scale. STL remains widely compatible, but confirm the import unit and measure the model again after opening it in the slicer." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you make a 3D scan watertight?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Remove stray shells, merge duplicate vertices where appropriate, correct flipped normals, close only unintended holes, and resolve non-manifold edges. Inspect the repaired surface because an automatic remesh can close the model while changing useful detail." }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate does a 3D scan need to be for printing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A 3D scan needs to be accurate enough for the part's intended test. A display copy can tolerate more surface and dimensional error than a mating cover, clip, bearing seat, or hole pattern, which should be rebuilt or verified with controlled dimensions." }
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://moorecode.com/#logan",
+      "name": "Logan Moore",
+      "url": "https://moorecode.com/",
+      "jobTitle": "Solo developer",
+      "sameAs": ["https://github.com/loganjmoore"],
+      "worksFor": { "@type": "Organization", "name": "BrightPrompt Consulting LLC" }
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://moorecode.com/blog/#blog",
+      "name": "moorecode blog",
+      "url": "https://moorecode.com/blog/"
+    }
+  ]
+}
+</script>
+<script src="/navigation.js" defer></script>
+<script defer src="/posthog-web.js"></script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="navlinks" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/consulting.html">Consulting</a>
+    <a href="/hobbies.html">Hobbies</a>
+    <a href="/youtube.html">YouTube</a>
+    <a href="/about.html">About</a>
+    <a href="/blog/" class="active">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+<article>
+<header class="post-head">
+  <p class="post-meta">October 17, 2026 · By Logan Moore</p>
+  <h1>3D Scanning to Printing: Repair, Scale, Slice</h1>
+</header>
+
+<section class="prose">
+  <img class="post-cover" src="/blog/images/3d-scanning-to-printing-repair-scale-slice.svg" width="1200" height="630" alt="A scanned object moving through mesh repair and dimension checks toward a sliced 3D print." />
+
+  <p class="lede">3D scanning and printing is a workflow for capturing an object's surface, repairing the mesh, setting a verified physical scale, and slicing a test file. A scan is ready to print only after it is closed, free of unwanted shells and self-intersections, thick enough for the chosen process, and checked against at least one real measurement. The safest sequence is capture, clean, repair, scale, inspect, then print a small measured test before committing to the full object.</p>
+
+  <p>The failure in this walkthrough hides behind a clean-looking mesh. I use a labeled example in which a 100.0 mm feature enters the mesh editor at 94.6 mm. It is a reproducible scale exercise. I have no verified customer job or scanner result to attach to it.</p>
+
+  <h2>What does the scan-to-print workflow look like?</h2>
+  <p>The scan-to-print workflow has six gates: capture, cleanup, repair, scale, slice, and physical verification. Keep the raw scan untouched, save a repaired working copy, and write down the reference measurement before changing geometry.</p>
+
+  <table>
+    <thead><tr><th>Gate</th><th>Check</th><th>Stop if</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Capture</strong></td><td>Required faces are present</td><td>A mating edge or underside is missing</td></tr>
+      <tr><td><strong>Cleanup</strong></td><td>Object is separated from floor and debris</td><td>Stray shells remain inside the model</td></tr>
+      <tr><td><strong>Repair</strong></td><td>Mesh is closed and consistently oriented</td><td>Repair bridges a real opening or erases detail</td></tr>
+      <tr><td><strong>Scale</strong></td><td>Two known dimensions agree</td><td>One axis fits while another remains wrong</td></tr>
+      <tr><td><strong>Slice</strong></td><td>Every layer has supported, printable geometry</td><td>Walls vanish or islands appear</td></tr>
+      <tr><td><strong>Test</strong></td><td>Printed coupon meets the written measurement</td><td>The full print would repeat the same error</td></tr>
+    </tbody>
+  </table>
+
+  <p>This walkthrough is narrower than the broader <a href="/blog/3d-printing-prototype-four-stage-test-plan.html">MooreCode prototype test plan</a>. That guide decides what a prototype must prove. Here, I want to keep mesh repair from changing the shape and scale that the test depends on.</p>
+
+  <h2>What should a 3D scanner for 3D printing capture?</h2>
+  <p>A 3D scanner for 3D printing should capture every surface that controls silhouette, fit, support, or wall thickness. Texture and color can help alignment or presentation, but a single-material print follows geometry.</p>
+
+  <p>Before scanning, mark two physical dimensions that can be reached again with calipers. Include a long reference across the object and a second dimension on another axis. Matte, stationary surfaces usually give the capture system more consistent information than transparent, reflective, or moving ones. If an underside matters, plan a second capture rather than asking repair software to invent it.</p>
+
+  <p>Separate the finished model from its source data. Save the original point cloud or high-resolution mesh, the aligned scan, the cleaned mesh, and the print export as different files. A later repair can then be compared with the capture instead of accepted because it looks smoother.</p>
+
+  <h2>How do you repair a scanned mesh without erasing detail?</h2>
+  <p>You repair a scanned mesh without erasing detail by fixing identified defects from least to most destructive. Start with floating fragments, duplicated vertices, face orientation, small unintended holes, non-manifold edges, and self-intersections. Use voxel remeshing or surface wrapping only when local fixes cannot produce a closed result.</p>
+
+  <p>The <a href="https://raw.githubusercontent.com/blender/blender-addons/main/object_print3d_utils/operators.py">official Blender 3D-Print Toolbox source</a> describes its solid check as checking whether geometry has valid inside and outside regions and correct normals. That is a diagnostic, not proof that automatic cleanup preserved the intended shape, so inspect the repaired surface before accepting it.</p>
+
+  <p><a href="https://3d.nih.gov/workflows">NIH 3D documents</a> the same trade-off in its public mesh-processing workflow. It tries cleanup before Boolean union, voxel remesh, or alpha wrap, and warns that the latter two rebuild the surface and can change fine detail. NIH 3D gives about 300,000 to 1,000,000 triangles as a practical 3D-printing range, while calling those numbers guidance rather than hard limits. That range is not a universal mesh cap or proof that a particular model will print. Preserve enough triangles for the printer's useful detail; extra triangles do not restore detail the scanner never measured.</p>
+
+  <h2>How do you scale a 3D scan accurately?</h2>
+  <p>You scale a 3D scan accurately by dividing a known physical dimension by the same dimension in the mesh, applying that factor uniformly, then checking a second axis. Scale before adding precisely modeled holes, tabs, or mating faces.</p>
+
+  <p>In the worked failure case, the physical reference is 100.0 mm and the imported mesh reads 94.6 mm. The correction is 100.0 ÷ 94.6 = 1.0571, so the uniform scale is 105.71%. The uncorrected mesh would print 5.4 mm short along that feature, even though its proportions look convincing on screen.</p>
+
+  <p>Now check a second physical dimension. If the object is 62.0 mm across and the scaled mesh reads 62.4 mm, the remaining 0.4 mm difference is evidence of scan distortion or measurement error. A second global scale would fix one axis by breaking the first. For a decorative copy, 0.4 mm may be acceptable. For a snap fit, hole pattern, or bearing seat, rebuild the interface as controlled CAD geometry and state a tolerance.</p>
+
+  <h2>Which file should you export for printing?</h2>
+  <p>The best export file is the one your mesh editor and slicer both read without losing scale or geometry. Keep OBJ or PLY when color or scan attributes still matter, then use 3MF or STL for the printable handoff supported by your tools.</p>
+
+  <p>The <a href="https://raw.githubusercontent.com/3MFConsortium/spec_core/1.3.0/3MF%20Core%20Specification.md">3MF Core Specification version 1.3.0</a> defines a model unit, uses millimeter as the default, and permits micron, centimeter, inch, foot, and meter. That explicit unit is useful in a scale-sensitive workflow. A plain STL remains common, but I treat its import unit as an assumption to verify. Measure the model again inside the slicer after export.</p>
+
+  <p>File format does not make thin features printable. Inspect the layer preview for lost walls, unsupported islands, trapped internal shells, filled openings, and a stable first layer. Choose FDM or resin from the geometry and finish. The <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin-versus-FDM guide</a> covers that process choice, while the <a href="/blog/3d-printing-filament-pla-petg-tpu.html">filament guide</a> helps choose among PLA, PETG, and TPU once FDM is the right process.</p>
+
+  <h2>How do you prove the scanned object is printable?</h2>
+  <p>You prove the scanned object is printable with a small physical test tied to the dimensions and surfaces that matter. Slice a ring, interface, base section, or other coupon before printing the whole scan.</p>
+
+  <ol>
+    <li>Write the expected dimension and allowed error before slicing.</li>
+    <li>Print the coupon in the same process, orientation, layer height, and material planned for the object.</li>
+    <li>Measure it after the required cooling or cure step.</li>
+    <li>Compare the print with both the repaired mesh and the physical source.</li>
+    <li>Change one cause at a time: scan geometry, mesh scale, modeled compensation, or printer calibration.</li>
+  </ol>
+
+  <p>A clean slicer preview proves only that toolpaths were generated. Dimensional accuracy, fit, strength, and faithfulness to the original object remain open questions. Photograph the reference points and record the mesh and printed measurements so the next revision has a baseline.</p>
+
+  <h2>How much time belongs in the first scan test?</h2>
+  <p>The first scan test should use enough printer time to expose the uncertain feature, and no more. The MooreCode calculator's built-in fictional example uses 2 parts at 4 print-hours each, which is 8 printer-hours before any failed-print allowance. A small coupon can keep an avoidable scale mistake from consuming that full block.</p>
+
+  <p>The 8-hour total comes from source-backed calculator inputs. It makes no prediction about a scanned object. Use the <a href="/calculators/3d-printing-price-calculator.html">3D printing price calculator</a> with the slicer's actual material and time estimate after the file passes its dimension check.</p>
+
+  <h2>What do people ask about 3D scanning and printing?</h2>
+  <h3>Can a 3D scan be printed directly?</h3>
+  <p>A 3D scan can be printed directly only when its mesh is already closed, correctly scaled, free of unwanted geometry, thick enough, and accepted by the slicer. Most scans need at least cleanup, a scale check, and a layer-by-layer preview first.</p>
+  <h3>Is STL or 3MF better for a repaired scan?</h3>
+  <p>3MF is safer when the software supports it because the format records a unit of scale. STL remains widely compatible, but confirm the import unit and measure the model again after opening it in the slicer.</p>
+  <h3>How do you make a 3D scan watertight?</h3>
+  <p>Remove stray shells, merge duplicate vertices where appropriate, correct flipped normals, close only unintended holes, and resolve non-manifold edges. Inspect the repaired surface because an automatic remesh can close the model while changing useful detail.</p>
+  <h3>How accurate does a 3D scan need to be for printing?</h3>
+  <p>A 3D scan needs to be accurate enough for the part's intended test. A display copy can tolerate more surface and dimensional error than a mating cover, clip, bearing seat, or hole pattern, which should be rebuilt or verified with controlled dimensions.</p>
+</section>
+</article>
+</main>
+
+<footer><p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p><div class="foot-links"><a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a><a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a></div><address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
