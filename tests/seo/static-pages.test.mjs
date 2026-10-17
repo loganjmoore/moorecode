@@ -314,6 +314,12 @@ assert.match(prototypeAnswer, /test form, fit, and function before committing to
 for (const link of ['/blog/what-is-fdm-3d-printing.html', '/calculators/3d-printing-price-calculator.html']) {
   assert.ok(prototypeAnswer.includes(`href="${link}"`), `Prototype direct answer needs ${link}`);
 }
+const prototypeCostSection = scanGuide.slice(scanGuide.indexOf('<h2 id="prototype-print-cost">'), scanGuide.indexOf('<h2 id="scan-to-print">'));
+assert.match(prototypeCostSection, /<h2 id="prototype-print-cost">What drives prototype print cost\?<\/h2>/);
+for (const factor of ['Material choice', 'Design complexity', 'Part size', 'Printing technology']) {
+  assert.ok(prototypeCostSection.includes(`<strong>${factor}:</strong>`), `Prototype cost section needs ${factor}`);
+}
+assert.match(prototypeCostSection, /href="\/calculators\/3d-printing-price-calculator\.html">MooreCode 3D printing price calculator<\/a>/);
 assert.match(scanGuide, /<h2 id="scan-to-print">How do you turn a 3D scan into a printable prototype\?<\/h2>/);
 
 const scanningGuide = read('blog/3d-scanning-to-printing-repair-scale-slice.html');
