@@ -6,7 +6,7 @@
 
 - [Logan Moore — iOS & Web Developer | MooreCode](https://moorecode.com/): Explore shipped iOS and web products by Logan Moore and product and software consulting through BrightPrompt Consulting LLC.
 - [About · Logan Moore](https://moorecode.com/about.html): About Logan Moore: faith, family, solo development, and a long list of hands-on hobbies.
-- [3D Printing Guides and Project Notes · MooreCode](https://moorecode.com/blog): MooreCode compares 3D-printing processes, materials, and projects in practical guides and project notes.
+- [3D Printing Guides and Project Notes · MooreCode](https://moorecode.com/blog/): MooreCode compares 3D-printing processes, materials, and projects in practical guides and project notes.
 - [Product & Software Consulting by Logan Moore | BrightPrompt](https://moorecode.com/consulting.html): Product and software consulting by Logan Moore through BrightPrompt Consulting LLC for web presence, digital products, software platforms, and internal tooling.
 - [Contact · Logan Moore](https://moorecode.com/contact.html): Get in touch with Logan Moore by email, on GitHub, or on the air.
 - [Hobbies · Logan Moore](https://moorecode.com/hobbies.html): The hands-on hobbies Logan Moore loves: flower farming, light shows, 3D printing, ham radio, robotics, and landscaping.
@@ -15,6 +15,9 @@
 - [YouTube · Logan Moore](https://moorecode.com/youtube.html): Logan Moore's YouTube channels are coming soon.
 - [Blackjack Now · Privacy Policy](https://moorecode.com/blackjack-privacy.html): Privacy Policy for the Blackjack Now iOS app.
 - [Blackjack Now · Support](https://moorecode.com/blackjack-support.html): Support and help for the Blackjack Now iOS app — contact, FAQ, and how-to.
+- [MyButter · Support](https://moorecode.com/mybutter-support.html): Support and help for the MyButter iOS app — contact, FAQ, and how-to.
+- [MathSteps: Staircase Sprint · Support](https://moorecode.com/mathsteps-support.html): Support and help for the MathSteps: Staircase Sprint iOS app — contact, FAQ, and how-to.
+- [Southside Explorer · Support](https://moorecode.com/southside-support.html): Support and help for the Southside Explorer iOS app — contact, FAQ, and how-to.
 - [3D Printing Price Calculator: Cost & Margin · MooreCode](https://moorecode.com/calculators/3d-printing-price-calculator.html): Estimate direct 3D printing cost, then calculate a suggested selling price from your markup or target gross margin.
 
 ## Blog

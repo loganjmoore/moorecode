@@ -66,6 +66,9 @@ const blog = read('blog/index.html');
 const sitemap = read('sitemap.xml');
 const feed = read('feed.xml');
 const llms = read('llms.txt');
+for (const [, url] of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+  assert.ok(llms.includes(`](${url})`), `${url} must appear in llms.txt`);
+}
 const decodeHtml = (value) => value.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#39;', "'");
 const blogGraph = JSON.parse(blog.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const blogSchema = blogGraph.find((item) => item['@type'] === 'Blog');
@@ -150,7 +153,13 @@ for (const path of [
 ]) assert.match(hobbies, new RegExp(`href="/blog/${path.replaceAll('.', '\\.')}`));
 
 const filamentGuide = read('blog/3d-printing-filament-pla-petg-tpu.html');
+const filamentSchemas = JSON.parse(filamentGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const filamentFaq = filamentSchemas.find((item) => item['@type'] === 'FAQPage');
+const beginnerFilamentAnswer = "MooreCode recommends PLA as the first filament for most home FDM printing because it is forgiving and gives clean results on models, organizers, and prototypes. Choose PETG when the part needs more toughness, layer adhesion, or moderate heat resistance, and choose TPU when it must flex. Use the spool maker's profile for the actual settings.";
 assert.match(filamentGuide, /<h1>3D Printing Materials Guide:/);
+assert.equal(filamentSchemas.find((item) => item['@type'] === 'BlogPosting').dateModified, '2026-10-18');
+assert.equal(filamentFaq.mainEntity.find((item) => item.name === 'Which 3D printing filament should a beginner buy first?').acceptedAnswer.text, beginnerFilamentAnswer);
+assert.ok(filamentGuide.includes(`<p>${beginnerFilamentAnswer}</p>`), 'Beginner filament FAQ needs the same visible and structured answer');
 const filamentLedeEnd = filamentGuide.indexOf('</p>', filamentGuide.indexOf('<p class="lede">')) + 4;
 const filamentFirstSection = filamentGuide.indexOf('<section', filamentLedeEnd);
 assert.equal(filamentFirstSection, filamentGuide.indexOf('<section class="direct-answer"', filamentLedeEnd), 'PLA vs PETG comparison must sit directly under the intro');
@@ -356,8 +365,12 @@ assert.match(invoicingGuide, /The 60-invoice business and its per-invoice result
 const resinGuide = read('blog/when-resin-3d-printing-beats-fdm.html');
 const resinSchemas = JSON.parse(resinGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const resinFaq = resinSchemas.find((item) => item['@type'] === 'FAQPage');
+const resinChoiceAnswer = 'MooreCode recommends resin when small detail, smooth surfaces, or compact batches of similarly tall parts control the result. Choose FDM for many larger functional parts, lower material cost, and simpler cleanup; resin also requires ventilation, skin protection, washing, curing, and contaminated-waste handling.';
 const dentalAnswer = "No. A general-purpose hobby printer and resin are not substitutes for a validated dental workflow. Patient-contact appliances require a material, printer, processing workflow, intended use, and professional oversight that meet the manufacturer's instructions and applicable regulatory requirements.";
 assert.match(resinGuide, /<h1>When Resin 3D Printing Beats FDM<\/h1>/);
+assert.equal(resinSchemas.find((item) => item['@type'] === 'BlogPosting').dateModified, '2026-10-18');
+assert.equal(resinFaq.mainEntity.find((item) => item.name === 'Is resin 3D printing better than FDM?').acceptedAnswer.text, resinChoiceAnswer);
+assert.ok(resinGuide.includes(`<p>${resinChoiceAnswer}</p>`), 'Resin choice FAQ needs the same visible and structured answer');
 assert.match(resinGuide, /<h2>What is resin 3D printing\?<\/h2>/);
 assert.match(resinGuide, /<h2 id="dental-work">When is resin 3D printing appropriate for dental work\?<\/h2>/);
 assert.match(resinGuide, /<h2 id="jewelry-work">How should a 3D-printed jewelry master be planned\?<\/h2>/);
