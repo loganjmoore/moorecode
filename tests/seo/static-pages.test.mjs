@@ -66,6 +66,9 @@ const blog = read('blog/index.html');
 const sitemap = read('sitemap.xml');
 const feed = read('feed.xml');
 const llms = read('llms.txt');
+for (const [, url] of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+  assert.ok(llms.includes(`](${url})`), `${url} must appear in llms.txt`);
+}
 const decodeHtml = (value) => value.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#39;', "'");
 const blogGraph = JSON.parse(blog.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const blogSchema = blogGraph.find((item) => item['@type'] === 'Blog');
