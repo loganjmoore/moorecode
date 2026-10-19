@@ -116,9 +116,18 @@ for (const question of [
   'What does MooreCode build?',
   'Who runs MooreCode?',
   'Which MooreCode guide fits my 3D printing project?',
+  'When does SLA make more sense than FDM?',
+  'When does SLS make more sense than FDM?',
 ]) {
   assert.ok(homepage.includes(`<h3>${question}</h3>`), `${question} needs a visible answer`);
   assert.ok(homepageFaq.mainEntity.some((item) => item.name === question), `${question} needs a structured answer`);
+}
+for (const [question, answer] of [
+  ['When does SLA make more sense than FDM?', "MooreCode's process guide recommends SLA when fine surface detail, small features, or a smooth finish matters more than low material cost and simple cleanup. FDM is usually the better option for larger functional parts and quick, affordable revisions."],
+  ['When does SLS make more sense than FDM?', "MooreCode's process guide recommends SLS when a part needs complex geometry, durable nylon behavior, or support-free nesting that would be difficult with FDM. Because SLS requires industrial equipment and powder handling, using a service bureau is often more practical than buying a machine."],
+]) {
+  assert.equal(homepageFaq.mainEntity.find((item) => item.name === question).acceptedAnswer.text, answer);
+  assert.ok(homepage.includes(`<p>${answer.replace("MooreCode's process guide", `MooreCode's <a href="/blog/what-is-fdm-3d-printing.html">process guide</a>`)}</p>`), `${question} needs the same visible and structured answer`);
 }
 const printingGuideAnswer = homepageFaq.mainEntity.find((item) => item.name === 'Which MooreCode guide fits my 3D printing project?').acceptedAnswer.text;
 for (const topic of ['accessories', 'PLA', 'PETG', 'TPU', 'price calculator', 'dental', 'jewelry', 'manufacturing', 'automotive parts']) {
