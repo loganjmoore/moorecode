@@ -62,6 +62,10 @@ const analyticsSchema = JSON.parse(analyticsPrivacy.match(/<script type="applica
 assert.equal(analyticsSchema['@type'], 'WebPage');
 assert.equal(analyticsSchema.url, 'https://moorecode.com/posthog-privacy.html');
 
+const blackjackPrivacy = read('blackjack-privacy.html');
+assert.match(blackjackPrivacy, /fonts\.googleapis\.com[^>]+rel="stylesheet" media="print" onload="this\.media='all'"/, 'Blackjack privacy must not block first paint on the web font');
+assert.match(blackjackPrivacy, /<noscript><link href="https:\/\/fonts\.googleapis\.com[^>]+rel="stylesheet" \/><\/noscript>/, 'Blackjack privacy needs the web font when JavaScript is disabled');
+
 const blog = read('blog/index.html');
 const sitemap = read('sitemap.xml');
 const feed = read('feed.xml');
