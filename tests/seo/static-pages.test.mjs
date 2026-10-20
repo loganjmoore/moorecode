@@ -167,16 +167,11 @@ for (const path of [
 
 const filamentGuide = read('blog/3d-printing-filament-pla-petg-tpu.html');
 const blogIndex = read('blog/index.html');
-for (const heading of [
-  'Which 3D printing filament and materials should you start with?',
-  'Which 3D printing accessories belong in a basic tool kit?',
-  'What do home 3D printing and paint preparation require?',
-  'How do FDM, SLA, SLS, PolyJet, and carbon 3D printing compare?',
-  'How do dentists and jewelry makers use resin 3D printing?',
-  'How should a 3D printing business set its rates?',
-  'Where does 3D printing fit in manufacturing and metal production?',
-]) {
-  assert.match(blogIndex, new RegExp(`<h2[^>]*>${heading.replace(/[?]/g, '\\?')}<\\/h2>`));
+const selector = blogIndex.match(/<nav class="guide-map" aria-labelledby="printing-guide-selector">([\s\S]*?)<\/nav>/)?.[1];
+assert.ok(selector, 'Inbound guide-selector anchors must reach the question navigation');
+assert.match(selector, /<h2 id="printing-guide-selector">Choose a 3D printing guide by process or project<\/h2>/);
+for (const id of ['filament-materials', 'printing-accessories', 'home-printing-paint', 'printing-processes', 'resin-projects', 'rates-business', 'manufacturing-metal']) {
+  assert.equal((blogIndex.match(new RegExp('id="' + id + '"', 'g')) || []).length, 1, 'Preserve a unique destination for #' + id);
 }
 for (const destination of [
   '/blog/3d-printing-filament-pla-petg-tpu.html',
@@ -186,7 +181,7 @@ for (const destination of [
   '/calculators/3d-printing-price-calculator.html',
   '/blog/3d-printing-metal-processes-compared.html#manufacturing',
 ]) {
-  assert.ok(blogIndex.includes(`href="${destination}"`), `Blog guide selector needs ${destination}`);
+  assert.ok(selector.includes(`href="${destination}"`), `Blog guide selector needs ${destination}`);
 }
 assert.match(filamentGuide, /href="\/blog\/#printing-guide-selector">3D printing process and project guide selector<\/a>/);
 assert.match(filamentGuide, /<h1>3D Printing Materials Guide:/);
