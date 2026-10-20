@@ -166,6 +166,29 @@ for (const path of [
 ]) assert.match(hobbies, new RegExp(`href="/blog/${path.replaceAll('.', '\\.')}`));
 
 const filamentGuide = read('blog/3d-printing-filament-pla-petg-tpu.html');
+const blogIndex = read('blog/index.html');
+for (const heading of [
+  'Which 3D printing filament and materials should you start with?',
+  'Which 3D printing accessories belong in a basic tool kit?',
+  'What do home 3D printing and paint preparation require?',
+  'How do FDM, SLA, SLS, PolyJet, and carbon 3D printing compare?',
+  'How do dentists and jewelry makers use resin 3D printing?',
+  'How should a 3D printing business set its rates?',
+  'Where does 3D printing fit in manufacturing and metal production?',
+]) {
+  assert.match(blogIndex, new RegExp(`<h2[^>]*>${heading.replace(/[?]/g, '\\?')}<\\/h2>`));
+}
+for (const destination of [
+  '/blog/3d-printing-filament-pla-petg-tpu.html',
+  '/blog/what-is-fdm-3d-printing.html',
+  '/blog/when-resin-3d-printing-beats-fdm.html#dental-work',
+  '/blog/when-resin-3d-printing-beats-fdm.html#jewelry-work',
+  '/calculators/3d-printing-price-calculator.html',
+  '/blog/3d-printing-metal-processes-compared.html#manufacturing',
+]) {
+  assert.ok(blogIndex.includes(`href="${destination}"`), `Blog guide selector needs ${destination}`);
+}
+assert.match(filamentGuide, /href="\/blog\/#printing-guide-selector">3D printing process and project guide selector<\/a>/);
 assert.match(filamentGuide, /<h1>3D Printing Materials Guide:/);
 const filamentLedeEnd = filamentGuide.indexOf('</p>', filamentGuide.indexOf('<p class="lede">')) + 4;
 const filamentFirstSection = filamentGuide.indexOf('<section', filamentLedeEnd);
