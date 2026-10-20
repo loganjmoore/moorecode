@@ -708,6 +708,70 @@ section h2 {
   background: var(--bg-elev);
 }
 
+.filament-hub {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.filament-hub h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.filament-hub > p {
+  max-width: 70ch;
+  margin: 0 0 18px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+.filament-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.filament-hub table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.filament-hub th,
+.filament-hub td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.filament-hub thead th {
+  color: var(--text);
+  background: var(--bg-elev);
+  font-weight: 600;
+}
+
+.filament-hub tbody th {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.filament-hub a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(245,185,66,0.35);
+  text-underline-offset: 3px;
+}
+
+.filament-hub .filament-hub-link {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
 .blog-list {
   max-width: 760px;
   margin: 0 auto;
