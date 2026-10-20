@@ -236,16 +236,6 @@ main { flex: 1 0 auto; width: 100%; }
 
 .guide-map a { color: var(--accent); }
 
-.intent-map h2:not(:first-child) {
-  margin-top: 24px;
-}
-
-.intent-map p {
-  margin: 0;
-  color: var(--text-dim);
-  line-height: 1.65;
-}
-
 /* ---------- Section headers ---------- */
 section h2 {
   font-size: clamp(28px, 4vw, 40px);
