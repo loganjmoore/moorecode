@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">3D printing materials after a PLA clamp failure</title>
+  <desc id="desc">A rigid clamp with a 65 degree Celsius requirement is checked against PLA, PETG, and TPU.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0b0c10"/>
+      <stop offset="1" stop-color="#1b1e26"/>
+    </linearGradient>
+    <linearGradient id="heat" x1="0" y1="1" x2="0" y2="0">
+      <stop stop-color="#e07a5f"/>
+      <stop offset="1" stop-color="#f5b942"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="70" y="84" fill="#f5b942" font-size="21" font-weight="700" letter-spacing="3">PART FIRST MATERIAL CHECK</text>
+    <text x="70" y="145" fill="#e8eaef" font-size="48" font-weight="800">PLA failed. What replaces it?</text>
+    <text x="70" y="187" fill="#9aa1ad" font-size="21">Match heat, load, motion, and fit before choosing a spool.</text>
+  </g>
+
+  <g transform="translate(72 245)">
+    <rect width="415" height="276" rx="22" fill="#14161c" stroke="#343946" stroke-width="3"/>
+    <text x="28" y="44" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">RIGID CLAMP REQUIREMENT</text>
+    <path d="M78 82h176v47H130v83h124v46H78z" fill="none" stroke="#e8eaef" stroke-width="15" stroke-linejoin="round"/>
+    <rect x="122" y="136" width="174" height="69" rx="9" fill="#262a35" stroke="#9aa1ad" stroke-width="3"/>
+    <path d="M296 170h47" stroke="#e07a5f" stroke-width="8" stroke-linecap="round"/>
+    <path d="M330 155l17 15-17 15" fill="none" stroke="#e07a5f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(335 68)">
+      <rect x="0" y="0" width="28" height="112" rx="14" fill="#262a35" stroke="#e8eaef" stroke-width="4"/>
+      <circle cx="14" cy="112" r="29" fill="#262a35" stroke="#e8eaef" stroke-width="4"/>
+      <path d="M14 99V31" stroke="url(#heat)" stroke-width="12" stroke-linecap="round"/>
+      <circle cx="14" cy="112" r="15" fill="#e07a5f"/>
+    </g>
+    <text x="278" y="248" fill="#f5b942" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800">65°C</text>
+  </g>
+
+  <g transform="translate(535 245)" font-family="Inter,Arial,sans-serif">
+    <g>
+      <rect width="593" height="76" rx="18" fill="#14161c" stroke="#343946" stroke-width="3"/>
+      <text x="25" y="48" fill="#e8eaef" font-size="25" font-weight="800">PLA</text>
+      <text x="139" y="34" fill="#9aa1ad" font-size="16">Strength warning above</text>
+      <text x="139" y="57" fill="#e07a5f" font-size="23" font-weight="800">60°C</text>
+      <rect x="450" y="18" width="116" height="40" rx="10" fill="#e07a5f"/>
+      <text x="508" y="45" text-anchor="middle" fill="#1a1208" font-size="18" font-weight="800">REJECT</text>
+    </g>
+    <g transform="translate(0 96)">
+      <rect width="593" height="76" rx="18" fill="#14161c" stroke="#f5b942" stroke-width="3"/>
+      <text x="25" y="48" fill="#e8eaef" font-size="25" font-weight="800">PETG</text>
+      <text x="139" y="34" fill="#9aa1ad" font-size="16">Published resistance</text>
+      <text x="139" y="57" fill="#f5b942" font-size="23" font-weight="800">68°C</text>
+      <rect x="450" y="18" width="116" height="40" rx="10" fill="#f5b942"/>
+      <text x="508" y="45" text-anchor="middle" fill="#1a1208" font-size="18" font-weight="800">TEST</text>
+    </g>
+    <g transform="translate(0 192)">
+      <rect width="593" height="76" rx="18" fill="#14161c" stroke="#343946" stroke-width="3"/>
+      <text x="25" y="48" fill="#e8eaef" font-size="25" font-weight="800">TPU</text>
+      <text x="139" y="34" fill="#9aa1ad" font-size="16">Designed to flex</text>
+      <path d="M141 52c30-17 56 17 86 0s56 17 86 0" fill="none" stroke="#e8eaef" stroke-width="5" stroke-linecap="round"/>
+      <rect x="450" y="18" width="116" height="40" rx="10" fill="#262a35" stroke="#9aa1ad" stroke-width="2"/>
+      <text x="508" y="45" text-anchor="middle" fill="#e8eaef" font-size="18" font-weight="800">WRONG FIT</text>
+    </g>
+  </g>
+  <text x="70" y="585" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="18">Published values screen the choice. A printed part still needs a measured test.</text>
+</svg>

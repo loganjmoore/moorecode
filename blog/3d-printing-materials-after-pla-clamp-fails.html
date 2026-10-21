@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Printing Materials After a PLA Clamp Fails</title>
+<meta name="description" content="Choose a replacement material from the failed part's heat, load, motion, and fit requirements. Includes a 65°C clamp check." />
+<link rel="canonical" href="https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html" />
+<meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="3D Printing Materials After a PLA Clamp Fails" />
+<meta property="og:description" content="Choose a filament from the part's heat, load, motion, and fit requirements, with a worked 65°C clamp check." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html" />
+<meta property="og:image" content="https://moorecode.com/blog/images/3d-printing-materials-after-pla-clamp-fails.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html#post",
+      "headline": "3D Printing Materials After a PLA Clamp Fails",
+      "description": "Choose a replacement material from the failed part's heat, load, motion, and fit requirements. Includes a 65°C clamp check.",
+      "url": "https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html",
+      "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html",
+      "datePublished": "2026-10-21",
+      "dateModified": "2026-10-21",
+      "image": "https://moorecode.com/blog/images/3d-printing-materials-after-pla-clamp-fails.svg",
+      "author": { "@id": "https://moorecode.com/#logan" },
+      "publisher": { "@id": "https://moorecode.com/#logan" },
+      "isPartOf": { "@id": "https://moorecode.com/blog/#blog" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which 3D printing material should a beginner use?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A beginner should usually use PLA for indoor models, fit checks, organizers, and other rigid parts that will stay cool. PLA is forgiving to print, but the finished part still has to pass its heat and load requirements." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is PETG stronger than PLA?",
+          "acceptedAnswer": { "@type": "Answer", "text": "PETG is generally tougher, less brittle, and better at layer bonding than PLA, while PLA is usually stiffer and gives cleaner detail. The stronger choice depends on the load direction, print orientation, temperature, geometry, and exact filament." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can TPU replace PETG for a functional part?",
+          "acceptedAnswer": { "@type": "Answer", "text": "TPU can replace PETG only when controlled flex is part of the job, such as a bumper, foot, sleeve, or compliant seal. TPU is a poor substitute for a bracket that must hold a rigid angle or a flat mounting face." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a PETG part stay in a hot car?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A PETG label alone does not prove a part is safe in a hot car. Check the exact filament data sheet, measure the temperature where the part will sit, include load and time in the test, and leave a useful margin below the published limit." }
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://moorecode.com/#logan",
+      "name": "Logan Moore",
+      "url": "https://moorecode.com/",
+      "jobTitle": "Solo developer",
+      "sameAs": ["https://github.com/loganjmoore"],
+      "worksFor": { "@type": "Organization", "name": "BrightPrompt Consulting LLC" }
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://moorecode.com/blog/#blog",
+      "name": "moorecode blog",
+      "url": "https://moorecode.com/blog/"
+    }
+  ]
+}
+</script>
+<script src="/navigation.js" defer></script>
+<script defer src="/posthog-web.js"></script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="navlinks" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/consulting.html">Consulting</a>
+    <a href="/hobbies.html">Hobbies</a>
+    <a href="/youtube.html">YouTube</a>
+    <a href="/about.html">About</a>
+    <a href="/blog/" class="active">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+<article>
+<header class="post-head">
+  <p class="post-meta">October 21, 2026 · By Logan Moore</p>
+  <h1>3D Printing Materials After a PLA Clamp Fails</h1>
+</header>
+
+<section class="prose">
+  <img class="post-cover" src="/blog/images/3d-printing-materials-after-pla-clamp-fails.svg" width="1200" height="630" alt="A diagram matching PLA, PETG, and TPU to a rigid clamp with a 65 degree Celsius heat requirement." />
+
+  <p class="lede">Choosing replacement 3D printing materials after a PLA part fails is a requirements check: use PETG for moderate heat and toughness, TPU for controlled flex, and PLA only when the part can stay rigid, cool, and lightly loaded. In a PETG vs PLA strength comparison, PETG is usually tougher and less brittle, while PLA is stiffer and easier to print. The 65°C example below rejects Prusament PLA at its published 60°C warning point, gives that brand's PETG only a 3°C paper margin, and sends the PETG prototype to a measured test.</p>
+
+  <section class="direct-answer" aria-labelledby="materials-quick-answer">
+    <h2 id="materials-quick-answer">Which 3D printing material fits which part?</h2>
+    <p>PLA, PETG, and TPU solve different part problems because stiffness, toughness, heat, and flexibility are separate requirements.</p>
+    <table>
+      <thead>
+        <tr><th>Part requirement</th><th>First material to consider</th><th>Reason to reject it</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Rigid indoor model or fit check</td><td>PLA</td><td>Reject PLA when sustained heat or repeated bending is part of the job.</td></tr>
+        <tr><td>Clamp, holder, or utility bracket</td><td>PETG</td><td>Reject PETG when crisp tiny detail or a truly flexible response matters more.</td></tr>
+        <tr><td>Bumper, foot, sleeve, or compliant seal</td><td>TPU</td><td>Reject TPU when the part must keep a rigid angle or bridge a firm span.</td></tr>
+      </tbody>
+    </table>
+    <p>Use the table to narrow the choice. It cannot certify a finished part: colorants and additives change filament behavior, while printed geometry creates weak directions that a raw-plastic data sheet cannot predict.</p>
+  </section>
+
+  <h2>Is PETG stronger than PLA?</h2>
+  <p>PETG is usually the better material for repeated handling, tougher parts, or stronger layer bonding. PLA is stiffer and often prints fine detail more cleanly. The word <em>stronger</em> hides the failure mode: a PLA arm may deflect less under a small load and then crack when bent too far, while a PETG arm can flex farther before a brittle break.</p>
+
+  <p>Prusament describes its PETG this way: “Compared to PLA, it is more heat resistant, more flexible and less brittle.” Because Prusament makes the filament and publishes the product data, that sentence is useful when comparing its own materials. Another brand, blend, color, or print orientation may behave differently. Read the <a href="https://prusament.com/materials/prusament-petg/">Prusament PETG material page</a>, then check the maker's sheet for the spool on your machine.</p>
+
+  <p>The existing <a href="/blog/3d-printing-filament-pla-petg-tpu.html">MooreCode filament guide</a> puts the decision in one sentence: “The right choice starts with the finished part rather than the label on the spool.” After a failure, that rule keeps me from reaching for a popular filament before I can name what the old part failed to do.</p>
+
+  <h2>Why did the PLA clamp fail the 65°C requirement?</h2>
+  <p>The PLA clamp fails this paper review because the part must work at 65°C, which is 5°C above Prusament's published warning point for PLA. <a href="https://prusament.com/materials/pla/">Prusament says its PLA parts start to lose mechanical strength above 60°C.</a> The requirement margin is 60 - 65 = -5°C, so I can reject this PLA before debating print orientation, infill, or clamp load.</p>
+
+  <table>
+    <thead>
+      <tr><th>Check</th><th>Published or required value</th><th>Margin against 65°C</th><th>Decision</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Clamp requirement</td><td>65°C sustained service</td><td>Baseline</td><td>The material must stay useful under load at this temperature.</td></tr>
+      <tr><td>Prusament PLA</td><td>Loses mechanical strength over 60°C</td><td>-5°C</td><td>Reject for this requirement.</td></tr>
+      <tr><td>Prusament PETG</td><td>68°C temperature resistance</td><td>+3°C</td><td>Candidate for a measured prototype, with little published margin.</td></tr>
+      <tr><td>TPU</td><td>Flex is the defining behavior</td><td>Not comparable</td><td>Reject if the clamp must hold a rigid mounting face.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Prusament lists 68°C temperature resistance for its PETG, leaving 68 - 65 = 3°C on this desk check. I would not turn three degrees into a promise. A dark enclosure may have a hotter local spot, the clamp stays under load, and a layer boundary may fail before the catalog value suggests. PETG earns a prototype test here, followed by a measured result.</p>
+
+  <p>This clamp is an independently reproducible selection example. It is neither a customer story nor a physical bench result. The evidence supports rejecting this PLA against the stated 65°C requirement and testing the named PETG next; it cannot prove that a particular model, spool, printer profile, or orientation will survive.</p>
+
+  <h2>When should you choose TPU 3D printing filament?</h2>
+  <p>TPU 3D printing filament fits a design that depends on bending, grip, impact absorption, or a compliant seal. A protective sleeve benefits from flex. A shelf bracket usually needs to hold its angle. Shore hardness matters too, so two products sold as TPU can behave differently.</p>
+
+  <p>Prusament lists TPU 95A as “Soft and bendable at thin layers, strong and durable at thick layers.” See the <a href="https://prusament.com/materials/prusament-tpu-95a/">Prusament TPU 95A material page</a>. That manufacturer-specific description is a reason to test wall thickness instead of assuming the TPU label predicts part behavior; it does not establish settings or behavior for every TPU.</p>
+
+  <h2>How should you test a material swap?</h2>
+  <p>A material swap should repeat the failed condition on a small, measured specimen before anyone trusts the full part. Keep the original geometry and test method when possible. Change one material variable at a time, and record any geometry change so the filament does not get credit for work done by the redesign.</p>
+
+  <ol>
+    <li>Write the failed requirement in units: temperature, load, bend cycles, impact, fit, or exposure time.</li>
+    <li>Record the filament brand, product, color, lot if available, nozzle, layer height, walls, infill, orientation, and conditioning.</li>
+    <li>Print a small specimen or the stressed section of the part with the maker's starting profile.</li>
+    <li>Measure the result under the real load direction and environment, including time at temperature when heat matters.</li>
+    <li>Leave a useful safety margin and repeat the test before treating the replacement as dependable.</li>
+  </ol>
+
+  <p>Material choice cannot rescue a shape that concentrates stress at one sharp corner. Extra infill cannot repair poor layer orientation either. A useful failure review records material, geometry, process, and test conditions separately instead of changing all four together.</p>
+
+  <h2>When should you leave PLA, PETG, and TPU behind?</h2>
+  <p>Leave PLA, PETG, and TPU behind when the part asks more than ordinary desktop filament printing can supply. Fine surface texture and tiny features may point to the <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin versus FDM decision</a>. High-temperature service, certified metal properties, or a production metal component needs a different process and the supplier evidence covered in the <a href="/blog/3d-printing-metal-processes-compared.html">metal 3D printing comparison</a>.</p>
+
+  <h2>What do people ask about PLA, PETG, and TPU?</h2>
+
+  <h3>Which 3D printing material should a beginner use?</h3>
+  <p>A beginner should usually use PLA for indoor models, fit checks, organizers, and other rigid parts that will stay cool. PLA is forgiving to print, but the finished part still has to pass its heat and load requirements.</p>
+
+  <h3>Is PETG stronger than PLA?</h3>
+  <p>PETG is generally tougher, less brittle, and better at layer bonding than PLA, while PLA is usually stiffer and gives cleaner detail. The stronger choice depends on the load direction, print orientation, temperature, geometry, and exact filament.</p>
+
+  <h3>Can TPU replace PETG for a functional part?</h3>
+  <p>TPU can replace PETG only when controlled flex is part of the job, such as a bumper, foot, sleeve, or compliant seal. TPU is a poor substitute for a bracket that must hold a rigid angle or a flat mounting face.</p>
+
+  <h3>Can a PETG part stay in a hot car?</h3>
+  <p>A PETG label alone does not prove a part is safe in a hot car. Check the exact filament data sheet, measure the temperature where the part will sit, include load and time in the test, and leave a useful margin below the published limit.</p>
+</section>
+</article>
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "verifier": "seo-worker-v1",
+  "postFile": "blog/3d-printing-rates-small-job-pricing.html",
+  "artifact": ".seo-evidence/b2b0f615c87c88a32994053d.json",
+  "verifiedAt": "2026-10-21T07:33:28.099Z",
+  "sourceFiles": [
+    {
+      "path": "calculators/3d-printing-price-calculator.js",
+      "sha256": "bdc39a9d38e7a1d117cae3654454ce848432d52ba2cdc37eb716d0d6fc744eef",
+      "excerpt": "  const example = {\n    quantity: 2, materialGrams: 100, printHours: 4, currency: 'USD', spoolPrice: 25,\n    spoolWeight: 1000, printerWatts: 120, energyRate: 0.15, laborHours: 0.5,\n    laborRate: 30, machineRate: 1.5, otherCost: 3, failureRate: 10,\n    pricingMode: 'markup', pricingPercentage: 25,\n  };"
+    },
+    {
+      "path": "calculators/3d-printing-price-calculator.js",
+      "sha256": "bdc39a9d38e7a1d117cae3654454ce848432d52ba2cdc37eb716d0d6fc744eef",
+      "excerpt": "    const material = quantity * number(values.materialGrams) / spoolWeight * number(values.spoolPrice);\n    const electricity = quantity * number(values.printHours) * number(values.printerWatts) / 1000 * number(values.energyRate);\n    const labor = number(values.laborHours) * number(values.laborRate);\n    const machine = quantity * number(values.printHours) * number(values.machineRate);\n    const other = number(values.otherCost);\n    const subtotal = material + electricity + labor + machine + other;\n    const failureAllowance = subtotal * failureRate / 100;\n    const total = subtotal + failureAllowance;\n    const suggestedPrice = pricingMode === 'markup'\n      ? total * (1 + pricingPercentage / 100)\n      : total / (1 - pricingPercentage / 100);\n    const grossProfit = suggestedPrice - total;"
+    },
+    {
+      "path": "calculators/3d-printing-price-calculator.html",
+      "sha256": "fb1b9a56f4eb96bc29d3c1e78051df59b2965b2a6936f497d4b0661836ec9f37",
+      "excerpt": "Suppose a two-part job uses 100 g per part from a 1,000 g spool priced at $25. Each part prints for four hours on a 120 W printer, electricity costs $0.15 per kWh, hands-on labor is 0.5 hours at $30 per hour, machine time is $1.50 per print hour, other direct costs are $3, and the failed-print allowance is 10%. Quantity scales material, electricity, and machine time; labor and other direct costs are entered once for the whole job. The unrounded subtotal is $35.144, and the 10% allowance adds $3.5144, giving a $38.6584 direct cost displayed as $38.66. A 25% markup produces a $48.32 suggested price, $9.66 gross profit, and $24.16 per part."
+    }
+  ],
+  "example": {
+    "description": "Recompute the tracked calculator's direct job cost from its unrounded subtotal and failed-print allowance.",
+    "operation": "sum",
+    "inputs": [
+      35.144,
+      3.5144
+    ],
+    "result": 38.6584,
+    "demonstration": "The tracked calculator page supplies the $35.144 subtotal and $3.5144 allowance, while the tracked script shows that the allowance is added to the subtotal. The worker can independently sum the two values.",
+    "calculation": "$35.144 + $3.5144 = $38.6584 direct cost. The tracked markup formula then gives $38.6584 × 1.25 = $48.323, and dividing by two parts gives $24.1615 before display rounding.",
+    "excerpt": "<p>The calculator's source-backed example has a $35.144 subtotal and a $3.5144 failure allowance. Add them and the direct job cost is $38.6584, displayed as $38.66. Applying a 25% markup gives $48.323, displayed as $48.32 for the job or $24.16 per part.</p>",
+    "claimLimits": "The tracked source proves the checked-in fictional inputs, formulas, arithmetic, and display rounding only. It does not establish a customer job, measured printer draw, market rate, accepted quote, sale, demand, or profitability after omitted overhead, shipping, taxes, and fees.",
+    "reproducedBy": "worker arithmetic"
+  },
+  "references": [
+    {
+      "url": "https://www.eia.gov/energyexplained/electricity/measuring-electricity.php",
+      "status": 200,
+      "sha256": "422a958c3160f01fef179a6f386e25588e108120bafd3e5e219cd21e5d8e1fc1",
+      "sourceExcerpt": "One Watthour is the energy of one Watt used for one hour. Electric utilities and power plants generally measure electricity in kilowatthours (kWh). One kWh is one kilowatt generated for one hour. For example, if you use a 40-Watt (0.04 kW) light bulb for five hours, you have used 200 Wh, or 0.2 kWh, of electrical energy.",
+      "supportingClaim": "The U.S. Energy Information Administration defines one watt-hour as one watt used for one hour and gives 200 Wh as 0.2 kWh.",
+      "primarySourceRationale": "The U.S. Energy Information Administration is the federal agency publishing this final public HTTPS measurement guide, which directly returns the quoted unit definitions and example in fetched HTML. It supports only the unit conversion, not the fictional printer wattage or electricity rate."
+    },
+    {
+      "url": "https://blog.prusa3d.com/3d-printing-price-calculator_38905/",
+      "status": 200,
+      "sha256": "0f4a825aab64dbfd308188660de015bd7cab845a7e1eba8b5f45d78c3bdd8190",
+      "sourceExcerpt": "There were already few calculators online, but we felt like they were always either too simple, overlooking important steps (such as print preparation), or very complicated with many inputs, but no default values to start with.",
+      "supportingClaim": "Prusa says simpler calculators can overlook “important steps (such as print preparation).”",
+      "primarySourceRationale": "Prusa Research publishes the referenced calculator and this final public HTTPS page directly returns its explanation and editable cost categories in fetched HTML. It supports the attributed preparation claim, not MooreCode's assumed rates or result."
+    }
+  ],
+  "claimRationale": "The exact tracked calculator excerpts supply every fictional input, the implementation formulas, the $35.144 subtotal, and the $3.5144 allowance. The worker can independently add those two source-backed values to reproduce $38.6584; the tracked markup formula and quantity then reproduce $48.323 and $24.1615 before display rounding. This evidence proves only checked-in calculator behavior, not a real job, customer, market rate, measured power draw, quote, sale, or net profit. The EIA excerpt supports only the electricity-unit conversion, while the Prusa excerpt supports only the attributed need to include preparation and editable cost categories."
+}

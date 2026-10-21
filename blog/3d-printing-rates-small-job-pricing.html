@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Printing Rates: Price a Small Job Step by Step</title>
+<meta name="description" content="Calculate 3D printing rates from material, print time, electricity, labor, machine time, failures, and margin. Includes a two-part example." />
+<link rel="canonical" href="https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html" />
+<meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="3D Printing Rates: Price a Small Job Step by Step" />
+<meta property="og:description" content="Build a small-job rate from direct costs, then apply markup or a target gross margin without guessing." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html" />
+<meta property="og:image" content="https://moorecode.com/blog/images/3d-printing-rates-small-job-pricing.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html#post",
+      "headline": "3D Printing Rates: Price a Small Job Step by Step",
+      "description": "Calculate 3D printing rates from material, print time, electricity, labor, machine time, failures, and margin. Includes a two-part example.",
+      "url": "https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html",
+      "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html",
+      "datePublished": "2026-10-21",
+      "dateModified": "2026-10-21",
+      "image": "https://moorecode.com/blog/images/3d-printing-rates-small-job-pricing.svg",
+      "author": { "@id": "https://moorecode.com/#logan" },
+      "publisher": { "@id": "https://moorecode.com/#logan" },
+      "isPartOf": { "@id": "https://moorecode.com/blog/#blog" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is an average 3D printing rate?",
+          "acceptedAnswer": { "@type": "Answer", "text": "There is no reliable universal 3D printing rate. A useful rate comes from the actual material, print time, power, labor, machine allowance, failure allowance, and job-specific costs, followed by the pricing method the shop chooses." }
+        },
+        {
+          "@type": "Question",
+          "name": "How much should I charge per print hour?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A print-hour charge should cover the machine and upkeep allowance you assign to occupied printer time. Keep hands-on labor separate because an eight-hour print does not require eight hours of operator work, and add material and electricity separately." }
+        },
+        {
+          "@type": "Question",
+          "name": "Should a 3D printing price include failed prints?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A 3D printing price can include a failed-print allowance when reprints are a real cost. Treat the percentage as a cost cushion, not a claim that every job has that probability of failure, and replace the estimate with your own records when enough completed jobs exist." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is markup the same as gross margin?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Markup and gross margin use different denominators. A 25% markup on $100 of direct cost gives a $125 price, while a 25% target gross margin requires a $133.33 price because the profit must equal 25% of the selling price." }
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://moorecode.com/#logan",
+      "name": "Logan Moore",
+      "url": "https://moorecode.com/",
+      "jobTitle": "Solo developer",
+      "sameAs": ["https://github.com/loganjmoore"],
+      "worksFor": { "@type": "Organization", "name": "BrightPrompt Consulting LLC" }
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://moorecode.com/blog/#blog",
+      "name": "moorecode blog",
+      "url": "https://moorecode.com/blog/"
+    }
+  ]
+}
+</script>
+<script src="/navigation.js" defer></script>
+<script defer src="/posthog-web.js"></script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">M</span>
+    <span class="brand-text">moorecode</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="navlinks" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navlinks">
+    <a href="/">Home</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/consulting.html">Consulting</a>
+    <a href="/hobbies.html">Hobbies</a>
+    <a href="/youtube.html">YouTube</a>
+    <a href="/about.html">About</a>
+    <a href="/blog/" class="active">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+<article>
+<header class="post-head">
+  <p class="post-meta">October 21, 2026 · By Logan Moore</p>
+  <h1>3D Printing Rates: Price a Small Job Step by Step</h1>
+</header>
+
+<section class="prose">
+  <img class="post-cover" src="/blog/images/3d-printing-rates-small-job-pricing.svg" width="1200" height="630" alt="A pricing diagram adding material, electricity, labor, machine time, and a failure allowance for a two-part 3D printing job." />
+
+  <p class="lede">A defensible 3D printing rate is the job's direct cost plus a clearly chosen markup or target gross margin. For a small FDM job, add material, electricity, hands-on labor, machine time, the failed-print allowance, and other direct costs; divide by quantity when you need the per-part cost. MooreCode's source-backed two-part example costs $38.6584 direct and reaches $48.32 after a 25% markup.</p>
+
+  <section class="direct-answer" aria-labelledby="rate-inputs">
+    <h2 id="rate-inputs">What belongs in a 3D printing rate?</h2>
+    <p>A 3D printing rate should cover the costs created by the job, with hands-on operator work kept separate from unattended print time.</p>
+    <table>
+      <thead>
+        <tr><th>Input</th><th>Use this evidence</th><th>What it pays for</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Material</td><td>Slicer grams, net package weight, and paid package price</td><td>The plastic or resin consumed by the ordered parts</td></tr>
+        <tr><td>Electricity</td><td>Measured average watts, print hours, and the rate on the power bill</td><td>Energy used while the job runs</td></tr>
+        <tr><td>Labor</td><td>Hands-on minutes and the shop's labor rate</td><td>Preparation, setup, support removal, inspection, and cleanup</td></tr>
+        <tr><td>Machine time</td><td>A per-print-hour allowance set by the operator</td><td>Depreciation, upkeep, and occupied capacity</td></tr>
+        <tr><td>Other direct costs</td><td>Receipts or a job-specific estimate</td><td>Hardware, packaging, and other known items</td></tr>
+        <tr><td>Failure allowance</td><td>Shop history when available</td><td>A cushion for the cost of rework or failed output</td></tr>
+      </tbody>
+    </table>
+    <p>These inputs produce an estimate. The quote may still change for taxes, shipping, marketplace fees, overhead, design work, or unusual order risk.</p>
+  </section>
+
+  <h2>How does the MooreCode calculator turn inputs into cost?</h2>
+  <p>The <a href="/calculators/3d-printing-price-calculator.html">MooreCode 3D printing price calculator</a> adds material, electricity, labor, machine time, and other direct costs before applying the failed-print allowance to the subtotal. The formulas are visible on the page and implemented in the repository, which makes the arithmetic easy to check.</p>
+
+  <p><strong>Material cost</strong> = quantity × grams per part ÷ package grams × material price.</p>
+  <p><strong>Electricity cost</strong> = quantity × print hours × average watts ÷ 1,000 × price per kWh.</p>
+  <p><strong>Direct cost</strong> = (material + electricity + labor + machine time + other costs) × (1 + failed-print allowance ÷ 100).</p>
+
+  <p>The U.S. Energy Information Administration defines one watt-hour as one watt used for one hour and gives 200 Wh as 0.2 kWh. See the <a href="https://www.eia.gov/energyexplained/electricity/measuring-electricity.php">EIA electricity measurement guide</a>. That published example supports converting watts × hours to watt-hours and dividing by 1,000 for kWh; the printer's average draw and electricity rate still come from your equipment and bill. <a href="https://blog.prusa3d.com/3d-printing-price-calculator_38905/">Prusa Research's calculator</a> also separates power, labor, and machine or upkeep costs. Prusa says simpler calculators can overlook “important steps (such as print preparation).”</p>
+
+  <h2>What does the two-part worked example cost?</h2>
+  <p>The two-part worked example produces $38.6584 in direct cost and a $48.323 suggested price before display rounding. Its inputs come from the checked calculator example in this repository. I use them here so anyone can reproduce the method; they are fictional assumptions rather than a MooreCode shop rate or customer quote.</p>
+
+  <table>
+    <thead>
+      <tr><th>Cost line</th><th>Calculation</th><th>Unrounded cost</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Material</td><td>2 parts × 100 g ÷ 1,000 g × $25</td><td>$5.00</td></tr>
+      <tr><td>Electricity</td><td>2 × 4 hours × 120 W ÷ 1,000 × $0.15/kWh</td><td>$0.144</td></tr>
+      <tr><td>Labor</td><td>0.5 hours × $30/hour</td><td>$15.00</td></tr>
+      <tr><td>Machine time</td><td>2 × 4 hours × $1.50/hour</td><td>$12.00</td></tr>
+      <tr><td>Other direct costs</td><td>Job entry</td><td>$3.00</td></tr>
+      <tr><td>Subtotal</td><td>$5 + $0.144 + $15 + $12 + $3</td><td>$35.144</td></tr>
+      <tr><td>Failure allowance</td><td>$35.144 × 10%</td><td>$3.5144</td></tr>
+      <tr><td>Direct job cost</td><td>$35.144 + $3.5144</td><td>$38.6584</td></tr>
+      <tr><td>Price with 25% markup</td><td>$38.6584 × 1.25</td><td>$48.323</td></tr>
+    </tbody>
+  </table>
+
+  <p>The calculator's source-backed example has a $35.144 subtotal and a $3.5144 failure allowance. Add them and the direct job cost is $38.6584, displayed as $38.66. Applying a 25% markup gives $48.323, displayed as $48.32 for the job or $24.16 per part.</p>
+
+  <p>The example supports the formula and the displayed result. It says nothing about another printer's running cost, a buyer's budget, or adequate profit. Replace every assumption with evidence from the job before putting the result on a quote.</p>
+
+  <h2>What machine rate should you use?</h2>
+  <p>The machine rate should be your hourly allowance for depreciation, maintenance, and occupied printer capacity. Start with the machine cost and the productive hours over which you expect to recover it, then add upkeep supported by your records. A printer that sits idle most of the week will look artificially cheap if the rate assumes 24-hour utilization.</p>
+
+  <p>Keep machine time separate from labor. An eight-hour print may need 15 minutes of setup and another 20 minutes of cleanup, so charging eight labor hours would misstate the operator's work. Setting labor to zero also misses the time spent preparing and finishing the job.</p>
+
+  <h2>Should you use markup or target gross margin?</h2>
+  <p>Use markup to add a percentage to direct cost. Use target gross margin when gross profit must be a percentage of the selling price. The difference shows up quickly: a 25% markup on $100 costs gives $125, while a 25% target gross margin requires $133.33.</p>
+
+  <p>The formula explains the gap: markup price = cost × (1 + percentage), while margin price = cost ÷ (1 - percentage). Both settings apply a pricing rule consistently. You still have to check overhead and demand.</p>
+
+  <h2>How should you quote a small 3D printing job?</h2>
+  <p>A small 3D printing quote should name the deliverable, quantity, material, finish, timing, price, and assumptions that could change the price. Keep the full cost breakdown with your records unless the customer needs it. Put exclusions such as shipping, tax, design changes, or supplied hardware on the quote itself.</p>
+
+  <ol>
+    <li>Slice the approved model and record grams and print time instead of estimating them from the bounding box.</li>
+    <li>Choose the material from the actual part requirement using the <a href="/blog/3d-printing-filament-pla-petg-tpu.html">PLA, PETG, and TPU material guide</a>.</li>
+    <li>Enter measured power, hands-on work, machine time, and every known direct item.</li>
+    <li>Apply either markup or target margin, then add fees, tax, shipping, and overhead that sit outside the direct-cost tool.</li>
+    <li>Save the assumptions with the quote so a model revision or quantity change can be recalculated.</li>
+  </ol>
+
+  <p>This method is built around a filament job. A resin quote needs washing, curing, consumables, and hazardous-waste handling from the <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin workflow</a>. A production metal part needs process-specific finishing and supplier evidence from the <a href="/blog/3d-printing-metal-processes-compared.html">metal process comparison</a>. Changing only the material price would leave either quote incomplete.</p>
+
+  <h2>What do people ask about 3D printing rates?</h2>
+
+  <h3>What is an average 3D printing rate?</h3>
+  <p>There is no reliable universal 3D printing rate. A useful rate comes from the actual material, print time, power, labor, machine allowance, failure allowance, and job-specific costs, followed by the pricing method the shop chooses.</p>
+
+  <h3>How much should I charge per print hour?</h3>
+  <p>A print-hour charge should cover the machine and upkeep allowance you assign to occupied printer time. Keep hands-on labor separate because an eight-hour print does not require eight hours of operator work, and add material and electricity separately.</p>
+
+  <h3>Should a 3D printing price include failed prints?</h3>
+  <p>A 3D printing price can include a failed-print allowance when reprints are a real cost. Treat the percentage as a cost cushion, not a claim that every job has that probability of failure, and replace the estimate with your own records when enough completed jobs exist.</p>
+
+  <h3>Is markup the same as gross margin?</h3>
+  <p>Markup and gross margin use different denominators. A 25% markup on $100 of direct cost gives a $125 price, while a 25% target gross margin requires a $133.33 price because the profit must equal 25% of the selling price.</p>
+</section>
+</article>
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p>
+  <div class="foot-links">
+    <a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a>
+    <a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
