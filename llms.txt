@@ -22,6 +22,8 @@
 
 ## Blog
 
+- [3D Printing Materials After a PLA Clamp Fails](https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html): Choose a replacement material from the failed part's heat, load, motion, and fit requirements. Includes a 65°C clamp check.
+- [3D Printing Rates: Price a Small Job Step by Step](https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html): Calculate 3D printing rates from material, print time, electricity, labor, machine time, failures, and margin. Includes a two-part example.
 - [3D Scanning to Printing: Repair, Scale, Slice](https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html): Turn a 3D scan into a printable file: repair the mesh, set scale from a known dimension, verify thin areas, and slice a measured test.
 - [Best 3D Printing Websites for Files: 2026 Guide](https://moorecode.com/blog/best-3d-printing-websites-files-2026.html): Compare five 3D printing websites for free files, print profiles, miniatures, search, and commercial-use licenses.
 - [Desktop 3D Printing Setup: A Safe Beginner Workspace](https://moorecode.com/blog/desktop-3d-printing-setup-safe-workspace.html): Build a practical desktop 3D printing setup with the right space, ventilation, tools, storage, and FDM or resin workflow.

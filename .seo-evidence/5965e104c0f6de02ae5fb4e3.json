@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "verifier": "seo-worker-v1",
+  "postFile": "blog/3d-printing-materials-after-pla-clamp-fails.html",
+  "artifact": ".seo-evidence/5965e104c0f6de02ae5fb4e3.json",
+  "verifiedAt": "2026-10-21T07:33:27.405Z",
+  "sourceFiles": [
+    {
+      "path": "blog/3d-printing-filament-pla-petg-tpu.html",
+      "sha256": "f9b49b11c4b70ea5e343103e5ffdf90f562bf06b5ee9bbf001ce020cf090b32e",
+      "excerpt": "The right choice starts with the finished part rather than the label on the spool."
+    }
+  ],
+  "example": {
+    "description": "Walk through the tracked part-first material rule against an explicitly fictional 65°C clamp requirement.",
+    "operation": "source_walkthrough",
+    "inputs": [],
+    "result": null,
+    "demonstration": "The tracked MooreCode guide says to start with the finished part. The post applies that rule to a stated 65°C service requirement, compares it with fetched manufacturer values, and labels the result as a paper screen rather than a physical test.",
+    "calculation": "No worker arithmetic is requested for this source walkthrough. The post separately shows the manufacturer-value screens: 60 - 65 = -5°C for the named PLA and 68 - 65 = 3°C for the named PETG.",
+    "excerpt": "<p>The existing <a href=\"/blog/3d-printing-filament-pla-petg-tpu.html\">MooreCode filament guide</a> puts the decision in one sentence: “The right choice starts with the finished part rather than the label on the spool.” After a failure, that rule keeps me from reaching for a popular filament before I can name what the old part failed to do.</p>",
+    "claimLimits": "The tracked source supports the selection method, not a tested clamp, customer result, universal material ranking, or promise that a particular spool, geometry, print profile, or orientation will survive 65°C under load.",
+    "reproducedBy": "worker source inspection"
+  },
+  "references": [
+    {
+      "url": "https://prusament.com/materials/pla/",
+      "status": 200,
+      "sha256": "a937dee4448ea07affe14016d02b8506fd1d0791bf58b480accbcb55d07a96bc",
+      "sourceExcerpt": "Parts start to lose mechanical strength at temperatures over 60 °C.",
+      "supportingClaim": "Prusament says its PLA parts start to lose mechanical strength above 60°C.",
+      "primarySourceRationale": "Prusament manufactures the named PLA and this final public HTTPS material page directly returns the quoted temperature warning in fetched HTML. It supports only the named product's paper screen, not a finished clamp result."
+    },
+    {
+      "url": "https://prusament.com/materials/prusament-petg/",
+      "status": 200,
+      "sha256": "a516a9fa7b37755990c3098b2554d83d13a318eb2b53560927b37dd323a09864",
+      "sourceExcerpt": "Temperature resistance 68 °C",
+      "supportingClaim": "Prusament lists 68°C temperature resistance for its PETG",
+      "primarySourceRationale": "Prusament manufactures the compared PETG, and this final public HTTPS page directly returns both its PLA comparison and the 68 °C product detail in fetched HTML. The catalog value supports the three-degree paper margin only; it does not certify the fictional clamp under sustained load."
+    },
+    {
+      "url": "https://prusament.com/materials/prusament-tpu-95a/",
+      "status": 200,
+      "sha256": "93f98f7c1ec32a15f80631cb54f6cc1151c122525d89a68a927a6b5e4b81f98c",
+      "sourceExcerpt": "Soft and bendable at thin layers, strong and durable at thick layers",
+      "supportingClaim": "Prusament lists TPU 95A as “Soft and bendable at thin layers, strong and durable at thick layers.”",
+      "primarySourceRationale": "Prusament manufactures TPU 95A and this final public HTTPS material page directly returns the quoted thickness-dependent description in fetched HTML. It supports only that named filament, not settings or behavior for every TPU."
+    }
+  ],
+  "claimRationale": "The exact tracked MooreCode excerpt supports choosing from the finished part's requirement and does not establish a live test. The fictional requirement is 65°C. Directly fetched Prusament text supplies the 60°C PLA warning and 68°C PETG catalog value, so the post correctly reports 60 - 65 = -5°C and 68 - 65 = 3°C. Those screening margins support rejecting the named PLA on paper and testing the named PETG next; they do not prove service life for another product, geometry, profile, orientation, time, or load. The TPU excerpt applies only to Prusament TPU 95A."
+}
