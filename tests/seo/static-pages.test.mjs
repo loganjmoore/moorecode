@@ -308,6 +308,15 @@ assert.match(calculator, /href="\/contact\.html#project-inquiry"/);
 
 const metalGuide = read('blog/3d-printing-metal-processes-compared.html');
 const metalAnswer = directAnswer(metalGuide);
+const metalEntityDefinition = metalGuide.match(/<p class="entity-definition">([\s\S]*?)<\/p>/)?.[1] || '';
+for (const process of ['laser powder bed fusion', 'binder jetting', 'metal FFF', 'directed energy deposition']) {
+  assert.match(metalEntityDefinition, new RegExp(process, 'i'), `Metal title-adjacent definition needs ${process}`);
+}
+assert.match(
+  metalGuide,
+  /<p class="process-decision">Which method fits which part\?[\s\S]*?<\/p>\s*<table>/,
+  'Metal process decision line must sit directly above the comparison table',
+);
 assert.ok(metalGuide.indexOf(metalAnswer) < metalGuide.indexOf('<h2 id="manufacturing">'), 'Metal direct answer needs to stay near the top');
 assert.match(metalAnswer, /<h2[^>]*>Metal 3D printing methods: quick answer<\/h2>/);
 for (const process of ['laser powder bed fusion', 'binder jetting', 'metal FFF', 'directed energy deposition']) {
