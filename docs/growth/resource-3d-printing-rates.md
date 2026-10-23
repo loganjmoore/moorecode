@@ -1,6 +1,6 @@
-# 3D Printing Price Calculator
+# 3D Printing Rates Resource
 
-Status: pending deployment verification
+Status: published and verified on 2026-10-14
 
 Deployment URL: https://moorecode.com/calculators/3d-printing-price-calculator.html
 
@@ -34,9 +34,11 @@ Run `PLAYWRIGHT_MODULE_PATH=<installed Playwright module path> node tests/seo/re
 
 The representative job independently totals 38.6584 (38.66 displayed), or 19.3292 direct cost per part (19.33 displayed). A 25% markup produces a 48.323 suggested selling price (48.32 displayed), 9.6646 gross profit (9.66 displayed), and 24.1615 price per part (24.16 displayed). The allowance is explicitly a cost cushion rather than a failure probability. Very large or unsafe values cannot produce a displayed non-finite estimate or a completion event.
 
-## Production preflight
+## Production verification
 
-On 2026-10-10, the existing public route rendered successfully in Chrome with the self-canonical URL, visible native form, `WebApplication` JSON-LD, and sitemap discovery. A keyboard-submitted representative calculation returned a $39.76 direct cost and $19.88 per part from the live cost-only release. An uncached command-line fetch was also attempted, but this worker's DNS sandbox returned `Could not resolve host: moorecode.com`; browser navigation provided the independent production check instead. The new markup and margin release remains pending until its source revision is merged, deployed, and rechecked at the same URL.
+On 2026-10-14, the public route rendered successfully in Chrome at its self-canonical URL. After the live page hydrated, a keyboard submission with the documented representative assumptions returned a $38.66 direct cost, $19.33 direct cost per part, $48.32 suggested selling price, $9.66 gross profit, and $24.16 selling price per part. The rendered success state is captured at `docs/growth/evidence/3d-printing-rates-live-2026-10-14.jpg` (real JPEG bytes, 1440 by 749 pixels). The published sitemap also lists the calculator URL, and the live blog links to it without changing the blog canonical.
+
+The required command-line fetch was attempted with `curl -L --fail --silent --show-error --max-time 20`, but this worker's shell DNS sandbox returned `Could not resolve host: moorecode.com`. Chrome reached the public origin independently and supplied the production verification above.
 
 ## Existing analytics adapter
 
@@ -50,4 +52,4 @@ The existing Inter typography and native MooreCode spacing/colors are retained u
 
 With optional analytics consent, a submitted calculator request records `cta_clicked` and a successful calculation records `resource_completed` through the site's existing anonymous PostHog component. The page path, device class, channel, and existing opaque campaign token can support landing-visit and resource-use counts without collecting calculator values. The existing Contact link records the site's consented contact-click events.
 
-No signup, lead delivery, paid outcome, or causal conversion lift has been verified. Organic landing visits and conversions remain unknown until the page is deployed and observed separately. Attribution coverage is limited to visitors who consent to analytics and is not complete population measurement.
+No signup, lead delivery, paid outcome, organic landing count, or causal conversion lift has been verified. Those values remain unknown and must be reported separately from resource-use counts. Attribution coverage is limited to visitors who consent to analytics and is not complete population measurement.
