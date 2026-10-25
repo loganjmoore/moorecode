@@ -18,7 +18,7 @@
 - [MyButter · Support](https://moorecode.com/mybutter-support.html): Support and help for the MyButter iOS app — contact, FAQ, and how-to.
 - [MathSteps: Staircase Sprint · Support](https://moorecode.com/mathsteps-support.html): Support and help for the MathSteps: Staircase Sprint iOS app — contact, FAQ, and how-to.
 - [Southside Explorer · Support](https://moorecode.com/southside-support.html): Support and help for the Southside Explorer iOS app — contact, FAQ, and how-to.
-- [3D Printing Price Calculator: Cost & Margin · MooreCode](https://moorecode.com/calculators/3d-printing-price-calculator.html): Estimate direct 3D printing cost, then calculate a suggested selling price from your markup or target gross margin.
+- [3D Print Cost & Price Calculator | MooreCode](https://moorecode.com/calculators/3d-printing-price-calculator.html): Free 3D print cost and price calculator for material, electricity, labor, machine time, failed prints, markup, and margin. No signup required.
 
 ## Blog
 
