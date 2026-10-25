@@ -277,8 +277,8 @@ for (const path of publishedArticlePaths) {
 const calculator = read('calculators/3d-printing-price-calculator.html');
 const calculatorTitle = calculator.match(/<title>([^<]+)<\/title>/)[1].replaceAll('&amp;', '&');
 assert.ok(calculatorTitle.length < 60, `Calculator title must be under 60 characters, got ${calculatorTitle.length}`);
-assert.ok(calculatorTitle.startsWith('3D Printing Price Calculator'));
-assert.match(calculator, /The MooreCode 3D printing price calculator is a browser tool/);
+assert.ok(calculatorTitle.startsWith('3D Print Cost & Price Calculator'));
+assert.match(calculator, /This free browser tool totals your editable/);
 assert.match(calculator, /<link rel="canonical" href="https:\/\/moorecode\.com\/calculators\/3d-printing-price-calculator\.html"/);
 for (const input of ['quantity', 'materialGrams', 'printHours', 'spoolPrice', 'spoolWeight', 'printerWatts', 'energyRate', 'laborHours', 'laborRate', 'machineRate', 'otherCost', 'failureRate', 'pricingPercentage']) {
   assert.match(calculator, new RegExp(`<label for="${input}">`), `${input} needs a visible label`);
