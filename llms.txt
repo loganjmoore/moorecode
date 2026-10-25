@@ -5,10 +5,10 @@
 ## Main pages
 
 - [Logan Moore — iOS & Web Developer | MooreCode](https://moorecode.com/): Explore shipped iOS and web products by Logan Moore and product and software consulting through BrightPrompt Consulting LLC.
-- [About · Logan Moore](https://moorecode.com/about.html): About Logan Moore: faith, family, solo development, and a long list of hands-on hobbies.
+- [About Logan Moore — iOS & Web Developer | MooreCode](https://moorecode.com/about.html): Logan Moore is the solo iOS and web developer behind MooreCode, runs BrightPrompt Consulting LLC, and documents hands-on maker projects.
 - [3D Printing Guides and Project Notes · MooreCode](https://moorecode.com/blog/): MooreCode compares 3D-printing processes, materials, and projects in practical guides and project notes.
 - [Product & Software Consulting by Logan Moore | BrightPrompt](https://moorecode.com/consulting.html): Product and software consulting by Logan Moore through BrightPrompt Consulting LLC for web presence, digital products, software platforms, and internal tooling.
-- [Contact · Logan Moore](https://moorecode.com/contact.html): Get in touch with Logan Moore by email, on GitHub, or on the air.
+- [Contact Logan Moore — Software Consulting | MooreCode](https://moorecode.com/contact.html): Contact Logan Moore directly about iOS and web products or software consulting. Download a project brief to outline your goal and useful first result.
 - [Hobbies · Logan Moore](https://moorecode.com/hobbies.html): The hands-on hobbies Logan Moore loves: flower farming, light shows, 3D printing, ham radio, robotics, and landscaping.
 - [Website analytics details](https://moorecode.com/posthog-privacy.html): Learn what MooreCode’s optional PostHog analytics collect, how consent works, and how to manage your analytics choice.
 - [iOS and Web Apps by Logan Moore | MooreCode](https://moorecode.com/projects.html): Explore 11 iOS and web apps by Logan Moore, including public App Store products, web products, and clearly labeled private projects.
