@@ -50,6 +50,26 @@ assert.match(consulting, /<h2 id="selected-work-heading">Selected work<\/h2>/);
 assert.match(consulting, /<h2>How to start<\/h2>/);
 assert.equal((consulting.match(/href="\/contact\.html#project-inquiry"/g) || []).length, 2);
 
+// About and Contact should describe the same person as the homepage, across visible and machine-readable surfaces.
+for (const [path, pageType] of [['about.html', 'AboutPage'], ['contact.html', 'ContactPage']]) {
+  const html = read(path);
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+  const page = graph.find((item) => item['@type'] === pageType);
+  const person = graph.find((item) => item['@type'] === 'Person');
+  const homePerson = JSON.parse(read('index.html').match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'].find((item) => item['@type'] === 'Person');
+  const decode = (value) => value.replaceAll('&amp;', '&');
+  const title = decode(html.match(/<title>([^<]+)<\/title>/)[1]);
+  const description = html.match(/<meta name="description" content="([^"]+)"/)[1];
+  assert.equal(decode(html.match(/<meta property="og:title" content="([^"]+)"/)[1]), title);
+  assert.equal(html.match(/<meta property="og:description" content="([^"]+)"/)[1], description);
+  assert.equal(page.name, title);
+  assert.equal(page.description, description);
+  assert.equal(page.url, `https://moorecode.com/${path}`);
+  assert.equal(page.about['@id'], homePerson['@id']);
+  assert.equal(person.jobTitle, homePerson.jobTitle);
+  assert.ok(html.match(/<h1>([^<]+)<\/h1>/)[1].includes(person.name), `${path} must visibly identify its person`);
+}
+
 const projects = read('projects.html');
 const blackjackCard = projects.slice(projects.indexOf('<h3>Blackjack Now</h3>'), projects.indexOf('<h3>TILT</h3>'));
 assert.match(blackjackCard, /href="blackjack-support\.html">Support<\/a>/);
