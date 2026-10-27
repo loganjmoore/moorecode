@@ -22,13 +22,13 @@
 
 ## 3D printing guides
 
-- [3D Printing at Home: Printer, Setup, Safety, Projects | MooreCode](https://moorecode.com/guides/3d-printing-at-home.html): Start 3D printing at home: choose FDM or resin, prepare a safe workspace, select materials, test the setup, and make useful beginner projects.
+- [3D Printing at Home: Setup, Safety & Projects | MooreCode](https://moorecode.com/guides/3d-printing-at-home.html): Start 3D printing at home: choose FDM or resin, prepare a safe workspace, select materials, test the setup, and make useful beginner projects.
 - [Best 3D Printing Accessories: Ranked Starter Kit | MooreCode](https://moorecode.com/guides/3d-printing-accessories.html): Compare 3D printing accessories by priority: nozzles, build surfaces, filament dryers, measuring tools, cleanup tools, and safety equipment.
 - [How to Start a 3D Printing Business Step by Step | MooreCode](https://moorecode.com/guides/start-a-3d-printing-business.html): Start a 3D printing business with a narrow offer, suitable printer, complete cost record, defensible pricing, proof, and a repeatable customer workflow.
-- [3D Printing for Dentists: Printers, Materials, Workflow | MooreCode](https://moorecode.com/guides/3d-printing-for-dentists.html): A practical guide to 3D printing for dentists and labs: compare printer categories, material limits, applications, processing, and validation.
+- [3D Printing for Dentists: Materials & Workflow | MooreCode](https://moorecode.com/guides/3d-printing-for-dentists.html): A practical guide to 3D printing for dentists and labs: compare printer categories, material limits, applications, processing, and validation.
 - [How to Make 3D-Printed Jewelry: Design to Finish | MooreCode](https://moorecode.com/guides/3d-printing-jewelry.html): Make 3D-printed jewelry step by step: plan the design, choose resin or filament, prepare a castable master, and finish the final piece.
 - [3D Printing in Manufacturing: Process and Uses | MooreCode](https://moorecode.com/guides/3d-printing-manufacturing.html): Learn how 3D printing works as a manufacturing process, compare technologies and materials, and decide where additive or traditional production fits.
-- [How to Paint 3D Prints: Prep, Primer, Paint, Finish | MooreCode](https://moorecode.com/guides/painting-3d-prints.html): Paint a 3D print step by step: remove supports, sand, clean, test compatible primer and paint, build thin color coats, and finish safely.
+- [How to Paint 3D Prints: Prep to Finish | MooreCode](https://moorecode.com/guides/painting-3d-prints.html): Paint a 3D print step by step: remove supports, sand, clean, test compatible primer and paint, build thin color coats, and finish safely.
 - [What Is Carbon 3D Printing? Fiber vs Carbon DLS | MooreCode](https://moorecode.com/guides/carbon-3d-printing.html): Carbon 3D printing can mean carbon-fiber-filled material or Carbon DLS resin printing. Learn how the processes, materials, and applications differ.
 
 ## Blog
@@ -37,7 +37,7 @@
 - [3D Printing Rates: Price a Small Job Step by Step](https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html): Calculate 3D printing rates from material, print time, electricity, labor, machine time, failures, and margin. Includes a two-part example.
 - [3D Scanning to Printing: Repair, Scale, Slice](https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html): Turn a 3D scan into a printable file: repair the mesh, set scale from a known dimension, verify thin areas, and slice a measured test.
 - [Best 3D Printing Websites for Files: 2026 Guide](https://moorecode.com/blog/best-3d-printing-websites-files-2026.html): Compare five 3D printing websites for free files, print profiles, miniatures, search, and commercial-use licenses.
-- [What Is Desktop 3D Printing? Types, Materials, Uses | MooreCode](https://moorecode.com/blog/desktop-3d-printing-setup-safe-workspace.html): Desktop 3D printing explained: compare FDM and resin printer categories, materials, typical uses, operating costs, and workspace requirements.
+- [Desktop 3D Printing: Types, Materials & Uses | MooreCode](https://moorecode.com/blog/desktop-3d-printing-setup-safe-workspace.html): Desktop 3D printing explained: compare FDM and resin printer categories, materials, typical uses, operating costs, and workspace requirements.
 - [3D Printing a Prototype: Four Stages, One Test Plan](https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html): Choose a 3D printing process and material for visual, fit, functional, and pilot prototypes by starting with the test result.
 - [PLA 3D Printing: Settings, Uses, PLA vs PETG | MooreCode](https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html): Start PLA 3D printing with a compatible profile, clean build surface, small first-layer test, practical uses, and a direct PLA versus PETG comparison.
 - [Free blackjack basic strategy trainer for iPhone compared](https://moorecode.com/blog/free-blackjack-basic-strategy-trainer-iphone.html): Five free iPhone blackjack basic strategy trainers compared on ads, in-app purchases, and rule settings. One of them is my own app, Blackjack Now.
