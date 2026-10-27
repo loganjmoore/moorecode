@@ -10,12 +10,23 @@ const publishedArticlePaths = readdirSync(new URL('../../blog/', import.meta.url
   .filter((entry) => entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html')
   .map((entry) => `blog/${entry.name}`)
   .sort();
+const intentGuidePaths = [
+  'guides/3d-printing-at-home.html',
+  'guides/3d-printing-accessories.html',
+  'guides/start-a-3d-printing-business.html',
+  'guides/3d-printing-for-dentists.html',
+  'guides/3d-printing-jewelry.html',
+  'guides/3d-printing-manufacturing.html',
+  'guides/painting-3d-prints.html',
+  'guides/carbon-3d-printing.html',
+];
 
 for (const path of [
   'index.html', 'projects.html', 'consulting.html', 'hobbies.html', 'youtube.html', 'about.html', 'contact.html',
   'blackjack-support.html', 'blackjack-privacy.html', 'posthog-privacy.html', 'blog/index.html',
   'calculators/3d-printing-price-calculator.html',
   ...publishedArticlePaths,
+  ...intentGuidePaths,
 ]) assert.match(read(path), /<script defer src="\/posthog-web\.js"><\/script>/, `${path} needs the shared analytics component`);
 
 for (const path of [
@@ -24,16 +35,17 @@ for (const path of [
   'hobbies.html',
   'blackjack-privacy.html',
   ...publishedArticlePaths,
+  ...intentGuidePaths,
 ]) {
   assert.match(firstParagraphAfterH1(read(path)), /\bis (?:a|an|the)\b/i, `${path} needs a title-adjacent entity definition`);
 }
 
 for (const [path, definition] of [
-  ['blog/3d-printing-filament-pla-petg-tpu.html', /^3D printing filament is a thermoplastic feedstock/],
+  ['blog/3d-printing-filament-pla-petg-tpu.html', /^PLA 3D printing is a material-extrusion process/],
   ['blog/what-is-fdm-3d-printing.html', /^FDM 3D printing is a material-extrusion process/],
   ['blog/when-resin-3d-printing-beats-fdm.html', /^Resin 3D printing is a process/],
   ['blog/best-3d-printing-websites-files-2026.html', /^A 3D printing website is a library or marketplace/],
-  ['blog/desktop-3d-printing-setup-safe-workspace.html', /^A desktop 3D printing setup is a dedicated work area/],
+  ['blog/desktop-3d-printing-setup-safe-workspace.html', /^Desktop 3D printing is the production of physical parts/],
   ['blog/3d-printing-prototype-four-stage-test-plan.html', /^A 3D-printed prototype is a physical test part/],
 ]) {
   assert.match(firstProseParagraph(read(path)), definition, `${path} needs its entity definition in the opening prose`);
@@ -218,27 +230,32 @@ const filamentGuide = read('blog/3d-printing-filament-pla-petg-tpu.html');
 const blogIndex = read('blog/index.html');
 const selector = blogIndex.match(/<nav class="guide-map" aria-labelledby="printing-guide-selector">([\s\S]*?)<\/nav>/)?.[1];
 assert.ok(selector, 'Inbound guide-selector anchors must reach the question navigation');
-assert.match(selector, /<h2 id="printing-guide-selector">Choose a 3D printing guide by process or project<\/h2>/);
+assert.match(selector, /<h2 id="printing-guide-selector">Start with the 3D printing guide that matches your job<\/h2>/);
 for (const id of ['filament-materials', 'printing-accessories', 'home-printing-paint', 'printing-processes', 'resin-projects', 'rates-business', 'manufacturing-metal']) {
   assert.equal((blogIndex.match(new RegExp('id="' + id + '"', 'g')) || []).length, 1, 'Preserve a unique destination for #' + id);
 }
 for (const destination of [
   '/blog/3d-printing-filament-pla-petg-tpu.html',
-  '/blog/what-is-fdm-3d-printing.html',
-  '/blog/when-resin-3d-printing-beats-fdm.html#dental-work',
-  '/blog/when-resin-3d-printing-beats-fdm.html#jewelry-work',
+  '/guides/3d-printing-at-home.html',
+  '/guides/3d-printing-accessories.html',
+  '/guides/start-a-3d-printing-business.html',
+  '/guides/3d-printing-for-dentists.html',
+  '/guides/3d-printing-jewelry.html',
+  '/guides/3d-printing-manufacturing.html',
+  '/guides/painting-3d-prints.html',
+  '/guides/carbon-3d-printing.html',
   '/calculators/3d-printing-price-calculator.html',
-  '/blog/3d-printing-metal-processes-compared.html#manufacturing',
 ]) {
   assert.ok(selector.includes(`href="${destination}"`), `Blog guide selector needs ${destination}`);
 }
 assert.match(filamentGuide, /href="\/blog\/#printing-guide-selector">3D printing process and project guide selector<\/a>/);
-assert.match(filamentGuide, /<h1>3D Printing Materials Guide:/);
+assert.match(filamentGuide, /<h1>PLA 3D printing:/);
 const filamentLedeEnd = filamentGuide.indexOf('</p>', filamentGuide.indexOf('<p class="lede">')) + 4;
 const filamentFirstSection = filamentGuide.indexOf('<section', filamentLedeEnd);
-assert.equal(filamentFirstSection, filamentGuide.indexOf('<section class="direct-answer"', filamentLedeEnd), 'PLA vs PETG comparison must sit directly under the intro');
+assert.equal(filamentFirstSection, filamentGuide.indexOf('<section class="direct-answer"', filamentLedeEnd), 'PLA quick start must sit directly under the intro');
 const filamentQuickAnswer = directAnswer(filamentGuide);
-assert.match(filamentQuickAnswer, /<h2 id="filament-quick-answer">PLA vs PETG: quick comparison<\/h2>/);
+assert.match(filamentQuickAnswer, /<h2 id="filament-quick-answer">PLA 3D printing: quick start<\/h2>/);
+assert.match(filamentQuickAnswer, /<h3>PLA vs PETG<\/h3>/);
 for (const property of ['Strength', 'Heat resistance', 'Ease of printing', 'Typical use']) {
   assert.ok(filamentQuickAnswer.includes(`<strong>${property}</strong>`), `PLA vs PETG comparison needs ${property}`);
 }
@@ -264,25 +281,20 @@ assert.match(scanAnswer, /The best option is a measured workflow rather than a s
 assert.match(scanAnswer, /MooreCode's scan-to-print guide walks through that sequence/);
 assert.match(scanToPrintGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
 
-for (const question of [
-  'Where should I look for 3D-printing files?',
-  'How should I set up a safe desktop printing workspace?',
-  'How should I test a 3D-printed prototype?',
-  'Which 3D printing material should I use?',
-  'Which material should replace a failed PLA clamp?',
-  'Which 3D printing accessories should I buy first?',
-  'Which metal printing process fits the job?',
-  'How do I paint and finish a filament print?',
-  'How is 3D printing used in dental work?',
-  'How do I plan a 3D-printed jewelry master?',
-  'Where does 3D printing fit in manufacturing?',
-  'How do I turn a 3D scan into a printable prototype?',
-  'What are my 3D printing rates per part?',
-  'How should I price work for a 3D printing business?',
-  'How do I price a small 3D printing job?',
-  'How do I diagnose an FDM setup problem?',
-  'How should a service business compare invoicing app pricing?',
-]) assert.ok(blog.includes(question), `Blog guide map needs: ${question}`);
+for (const routeLabel of [
+  'Set up 3D printing at home',
+  'Start PLA 3D printing',
+  'Choose 3D printing accessories',
+  'Start a 3D printing business',
+  'Calculate 3D printing rates',
+  'Paint a 3D print',
+  'Plan 3D printing for a dental practice or lab',
+  'Make a 3D-printed jewelry master',
+  'Understand 3D printing in manufacturing',
+  'Understand carbon 3D printing',
+  'Compare desktop 3D printer categories',
+  'Find 3D-printing files',
+]) assert.ok(selector.includes(routeLabel), `Blog guide map needs: ${routeLabel}`);
 
 assert.match(blog, /<h2 id="printing-topic">3D printing guides<\/h2>/);
 assert.match(blog, /<h2 id="software-topic">Software and product notes<\/h2>/);
@@ -381,15 +393,17 @@ assert.match(fdmGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">re
 
 const desktopGuide = read('blog/desktop-3d-printing-setup-safe-workspace.html');
 const desktopAnswer = directAnswer(desktopGuide);
-assert.ok(desktopGuide.indexOf(desktopAnswer) < desktopGuide.indexOf('<h2>Which type of desktop 3D printer'), 'Desktop direct answer needs to stay near the top');
-assert.match(desktopAnswer, /<h2[^>]*>Safe desktop 3D printing setup: quick answer<\/h2>/);
-for (const requirement of ['ventilation', 'surface', 'clearance']) {
+assert.ok(desktopGuide.indexOf(desktopAnswer) < desktopGuide.indexOf('<h2>Desktop 3D printer categories compared'), 'Desktop definition needs to stay near the top');
+assert.match(desktopAnswer, /<h2[^>]*>Desktop 3D printing: quick definition<\/h2>/);
+for (const requirement of ['filament', 'resin', 'ventilation']) {
   assert.match(desktopAnswer, new RegExp(requirement, 'i'), `Desktop direct answer needs ${requirement}`);
 }
 for (const link of ['/blog/what-is-fdm-3d-printing.html', '/blog/3d-printing-filament-pla-petg-tpu.html']) {
   assert.ok(desktopAnswer.includes(`href="${link}"`), `Desktop direct answer needs ${link}`);
 }
-assert.match(desktopGuide, /<h2>Which type of desktop 3D printer fits the job\?<\/h2>/);
+assert.match(desktopGuide, /<h1>What is desktop 3D printing\?<\/h1>/);
+assert.match(desktopGuide, /<h2>Desktop 3D printer categories compared<\/h2>/);
+assert.match(desktopGuide, /<h2>What does desktop 3D printing cost\?<\/h2>/);
 assert.match(desktopGuide, /<h2>What is the best desktop 3D printing setup\?<\/h2>/);
 assert.match(desktopGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
 assert.match(desktopGuide, /MooreCode's workspace guide recommends a rigid, level surface/);
@@ -436,11 +450,28 @@ for (const link of [
 
 const filamentAnswer = directAnswer(filamentGuide);
 assert.ok(filamentGuide.indexOf(filamentAnswer) < filamentGuide.indexOf('<h2>Which 3D printing materials'), 'Filament direct answer needs to stay near the top');
-assert.match(filamentAnswer, /<h2[^>]*>PLA vs PETG: quick comparison<\/h2>/);
+assert.match(filamentAnswer, /<h2[^>]*>PLA 3D printing: quick start<\/h2>/);
 for (const material of ['PLA', 'PETG', 'TPU']) {
   assert.match(filamentAnswer, new RegExp(material), `Filament direct answer needs ${material}`);
 }
 assert.ok(filamentAnswer.includes('href="#tpu-filament"'), 'Filament direct answer needs to hand off to the existing TPU section');
+
+const intentGuides = new Map(intentGuidePaths.map((path) => [path, read(path)]));
+for (const [path, html] of intentGuides) {
+  const canonicalPath = `https://moorecode.com/${path}`;
+  assert.ok(html.includes(`<link rel="canonical" href="${canonicalPath}"`), `${path} needs a self-canonical`);
+  assert.ok(blogIndex.includes(`href="/${path}"`), `${path} needs a prominent blog-index link`);
+  assert.ok(sitemap.includes(`<loc>${canonicalPath}</loc>`), `${path} needs sitemap discovery`);
+  assert.ok(llms.includes(`](${canonicalPath})`), `${path} needs llms.txt discovery`);
+}
+assert.match(intentGuides.get('guides/3d-printing-accessories.html'), /3D printing accessories ranked by usefulness[\s\S]*<ol>[\s\S]*Accessory type/);
+assert.match(directAnswer(intentGuides.get('guides/start-a-3d-printing-business.html')), /Seven 3D printing business ideas[\s\S]*<ol>/);
+assert.match(directAnswer(intentGuides.get('guides/3d-printing-for-dentists.html')), /Dental 3D printer options compared[\s\S]*Printer category/);
+assert.match(directAnswer(intentGuides.get('guides/3d-printing-jewelry.html')), /3D-printed jewelry in seven steps[\s\S]*<ol>/);
+assert.match(directAnswer(intentGuides.get('guides/3d-printing-manufacturing.html')), /3D printing versus traditional manufacturing[\s\S]*Production question/);
+assert.match(directAnswer(intentGuides.get('guides/painting-3d-prints.html')), /Paint a 3D print in eight steps[\s\S]*<ol>/);
+assert.match(directAnswer(intentGuides.get('guides/carbon-3d-printing.html')), /Carbon-fiber printing versus Carbon DLS[\s\S]*How it works/);
+assert.match(directAnswer(intentGuides.get('guides/3d-printing-at-home.html')), /Eight useful first projects[\s\S]*<ol>/);
 
 const invoicingGuide = read('blog/simple-invoicing-app-pricing-service-businesses.html');
 assert.match(invoicingGuide, /Assessment method and date:/);
