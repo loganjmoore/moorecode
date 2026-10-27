@@ -160,6 +160,17 @@ for (const match of llms.matchAll(/^- \[([^\]]+)\]\(https:\/\/moorecode\.com\/([
   assert.equal(match[1], title, `${path} title must stay current in llms.txt`);
   assert.equal(match[3], description, `${path} description must stay current in llms.txt`);
 }
+for (const [path, expectedTitle] of [
+  ['blog/desktop-3d-printing-setup-safe-workspace.html', 'Desktop 3D Printing: Types, Materials & Uses | MooreCode'],
+  ['guides/3d-printing-at-home.html', '3D Printing at Home: Setup, Safety & Projects | MooreCode'],
+  ['guides/3d-printing-for-dentists.html', '3D Printing for Dentists: Materials & Workflow | MooreCode'],
+  ['guides/painting-3d-prints.html', 'How to Paint 3D Prints: Prep to Finish | MooreCode'],
+]) {
+  const html = read(path);
+  const title = decodeHtml(html.match(/<title>([^<]+)<\/title>/)?.[1] || '');
+  assert.equal(title, expectedTitle);
+  assert.ok(title.length <= 60, `${path} title must be at most 60 characters`);
+}
 const homepage = read('index.html');
 const homepageGraph = JSON.parse(homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 assert.match(homepage, /href="blog\/">Blog<\/a>/);
