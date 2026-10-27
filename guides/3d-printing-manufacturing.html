@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Printing in Manufacturing: Process and Uses | MooreCode</title>
+<meta name="description" content="Learn how 3D printing works as a manufacturing process, compare technologies and materials, and decide where additive or traditional production fits." />
+<link rel="canonical" href="https://moorecode.com/guides/3d-printing-manufacturing.html" /><meta name="theme-color" content="#0b0c10" /><link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" /><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+<link rel="stylesheet" href="/style.css" /><link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
+<meta property="og:title" content="3D Printing in Manufacturing: Process and Uses" /><meta property="og:description" content="How additive manufacturing works, which technologies and materials it uses, and where it fits against traditional production." /><meta property="og:type" content="article" /><meta property="og:url" content="https://moorecode.com/guides/3d-printing-manufacturing.html" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"3D Printing in Manufacturing: Process and Uses","description":"Learn how 3D printing works as a manufacturing process, compare technologies and materials, and decide where additive or traditional production fits.","url":"https://moorecode.com/guides/3d-printing-manufacturing.html","datePublished":"2026-10-27","dateModified":"2026-10-27","author":{"@type":"Person","name":"Logan Moore","url":"https://moorecode.com/"}}</script>
+<script src="/navigation.js" defer></script><script defer src="/posthog-web.js"></script>
+</head>
+<body>
+<header class="nav"><a class="brand" href="/"><span class="brand-mark">M</span><span class="brand-text">moorecode</span></a><button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="navlinks" aria-expanded="false"><span></span><span></span><span></span></button><nav class="nav-links" id="navlinks"><a href="/">Home</a><a href="/projects.html">Projects</a><a href="/consulting.html">Consulting</a><a href="/hobbies.html">Hobbies</a><a href="/youtube.html">YouTube</a><a href="/about.html">About</a><a href="/blog/" class="active">Blog</a><a href="/contact.html">Contact</a></nav></header>
+<main><article>
+<header class="post-head"><p class="post-meta">Evergreen guide · Updated October 27, 2026 · By Logan Moore</p><h1>What is 3D printing in manufacturing?</h1></header>
+<section class="prose">
+  <p class="lede">3D printing in manufacturing is an additive production process: a machine turns digital geometry into a part by building material layer by layer. It can replace tooling for prototypes and low-volume parts, produce complex or consolidated geometry, make fixtures and patterns, or add material during repair, but it does not automatically beat molding, machining, forming, or casting on speed, cost, finish, or qualification.</p>
+
+  <section class="direct-answer" aria-labelledby="manufacturing-comparison">
+    <h2 id="manufacturing-comparison">3D printing versus traditional manufacturing</h2>
+    <table>
+      <thead><tr><th>Production question</th><th>3D printing can fit when</th><th>Another process can fit when</th></tr></thead>
+      <tbody>
+        <tr><td>How often does the design change?</td><td>Revisions are frequent and dedicated tooling would slow learning</td><td>The geometry is stable enough to justify mature tooling</td></tr>
+        <tr><td>How complex is the geometry?</td><td>Internal channels, consolidation, or customization create value</td><td>The part is simple to cut, form, mold, or assemble</td></tr>
+        <tr><td>What quantity is needed?</td><td>Low volume or on-demand production avoids inventory and tooling</td><td>High repeat volume rewards a faster established cycle</td></tr>
+        <tr><td>What must be qualified?</td><td>A documented material, machine, parameter set, finishing, and inspection plan is available</td><td>An existing qualified process already meets the requirement</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <h2>How the manufacturing workflow works</h2>
+  <ol>
+    <li>Define the finished part's function, material, quantity, tolerances, surface, and inspection.</li>
+    <li>Create or prepare the digital model for the chosen process.</li>
+    <li>Orient, support, nest, and slice the build under a controlled parameter set.</li>
+    <li>Build the part layer by layer from filament, liquid resin, powder, wire, or another supported feedstock.</li>
+    <li>Remove, clean, depowder, wash, dry, cure, debind, sinter, heat-treat, or machine only as that process requires.</li>
+    <li>Inspect the features that control acceptance and feed the result back into the production plan.</li>
+  </ol>
+
+  <h2>Key 3D printing technologies</h2>
+  <table>
+    <thead><tr><th>Technology family</th><th>Starting feedstock</th><th>Typical manufacturing role</th></tr></thead>
+    <tbody>
+      <tr><td>Material extrusion</td><td>Thermoplastic or supported filled feedstock</td><td>Prototypes, fixtures, aids, patterns, and polymer parts</td></tr>
+      <tr><td>Vat photopolymerization</td><td>Liquid photopolymer</td><td>Fine-detail models, patterns, and smooth prototypes</td></tr>
+      <tr><td>Polymer powder-bed fusion</td><td>Polymer powder</td><td>Nested batches and functional polymer geometry without attached build supports</td></tr>
+      <tr><td>Metal powder-bed fusion</td><td>Metal powder</td><td>Dense intricate metal parts under a controlled production system</td></tr>
+      <tr><td>Binder jetting</td><td>Powder plus binder</td><td>Batched parts that become dense during later furnace processing</td></tr>
+      <tr><td>Directed energy deposition</td><td>Metal powder or wire</td><td>Large features, near-net builds, and repair</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Materials are process-specific</h2>
+  <p>PLA, PETG, TPU, engineering thermoplastics, photopolymers, polymer powders, ceramics, and metal alloys do not become interchangeable because each can be printed. The exact machine, feedstock, parameter set, orientation, environment, and post-processing control the resulting part. Start with the property and standard the finished job needs.</p>
+
+  <h2>Where additive manufacturing fits best</h2>
+  <ul>
+    <li>Fast prototypes with a written visual, fit, or functional test.</li>
+    <li>Jigs, fixtures, templates, trays, and assembly aids that improve a measured task.</li>
+    <li>Low-volume parts where dedicated tooling would dominate cost or schedule.</li>
+    <li>Customized geometry based on a controlled input and repeatable inspection.</li>
+    <li>Consolidated shapes or internal passages that create real performance or assembly value.</li>
+    <li>Repair or material addition when a suitable directed process and qualification path exist.</li>
+  </ul>
+
+  <p>The <a href="/blog/3d-printing-metal-processes-compared.html">metal process comparison</a> goes deeper on powder bed fusion, binder jetting, metal FFF, and directed energy deposition. The <a href="/blog/3d-printing-prototype-four-stage-test-plan.html">prototype test plan</a> separates learning builds from production evidence.</p>
+</section>
+</article></main>
+<footer><p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p><div class="foot-links"><a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a><a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a></div><address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address></footer><script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body></html>
