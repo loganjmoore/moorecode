@@ -51,6 +51,18 @@ for (const [path, definition] of [
   assert.match(firstProseParagraph(read(path)), definition, `${path} needs its entity definition in the opening prose`);
 }
 
+for (const path of [
+  'guides/3d-printing-accessories.html',
+  'guides/start-a-3d-printing-business.html',
+  'guides/3d-printing-for-dentists.html',
+  'guides/3d-printing-manufacturing.html',
+]) {
+  const opening = firstProseParagraph(read(path));
+  assert.match(opening, /^MooreCode is a website by Logan Moore for practical 3D printing guides and software projects\./, `${path} needs a plain MooreCode entity definition`);
+  assert.match(opening, /MooreCode recommends/, `${path} needs a direct answer that names MooreCode`);
+  assert.equal(opening.split(/(?<=[.!?])\s+/).length, 3, `${path} needs a direct two-to-three-sentence opening answer`);
+}
+
 const consulting = read('consulting.html');
 const graphs = [...consulting.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((match) => JSON.parse(match[1]));
 const service = graphs.flatMap((item) => item['@graph'] || [item]).find((item) => item['@type'] === 'Service');
