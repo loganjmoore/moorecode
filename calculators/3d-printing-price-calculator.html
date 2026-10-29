@@ -58,7 +58,7 @@
 <script defer src="/posthog-web.js"></script>
 <script defer src="/calculators/3d-printing-price-calculator.js"></script>
 </head>
-<body>
+<body class="price-calculator-page">
 
 <header class="nav">
   <a class="brand" href="/">
@@ -196,10 +196,38 @@
       </fieldset>
 
       <button class="btn primary" type="submit">Calculate estimate</button>
+      <p class="calculator-status" id="calculator-status" role="status" aria-live="polite">Enter your assumptions, then calculate.</p>
     </form>
 
-    <aside class="calculator-result" aria-labelledby="estimate-heading">
-      <h2 id="estimate-heading">Estimated direct cost</h2>
+    <section class="calculator-result" id="estimate-summary" aria-labelledby="estimate-heading">
+      <div class="estimate-summary-head">
+        <h2 id="estimate-heading">Estimate summary</h2>
+        <div class="estimate-actions" aria-label="Estimate actions">
+          <button class="btn ghost" id="print-estimate" type="button" disabled>Print estimate</button>
+          <button class="btn ghost" id="download-estimate" type="button" disabled>Download estimate (.txt)</button>
+        </div>
+      </div>
+      <section class="estimate-summary-group" aria-labelledby="assumptions-heading">
+        <h3 id="assumptions-heading">Assumptions</h3>
+        <dl class="estimate-assumptions">
+          <div><dt>Number of parts</dt><dd data-estimate-assumption="quantity">Not calculated</dd></div>
+          <div><dt>Material per part (g)</dt><dd data-estimate-assumption="materialGrams">Not calculated</dd></div>
+          <div><dt>Print time per part (hours)</dt><dd data-estimate-assumption="printHours">Not calculated</dd></div>
+          <div><dt>Currency</dt><dd data-estimate-assumption="currency">Not calculated</dd></div>
+          <div><dt>Spool or material price</dt><dd data-estimate-assumption="spoolPrice">Not calculated</dd></div>
+          <div><dt>Spool or package weight (g)</dt><dd data-estimate-assumption="spoolWeight">Not calculated</dd></div>
+          <div><dt>Average printer power (W)</dt><dd data-estimate-assumption="printerWatts">Not calculated</dd></div>
+          <div><dt>Electricity price per kWh</dt><dd data-estimate-assumption="energyRate">Not calculated</dd></div>
+          <div><dt>Hands-on labor (hours)</dt><dd data-estimate-assumption="laborHours">Not calculated</dd></div>
+          <div><dt>Labor rate per hour</dt><dd data-estimate-assumption="laborRate">Not calculated</dd></div>
+          <div><dt>Machine and upkeep per print hour</dt><dd data-estimate-assumption="machineRate">Not calculated</dd></div>
+          <div><dt>Other direct job costs</dt><dd data-estimate-assumption="otherCost">Not calculated</dd></div>
+          <div><dt>Failed-print allowance</dt><dd data-estimate-assumption="failureRate">Not calculated</dd></div>
+        </dl>
+      </section>
+      <section class="estimate-summary-group" aria-labelledby="direct-cost-heading">
+      <h3 id="direct-cost-heading">Direct-cost breakdown</h3>
+      <p class="result-label">Total direct cost</p>
       <p class="result-total" id="job-total">Not calculated</p>
       <p class="result-per-part" id="per-part">Calculate to see direct cost per part.</p>
       <dl class="result-breakdown">
@@ -210,14 +238,19 @@
         <div><dt>Other direct costs</dt><dd id="result-other">Not calculated</dd></div>
         <div><dt>Failed-print allowance</dt><dd id="result-failureAllowance">Not calculated</dd></div>
       </dl>
+      </section>
+      <section class="estimate-summary-group" aria-labelledby="pricing-summary-heading">
+      <h3 id="pricing-summary-heading">Pricing</h3>
       <dl class="pricing-result" aria-label="Suggested price">
+        <div><dt>Pricing method</dt><dd id="pricing-method-summary">Not calculated</dd></div>
+        <div><dt>Pricing percentage</dt><dd id="pricing-percentage-summary">Not calculated</dd></div>
         <div><dt>Suggested selling price</dt><dd id="suggested-price">Not calculated</dd></div>
         <div><dt>Gross profit</dt><dd id="gross-profit">Not calculated</dd></div>
-        <div><dt>Price per part</dt><dd id="selling-price-per-part">Not calculated</dd></div>
+        <div><dt>Selling price per part</dt><dd id="selling-price-per-part">Not calculated</dd></div>
       </dl>
+      </section>
       <p class="estimate-caveat">Estimate only. Excludes taxes, shipping, marketplace fees, and any overhead you did not enter.</p>
-      <p class="calculator-status" id="calculator-status" role="status" aria-live="polite">Enter your assumptions, then calculate.</p>
-    </aside>
+    </section>
   </section>
 
   <section class="calculator-notes" aria-labelledby="formula-heading">

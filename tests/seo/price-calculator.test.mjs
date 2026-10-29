@@ -6,6 +6,7 @@ const source = readFileSync(new URL('../../calculators/3d-printing-price-calcula
 const context = { globalThis: {} };
 vm.runInNewContext(source, context);
 const calculate = context.globalThis.calculate3DPrintingPrice;
+const buildEstimateText = context.globalThis.build3DPrintingEstimateText;
 
 const zero = calculate({
   quantity: 1, materialGrams: 0, spoolPrice: 0, spoolWeight: 1000,
@@ -18,12 +19,13 @@ assert.deepEqual({ ...zero }, {
   failureAllowance: 0, total: 0, perPart: 0, suggestedPrice: 0, grossProfit: 0, sellingPricePerPart: 0,
 });
 
-const representative = calculate({
+const representativeValues = {
   quantity: 2, materialGrams: 100, spoolPrice: 25, spoolWeight: 1000,
   printHours: 4, printerWatts: 120, energyRate: 0.15,
   laborHours: 0.5, laborRate: 30, machineRate: 1.5, otherCost: 3, failureRate: 10,
-  pricingMode: 'markup', pricingPercentage: 25,
-});
+  pricingMode: 'markup', pricingPercentage: 25, currency: 'USD',
+};
+const representative = calculate(representativeValues);
 assert.ok(Math.abs(representative.material - 5) < 1e-9);
 assert.ok(Math.abs(representative.electricity - 0.144) < 1e-9);
 assert.ok(Math.abs(representative.total - 38.6584) < 1e-9);
@@ -31,6 +33,20 @@ assert.ok(Math.abs(representative.perPart - 19.3292) < 1e-9);
 assert.ok(Math.abs(representative.suggestedPrice - 48.323) < 1e-9);
 assert.ok(Math.abs(representative.grossProfit - 9.6646) < 1e-9);
 assert.ok(Math.abs(representative.sellingPricePerPart - 24.1615) < 1e-9);
+const estimateText = buildEstimateText(representativeValues, representative);
+for (const expected of [
+  'Estimate summary',
+  'Number of parts: 2',
+  'Material: $5.00',
+  'Total direct cost: $38.66',
+  'Direct cost per part: $19.33',
+  'Pricing method: Markup',
+  'Pricing percentage: 25%',
+  'Suggested selling price: $48.32',
+  'Gross profit: $9.66',
+  'Selling price per part: $24.16',
+  'Estimate only. Excludes taxes, shipping, marketplace fees, and any overhead you did not enter.',
+]) assert.match(estimateText, new RegExp(expected.replaceAll('$', '\\$').replaceAll('.', '\\.')));
 
 const margin = calculate({
   quantity: 1, materialGrams: 100, spoolPrice: 1000, spoolWeight: 1000,
