@@ -1576,7 +1576,8 @@ footer .foot-links a:hover { color: var(--accent); }
   .prototype-test-plan-page .prototype-plan-summary-group h4,
   .prototype-test-plan-page .prototype-plan-summary-group dt,
   .prototype-test-plan-page .prototype-plan-summary-group dd,
-  .prototype-test-plan-page .prose .prototype-plan-example-note {
+  .prototype-test-plan-page .prose .prototype-plan-example-note,
+  .prototype-test-plan-page .prose .prototype-plan-example-note strong {
     color: #111;
   }
 
