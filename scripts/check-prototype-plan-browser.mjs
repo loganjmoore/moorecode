@@ -24,8 +24,8 @@ try {
     page.on('pageerror', e => errors.push(e.message));
     await page.goto(origin + '/blog/3d-printing-prototype-four-stage-test-plan.html');
     await page.locator('#prototype-plan-form').waitFor();
-    const decline = page.getByRole('button', { name: /decline/i });
-    if (await decline.isVisible()) await decline.click();
+    await page.getByRole('button', { name:'No thanks', exact:true }).click();
+    assert.equal(await page.locator('.analytics-consent').isVisible(),false);
     assert.equal(await page.locator('h1').count(),1);
     await page.getByRole('button', { name: 'Create test-plan summary', exact: true }).click();
     assert.equal(await page.locator('#prototype-plan-output').isVisible(),false);
@@ -42,6 +42,7 @@ try {
     assert.equal(await page.locator('#prototype-plan-summary-heading').count(),1);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.screenshot({ path: dir + '/' + width + '-summary.png' });
+    await page.locator('#prototype-plan-output').screenshot({ path: dir + '/' + width + '-complete-summary.png' });
     await page.getByRole('button', { name: 'Print or save as PDF', exact: true }).click();
     assert.equal(await page.evaluate(() => window.__prints),1);
     if (width === 1280) {
