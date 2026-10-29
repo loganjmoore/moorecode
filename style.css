@@ -714,6 +714,168 @@ section h2 {
   background: var(--bg-elev);
 }
 
+/* ---------- Prototype test-plan builder ---------- */
+.prototype-plan-builder {
+  margin: 40px 0 20px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+}
+
+.prose .prototype-plan-builder h2 {
+  margin: 0 0 10px;
+}
+
+.prose .prototype-plan-intro {
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.prose .prototype-plan-privacy {
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.prototype-plan-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.prototype-plan-field {
+  display: grid;
+  gap: 8px;
+}
+
+.prototype-plan-field--wide {
+  grid-column: 1 / -1;
+}
+
+.prototype-plan-field label {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.prototype-plan-field label span {
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.prototype-plan-field textarea,
+.prototype-plan-field select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #4b5262;
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  padding: 11px 12px;
+  font: inherit;
+  line-height: 1.5;
+}
+
+.prototype-plan-field textarea {
+  resize: vertical;
+}
+
+.prototype-plan-field textarea:focus-visible,
+.prototype-plan-field select:focus-visible,
+.prototype-plan-actions button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.prototype-plan-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.prototype-plan-actions .btn {
+  min-height: 46px;
+  justify-content: center;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.prototype-plan-actions .btn:active {
+  transform: translateY(1px);
+}
+
+.prose .prototype-plan-status {
+  min-height: 24px;
+  margin: 12px 0 0;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+.prototype-plan-output {
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.prototype-plan-output[hidden] {
+  display: none;
+}
+
+.prototype-plan-output h3 {
+  margin: 0 0 12px;
+  font-size: 24px;
+}
+
+.prose .prototype-plan-example-note {
+  margin-bottom: 24px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.prototype-plan-summary-group + .prototype-plan-summary-group {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.prototype-plan-summary-group h4 {
+  margin: 0 0 14px;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.prototype-plan-summary-group dl {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.prototype-plan-summary-group dl > div {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.38fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.prototype-plan-summary-group dt {
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.prototype-plan-summary-group dd {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.prose .prototype-plan-next {
+  margin-bottom: 32px;
+}
+
 .filament-hub {
   margin-top: 32px;
   padding-top: 28px;
@@ -1370,6 +1532,65 @@ footer .foot-links a:hover { color: var(--accent); }
   .post-card { flex-direction: column; }
   .post-card img { flex-basis: auto; width: 100%; }
   .topic-groups { grid-template-columns: 1fr; padding-left: 20px; padding-right: 20px; }
+
+  .prototype-plan-builder { padding: 20px; }
+  .prototype-plan-fields { grid-template-columns: 1fr; }
+  .prototype-plan-field--wide { grid-column: auto; }
+  .prototype-plan-summary-group dl > div { grid-template-columns: 1fr; gap: 4px; }
+  .prototype-plan-actions .btn { width: 100%; white-space: normal; }
+}
+
+@media print {
+  body.prototype-test-plan-page {
+    display: block;
+    background: #fff;
+  }
+
+  body.prototype-test-plan-page * {
+    visibility: hidden;
+  }
+
+  .prototype-test-plan-page .prototype-plan-builder,
+  .prototype-test-plan-page .prototype-plan-builder * {
+    visibility: visible;
+  }
+
+  .prototype-test-plan-page .prototype-plan-builder {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #fff;
+    color: #111;
+  }
+
+  .prototype-test-plan-page .prototype-plan-builder h2,
+  .prototype-test-plan-page .prototype-plan-output h3,
+  .prototype-test-plan-page .prototype-plan-summary-group h4,
+  .prototype-test-plan-page .prototype-plan-summary-group dt,
+  .prototype-test-plan-page .prototype-plan-summary-group dd,
+  .prototype-test-plan-page .prose .prototype-plan-example-note {
+    color: #111;
+  }
+
+  .prototype-test-plan-page .prototype-plan-form,
+  .prototype-test-plan-page .prototype-plan-intro,
+  .prototype-test-plan-page .prototype-plan-privacy {
+    display: none;
+  }
+
+  .prototype-test-plan-page .prototype-plan-output {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-color: #bbb;
+  }
+
+  .prototype-test-plan-page .prototype-plan-summary-group + .prototype-plan-summary-group {
+    border-color: #bbb;
+    break-inside: avoid;
+  }
 }
 
 /* Comfortable mobile menu target; keep the existing navigation styling. */

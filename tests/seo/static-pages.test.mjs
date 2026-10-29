@@ -437,14 +437,61 @@ for (const requirement of ['rigid, level surface', 'source-control ventilation',
 const scanGuide = read('blog/3d-printing-prototype-four-stage-test-plan.html');
 const prototypeAnswer = directAnswer(scanGuide);
 assert.ok(scanGuide.indexOf(prototypeAnswer) < scanGuide.indexOf('<h2 id="scan-to-print">'), 'Prototype direct answer needs to stay near the top');
+assert.match(scanGuide, /<title>3D Printing Prototype Test Plan &amp; Checklist \| MooreCode<\/title>/);
+assert.match(scanGuide, /<meta name="description" content="Plan visual, form-and-fit, functional, and pilot prototypes with an on-device printable checklist and MooreCode's 3D printing cost calculator\." \/>/);
+assert.match(scanGuide, /<link rel="canonical" href="https:\/\/moorecode\.com\/blog\/3d-printing-prototype-four-stage-test-plan\.html" \/>/);
+assert.match(scanGuide, /<body class="prototype-test-plan-page">/);
+const sharedStyles = read('style.css');
+assert.match(sharedStyles, /body\.prototype-test-plan-page \* \{\s+visibility: hidden;/, 'Print isolation must be scoped to the prototype article');
+assert.doesNotMatch(sharedStyles, /\n\s+body \* \{\s+visibility: hidden;/, 'Shared print CSS must not hide every MooreCode page');
+assert.match(scanGuide, /<h1>3D printing prototype test plan and checklist<\/h1>/);
 assert.match(prototypeAnswer, /<h2[^>]*>Prototype test plan: quick answer<\/h2>/);
 for (const stage of ['visual', 'form-and-fit', 'functional', 'pilot']) {
   assert.match(prototypeAnswer, new RegExp(stage, 'i'), `Prototype direct answer needs ${stage}`);
 }
 assert.match(prototypeAnswer, /test form, fit, and function before committing to production/i);
-for (const link of ['/blog/what-is-fdm-3d-printing.html', '/calculators/3d-printing-price-calculator.html']) {
-  assert.ok(prototypeAnswer.includes(`href="${link}"`), `Prototype direct answer needs ${link}`);
+assert.ok(prototypeAnswer.includes('href="/blog/what-is-fdm-3d-printing.html"'), 'Prototype direct answer needs the FDM explainer');
+assert.match(scanGuide, /<section class="prototype-plan-builder" aria-labelledby="prototype-plan-heading">[\s\S]*?<h2 id="prototype-plan-heading">Build your prototype test plan<\/h2>/);
+for (const [id, label] of [
+  ['prototype-question', 'Test question'],
+  ['prototype-stage', 'Stage'],
+  ['prototype-specimen', 'Specimen and quantity'],
+  ['prototype-process', 'Process and material'],
+  ['prototype-method', 'Method'],
+  ['prototype-measurement', 'Measurement'],
+  ['prototype-threshold', 'Pass/fail threshold'],
+  ['prototype-result', 'Observed result'],
+  ['prototype-next-action', 'Next action'],
+]) {
+  assert.match(scanGuide, new RegExp(`<label for="${id}">${label}`), `Prototype builder needs a native label for ${label}`);
+  assert.match(scanGuide, new RegExp(`id="${id}"`), `Prototype builder needs the ${id} control`);
 }
+for (const label of [
+  'Load the fictional sensor-bracket example',
+  'Create test-plan summary',
+  'Print or save as PDF',
+  'Clear',
+]) assert.ok(scanGuide.includes(`>${label}</button>`), `Prototype builder needs the ${label} button`);
+assert.match(scanGuide, /Your entries stay in this browser tab only\. Nothing is uploaded or saved, and refreshing the page clears the draft\./);
+assert.match(scanGuide, /<section class="prototype-plan-output"[^>]*hidden>[\s\S]*?<dl>/);
+assert.match(scanGuide, /<strong>Next task:<\/strong> <a href="\/calculators\/3d-printing-price-calculator\.html">Estimate a print with the price calculator<\/a>/);
+const prototypeBuilderScript = scanGuide.slice(scanGuide.indexOf('(() => {'), scanGuide.lastIndexOf('})();') + 5);
+assert.doesNotMatch(prototypeBuilderScript, /\b(?:localStorage|sessionStorage|fetch|XMLHttpRequest|sendBeacon)\b/, 'Prototype builder must not store or transmit draft data');
+for (const citation of [
+  'https://www.nist.gov/additive-manufacturing/what-additive-manufacturing',
+  'https://formlabs.com/blog/validation-testing-product-development-poc-evt-dvt-pvt-mp/',
+  'https://www.protolabs.com/resources/design-tips/3d-printing-tolerances/',
+  'https://www.protolabs.com/resources/guides-and-trend-reports/selecting-the-right-material-for-3d-printing/',
+]) assert.ok(scanGuide.includes(`href="${citation}"`), `Prototype guide must preserve ${citation}`);
+const prototypeSchemas = JSON.parse(scanGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const prototypePost = prototypeSchemas.find((item) => item['@type'] === 'BlogPosting');
+const prototypeFaq = prototypeSchemas.find((item) => item['@type'] === 'FAQPage');
+const onlinePlanQuestion = 'Can I make a 3D printing prototype test plan online?';
+const onlinePlanAnswer = "Yes. Use the checklist on this page to draft a test plan entirely in your browser. Nothing is uploaded or saved, refreshing clears the draft, and your browser's print dialog can print the summary or save it as a PDF.";
+assert.equal(prototypePost.dateModified, '2026-10-29');
+assert.equal(prototypeFaq.mainEntity.find(({ name }) => name === onlinePlanQuestion)?.acceptedAnswer.text, onlinePlanAnswer);
+assert.ok(scanGuide.includes(`<h3>${onlinePlanQuestion}</h3>`), 'Prototype guide needs the online-plan FAQ question');
+assert.ok(scanGuide.includes(`<p>${onlinePlanAnswer}</p>`), 'Prototype guide needs the same visible and structured online-plan answer');
 const prototypeCostSection = scanGuide.slice(scanGuide.indexOf('<h2 id="prototype-print-cost">'), scanGuide.indexOf('<h2 id="scan-to-print">'));
 assert.match(prototypeCostSection, /<h2 id="prototype-print-cost">What drives prototype print cost\?<\/h2>/);
 for (const factor of ['Material choice', 'Design complexity', 'Part size', 'Printing technology']) {

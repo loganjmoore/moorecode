@@ -35,7 +35,7 @@ for (const [location, contentDate] of [
   ['https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html', '2026-10-17'],
   ['https://moorecode.com/blog/best-3d-printing-websites-files-2026.html', '2026-10-08'],
   ['https://moorecode.com/blog/desktop-3d-printing-setup-safe-workspace.html', '2026-10-27'],
-  ['https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html', '2026-10-08'],
+  ['https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html', '2026-10-29'],
   ['https://moorecode.com/blog/3d-printing-metal-processes-compared.html', '2026-10-23'],
   ['https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html', '2026-10-27'],
   ['https://moorecode.com/guides/3d-printing-at-home.html', '2026-10-27'],
@@ -61,6 +61,7 @@ for (const [location, expectedLastmod] of [
   ['https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html', '2026-10-27'],
   ['https://moorecode.com/blog/what-is-fdm-3d-printing.html', '2026-10-20'],
   ['https://moorecode.com/blog/desktop-3d-printing-setup-safe-workspace.html', '2026-10-27'],
+  ['https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html', '2026-10-29'],
 ]) {
   assert.equal(entries.get(location), expectedLastmod, `${location} lastmod must match its verified public-content change`);
 }
