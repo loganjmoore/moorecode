@@ -34,6 +34,7 @@ jobs:
           for PLAN_ORIGIN in $PLAN_ORIGINS; do
             TARGET_NAME=$(echo "$PLAN_ORIGIN" | tr -cs 'a-zA-Z0-9' '-')
             PLAN_ORIGIN="$PLAN_ORIGIN" PLAYWRIGHT_ENTRY="$RUNNER_TEMP/plan-browser/node_modules/playwright/index.mjs" PDF_ENTRY="$RUNNER_TEMP/plan-browser/node_modules/pdf-lib/cjs/index.js" EVIDENCE_DIR="$RUNNER_TEMP/plan-evidence/$TARGET_NAME" node scripts/check-prototype-plan-browser.mjs
+            PLAN_ORIGIN="$PLAN_ORIGIN" PLAYWRIGHT_ENTRY="$RUNNER_TEMP/plan-browser/node_modules/playwright/index.mjs" PDF_ENTRY="$RUNNER_TEMP/plan-browser/node_modules/pdf-lib/cjs/index.js" EVIDENCE_DIR="$RUNNER_TEMP/plan-evidence/$TARGET_NAME" node scripts/check-price-calculator-browser.mjs
           done
       - uses: actions/upload-artifact@v4
         if: always()
