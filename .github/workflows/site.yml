@@ -27,7 +27,11 @@ jobs:
             if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then break; fi
             sleep 1
           done
-          for PLAN_ORIGIN in http://127.0.0.1:4173 https://moorecode.com https://moorecode.onrender.com; do
+          PLAN_ORIGINS="http://127.0.0.1:4173"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PLAN_ORIGINS="$PLAN_ORIGINS https://moorecode.com https://moorecode.onrender.com"
+          fi
+          for PLAN_ORIGIN in $PLAN_ORIGINS; do
             TARGET_NAME=$(echo "$PLAN_ORIGIN" | tr -cs 'a-zA-Z0-9' '-')
             PLAN_ORIGIN="$PLAN_ORIGIN" PLAYWRIGHT_ENTRY="$RUNNER_TEMP/plan-browser/node_modules/playwright/index.mjs" PDF_ENTRY="$RUNNER_TEMP/plan-browser/node_modules/pdf-lib/cjs/index.js" EVIDENCE_DIR="$RUNNER_TEMP/plan-evidence/$TARGET_NAME" node scripts/check-prototype-plan-browser.mjs
           done
