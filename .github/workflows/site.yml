@@ -1,5 +1,6 @@
 name: Public site checks
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches: [main]
@@ -13,4 +14,29 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
-      - run: node --test tests/posthog/consent-ui.test.mjs tests/posthog/posthog-web.test.mjs tests/seo/static-pages.test.mjs tests/seo/price-calculator.test.mjs tests/seo/sitemap.test.mjs
+      - run: node --test tests/posthog/*.test.mjs tests/seo/*.test.mjs
+      - name: Hosted prototype checklist journeys
+        env:
+          CI: 'true'
+        run: |
+          npm install --prefix "$RUNNER_TEMP/plan-browser" --no-package-lock --no-save playwright@1.58.2 pdf-lib@1.17.1
+          python3 -m http.server 4173 --bind 127.0.0.1 > "$RUNNER_TEMP/plan-preview.log" 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then break; fi
+            sleep 1
+          done
+          PLAN_ORIGINS="http://127.0.0.1:4173"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PLAN_ORIGINS="$PLAN_ORIGINS https://moorecode.com https://moorecode.onrender.com"
+          fi
+          for PLAN_ORIGIN in $PLAN_ORIGINS; do
+            TARGET_NAME=$(echo "$PLAN_ORIGIN" | tr -cs 'a-zA-Z0-9' '-')
+            PLAN_ORIGIN="$PLAN_ORIGIN" PLAYWRIGHT_ENTRY="$RUNNER_TEMP/plan-browser/node_modules/playwright/index.mjs" PDF_ENTRY="$RUNNER_TEMP/plan-browser/node_modules/pdf-lib/cjs/index.js" EVIDENCE_DIR="$RUNNER_TEMP/plan-evidence/$TARGET_NAME" node scripts/check-prototype-plan-browser.mjs
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prototype-plan-browser
+          path: ${{ runner.temp }}/plan-evidence

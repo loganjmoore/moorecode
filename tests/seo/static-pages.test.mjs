@@ -442,7 +442,8 @@ assert.match(scanGuide, /<meta name="description" content="Plan visual, form-and
 assert.match(scanGuide, /<link rel="canonical" href="https:\/\/moorecode\.com\/blog\/3d-printing-prototype-four-stage-test-plan\.html" \/>/);
 assert.match(scanGuide, /<body class="prototype-test-plan-page">/);
 const sharedStyles = read('style.css');
-assert.match(sharedStyles, /body\.prototype-test-plan-page \* \{\s+visibility: hidden;/, 'Print isolation must be scoped to the prototype article');
+assert.match(sharedStyles, /body\.prototype-test-plan-page > :not\(main\)/, 'Print isolation must remove unrelated page layout');
+assert.match(sharedStyles, /\.prototype-test-plan-page \.prose > :not\(\.prototype-plan-builder\) \{\s+display: none !important;/, 'Print must collapse article siblings rather than retain hidden pages');
 assert.doesNotMatch(sharedStyles, /\n\s+body \* \{\s+visibility: hidden;/, 'Shared print CSS must not hide every MooreCode page');
 assert.match(scanGuide, /<h1>3D printing prototype test plan and checklist<\/h1>/);
 assert.match(prototypeAnswer, /<h2[^>]*>Prototype test plan: quick answer<\/h2>/);

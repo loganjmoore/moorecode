@@ -1546,18 +1546,23 @@ footer .foot-links a:hover { color: var(--accent); }
     background: #fff;
   }
 
-  body.prototype-test-plan-page * {
-    visibility: hidden;
+  body.prototype-test-plan-page > :not(main),
+  .prototype-test-plan-page main > article > :not(.prose),
+  .prototype-test-plan-page .prose > :not(.prototype-plan-builder) {
+    display: none !important;
   }
 
-  .prototype-test-plan-page .prototype-plan-builder,
-  .prototype-test-plan-page .prototype-plan-builder * {
-    visibility: visible;
+  .prototype-test-plan-page main,
+  .prototype-test-plan-page main > article,
+  .prototype-test-plan-page .prose {
+    display: block;
+    margin: 0;
+    padding: 0;
+    max-width: none;
   }
 
   .prototype-test-plan-page .prototype-plan-builder {
-    position: absolute;
-    inset: 0 auto auto 0;
+    position: static;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -1571,7 +1576,8 @@ footer .foot-links a:hover { color: var(--accent); }
   .prototype-test-plan-page .prototype-plan-summary-group h4,
   .prototype-test-plan-page .prototype-plan-summary-group dt,
   .prototype-test-plan-page .prototype-plan-summary-group dd,
-  .prototype-test-plan-page .prose .prototype-plan-example-note {
+  .prototype-test-plan-page .prose .prototype-plan-example-note,
+  .prototype-test-plan-page .prose .prototype-plan-example-note strong {
     color: #111;
   }
 
