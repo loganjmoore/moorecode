@@ -1,0 +1,61 @@
+import assert from 'node:assert/strict';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
+assert.equal(process.env.CI,'true','Hosted browser validation only');
+const origin=process.env.PLAN_ORIGIN;
+assert.ok(['http://127.0.0.1:4173','https://moorecode.com','https://moorecode.onrender.com'].includes(origin));
+const { chromium }=await import(pathToFileURL(process.env.PLAYWRIGHT_ENTRY));
+const { PDFDocument }=await import(pathToFileURL(process.env.PDF_ENTRY));
+const dir=process.env.EVIDENCE_DIR+'/calculator'; await mkdir(dir,{recursive:true});
+const browser=await chromium.launch({channel:'chrome',headless:true}); const results=[];
+try {
+ for(const width of [390,1280]) {
+  const context=await browser.newContext({viewport:{width,height:900},acceptDownloads:true});
+  const writes=[],errors=[];
+  await context.route('**/*',route=>{const r=route.request();if(r.method()!=='GET')writes.push(r.method());return r.method()==='GET'&&new URL(r.url()).origin===origin?route.continue():route.abort();});
+  await context.addInitScript(()=>{window.__prints=0;window.print=()=>{window.__prints++;};});
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(origin+'/calculators/3d-printing-price-calculator.html');
+  await page.getByRole('button',{name:'No thanks',exact:true}).click();
+  const print=page.getByRole('button',{name:'Print estimate',exact:true});
+  const download=page.getByRole('button',{name:'Download estimate (.txt)',exact:true});
+  assert.equal(await print.isDisabled(),true);assert.equal(await download.isDisabled(),true);
+  const example=page.locator('#load-example');
+  await example.focus();await page.keyboard.press('Tab');await page.keyboard.press('Shift+Tab');
+  assert.equal(await example.evaluate(el=>el.matches(':focus-visible')),true);
+  await page.keyboard.press('Enter');
+  assert.equal(await page.locator('#quantity').inputValue(),'2');
+  await page.getByRole('button',{name:'Calculate estimate',exact:true}).click();
+  assert.equal(await page.locator('#job-total').innerText(),'$38.66');
+  assert.match(await page.locator('#per-part').innerText(),/^\$19.33 direct cost per part/);
+  assert.equal(await page.locator('#suggested-price').innerText(),'$48.32');
+  assert.equal(await print.isEnabled(),true);assert.equal(await download.isEnabled(),true);
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  const event=page.waitForEvent('download');await download.click();const file=await event;
+  assert.equal(file.suggestedFilename(),'moorecode-3d-print-estimate.txt');
+  const path=dir+'/'+width+'-estimate.txt';await file.saveAs(path);const text=await readFile(path,'utf8');
+  for(const line of ['Number of parts: 2','Material: $5.00','Total direct cost: $38.66','Direct cost per part: $19.33','Suggested selling price: $48.32','Pricing method: Markup','Pricing percentage: 25%','Excludes taxes, shipping'])assert.ok(text.includes(line),line);
+  await page.locator('#estimate-summary').screenshot({path:dir+'/'+width+'-summary.png'});
+  await print.click();assert.equal(await page.evaluate(()=>window.__prints),1);
+  if(width===1280){const pdf=await page.pdf({format:'A4',printBackground:true,margin:{top:'10mm',bottom:'10mm',left:'10mm',right:'10mm'}});await writeFile(dir+'/estimate.pdf',pdf);const pages=(await PDFDocument.load(pdf)).getPageCount();results.push({origin,width,pdfPages:pages});assert.equal(pages,1,'Representative estimate should print as one readable page');}
+  await page.locator('#quantity').fill('');
+  assert.equal(await print.isDisabled(),true);assert.equal(await download.isDisabled(),true);
+  assert.equal(await page.locator('#job-total').innerText(),'Not calculated');
+  await page.getByRole('button',{name:'Calculate estimate',exact:true}).click();
+  assert.equal(await page.locator('#quantity').evaluate(el=>el===document.activeElement),true);
+  assert.equal(await page.evaluate(()=>window.__prints),1);
+  await example.click();await page.getByLabel('Target gross margin',{exact:true}).check();await page.locator('#pricingPercentage').fill('100');
+  await page.getByRole('button',{name:'Calculate estimate',exact:true}).click();
+  assert.match(await page.locator('#calculator-status').innerText(),/Target gross margin must be less than 100%/);
+  assert.equal(await print.isDisabled(),true);assert.equal(await download.isDisabled(),true);
+  assert.equal(await page.locator('#suggested-price').innerText(),'Not calculated');
+  await page.locator('#pricingPercentage').fill('25');await page.getByRole('button',{name:'Calculate estimate',exact:true}).click();
+  assert.equal(await page.locator('#suggested-price').innerText(),'$51.54');
+  assert.equal(await page.locator('#pricing-method-summary').innerText(),'Target gross margin');
+  const again=page.waitForEvent('download');await download.click();const updated=await again;await updated.saveAs(dir+'/'+width+'-margin-estimate.txt');const updatedText=await readFile(dir+'/'+width+'-margin-estimate.txt','utf8');
+  assert.ok(updatedText.includes('Suggested selling price: $51.54'));assert.ok(!updatedText.includes('$48.32'));
+  await page.reload();assert.equal(await print.isDisabled(),true);assert.equal(await download.isDisabled(),true);assert.equal(await page.locator('#job-total').innerText(),'Not calculated');
+  assert.deepEqual(errors,[]);assert.deepEqual(writes,[]);results.push({origin,width,journey:'pass'});await context.close();
+ }
+} finally {await writeFile(dir+'/results.json',JSON.stringify(results,null,2));await browser.close();}
+console.log(JSON.stringify(results));
