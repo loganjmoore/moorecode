@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>3D Printing a Prototype: Four Stages, One Test Plan</title>
-<meta name="description" content="Choose a 3D printing process and material for visual, fit, functional, and pilot prototypes by starting with the test result." />
+<title>3D Printing Prototype Test Plan &amp; Checklist | MooreCode</title>
+<meta name="description" content="Plan visual, form-and-fit, functional, and pilot prototypes with an on-device printable checklist and MooreCode's 3D printing cost calculator." />
 <link rel="canonical" href="https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html" />
 <meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
 <meta name="theme-color" content="#0b0c10" />
@@ -15,8 +15,8 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
 <link rel="stylesheet" href="/style.css" />
 <link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
-<meta property="og:title" content="3D Printing a Prototype: Four Stages, One Test Plan" />
-<meta property="og:description" content="Map visual, fit, functional, and pilot prototypes to a process, material, and pass/fail test." />
+<meta property="og:title" content="3D Printing Prototype Test Plan &amp; Checklist | MooreCode" />
+<meta property="og:description" content="Plan visual, form-and-fit, functional, and pilot prototypes with an on-device printable checklist and MooreCode's 3D printing cost calculator." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html" />
 <meta property="og:image" content="https://moorecode.com/blog/images/3d-printing-prototype-four-stage-test-plan.svg" />
@@ -30,12 +30,12 @@
     {
       "@type": "BlogPosting",
       "@id": "https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html#post",
-      "headline": "3D Printing a Prototype: Four Stages, One Test Plan",
-      "description": "Choose a 3D printing process and material for visual, fit, functional, and pilot prototypes by starting with the test result.",
+      "headline": "3D printing prototype test plan and checklist",
+      "description": "Plan visual, form-and-fit, functional, and pilot prototypes with an on-device printable checklist and MooreCode's 3D printing cost calculator.",
       "url": "https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html",
       "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html",
       "datePublished": "2026-10-08",
-      "dateModified": "2026-10-17",
+      "dateModified": "2026-10-29",
       "image": "https://moorecode.com/blog/images/3d-printing-prototype-four-stage-test-plan.svg",
       "author": { "@id": "https://moorecode.com/#logan" },
       "publisher": { "@id": "https://moorecode.com/#logan" },
@@ -64,6 +64,11 @@
           "@type": "Question",
           "name": "Should a prototype use the final production material?",
           "acceptedAnswer": { "@type": "Answer", "text": "Use the final material or a qualified match when the test depends on its heat, chemical, fatigue, friction, flexibility, or regulatory behavior. A cheaper stand-in is fine for questions about size, appearance, or handling." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I make a 3D printing prototype test plan online?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the checklist on this page to draft a test plan entirely in your browser. Nothing is uploaded or saved, refreshing clears the draft, and your browser's print dialog can print the summary or save it as a PDF." }
         }
       ]
     },
@@ -74,7 +79,7 @@
 </script>
 <script defer src="/posthog-web.js"></script>
 </head>
-<body>
+<body class="prototype-test-plan-page">
 <header class="nav">
   <a class="brand" href="/"><span class="brand-mark">M</span><span class="brand-text">moorecode</span></a>
   <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')"><span></span><span></span><span></span></button>
@@ -85,7 +90,7 @@
 <article>
 <header class="post-head">
   <p class="post-meta">October 8, 2026 · By Logan Moore</p>
-  <h1>3D Printing a Prototype: Four Stages, One Test Plan</h1>
+  <h1>3D printing prototype test plan and checklist</h1>
 </header>
 
 <section class="prose">
@@ -96,8 +101,111 @@
   <section class="direct-answer" aria-labelledby="prototype-quick-answer">
     <h2 id="prototype-quick-answer">Prototype test plan: quick answer</h2>
     <p>The four stages are visual, form-and-fit, functional, and pilot. A prototype test plan uses them to test form, fit, and function before committing to production.</p>
-    <p>Related: <a href="/blog/what-is-fdm-3d-printing.html">read the FDM explainer</a> and <a href="/calculators/3d-printing-price-calculator.html">estimate a print with the price calculator</a>.</p>
+    <p>Related: <a href="/blog/what-is-fdm-3d-printing.html">read the FDM explainer</a>.</p>
   </section>
+
+  <section class="prototype-plan-builder" aria-labelledby="prototype-plan-heading">
+    <h2 id="prototype-plan-heading">Build your prototype test plan</h2>
+    <p class="prototype-plan-intro">Draft the question, evidence, and decision before you print. The built-in sensor-bracket example is fictional.</p>
+    <p class="prototype-plan-privacy">Your entries stay in this browser tab only. Nothing is uploaded or saved, and refreshing the page clears the draft.</p>
+
+    <form class="prototype-plan-form" id="prototype-plan-form" autocomplete="off">
+      <div class="prototype-plan-fields">
+        <div class="prototype-plan-field prototype-plan-field--wide">
+          <label for="prototype-question">Test question</label>
+          <textarea id="prototype-question" name="question" rows="2" required></textarea>
+        </div>
+
+        <div class="prototype-plan-field">
+          <label for="prototype-stage">Stage</label>
+          <select id="prototype-stage" name="stage" required>
+            <option value="">Choose a stage</option>
+            <option value="Visual">Visual</option>
+            <option value="Form-and-fit">Form-and-fit</option>
+            <option value="Functional">Functional</option>
+            <option value="Pilot">Pilot</option>
+          </select>
+        </div>
+
+        <div class="prototype-plan-field">
+          <label for="prototype-specimen">Specimen and quantity</label>
+          <textarea id="prototype-specimen" name="specimen" rows="2" required></textarea>
+        </div>
+
+        <div class="prototype-plan-field">
+          <label for="prototype-process">Process and material</label>
+          <textarea id="prototype-process" name="process" rows="2" required></textarea>
+        </div>
+
+        <div class="prototype-plan-field">
+          <label for="prototype-measurement">Measurement</label>
+          <textarea id="prototype-measurement" name="measurement" rows="2" required></textarea>
+        </div>
+
+        <div class="prototype-plan-field prototype-plan-field--wide">
+          <label for="prototype-method">Method</label>
+          <textarea id="prototype-method" name="method" rows="3" required></textarea>
+        </div>
+
+        <div class="prototype-plan-field prototype-plan-field--wide">
+          <label for="prototype-threshold">Pass/fail threshold</label>
+          <textarea id="prototype-threshold" name="threshold" rows="3" required></textarea>
+        </div>
+
+        <div class="prototype-plan-field prototype-plan-field--wide">
+          <label for="prototype-result">Observed result <span>(optional until tested)</span></label>
+          <textarea id="prototype-result" name="result" rows="3"></textarea>
+        </div>
+
+        <div class="prototype-plan-field prototype-plan-field--wide">
+          <label for="prototype-next-action">Next action</label>
+          <textarea id="prototype-next-action" name="nextAction" rows="3" required></textarea>
+        </div>
+      </div>
+
+      <div class="prototype-plan-actions">
+        <button class="btn ghost" type="button" id="prototype-load-example">Load the fictional sensor-bracket example</button>
+        <button class="btn primary" type="submit">Create test-plan summary</button>
+        <button class="btn ghost" type="button" id="prototype-print">Print or save as PDF</button>
+        <button class="btn ghost" type="reset">Clear</button>
+      </div>
+      <p class="prototype-plan-status" id="prototype-plan-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <section class="prototype-plan-output" id="prototype-plan-output" aria-labelledby="prototype-plan-summary-heading" hidden>
+      <h3 id="prototype-plan-summary-heading">Test-plan summary</h3>
+      <p class="prototype-plan-example-note" id="prototype-plan-example-note" hidden><strong>Fictional example:</strong> These values demonstrate the checklist and are not a completed physical test.</p>
+
+      <div class="prototype-plan-summary-group">
+        <h4>Purpose and specimen</h4>
+        <dl>
+          <div><dt>Test question</dt><dd data-plan-summary="question"></dd></div>
+          <div><dt>Stage</dt><dd data-plan-summary="stage"></dd></div>
+          <div><dt>Specimen and quantity</dt><dd data-plan-summary="specimen"></dd></div>
+          <div><dt>Process and material</dt><dd data-plan-summary="process"></dd></div>
+        </dl>
+      </div>
+
+      <div class="prototype-plan-summary-group">
+        <h4>Test method</h4>
+        <dl>
+          <div><dt>Method</dt><dd data-plan-summary="method"></dd></div>
+          <div><dt>Measurement</dt><dd data-plan-summary="measurement"></dd></div>
+          <div><dt>Pass/fail threshold</dt><dd data-plan-summary="threshold"></dd></div>
+        </dl>
+      </div>
+
+      <div class="prototype-plan-summary-group">
+        <h4>Result and decision</h4>
+        <dl>
+          <div><dt>Observed result</dt><dd data-plan-summary="result"></dd></div>
+          <div><dt>Next action</dt><dd data-plan-summary="nextAction"></dd></div>
+        </dl>
+      </div>
+    </section>
+  </section>
+
+  <p class="prototype-plan-next"><strong>Next task:</strong> <a href="/calculators/3d-printing-price-calculator.html">Estimate a print with the price calculator</a>.</p>
 
   <h2 id="prototype-print-cost">What drives prototype print cost?</h2>
   <p>Prototype print cost is driven by material choice, design complexity, part size, and printing technology.</p>
@@ -204,11 +312,79 @@
   <p>Four stages are a useful planning model: visual, form-and-fit, functional, and pilot. A project can combine or skip stages when the unanswered question and risk justify it.</p>
   <h3>Should a prototype use the final production material?</h3>
   <p>Use the final material or a qualified match when the test depends on its heat, chemical, fatigue, friction, flexibility, or regulatory behavior. A cheaper stand-in is fine for questions about size, appearance, or handling.</p>
+  <h3>Can I make a 3D printing prototype test plan online?</h3>
+  <p>Yes. Use the checklist on this page to draft a test plan entirely in your browser. Nothing is uploaded or saved, refreshing clears the draft, and your browser's print dialog can print the summary or save it as a PDF.</p>
 </section>
 </article>
 </main>
 
 <footer><p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p><div class="foot-links"><a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a><a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a></div><address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address></footer>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+(() => {
+  const form = document.getElementById('prototype-plan-form');
+  const output = document.getElementById('prototype-plan-output');
+  const status = document.getElementById('prototype-plan-status');
+  const exampleNote = document.getElementById('prototype-plan-example-note');
+  let exampleLoaded = false;
+
+  const example = {
+    question: 'Will the bracket hold the sensor without visible movement?',
+    stage: 'Functional',
+    specimen: 'Three PETG brackets printed flat with the same profile and material lot.',
+    process: 'FDM in PETG, printed flat.',
+    method: 'Mount each bracket with the intended M4 hardware and apply 100 N at the sensor centerline for 50 cycles.',
+    measurement: 'Peak deflection, visible cracks, and pin spacing after cycling.',
+    threshold: 'Less than 2 mm peak deflection, no crack, and pin spacing within 50.0 ± 0.2 mm.',
+    result: 'Pin spacing measured 50.3 mm; load and cycle results not recorded.',
+    nextAction: 'Change one variable and repeat the failed pin-spacing measurement.'
+  };
+
+  const renderSummary = () => {
+    const values = Object.fromEntries(new FormData(form));
+    output.querySelectorAll('[data-plan-summary]').forEach((item) => {
+      item.textContent = values[item.dataset.planSummary]?.trim() || 'Not recorded yet.';
+    });
+    exampleNote.hidden = !exampleLoaded;
+    output.hidden = false;
+    status.textContent = 'Test-plan summary created below.';
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    renderSummary();
+    output.scrollIntoView({ block: 'start' });
+  });
+
+  form.addEventListener('input', () => {
+    exampleLoaded = false;
+    exampleNote.hidden = true;
+    if (!output.hidden) {
+      output.hidden = true;
+      status.textContent = 'Draft changed. Create a new summary to include the latest values.';
+    }
+  });
+
+  form.addEventListener('reset', () => {
+    exampleLoaded = false;
+    output.hidden = true;
+    status.textContent = 'Draft cleared.';
+  });
+
+  document.getElementById('prototype-load-example').addEventListener('click', () => {
+    for (const [name, value] of Object.entries(example)) form.elements[name].value = value;
+    exampleLoaded = true;
+    output.hidden = true;
+    status.textContent = 'Fictional sensor-bracket example loaded. Create the summary when ready.';
+  });
+
+  document.getElementById('prototype-print').addEventListener('click', () => {
+    if (!form.reportValidity()) return;
+    renderSummary();
+    window.print();
+  });
+})();
+</script>
 </body>
 </html>
