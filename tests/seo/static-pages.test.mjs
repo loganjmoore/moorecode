@@ -344,6 +344,22 @@ assert.match(calculator, /Price with markup<\/strong> = direct cost × \(1 \+ ma
 assert.match(calculator, /Price for target gross margin<\/strong> = direct cost ÷ \(1 - margin ÷ 100\)/);
 assert.match(calculator, /Suggested selling price/);
 assert.match(calculator, /Worked fictional example/);
+assert.match(calculator, /<body class="price-calculator-page">/);
+assert.match(calculator, /<section class="calculator-result" id="estimate-summary" aria-labelledby="estimate-heading">/);
+assert.match(calculator, /<h2 id="estimate-heading">Estimate summary<\/h2>/);
+assert.match(calculator, /id="print-estimate" type="button" disabled>Print estimate<\/button>/);
+assert.match(calculator, /id="download-estimate" type="button" disabled>Download estimate \(\.txt\)<\/button>/);
+for (const assumption of ['quantity', 'materialGrams', 'printHours', 'currency', 'spoolPrice', 'spoolWeight', 'printerWatts', 'energyRate', 'laborHours', 'laborRate', 'machineRate', 'otherCost', 'failureRate']) {
+  assert.match(calculator, new RegExp(`data-estimate-assumption="${assumption}"`), `${assumption} needs a labelled estimate-summary value`);
+}
+const calculatorScript = read('calculators/3d-printing-price-calculator.js');
+assert.match(calculatorScript, /moorecode-3d-print-estimate\.txt/);
+assert.match(calculatorScript, /new Blob\(\[currentEstimateText\], \{ type: 'text\/plain;charset=utf-8' \}\)/);
+assert.doesNotMatch(calculatorScript.slice(calculatorScript.indexOf("printButton.addEventListener")), /productAnalytics/, 'Print and download controls must not add telemetry');
+const calculatorStyles = read('style.css');
+assert.match(calculatorStyles, /body\.price-calculator-page > :not\(main\)/, 'Calculator print must remove navigation, consent, and footer layout');
+assert.match(calculatorStyles, /\.price-calculator-page \.calculator-form,/, 'Calculator print must hide form controls');
+assert.match(calculatorStyles, /\.price-calculator-page \.calculator-notes > :not\(h2\):not\(\.formula\)/, 'Calculator print must retain formulas without unrelated notes');
 assert.match(calculator, /<section class="calculator-faq" id="business-pricing"/);
 assert.match(calculator, /<h3>How do you start pricing a 3D printing business\?<\/h3>/);
 const calculatorSchemas = JSON.parse(calculator.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
@@ -360,6 +376,16 @@ assert.match(calculator, /MooreCode is Logan Moore's site for practical maker gu
 assert.match(calculator, /Department of Energy energy-use lesson/);
 assert.match(calculator, /Prusa's 3D-printing price calculator/);
 assert.match(calculator, /href="\/contact\.html#project-inquiry"/);
+
+for (const path of [
+  'index.html',
+  'guides/3d-printing-for-dentists.html',
+  'blog/3d-printing-metal-processes-compared.html',
+  'blog/3d-printing-rates-small-job-pricing.html',
+  'guides/3d-printing-at-home.html',
+]) {
+  assert.match(read(path), /MooreCode is (?:a|Logan Moore's)/, `${path} needs a plain MooreCode entity definition`);
+}
 
 const metalGuide = read('blog/3d-printing-metal-processes-compared.html');
 const metalAnswer = directAnswer(metalGuide);
