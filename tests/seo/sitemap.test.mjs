@@ -38,7 +38,7 @@ for (const [location, contentDate] of [
   ['https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html', '2026-10-29'],
   ['https://moorecode.com/blog/3d-printing-metal-processes-compared.html', '2026-10-23'],
   ['https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html', '2026-11-01'],
-  ['https://moorecode.com/guides/3d-printing-at-home.html', '2026-10-27'],
+  ['https://moorecode.com/guides/3d-printing-at-home.html', '2026-11-01'],
   ['https://moorecode.com/guides/3d-printing-accessories.html', '2026-10-28'],
   ['https://moorecode.com/guides/start-a-3d-printing-business.html', '2026-10-28'],
   ['https://moorecode.com/guides/3d-printing-for-dentists.html', '2026-10-28'],
@@ -47,7 +47,7 @@ for (const [location, contentDate] of [
   ['https://moorecode.com/guides/painting-3d-prints.html', '2026-10-27'],
   ['https://moorecode.com/guides/carbon-3d-printing.html', '2026-10-31'],
   ['https://moorecode.com/blog/what-is-fdm-3d-printing.html', '2026-11-01'],
-  ['https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html', '2026-10-08'],
+  ['https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html', '2026-11-01'],
 ]) {
   assert.ok(entries.has(location), `${location} must be listed in sitemap.xml`);
   assert.ok(entries.get(location) >= contentDate, `${location} lastmod must not predate ${contentDate}`);
@@ -61,7 +61,9 @@ for (const [location, expectedLastmod] of [
   ['https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html', '2026-11-01'],
   ['https://moorecode.com/blog/what-is-fdm-3d-printing.html', '2026-11-01'],
   ['https://moorecode.com/blog/desktop-3d-printing-setup-safe-workspace.html', '2026-11-01'],
+  ['https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html', '2026-11-01'],
   ['https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html', '2026-10-29'],
+  ['https://moorecode.com/guides/3d-printing-at-home.html', '2026-11-01'],
   ['https://moorecode.com/guides/carbon-3d-printing.html', '2026-10-31'],
 ]) {
   assert.equal(entries.get(location), expectedLastmod, `${location} lastmod must match its verified public-content change`);
