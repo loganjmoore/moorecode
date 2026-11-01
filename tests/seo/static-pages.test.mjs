@@ -123,7 +123,7 @@ const blogSchema = blogGraph.find((item) => item['@type'] === 'Blog');
 const blogPostIds = new Set(blogSchema.blogPost.map((item) => item['@id']));
 assert.match(blog, /<title>3D Printing Guides and Project Notes · MooreCode<\/title>/);
 assert.match(blog, /<h1>3D printing guides and project notes<\/h1>/);
-assert.match(blog, /The MooreCode blog is a collection of fifteen practical guides/);
+assert.match(blog, /The MooreCode blog is a collection of sixteen practical guides/);
 assert.equal((blog.match(/class="post-card"/g) || []).length, publishedArticlePaths.length);
 for (const path of publishedArticlePaths) {
   const url = `https://moorecode.com/${path}`;
@@ -134,12 +134,13 @@ for (const path of publishedArticlePaths) {
   assert.ok(blogPostIds.has(`${url}#post`), `${path} must appear in Blog JSON-LD`);
 }
 const newestFeedLinks = [...feed.matchAll(/<item>[\s\S]*?<link>([^<]+)<\/link>[\s\S]*?<\/item>/g)]
-  .slice(0, 2)
+  .slice(0, 3)
   .map((match) => match[1]);
 assert.deepEqual(newestFeedLinks, [
+  'https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html',
   'https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html',
   'https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html',
-], 'The two October 21 posts must lead the feed in target order');
+], 'The November 1 post must lead the feed before the October 21 posts');
 for (const [path, expectedTitle] of [
   ['blog/3d-printing-materials-after-pla-clamp-fails.html', '3D Printing Materials After a PLA Clamp Fails'],
   ['blog/3d-printing-rates-small-job-pricing.html', '3D Printing Rates: Price a Small Job Step by Step'],
@@ -161,6 +162,23 @@ for (const [path, expectedTitle] of [
     assert.ok(article.includes(`<h3>${item.name}</h3>`), `${path} must show FAQ question: ${item.name}`);
     assert.ok(article.includes(`<p>${item.acceptedAnswer.text}</p>`), `${path} must keep visible and structured FAQ answers aligned`);
   }
+}
+const rapidPrototypingPath = 'blog/3d-printer-rapid-prototyping-in-house-or-outsource.html';
+const rapidPrototypingGuide = read(rapidPrototypingPath);
+const rapidPrototypingDescription = rapidPrototypingGuide.match(/<meta name="description" content="([^"]+)"/)?.[1] || '';
+const rapidPrototypingGraph = JSON.parse(rapidPrototypingGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const rapidPrototypingPost = rapidPrototypingGraph.find((item) => item['@type'] === 'BlogPosting');
+const rapidPrototypingFaq = rapidPrototypingGraph.find((item) => item['@type'] === 'FAQPage');
+assert.equal(decodeHtml(rapidPrototypingGuide.match(/<title>([^<]+)<\/title>/)[1]), '3D Printer Rapid Prototyping: In-House or Outsource?');
+assert.ok(rapidPrototypingDescription.length <= 160);
+assert.equal(rapidPrototypingPost.datePublished, '2026-11-01');
+assert.equal(rapidPrototypingPost.dateModified, '2026-11-01');
+assert.equal(rapidPrototypingPost.image, 'https://moorecode.com/blog/images/3d-printer-rapid-prototyping-in-house-or-outsource.svg');
+assert.equal(firstProseParagraph(rapidPrototypingGuide).split(/(?<=[.!?])\s+/).length, 3);
+assert.equal(rapidPrototypingFaq.mainEntity.length, 4);
+for (const item of rapidPrototypingFaq.mainEntity) {
+  assert.ok(rapidPrototypingGuide.includes(`<h3>${item.name}</h3>`));
+  assert.ok(rapidPrototypingGuide.includes(`<p>${item.acceptedAnswer.text}</p>`));
 }
 for (const match of llms.matchAll(/^- \[([^\]]+)\]\(https:\/\/moorecode\.com\/([^)]*)\): (.+)$/gm)) {
   let path = match[2] || 'index.html';

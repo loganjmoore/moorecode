@@ -33,6 +33,7 @@
 
 ## Blog
 
+- [3D Printer Rapid Prototyping: In-House or Outsource?](https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html): Use desktop FDM for fast fit checks. Outsource a prototype when its material, tolerance, finish, size, or inspection exceeds your printer.
 - [3D Printing Materials After a PLA Clamp Fails](https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html): Choose a replacement material from the failed part's heat, load, motion, and fit requirements. Includes a 65°C clamp check.
 - [3D Printing Rates: Price a Small Job Step by Step](https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html): Calculate 3D printing rates from material, print time, electricity, labor, machine time, failures, and margin. Includes a two-part example.
 - [3D Scanning to Printing: Repair, Scale, Slice](https://moorecode.com/blog/3d-scanning-to-printing-repair-scale-slice.html): Turn a 3D scan into a printable file: repair the mesh, set scale from a known dimension, verify thin areas, and slice a measured test.
