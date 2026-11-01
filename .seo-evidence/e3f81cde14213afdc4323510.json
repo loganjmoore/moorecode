@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "verifier": "seo-worker-v1",
+  "postFile": "blog/3d-printer-rapid-prototyping-in-house-or-outsource.html",
+  "artifact": ".seo-evidence/e3f81cde14213afdc4323510.json",
+  "verifiedAt": "2026-11-01T08:18:10.413Z",
+  "sourceFiles": [
+    {
+      "path": "blog/3d-printing-prototype-four-stage-test-plan.html",
+      "sha256": "d5f0e6fbd4ecc68e486edac65380870a88d472d6f66d23e2a03646ef36d46338",
+      "excerpt": "Suppose a sensor bracket must place two pins 50.0 ± 0.2 mm apart and accept an M4 fastener through a 4.2 mm clearance hole. Print a coupon containing the holes before the whole bracket, measure it with calipers, and test the actual pin and screw. If the measured spacing is 50.3 mm, the result fails even if the screw can be forced through."
+    }
+  ],
+  "example": {
+    "description": "Walk through the source-backed sensor-bracket tolerance failure that triggers an outsource check.",
+    "operation": "source_walkthrough",
+    "inputs": [],
+    "result": null,
+    "excerpt": "Suppose a sensor bracket must place two pins 50.0 ± 0.2 mm apart and accept an M4 fastener through a 4.2 mm clearance hole. Print a coupon containing the holes before the whole bracket, measure it with calipers, and test the actual pin and screw. If the measured spacing is 50.3 mm, the result fails even if the screw can be forced through.",
+    "reproducedBy": "worker source inspection"
+  },
+  "references": [
+    {
+      "url": "https://www.nist.gov/additive-manufacturing/what-additive-manufacturing",
+      "status": 200,
+      "sha256": "818348d0e2053f63df28294819de27cc28bb0c700003648dcf66cd9d7eb886fc",
+      "sourceExcerpt": "Additive manufacturing (or 3D printing) fabricates parts by building them up layer-by-layer (as opposed to cutting material away or molding it).",
+      "supportingClaim": "says additive manufacturing fabricates parts layer by layer from digital designs.",
+      "primarySourceRationale": "NIST is the United States measurement-science agency and publishes its own additive-manufacturing guidance."
+    },
+    {
+      "url": "https://formlabs.com/uk/blog/rapid-prototyping-tips/",
+      "status": 200,
+      "sha256": "168ab59ae278b3b45ad6aece82e017c45cce29daf33446f465b855d638d72a5f",
+      "sourceExcerpt": "bring the most frequently used prototyping tools in-house and outsource larger parts, and parts that require non-standard materials or complex machinery.",
+      "supportingClaim": "keeping frequently used prototyping tools in-house and outsourcing larger parts or work that needs non-standard materials or complex machinery.",
+      "primarySourceRationale": "Formlabs makes professional additive-manufacturing systems and publishes its own rapid-prototyping workflow guidance."
+    },
+    {
+      "url": "https://www.protolabs.com/resources/design-tips/3d-printing-tolerances/",
+      "status": 200,
+      "sha256": "e2f393c7f96ff03a315321196eea829b5b13c8e37d26eeeba907c96bc3ebe75c",
+      "sourceExcerpt": "Tolerances in the X/Y axes of ±0.002 in. (±0.0508mm) for the first inch plus 0.1% of nominal dimensions",
+      "supportingClaim": "its typical SLA X/Y tolerance as ±0.002 inch (±0.0508 mm) for the first inch, plus 0.1% of the nominal dimension.",
+      "primarySourceRationale": "Protolabs publishes the tolerance capabilities of its own 3D-printing services, so the values apply only to that supplier."
+    }
+  ],
+  "claimRationale": "The source-backed bracket example demonstrates a measurable handoff trigger, while the article labels it fictional and limits supplier tolerances to the named process and service."
+}

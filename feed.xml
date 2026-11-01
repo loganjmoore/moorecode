@@ -7,6 +7,13 @@
     <language>en-us</language>
     <atom:link href="https://moorecode.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>3D Printer Rapid Prototyping: In-House or Outsource?</title>
+      <link>https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html</guid>
+      <pubDate>Sun, 01 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Decide when desktop FDM can answer the next prototype question and when material, tolerance, finish, size, or inspection requires an outside process.</description>
+    </item>
+    <item>
       <title>3D Printing Materials After a PLA Clamp Fails</title>
       <link>https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html</link>
       <guid isPermaLink="true">https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html</guid>

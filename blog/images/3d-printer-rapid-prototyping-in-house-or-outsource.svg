@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Desktop FDM or outsourced rapid prototype decision</title>
+  <desc id="desc">A mounting bracket routes left to desktop FDM for quick fit checks and right to an outside service for demanding material, tolerance, or inspection requirements.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0b0c10"/>
+      <stop offset="1" stop-color="#1b1e26"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0l12 6-12 6z" fill="#f5b942"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="70" y="75" fill="#f5b942" font-size="20" font-weight="700" letter-spacing="3">RAPID PROTOTYPING DECISION</text>
+    <text x="70" y="137" fill="#e8eaef" font-size="49" font-weight="800">Print in-house or send it out?</text>
+    <text x="70" y="178" fill="#9aa1ad" font-size="21">Choose the process that can answer the next test.</text>
+
+    <g transform="translate(70 237)">
+      <rect width="410" height="250" rx="20" fill="#14161c" stroke="#343946" stroke-width="3"/>
+      <text x="28" y="45" fill="#f5b942" font-size="18" font-weight="800">DESKTOP FDM</text>
+      <text x="28" y="88" fill="#e8eaef" font-size="30" font-weight="800">Fast iteration</text>
+      <g fill="#9aa1ad" font-size="19">
+        <text x="28" y="132">Fit and clearance</text>
+        <text x="28" y="169">Handling and access</text>
+        <text x="28" y="206">Low-risk function</text>
+      </g>
+      <path d="M382 70v108h-53v-54h-65v-54z" fill="none" stroke="#e8eaef" stroke-width="13" stroke-linejoin="round"/>
+      <circle cx="350" cy="97" r="8" fill="#f5b942"/>
+    </g>
+
+    <path d="M500 362h178" stroke="#f5b942" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <circle cx="590" cy="362" r="30" fill="#262a35" stroke="#f5b942" stroke-width="3"/>
+    <text x="590" y="371" text-anchor="middle" fill="#f5b942" font-size="26" font-weight="800">?</text>
+
+    <g transform="translate(700 237)">
+      <rect width="430" height="250" rx="20" fill="#14161c" stroke="#e07a5f" stroke-width="3"/>
+      <text x="28" y="45" fill="#e07a5f" font-size="18" font-weight="800">OUTSIDE SERVICE</text>
+      <text x="28" y="88" fill="#e8eaef" font-size="30" font-weight="800">Process capability</text>
+      <g fill="#9aa1ad" font-size="19">
+        <text x="28" y="132">Required material</text>
+        <text x="28" y="169">Critical tolerance</text>
+        <text x="28" y="206">Documented inspection</text>
+      </g>
+      <g transform="translate(325 87)" fill="none" stroke="#e8eaef" stroke-width="6" stroke-linecap="round">
+        <path d="M0 0v104M78 0v104M0 12h78M0 92h78"/>
+        <path d="M16 24h47M16 42h47M16 60h47M16 78h47" stroke="#e07a5f" stroke-width="4"/>
+      </g>
+    </g>
+
+    <rect x="70" y="535" width="1060" height="1" fill="#343946"/>
+    <text x="70" y="582" fill="#e8eaef" font-size="22" font-weight="700">Switch when the next test outruns the machine.</text>
+  </g>
+</svg>
