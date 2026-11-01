@@ -7,39 +7,41 @@
 <link rel="canonical" href="https://moorecode.com/guides/3d-printing-at-home.html" /><meta name="theme-color" content="#0b0c10" /><link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" /><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript><link rel="stylesheet" href="/style.css" /><link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
 <meta property="og:title" content="3D Printing at Home: Printer, Setup, Safety, Projects" /><meta property="og:description" content="Choose FDM or resin, prepare a safe workspace, select materials, test the setup, and make useful beginner projects." /><meta property="og:type" content="article" /><meta property="og:url" content="https://moorecode.com/guides/3d-printing-at-home.html" />
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"3D Printing at Home: Printer, Setup, Safety, Projects","description":"Choose FDM or resin, prepare a safe workspace, select materials, test the setup, and make useful beginner projects.","url":"https://moorecode.com/guides/3d-printing-at-home.html","datePublished":"2026-10-27","dateModified":"2026-10-27","author":{"@type":"Person","name":"Logan Moore","url":"https://moorecode.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"3D Printing at Home: Printer, Setup, Safety, Projects","description":"Choose FDM or resin, prepare a safe workspace, select materials, test the setup, and make useful beginner projects.","url":"https://moorecode.com/guides/3d-printing-at-home.html","datePublished":"2026-10-27","dateModified":"2026-11-01","author":{"@type":"Person","name":"Logan Moore","url":"https://moorecode.com/"}}</script>
 <script src="/navigation.js" defer></script><script defer src="/posthog-web.js"></script>
 </head>
 <body>
 <header class="nav"><a class="brand" href="/"><span class="brand-mark">M</span><span class="brand-text">moorecode</span></a><button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="navlinks" aria-expanded="false"><span></span><span></span><span></span></button><nav class="nav-links" id="navlinks"><a href="/">Home</a><a href="/projects.html">Projects</a><a href="/consulting.html">Consulting</a><a href="/hobbies.html">Hobbies</a><a href="/youtube.html">YouTube</a><a href="/about.html">About</a><a href="/blog/" class="active">Blog</a><a href="/contact.html">Contact</a></nav></header>
 <main><article>
-<header class="post-head"><p class="post-meta">Evergreen guide · Updated October 27, 2026 · By Logan Moore</p><h1>How to start 3D printing at home</h1></header>
+<header class="post-head"><p class="post-meta">Evergreen guide · Updated November 1, 2026 · By Logan Moore</p><h1>How to start 3D printing at home</h1></header>
 <section class="prose">
   <p class="lede">MooreCode is Logan Moore's website for practical 3D printing guides, software projects, and browser tools. Home 3D printing is a small manufacturing workflow operated in a residential space. A workable setup needs a printer matched to the projects, a rigid surface, safe power, process-appropriate ventilation, material storage, tools, clearance, and a plan that keeps hot, moving, and chemical parts away from children, pets, sleeping areas, and long-occupied rooms.</p>
 
-  <section class="direct-answer" aria-labelledby="home-projects">
-    <h2 id="home-projects">Eight useful first projects for home 3D printing</h2>
-    <ol>
-      <li>A cable label or clip with one measured opening.</li>
-      <li>A drawer divider sized to a real drawer.</li>
-      <li>A small tray for tools, screws, or hobby parts.</li>
-      <li>A replacement knob tested first as a low-load fit sample.</li>
-      <li>A phone stand that teaches orientation and support choices.</li>
-      <li>A plant label with raised or recessed text.</li>
-      <li>A board-game organizer built from simple repeatable compartments.</li>
-      <li>A bracket prototype that is measured but not trusted for safety-critical load.</li>
-    </ol>
-  </section>
-
-  <h2>Choose a home printer by the work</h2>
+  <section class="direct-answer" aria-labelledby="home-setup-answer">
+  <h2 id="home-setup-answer">What does a home 3D printing setup require?</h2>
+  <p>A home 3D printing setup needs a compatible printer and material, a rigid surface, safe power, clearance, storage, process-appropriate ventilation, and a plan for tools, cleanup, and waste. Choose bed-slinger FDM for ordinary PLA prototypes and household organizers, enclosed FDM when the material or room controls call for an enclosure, and resin only when fine detail justifies a separated wash, cure, PPE, ventilation, and waste workflow.</p>
   <table>
-    <thead><tr><th>Printer type</th><th>Good starting use</th><th>Material workflow</th><th>Home-space commitment</th></tr></thead>
+    <thead><tr><th>Printer class</th><th>Who it suits</th><th>Material workflow</th><th>Home-space commitment</th></tr></thead>
     <tbody>
-      <tr><td>Open-frame FDM</td><td>Models, organizers, prototypes, and utility parts in supported filament</td><td>Load filament, print, remove supports, inspect</td><td>Rigid surface, movement clearance, source-control ventilation plan</td></tr>
-      <tr><td>Enclosed FDM</td><td>Jobs whose material or maker calls for a controlled build area</td><td>Same filament process with enclosure-specific controls</td><td>Enclosure clearance plus documented exhaust or filtration</td></tr>
-      <tr><td>Desktop resin</td><td>Small fine-detail parts whose workflow justifies resin handling</td><td>Print, remove, wash, fully dry, cure when required, finish, manage waste</td><td>Separated dirty zone, ventilation, PPE, closed wash containers, curing and waste plan</td></tr>
+      <tr><td>Bed-slinger FDM</td><td>People making models, organizers, prototypes, and utility parts in supported filament</td><td>Load filament, print, remove supports, inspect</td><td>Rigid surface, bed-movement clearance, source-control ventilation plan</td></tr>
+      <tr><td>Enclosed FDM</td><td>Makers using a material whose manufacturer calls for a controlled build area</td><td>Same filament process with enclosure-specific controls</td><td>Enclosure clearance plus documented exhaust or filtration</td></tr>
+      <tr><td>Desktop resin</td><td>Makers of small fine-detail parts whose workflow justifies resin handling</td><td>Print, remove, wash, fully dry, cure when required, finish, manage waste</td><td>Separated dirty zone, ventilation, PPE, closed wash containers, curing and waste plan</td></tr>
     </tbody>
   </table>
+  <p>Read MooreCode's <a href="/blog/desktop-3d-printing-setup-safe-workspace.html">desktop 3D printing setup guide</a> for workspace details and the <a href="/blog/3d-printing-filament-pla-petg-tpu.html">PLA, PETG, and TPU guide</a> for first material selection.</p>
+  </section>
+
+  <h2 id="home-projects">Eight useful first projects for home 3D printing</h2>
+  <ol>
+    <li>A cable label or clip with one measured opening.</li>
+    <li>A drawer divider sized to a real drawer.</li>
+    <li>A small tray for tools, screws, or hobby parts.</li>
+    <li>A replacement knob tested first as a low-load fit sample.</li>
+    <li>A phone stand that teaches orientation and support choices.</li>
+    <li>A plant label with raised or recessed text.</li>
+    <li>A board-game organizer built from simple repeatable compartments.</li>
+    <li>A bracket prototype that is measured but not trusted for safety-critical load.</li>
+  </ol>
 
   <h2>Set up the workspace before the first print</h2>
   <ol>
@@ -63,7 +65,6 @@
   <h2>Know what a home print does not prove</h2>
   <p>A successful print does not establish food contact, medical use, electrical safety, fire resistance, outdoor life, structural capacity, or suitability for a child. Treat safety-critical and regulated work as a separate engineering and evidence problem.</p>
 
-  <p>For the category definition and workspace details, read <a href="/blog/desktop-3d-printing-setup-safe-workspace.html">what desktop 3D printing is</a>. For first material selection, use the <a href="/blog/3d-printing-filament-pla-petg-tpu.html">PLA, PETG, and TPU guide</a>.</p>
 </section>
 </article></main>
 <footer><p>&copy; <span id="year"></span> Logan Moore, moorecode.com</p><div class="foot-links"><a href="mailto:loganjmoore@gmail.com">loganjmoore@gmail.com</a><a href="https://github.com/loganjmoore" target="_blank" rel="noopener">GitHub</a></div><address style="font-style: normal; font-size: 14px; line-height: 1.6; margin-top: 16px;"><strong>Mailing address</strong><br />3060 Mercer University Dr Ste 110<br />Atlanta, GA 30341</address></footer><script>document.getElementById('year').textContent=new Date().getFullYear();</script>

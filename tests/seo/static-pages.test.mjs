@@ -236,7 +236,9 @@ for (const [question, answer] of [
   assert.ok(homepage.includes(`<p>${answer.replace("MooreCode's process guide", `MooreCode's <a href="/blog/what-is-fdm-3d-printing.html">process guide</a>`)}</p>`), `${question} needs the same visible and structured answer`);
 }
 const printingGuideAnswer = homepageFaq.mainEntity.find((item) => item.name === 'Which MooreCode guide fits my 3D printing project?').acceptedAnswer.text;
-for (const topic of ['accessories', 'PLA', 'PETG', 'TPU', 'price calculator', 'dental', 'jewelry', 'manufacturing', 'automotive parts']) {
+const printingGuideVisibleAnswer = homepage.match(/<h3>Which MooreCode guide fits my 3D printing project\?<\/h3>\s*<p>([\s\S]*?)<\/p>/)[1].replace(/<[^>]+>/g, '');
+assert.equal(printingGuideVisibleAnswer, printingGuideAnswer, 'Homepage guide answer must match its FAQPage structured data');
+for (const topic of ['accessories', 'PLA', 'PETG', 'TPU', 'price calculator', 'rapid prototype', 'in-house', 'outsource', 'dental', 'jewelry', 'manufacturing', 'automotive parts']) {
   assert.match(printingGuideAnswer, new RegExp(topic, 'i'), `Homepage guide answer needs to address ${topic}`);
 }
 assert.ok(questionHeadingCount(homepage) >= 2, 'Homepage needs at least two question-style headings');
@@ -245,6 +247,7 @@ for (const link of [
   '/blog/3d-printing-filament-pla-petg-tpu.html',
   '/blog/what-is-fdm-3d-printing.html',
   '/blog/when-resin-3d-printing-beats-fdm.html',
+  '/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html',
   '/blog/3d-printing-metal-processes-compared.html',
   '/calculators/3d-printing-price-calculator.html',
 ]) assert.match(homepage, new RegExp(`href="${link.replaceAll('.', '\\.')}`), `Homepage coverage needs ${link}`);
@@ -299,7 +302,8 @@ const filamentLedeEnd = filamentGuide.indexOf('</p>', filamentGuide.indexOf('<p 
 const filamentFirstSection = filamentGuide.indexOf('<section', filamentLedeEnd);
 assert.equal(filamentFirstSection, filamentGuide.indexOf('<section class="direct-answer"', filamentLedeEnd), 'PLA quick start must sit directly under the intro');
 const filamentQuickAnswer = directAnswer(filamentGuide);
-assert.match(filamentQuickAnswer, /<h2 id="filament-quick-answer">PLA vs PETG vs TPU: quick answer<\/h2>/);
+assert.match(filamentQuickAnswer, /<h2 id="filament-quick-answer">Should you choose PLA, PETG, or TPU\?<\/h2>/);
+assert.match(filamentQuickAnswer, /MooreCode's filament comparison recommends PLA/);
 assert.match(filamentQuickAnswer, /<th scope="col">Primary trade-off<\/th><th scope="col">Typical use cases<\/th>/);
 for (const material of ['PLA', 'PETG', 'TPU']) assert.ok(filamentQuickAnswer.includes(`<strong>${material}</strong>`), `Filament comparison needs ${material}`);
 for (const destination of ['/blog/3d-printing-prototype-four-stage-test-plan.html', '/blog/desktop-3d-printing-setup-safe-workspace.html', '#tpu-filament']) {
@@ -575,7 +579,7 @@ for (const link of [
 
 const filamentAnswer = directAnswer(filamentGuide);
 assert.ok(filamentGuide.indexOf(filamentAnswer) < filamentGuide.indexOf('<h2>Which 3D printing materials'), 'Filament direct answer needs to stay near the top');
-assert.match(filamentAnswer, /<h2[^>]*>PLA vs PETG vs TPU: quick answer<\/h2>/);
+assert.match(filamentAnswer, /<h2[^>]*>Should you choose PLA, PETG, or TPU\?<\/h2>/);
 for (const material of ['PLA', 'PETG', 'TPU']) {
   assert.match(filamentAnswer, new RegExp(material), `Filament direct answer needs ${material}`);
 }
@@ -604,7 +608,14 @@ assert.match(directAnswer(carbonGuide), /Which carbon 3D printing process fits t
 assert.equal(carbonFaq.mainEntity[0].name, 'Which carbon 3D printing process fits the job?');
 assert.equal(carbonFaq.mainEntity[0].acceptedAnswer.text, carbonAnswer);
 assert.ok(carbonGuide.includes(`<p>${carbonAnswer}</p>`), 'Carbon guide needs the same visible and structured answer');
-assert.match(directAnswer(intentGuides.get('guides/3d-printing-at-home.html')), /Eight useful first projects[\s\S]*<ol>/);
+const homePrintingGuide = intentGuides.get('guides/3d-printing-at-home.html');
+const homePrintingAnswer = directAnswer(homePrintingGuide);
+assert.match(homePrintingAnswer, /What does a home 3D printing setup require\?/);
+for (const printerClass of ['Bed-slinger FDM', 'Enclosed FDM', 'Desktop resin']) assert.match(homePrintingAnswer, new RegExp(printerClass));
+for (const destination of ['/blog/desktop-3d-printing-setup-safe-workspace.html', '/blog/3d-printing-filament-pla-petg-tpu.html']) {
+  assert.ok(homePrintingAnswer.includes(`href="${destination}"`), `Home setup answer needs ${destination}`);
+}
+assert.match(homePrintingGuide, /Eight useful first projects for home 3D printing[\s\S]*<ol>/);
 
 const invoicingGuide = read('blog/simple-invoicing-app-pricing-service-businesses.html');
 assert.match(invoicingGuide, /Assessment method and date:/);
@@ -616,6 +627,10 @@ const resinSchemas = JSON.parse(resinGuide.match(/<script type="application\/ld\
 const resinFaq = resinSchemas.find((item) => item['@type'] === 'FAQPage');
 const dentalAnswer = "No. A general-purpose hobby printer and resin are not substitutes for a validated dental workflow. Patient-contact appliances require a material, printer, processing workflow, intended use, and professional oversight that meet the manufacturer's instructions and applicable regulatory requirements.";
 assert.match(resinGuide, /<h1>When Resin 3D Printing Beats FDM<\/h1>/);
+const resinAnswer = directAnswer(resinGuide);
+assert.match(resinAnswer, /<h2 id="resin-or-fdm">When should you choose resin instead of FDM\?<\/h2>/);
+assert.match(resinAnswer, /MooreCode's comparison favors FDM/);
+for (const choice of ['Resin', 'FDM', 'FDM with TPU']) assert.ok(resinAnswer.includes(`<strong>${choice}</strong>`), `Resin comparison needs ${choice}`);
 assert.match(resinGuide, /<h2>What is resin 3D printing\?<\/h2>/);
 assert.match(resinGuide, /<h2 id="dental-work">When is resin 3D printing appropriate for dental work\?<\/h2>/);
 assert.match(resinGuide, /<h2 id="jewelry-work">How should a 3D-printed jewelry master be planned\?<\/h2>/);
