@@ -210,6 +210,10 @@ assert.match(homepage, /<h2 id="products-heading">iOS and web products I build<\
 assert.match(homepage, /<h2 id="consulting-heading">Product and software consulting<\/h2>/);
 assert.ok(homepage.indexOf('id="products-heading"') < homepage.indexOf('id="coverage-heading"'));
 assert.ok(homepage.indexOf('id="consulting-heading"') < homepage.indexOf('id="coverage-heading"'));
+assert.match(homepage, /<meta name="description" content="Explore shipped iOS and web products by Logan Moore and product and software consulting through BrightPrompt Consulting LLC\." \/>/);
+assert.match(homepage, /<link rel="canonical" href="https:\/\/moorecode\.com\/" \/>/);
+assert.match(sitemap, /<loc>https:\/\/moorecode\.com\/<\/loc>/);
+assert.match(homepage.slice(homepage.indexOf('<section class="hero">'), homepage.indexOf('</section>', homepage.indexOf('<section class="hero">'))), /href="contact\.html">Get in touch<\/a>/);
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Organization' && item.name === 'MooreCode'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Person' && item.name === 'Logan Moore'));
 const homepageFaq = homepageGraph.find((item) => item['@type'] === 'FAQPage');
@@ -295,13 +299,12 @@ const filamentLedeEnd = filamentGuide.indexOf('</p>', filamentGuide.indexOf('<p 
 const filamentFirstSection = filamentGuide.indexOf('<section', filamentLedeEnd);
 assert.equal(filamentFirstSection, filamentGuide.indexOf('<section class="direct-answer"', filamentLedeEnd), 'PLA quick start must sit directly under the intro');
 const filamentQuickAnswer = directAnswer(filamentGuide);
-assert.match(filamentQuickAnswer, /<h2 id="filament-quick-answer">PLA 3D printing: quick start<\/h2>/);
-assert.match(filamentQuickAnswer, /<h3>PLA vs PETG<\/h3>/);
-for (const property of ['Strength', 'Heat resistance', 'Ease of printing', 'Typical use']) {
-  assert.ok(filamentQuickAnswer.includes(`<strong>${property}</strong>`), `PLA vs PETG comparison needs ${property}`);
+assert.match(filamentQuickAnswer, /<h2 id="filament-quick-answer">PLA vs PETG vs TPU: quick answer<\/h2>/);
+assert.match(filamentQuickAnswer, /<th scope="col">Primary trade-off<\/th><th scope="col">Typical use cases<\/th>/);
+for (const material of ['PLA', 'PETG', 'TPU']) assert.ok(filamentQuickAnswer.includes(`<strong>${material}</strong>`), `Filament comparison needs ${material}`);
+for (const destination of ['/blog/3d-printing-prototype-four-stage-test-plan.html', '/blog/desktop-3d-printing-setup-safe-workspace.html', '#tpu-filament']) {
+  assert.ok(filamentQuickAnswer.includes(`href="${destination}"`), `Filament quick answer needs ${destination}`);
 }
-assert.match(filamentQuickAnswer, /<strong>Verdict:<\/strong> choose PLA/);
-assert.match(filamentQuickAnswer, /href="#tpu-filament">Jump to the existing TPU guidance<\/a>/);
 assert.match(filamentGuide, /<h2 id="tpu-filament">When does TPU 3D printing filament make sense\?<\/h2>/);
 assert.match(filamentGuide, /<th>Rank<\/th><th>Accessory<\/th><th>What it is for<\/th><th>Budget weight<\/th>/);
 assert.match(filamentGuide, /<h2>Which 3D printing materials fit a desktop or home printer\?<\/h2>/);
@@ -434,12 +437,21 @@ for (const linkedGuide of ['what-is-fdm-3d-printing.html', 'when-resin-3d-printi
 }
 
 const fdmGuide = read('blog/what-is-fdm-3d-printing.html');
+const fdmOpening = firstProseParagraph(fdmGuide);
+const fdmAnswer = directAnswer(fdmGuide);
 const fdmSchemas = JSON.parse(fdmGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const fdmFaq = fdmSchemas.find((item) => item['@type'] === 'FAQPage');
 const fdmFaqAnswers = new Map(fdmFaq.mainEntity.map((item) => [item.name, item.acceptedAnswer.text]));
 assert.match(fdmGuide, /<title>What Is FDM 3D Printing\? How It Works<\/title>/);
 assert.match(fdmGuide, /<h1>What Is FDM 3D Printing\?<\/h1>/);
-assert.match(fdmGuide, /<h2>How do FDM, SLA 3D printing, and SLS 3D printing compare\?<\/h2>/);
+assert.equal(fdmOpening.split(/(?<=[.!?])\s+/).length, 1, 'FDM must open with one definition sentence');
+assert.ok(fdmGuide.indexOf(fdmAnswer) < fdmGuide.indexOf('<h2>How does FDM'), 'FDM comparison must sit directly after the definition');
+assert.match(fdmAnswer, /<h2 id="fdm-process-comparison">FDM vs SLA vs SLS<\/h2>/);
+assert.match(fdmAnswer, /<th scope="col">Choose this when<\/th>/);
+for (const process of ['FDM / FFF', 'SLA', 'SLS']) assert.ok(fdmAnswer.includes(`<strong>${process}</strong>`), `FDM comparison needs ${process}`);
+for (const destination of ['/blog/when-resin-3d-printing-beats-fdm.html', '/blog/3d-printing-metal-processes-compared.html']) {
+  assert.ok(fdmAnswer.includes(`href="${destination}"`), `FDM comparison needs ${destination}`);
+}
 assert.match(fdmGuide, /<h2>What is SLA 3D printing\?<\/h2>/);
 assert.match(fdmGuide, /<h2>What is SLS 3D printing\?<\/h2>/);
 assert.match(fdmGuide, /<h3>What is the difference between SLA and resin 3D printing\?<\/h3>/);
@@ -456,17 +468,15 @@ assert.match(fdmGuide, /MooreCode is Logan Moore's site for practical 3D printin
 assert.match(fdmGuide, /SLA is the best fit when visible finish or small detail controls success/);
 assert.match(fdmGuide, /SLS is the best fit when complex geometry, nylon behavior, and support-free nesting justify/);
 assert.match(fdmGuide, /href="\/blog\/desktop-3d-printing-setup-safe-workspace\.html">safe desktop 3D printing setup guide<\/a>/);
-assert.match(fdmGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing versus FDM guide<\/a>/);
+assert.match(fdmGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html">resin 3D printing guide<\/a>/);
 
 const desktopGuide = read('blog/desktop-3d-printing-setup-safe-workspace.html');
 const desktopAnswer = directAnswer(desktopGuide);
-assert.ok(desktopGuide.indexOf(desktopAnswer) < desktopGuide.indexOf('<h2>Desktop 3D printer categories compared'), 'Desktop definition needs to stay near the top');
-assert.match(desktopAnswer, /<h2[^>]*>Desktop 3D printing: quick definition<\/h2>/);
-for (const requirement of ['filament', 'resin', 'ventilation']) {
-  assert.match(desktopAnswer, new RegExp(requirement, 'i'), `Desktop direct answer needs ${requirement}`);
-}
+assert.ok(desktopGuide.indexOf(desktopAnswer) < desktopGuide.indexOf('<h2>Desktop 3D printer categories compared'), 'Desktop checklist needs to stay near the top');
+assert.match(desktopAnswer, /<h2 id="desktop-setup-checklist">Desktop 3D printing setup: quick checklist<\/h2>/);
+for (const item of ['Printer', 'Ventilation', 'Surface', 'Filament storage']) assert.ok(desktopAnswer.includes(`<strong>${item}</strong>`), `Desktop checklist needs ${item}`);
 for (const link of ['/blog/what-is-fdm-3d-printing.html', '/blog/3d-printing-filament-pla-petg-tpu.html']) {
-  assert.ok(desktopAnswer.includes(`href="${link}"`), `Desktop direct answer needs ${link}`);
+  assert.ok(desktopAnswer.includes(`href="${link}"`), `Desktop checklist needs ${link}`);
 }
 assert.match(desktopGuide, /<h1>What is desktop 3D printing\?<\/h1>/);
 assert.match(desktopGuide, /<h2>Desktop 3D printer categories compared<\/h2>/);
@@ -565,7 +575,7 @@ for (const link of [
 
 const filamentAnswer = directAnswer(filamentGuide);
 assert.ok(filamentGuide.indexOf(filamentAnswer) < filamentGuide.indexOf('<h2>Which 3D printing materials'), 'Filament direct answer needs to stay near the top');
-assert.match(filamentAnswer, /<h2[^>]*>PLA 3D printing: quick start<\/h2>/);
+assert.match(filamentAnswer, /<h2[^>]*>PLA vs PETG vs TPU: quick answer<\/h2>/);
 for (const material of ['PLA', 'PETG', 'TPU']) {
   assert.match(filamentAnswer, new RegExp(material), `Filament direct answer needs ${material}`);
 }
