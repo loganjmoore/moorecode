@@ -35,7 +35,7 @@
       "url": "https://moorecode.com/blog/what-is-fdm-3d-printing.html",
       "mainEntityOfPage": "https://moorecode.com/blog/what-is-fdm-3d-printing.html",
       "datePublished": "2026-10-06",
-"dateModified": "2026-10-20",
+"dateModified": "2026-11-01",
       "image": "https://moorecode.com/blog/images/what-is-fdm-3d-printing.svg",
       "author": { "@id": "https://moorecode.com/#logan" },
       "publisher": { "@id": "https://moorecode.com/#logan" },
@@ -123,14 +123,29 @@
 
 <article>
 <header class="post-head">
-<p class="post-meta">Published October 6, 2026 · Updated October 20, 2026 · By Logan Moore</p>
+<p class="post-meta">Published October 6, 2026 · Updated November 1, 2026 · By Logan Moore</p>
   <h1>What Is FDM 3D Printing?</h1>
 </header>
 
 <section class="prose">
   <img class="post-cover" src="/blog/images/what-is-fdm-3d-printing.svg" width="1200" height="630" alt="Cutaway diagram of an FDM nozzle laying stacked orange lines beside SLA resin and SLS powder symbols." />
 
-  <p class="lede">FDM 3D printing is a material-extrusion process, short for fused deposition modeling, that melts a solid plastic filament, pushes it through a nozzle, and deposits the plastic one layer at a time. It is usually the practical choice for affordable prototypes, fixtures, organizers, and medium-to-large functional parts. Choose SLA for finer surface detail and SLS for complex nylon parts that should print without attached supports.</p>
+  <p class="lede">FDM 3D printing is a material-extrusion process, short for fused deposition modeling, that melts solid plastic filament and deposits it through a nozzle one layer at a time.</p>
+
+  <section class="direct-answer" aria-labelledby="fdm-process-comparison">
+    <h2 id="fdm-process-comparison">FDM vs SLA vs SLS</h2>
+    <table>
+      <thead>
+        <tr><th scope="col">Process</th><th scope="col">How it works</th><th scope="col">Choose this when</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>FDM / FFF</strong></td><td>A nozzle deposits melted filament</td><td>You need affordable, larger functional parts or fast revisions</td></tr>
+        <tr><td><strong>SLA</strong></td><td>Light cures liquid resin</td><td>You need fine features or smooth visible surfaces</td></tr>
+        <tr><td><strong>SLS</strong></td><td>A laser fuses polymer powder</td><td>You need complex nylon parts without attached supports</td></tr>
+      </tbody>
+    </table>
+    <p>Read the <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin 3D printing guide</a> for the SLA workflow, or compare powder bed fusion, binder jetting, metal FFF, and directed energy deposition in the <a href="/blog/3d-printing-metal-processes-compared.html">metal 3D printing guide</a>.</p>
+  </section>
 
   <p>MooreCode is Logan Moore's site for practical 3D printing guides, software projects, and hands-on project notes.</p>
 
@@ -162,49 +177,7 @@
 
   <p>Thin features also reach a practical limit. Formlabs' published comparison puts a typical FDM minimum supported wall near 0.8 mm and minimum embossed detail near 0.6 mm wide and 2 mm high. Those are design guidelines rather than promises for every machine, but they explain why a small miniature face usually reads better in resin.</p>
 
-  <p>For the complete workflow behind that detail advantage, including washing, curing, ventilation, and waste handling, read the <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin 3D printing versus FDM guide</a>.</p>
-
-  <p>When the finished part must be metal rather than polymer, the <a href="/blog/3d-printing-metal-processes-compared.html">metal 3D printing process guide</a> compares powder bed fusion, binder jetting, metal FFF, and directed energy deposition.</p>
-
   <p>FDM parts are direction-dependent. A load that tries to separate layers can expose a weaker axis, and an apparently solid model can fail at a sharp corner or thin neck. Food contact, pressure, electrical insulation, medical use, and load-bearing safety parts need application-specific material and process validation.</p>
-
-  <h2>How do FDM, SLA 3D printing, and SLS 3D printing compare?</h2>
-  <p>FDM deposits melted filament, SLA 3D printing cures liquid resin, and SLS 3D printing fuses polymer powder. They differ most in feedstock, support strategy, finish, and the work required after printing. The short table below matches the format readers usually need before choosing a process.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Process</th>
-        <th>How it forms a layer</th>
-        <th>Supports</th>
-        <th>Best fit</th>
-        <th>Main tradeoff</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>FDM / FFF</strong></td>
-        <td>Nozzle deposits melted filament</td>
-        <td>Added under some overhangs</td>
-        <td>Affordable, larger functional parts</td>
-        <td>Visible layers and limited tiny detail</td>
-      </tr>
-      <tr>
-        <td><strong>SLA</strong></td>
-        <td>Light cures liquid photopolymer resin</td>
-        <td>Attached support structures</td>
-        <td>Fine features and smooth surfaces</td>
-        <td>Washing, curing, and resin handling</td>
-      </tr>
-      <tr>
-        <td><strong>SLS</strong></td>
-        <td>Laser fuses polymer powder</td>
-        <td>Loose powder supports the part</td>
-        <td>Complex nylon parts and nested builds</td>
-        <td>Industrial equipment and powder workflow</td>
-      </tr>
-    </tbody>
-  </table>
 
   <h2>What is SLA 3D printing?</h2>
   <p>SLA 3D printing is a vat-photopolymerization process that uses light to cure liquid resin into solid layers.</p>
