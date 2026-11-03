@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>3D Printing Materials After a PLA Clamp Fails</title>
-<meta name="description" content="Choose a replacement material from the failed part's heat, load, motion, and fit requirements. Includes a 65°C clamp check." />
+<title>3D Printing Materials: Types, Properties &amp; Uses</title>
+<meta name="description" content="Compare thermoplastic filament, photopolymer resin, polymer powder, and metal 3D printing materials by properties, use cases, workflow, and tradeoffs." />
 <link rel="canonical" href="https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html" />
 <meta name="google-site-verification" content="RFPllP4BgVWSoG0OLAEUH6cb2_dLrIh-16tGoYtjLp8" />
 <meta name="theme-color" content="#0b0c10" />
@@ -15,8 +15,8 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
 <link rel="stylesheet" href="/style.css" />
 <link rel="alternate" type="application/rss+xml" title="moorecode" href="/feed.xml" />
-<meta property="og:title" content="3D Printing Materials After a PLA Clamp Fails" />
-<meta property="og:description" content="Choose a filament from the part's heat, load, motion, and fit requirements, with a worked 65°C clamp check." />
+<meta property="og:title" content="3D Printing Materials: Types, Properties &amp; Uses" />
+<meta property="og:description" content="Compare the main 3D printing material types, their properties, use cases, workflows, and tradeoffs." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html" />
 <meta property="og:image" content="https://moorecode.com/blog/images/3d-printing-materials-after-pla-clamp-fails.svg" />
@@ -30,12 +30,12 @@
     {
       "@type": "BlogPosting",
       "@id": "https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html#post",
-      "headline": "3D Printing Materials After a PLA Clamp Fails",
-      "description": "Choose a replacement material from the failed part's heat, load, motion, and fit requirements. Includes a 65°C clamp check.",
+      "headline": "3D Printing Materials: Types, Properties, and Uses",
+      "description": "Compare thermoplastic filament, photopolymer resin, polymer powder, and metal 3D printing materials by properties, use cases, workflow, and tradeoffs.",
       "url": "https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html",
       "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html",
       "datePublished": "2026-10-21",
-      "dateModified": "2026-10-21",
+      "dateModified": "2026-11-03",
       "image": "https://moorecode.com/blog/images/3d-printing-materials-after-pla-clamp-fails.svg",
       "author": { "@id": "https://moorecode.com/#logan" },
       "publisher": { "@id": "https://moorecode.com/#logan" },
@@ -64,6 +64,11 @@
           "@type": "Question",
           "name": "Can a PETG part stay in a hot car?",
           "acceptedAnswer": { "@type": "Answer", "text": "A PETG label alone does not prove a part is safe in a hot car. Check the exact filament data sheet, measure the temperature where the part will sit, include load and time in the test, and leave a useful margin below the published limit." }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the main types of 3D printing materials?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The main groups covered here are thermoplastic filament, liquid photopolymer resin, polymer powder, and metal feedstocks. Choose among them by the finished part's required stiffness, toughness, flexibility, heat resistance, detail, environment, and processing workflow." }
         }
       ]
     },
@@ -113,30 +118,42 @@
 <main>
 <article>
 <header class="post-head">
-  <p class="post-meta">October 21, 2026 · By Logan Moore</p>
-  <h1>3D Printing Materials After a PLA Clamp Fails</h1>
+  <p class="post-meta">October 21, 2026 · Updated November 3, 2026 · By Logan Moore</p>
+  <h1>3D Printing Materials: Types, Properties, and Uses</h1>
 </header>
 
 <section class="prose">
-  <img class="post-cover" src="/blog/images/3d-printing-materials-after-pla-clamp-fails.svg" width="1200" height="630" alt="A diagram matching PLA, PETG, and TPU to a rigid clamp with a 65 degree Celsius heat requirement." />
-
-  <p class="lede">Choosing replacement 3D printing materials after a PLA part fails is a requirements check: use PETG for moderate heat and toughness, TPU for controlled flex, and PLA only when the part can stay rigid, cool, and lightly loaded. In a PETG vs PLA strength comparison, PETG is usually tougher and less brittle, while PLA is stiffer and easier to print. The 65°C example below rejects Prusament PLA at its published 60°C warning point, gives that brand's PETG only a 3°C paper margin, and sends the PETG prototype to a measured test.</p>
+  <p class="lede">A 3D printing material is the feedstock a printer builds into a part. The main groups are thermoplastic filament for material extrusion, liquid photopolymer resin for light-based printing, polymer powder for powder-bed fusion, and metal feedstocks for process-specific systems. Choose by the finished part's required stiffness, toughness, flexibility, heat resistance, detail, environment, and processing workflow.</p>
 
   <section class="direct-answer" aria-labelledby="materials-quick-answer">
-    <h2 id="materials-quick-answer">Which 3D printing material fits which part?</h2>
-    <p>PLA, PETG, and TPU solve different part problems because stiffness, toughness, heat, and flexibility are separate requirements.</p>
+    <h2 id="materials-quick-answer">3D printing material types compared</h2>
+    <p>Start with the process and the finished part requirement. A material name alone does not establish the printed part's properties.</p>
     <table>
       <thead>
-        <tr><th>Part requirement</th><th>First material to consider</th><th>Reason to reject it</th></tr>
+        <tr><th>Material type</th><th>Properties to compare</th><th>Common use cases</th><th>Workflow boundary</th></tr>
       </thead>
       <tbody>
-        <tr><td>Rigid indoor model or fit check</td><td>PLA</td><td>Reject PLA when sustained heat or repeated bending is part of the job.</td></tr>
-        <tr><td>Clamp, holder, or utility bracket</td><td>PETG</td><td>Reject PETG when crisp tiny detail or a truly flexible response matters more.</td></tr>
-        <tr><td>Bumper, foot, sleeve, or compliant seal</td><td>TPU</td><td>Reject TPU when the part must keep a rigid angle or bridge a firm span.</td></tr>
+        <tr><td><a href="/blog/3d-printing-filament-pla-petg-tpu.html">Thermoplastic filament</a></td><td>Stiffness, toughness, flexibility, heat, layer direction, and moisture sensitivity</td><td>Models, fit checks, fixtures, brackets, and flexible bumpers</td><td>The printer heats and deposits filament. Use a compatible profile and the material maker's handling guidance.</td></tr>
+        <tr><td><a href="/blog/when-resin-3d-printing-beats-fdm.html">Liquid photopolymer resin</a></td><td>Fine detail, surface finish, brittleness or toughness, and the documented intended use</td><td>Detailed models, surface tests, patterns, and supported dental workflows</td><td>Follow the exact resin instructions for handling, washing, drying, curing when required, ventilation, and waste.</td></tr>
+        <tr><td><a href="/blog/what-is-fdm-3d-printing.html">Polymer powder</a></td><td>Toughness, heat, surface texture, dimensional needs, and the specific powder grade</td><td>Durable functional geometry, clips, nested parts, and interlocking assemblies</td><td>SLS or MJF require powder handling and process controls that differ from desktop filament printing.</td></tr>
+        <tr><td><a href="/blog/3d-printing-metal-processes-compared.html">Metal feedstocks</a></td><td>Alloy, density, direction, heat treatment, finish, tolerance, and inspection</td><td>Process-specific prototypes, tooling, and production parts</td><td>The route may include printing, debinding or sintering, finishing, and inspection; follow the process-specific documentation.</td></tr>
       </tbody>
     </table>
-    <p>Use the table to narrow the choice. It cannot certify a finished part: colorants and additives change filament behavior, while printed geometry creates weak directions that a raw-plastic data sheet cannot predict.</p>
+    <p>Use the table to choose a material family, then compare the exact grade and complete process. It cannot certify a finished part: additives change behavior, while printed geometry and process direction can create weak directions that a raw-material data sheet does not predict.</p>
   </section>
+
+  <h2>How do common filament materials differ?</h2>
+  <p>PLA, PETG, and TPU solve different part problems because stiffness, toughness, heat, and flexibility are separate requirements.</p>
+  <table>
+    <thead>
+      <tr><th>Part requirement</th><th>First material to consider</th><th>Reason to reject it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Rigid indoor model or fit check</td><td>PLA</td><td>Reject PLA when sustained heat or repeated bending is part of the job.</td></tr>
+      <tr><td>Clamp, holder, or utility bracket</td><td>PETG</td><td>Reject PETG when crisp tiny detail or a truly flexible response matters more.</td></tr>
+      <tr><td>Bumper, foot, sleeve, or compliant seal</td><td>TPU</td><td>Reject TPU when the part must keep a rigid angle or bridge a firm span.</td></tr>
+    </tbody>
+  </table>
 
   <h2>Is PETG stronger than PLA?</h2>
   <p>PETG is usually the better material for repeated handling, tougher parts, or stronger layer bonding. PLA is stiffer and often prints fine detail more cleanly. The word <em>stronger</em> hides the failure mode: a PLA arm may deflect less under a small load and then crack when bent too far, while a PETG arm can flex farther before a brittle break.</p>
@@ -145,7 +162,9 @@
 
   <p>The existing <a href="/blog/3d-printing-filament-pla-petg-tpu.html">MooreCode filament guide</a> puts the decision in one sentence: “The right choice starts with the finished part rather than the label on the spool.” After a failure, that rule keeps me from reaching for a popular filament before I can name what the old part failed to do.</p>
 
-  <h2>Why did the PLA clamp fail the 65°C requirement?</h2>
+  <img class="post-cover" src="/blog/images/3d-printing-materials-after-pla-clamp-fails.svg" width="1200" height="630" alt="A diagram matching PLA, PETG, and TPU to a rigid clamp with a 65 degree Celsius heat requirement." />
+
+  <h2>Worked example: why did the PLA clamp fail the 65°C requirement?</h2>
   <p>The PLA clamp fails this paper review because the part must work at 65°C, which is 5°C above Prusament's published warning point for PLA. <a href="https://prusament.com/materials/pla/">Prusament says its PLA parts start to lose mechanical strength above 60°C.</a> The requirement margin is 60 - 65 = -5°C, so I can reject this PLA before debating print orientation, infill, or clamp load.</p>
 
   <table>
@@ -182,8 +201,8 @@
 
   <p>Material choice cannot rescue a shape that concentrates stress at one sharp corner. Extra infill cannot repair poor layer orientation either. A useful failure review records material, geometry, process, and test conditions separately instead of changing all four together.</p>
 
-  <h2>When should you leave PLA, PETG, and TPU behind?</h2>
-  <p>Leave PLA, PETG, and TPU behind when the part asks more than ordinary desktop filament printing can supply. Fine surface texture and tiny features may point to the <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin versus FDM decision</a>. High-temperature service, certified metal properties, or a production metal component needs a different process and the supplier evidence covered in the <a href="/blog/3d-printing-metal-processes-compared.html">metal 3D printing comparison</a>.</p>
+  <h2>When should you choose resin, powder, or metal?</h2>
+  <p>Move beyond ordinary desktop filament when the part asks for a different process. Fine surface texture and tiny features may point to the <a href="/blog/when-resin-3d-printing-beats-fdm.html">resin versus FDM decision</a>. Durable nested or interlocking nylon geometry may point to SLS or MJF powder. High-temperature service, documented metal properties, or a production metal component needs a process-specific route and the supplier evidence covered in the <a href="/blog/3d-printing-metal-processes-compared.html">metal 3D printing comparison</a>.</p>
 
   <h2>What do people ask about PLA, PETG, and TPU?</h2>
 
@@ -198,6 +217,9 @@
 
   <h3>Can a PETG part stay in a hot car?</h3>
   <p>A PETG label alone does not prove a part is safe in a hot car. Check the exact filament data sheet, measure the temperature where the part will sit, include load and time in the test, and leave a useful margin below the published limit.</p>
+
+  <h3>What are the main types of 3D printing materials?</h3>
+  <p>The main groups covered here are thermoplastic filament, liquid photopolymer resin, polymer powder, and metal feedstocks. Choose among them by the finished part's required stiffness, toughness, flexibility, heat resistance, detail, environment, and processing workflow.</p>
 </section>
 </article>
 </main>

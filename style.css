@@ -715,6 +715,19 @@ section h2 {
 }
 
 /* ---------- Prototype test-plan builder ---------- */
+.prototype-route-choices {
+  margin: 32px 0;
+}
+
+.prose .prototype-route-choices h2 {
+  margin-top: 0;
+}
+
+.prototype-route-choices .coverage-links {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
 .prototype-plan-builder {
   margin: 40px 0 20px;
   padding: 24px;
@@ -1012,6 +1025,61 @@ section h2 {
 }
 
 /* ---------- 3D-printing price calculator ---------- */
+.rate-calculator {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+  gap: 20px;
+  align-items: start;
+  margin: 32px 0 40px;
+}
+
+.rate-calculator .calculator-form,
+.rate-calculator .calculator-result {
+  padding: 20px;
+}
+
+.rate-calculator .calculator-form fieldset {
+  margin-bottom: 20px;
+}
+
+.prose .rate-calculator .calculator-form p {
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+.rate-calculator .calculator-result {
+  position: static;
+}
+
+.rate-calculator-result dl {
+  margin: 20px 0;
+}
+
+.rate-calculator-result dl > div {
+  display: grid;
+  gap: 4px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.rate-calculator-result dt {
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.rate-calculator-result dd {
+  margin: 0;
+  color: var(--accent);
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose .rate-calculator-result p {
+  margin: 0;
+  font-size: 14px;
+}
+
 .calculator-shell {
   max-width: var(--max);
   margin: 0 auto;
@@ -1593,6 +1661,7 @@ footer .foot-links a:hover { color: var(--accent); }
   .topic-groups { grid-template-columns: 1fr; padding-left: 20px; padding-right: 20px; }
 
   .prototype-plan-builder { padding: 20px; }
+  .rate-calculator { grid-template-columns: 1fr; }
   .prototype-plan-fields { grid-template-columns: 1fr; }
   .prototype-plan-field--wide { grid-column: auto; }
   .prototype-plan-summary-group dl > div { grid-template-columns: 1fr; gap: 4px; }
