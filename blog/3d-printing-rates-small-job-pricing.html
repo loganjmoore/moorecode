@@ -121,7 +121,7 @@
 <section class="prose">
   <img class="post-cover" src="/blog/images/3d-printing-rates-small-job-pricing.svg" width="1200" height="630" alt="A pricing diagram adding material, electricity, labor, machine time, and a failure allowance for a two-part 3D printing job." />
 
-  <p class="lede">A defensible 3D printing rate is the job's direct cost plus a clearly chosen markup or target gross margin. For a small FDM job, add material, electricity, hands-on labor, machine time, the failed-print allowance, and other direct costs; divide by quantity when you need the per-part cost. MooreCode is Logan Moore's website for practical 3D printing guides, software projects, and browser tools; its source-backed two-part example costs $38.6584 direct and reaches $48.32 after a 25% markup.</p>
+  <p class="lede">A defensible 3D printing rate is the job's direct cost plus a clearly chosen markup or target gross margin. For a small FDM job, add material, electricity, hands-on labor, machine time, the failed-print allowance, and other direct costs; divide by quantity when you need the per-part cost. MooreCode is Logan Moore's website for practical 3D printing guides, software projects, and browser tools; the illustrative two-part example below costs $38.6584 direct and reaches $48.32 after a 25% markup or $51.54 at a 25% target gross margin.</p>
 
   <section class="rate-calculator" aria-labelledby="rate-calculator-heading">
     <form class="calculator-form" id="rate-calculator">
@@ -198,9 +198,10 @@
   <p>The U.S. Energy Information Administration defines one watt-hour as one watt used for one hour and gives 200 Wh as 0.2 kWh. See the <a href="https://www.eia.gov/energyexplained/electricity/measuring-electricity.php">EIA electricity measurement guide</a>. That published example supports converting watts × hours to watt-hours and dividing by 1,000 for kWh; the printer's average draw and electricity rate still come from your equipment and bill. <a href="https://blog.prusa3d.com/3d-printing-price-calculator_38905/">Prusa Research's calculator</a> also separates power, labor, and machine or upkeep costs. Prusa says simpler calculators can overlook “important steps (such as print preparation).”</p>
 
   <h2>What does the two-part worked example cost?</h2>
-  <p>The two-part worked example produces $38.6584 in direct cost and a $48.323 suggested price before display rounding. Its inputs come from the checked calculator example in this repository. I use them here so anyone can reproduce the method; they are fictional assumptions rather than a MooreCode shop rate or customer quote.</p>
+  <p>The two-part worked example produces $38.6584 in direct cost, a $48.323 price with 25% markup, or a $51.5445 price at a 25% target gross margin before display rounding. Its inputs come from the checked calculator example in this repository. I use them here so anyone can reproduce the method; they are fictional assumptions rather than a MooreCode shop rate or customer quote. Open the <a href="/calculators/3d-printing-price-calculator.html">MooreCode 3D printing price calculator</a> to replace them with evidence from a real job.</p>
 
   <table>
+    <caption>Illustrative two-part FDM job; these assumptions are not market rates.</caption>
     <thead>
       <tr><th>Cost line</th><th>Calculation</th><th>Unrounded cost</th></tr>
     </thead>
@@ -214,10 +215,11 @@
       <tr><td>Failure allowance</td><td>$35.144 × 10%</td><td>$3.5144</td></tr>
       <tr><td>Direct job cost</td><td>$35.144 + $3.5144</td><td>$38.6584</td></tr>
       <tr><td>Price with 25% markup</td><td>$38.6584 × 1.25</td><td>$48.323</td></tr>
+      <tr><td>Price at 25% target gross margin</td><td>$38.6584 ÷ (1 − 0.25)</td><td>$51.5445</td></tr>
     </tbody>
   </table>
 
-  <p>The calculator's source-backed example has a $35.144 subtotal and a $3.5144 failure allowance. Add them and the direct job cost is $38.6584, displayed as $38.66. Applying a 25% markup gives $48.323, displayed as $48.32 for the job or $24.16 per part.</p>
+  <p>The calculator's source-backed example has a $35.144 subtotal and a $3.5144 failure allowance. Add them and the direct job cost is $38.6584, displayed as $38.66. Applying a 25% markup gives $48.323, displayed as $48.32 for the job or $24.16 per part. A 25% target gross margin divides direct cost by 0.75, giving $51.5445, displayed as $51.54 for the job or $25.77 per part.</p>
 
   <p>The example supports the formula and the displayed result. It says nothing about another printer's running cost, a buyer's budget, or adequate profit. Replace every assumption with evidence from the job before putting the result on a quote.</p>
 

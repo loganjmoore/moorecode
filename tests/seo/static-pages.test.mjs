@@ -188,6 +188,20 @@ for (const [id, name] of [
   assert.match(ratesGuide, new RegExp(`id="${id}" name="${name}"`), `${id} label and control must match`);
 }
 assert.match(ratesGuide, /href="\/calculators\/3d-printing-price-calculator\.html">full 3D printing price calculator<\/a>/);
+const workedRateExample = ratesGuide.slice(ratesGuide.indexOf('<h2>What does the two-part worked example cost?</h2>'), ratesGuide.indexOf('<h2>What machine rate should you use?</h2>'));
+assert.match(workedRateExample, /<caption>Illustrative two-part FDM job; these assumptions are not market rates\.<\/caption>/);
+assert.match(workedRateExample, /2 parts × 100 g/);
+assert.match(workedRateExample, /2 × 4 hours × \$1\.50\/hour/);
+assert.match(workedRateExample, /0\.5 hours × \$30\/hour/);
+assert.match(workedRateExample, /Failure allowance/);
+assert.match(workedRateExample, /Price at 25% target gross margin/);
+assert.match(workedRateExample, /href="\/calculators\/3d-printing-price-calculator\.html">MooreCode 3D printing price calculator<\/a>/);
+
+const fdmRankingGuide = read('blog/what-is-fdm-3d-printing.html');
+assert.match(fdmRankingGuide, /<h2>What is FDM 3D printing used for\?<\/h2>\s*<p>FDM 3D printing is used for functional parts and fast revisions/);
+for (const path of ['blog/3d-printing-filament-pla-petg-tpu.html', 'blog/3d-printer-rapid-prototyping-in-house-or-outsource.html']) {
+  assert.match(read(path), /href="\/blog\/what-is-fdm-3d-printing\.html">FDM 3D printing (?:process comparison|process guide)<\/a>/, `${path} needs a descriptive link to the FDM guide`);
+}
 
 const dentistGuide = read('guides/3d-printing-for-dentists.html');
 const dentistGraph = JSON.parse(dentistGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
