@@ -1,5 +1,5 @@
 import { strict as assert } from 'node:assert';
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const firstParagraphAfterH1 = (html) => html.slice(html.indexOf('</h1>') + 5).match(/<p[^>]*>(.*?)<\/p>/s)?.[1].replace(/<[^>]+>/g, '');
@@ -141,9 +141,9 @@ assert.deepEqual(newestFeedLinks, [
   'https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html',
   'https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html',
 ], 'The November 1 post must lead the feed before the October 21 posts');
-for (const [path, expectedTitle] of [
-  ['blog/3d-printing-materials-after-pla-clamp-fails.html', '3D Printing Materials After a PLA Clamp Fails'],
-  ['blog/3d-printing-rates-small-job-pricing.html', '3D Printing Rates: Price a Small Job Step by Step'],
+for (const [path, expectedTitle, expectedModified] of [
+  ['blog/3d-printing-materials-after-pla-clamp-fails.html', '3D Printing Materials: Types, Properties & Uses', '2026-11-03'],
+  ['blog/3d-printing-rates-small-job-pricing.html', '3D Printing Rates: Price a Small Job Step by Step', '2026-11-03'],
 ]) {
   const article = read(path);
   const title = decodeHtml(article.match(/<title>([^<]+)<\/title>/)?.[1] || '');
@@ -155,7 +155,7 @@ for (const [path, expectedTitle] of [
   assert.ok(title.length <= 60, `${path} title must be at most 60 characters`);
   assert.ok(description.length <= 160, `${path} description must be at most 160 characters`);
   assert.equal(posting.datePublished, '2026-10-21');
-  assert.equal(posting.dateModified, '2026-10-21');
+  assert.equal(posting.dateModified, expectedModified);
   assert.match(posting.image, /^https:\/\/moorecode\.com\/blog\/images\/.+\.svg$/);
   assert.ok(faq.mainEntity.length >= 3 && faq.mainEntity.length <= 5, `${path} needs three to five FAQ entries`);
   for (const item of faq.mainEntity) {
@@ -163,6 +163,64 @@ for (const [path, expectedTitle] of [
     assert.ok(article.includes(`<p>${item.acceptedAnswer.text}</p>`), `${path} must keep visible and structured FAQ answers aligned`);
   }
 }
+
+const materialsGuide = read('blog/3d-printing-materials-after-pla-clamp-fails.html');
+const materialsComparison = directAnswer(materialsGuide);
+assert.match(materialsGuide, /<h1>3D Printing Materials: Types, Properties, and Uses<\/h1>/);
+assert.match(materialsComparison, /<h2 id="materials-quick-answer">3D printing material types compared<\/h2>/);
+for (const materialType of ['Thermoplastic filament', 'Liquid photopolymer resin', 'Polymer powder', 'Metal feedstocks']) {
+  assert.ok(materialsComparison.includes(materialType), `Materials overview needs ${materialType}`);
+}
+assert.ok(materialsGuide.indexOf(materialsComparison) < materialsGuide.indexOf('Worked example: why did the PLA clamp fail'), 'The material-type overview must come before the clamp example');
+
+const ratesGuide = read('blog/3d-printing-rates-small-job-pricing.html');
+assert.ok(ratesGuide.indexOf('id="rate-calculator"') < ratesGuide.indexOf('id="rate-inputs"'), 'The pricing tool must come before the written walkthrough');
+assert.match(ratesGuide, /<script src="\/blog\/3d-printing-rates-small-job-pricing\.js" defer><\/script>/);
+for (const [id, name] of [
+  ['rate-material-cost', 'materialCost'],
+  ['rate-print-hours', 'printHours'],
+  ['rate-machine-rate', 'machineRate'],
+  ['rate-labor-hours', 'laborHours'],
+  ['rate-labor-rate', 'laborRate'],
+  ['rate-markup', 'markup'],
+]) {
+  assert.match(ratesGuide, new RegExp(`<label for="${id}">`), `${id} needs a visible label`);
+  assert.match(ratesGuide, new RegExp(`id="${id}" name="${name}"`), `${id} label and control must match`);
+}
+assert.match(ratesGuide, /href="\/calculators\/3d-printing-price-calculator\.html">full 3D printing price calculator<\/a>/);
+
+const dentistGuide = read('guides/3d-printing-for-dentists.html');
+const dentistGraph = JSON.parse(dentistGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const dentistArticle = dentistGraph.find((item) => item['@type'] === 'Article');
+const dentistFaq = dentistGraph.find((item) => item['@type'] === 'FAQPage');
+assert.equal(dentistArticle.dateModified, '2026-11-03');
+assert.equal(dentistFaq.mainEntity.length, 3);
+assert.match(dentistGuide, /<h2 id="dental-questions">Dental 3D printing questions<\/h2>/);
+assert.doesNotMatch(dentistGuide, /Questions to answer before buying a printer/);
+for (const item of dentistFaq.mainEntity) {
+  assert.ok(dentistGuide.includes(`<h3>${item.name}</h3>`), `Dentist guide must show FAQ question: ${item.name}`);
+  assert.ok(dentistGuide.includes(`<p>${item.acceptedAnswer.text}</p>`), `Dentist guide must keep visible and structured FAQ answers aligned`);
+}
+assert.match(dentistGuide, /href="\/blog\/when-resin-3d-printing-beats-fdm\.html#dental-work"/);
+
+const prototypeGuide = read('blog/3d-printing-prototype-four-stage-test-plan.html');
+const prototypeGraph = JSON.parse(prototypeGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const prototypeServicePost = prototypeGraph.find((item) => item['@type'] === 'BlogPosting');
+const prototypeServiceFaq = prototypeGraph.find((item) => item['@type'] === 'FAQPage');
+const serviceQuestion = 'When should you use a 3D printing service for a prototype?';
+const serviceAnswer = 'Keep a job in-house when the available process, material, tolerance, and test can answer the question. Use a service when the required material, size, finish, tolerance, inspection, or process is unavailable locally.';
+assert.equal(prototypeServicePost.dateModified, '2026-11-03');
+assert.equal(prototypeServiceFaq.mainEntity.find((item) => item.name === serviceQuestion).acceptedAnswer.text, serviceAnswer);
+assert.ok(prototypeGuide.includes(`<h3>${serviceQuestion}</h3>\n  <p>${serviceAnswer}</p>`));
+assert.ok(prototypeGuide.indexOf('id="prototype-route-heading"') < prototypeGuide.indexOf('class="prototype-plan-builder"'), 'Prototype decision paths must appear before the builder');
+for (const [href, label] of [
+  ['#prototype-plan-heading', 'Build and document a test plan'],
+  ['/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html', 'Decide whether to print in-house or outsource'],
+  ['/calculators/3d-printing-price-calculator.html', 'Estimate a print'],
+]) assert.ok(prototypeGuide.includes(`<a href="${href}">${label}</a>`), `Prototype route needs ${label}`);
+assert.match(prototypeGuide, /id="prototype-plan-heading"/);
+assert.ok(existsSync(new URL('../../blog/3d-printer-rapid-prototyping-in-house-or-outsource.html', import.meta.url)));
+assert.ok(existsSync(new URL('../../calculators/3d-printing-price-calculator.html', import.meta.url)));
 const rapidPrototypingPath = 'blog/3d-printer-rapid-prototyping-in-house-or-outsource.html';
 const rapidPrototypingGuide = read(rapidPrototypingPath);
 const rapidPrototypingDescription = rapidPrototypingGuide.match(/<meta name="description" content="([^"]+)"/)?.[1] || '';
@@ -547,7 +605,7 @@ const prototypePost = prototypeSchemas.find((item) => item['@type'] === 'BlogPos
 const prototypeFaq = prototypeSchemas.find((item) => item['@type'] === 'FAQPage');
 const onlinePlanQuestion = 'Can I make a 3D printing prototype test plan online?';
 const onlinePlanAnswer = "Yes. Use the checklist on this page to draft a test plan entirely in your browser. Nothing is uploaded or saved, refreshing clears the draft, and your browser's print dialog can print the summary or save it as a PDF.";
-assert.equal(prototypePost.dateModified, '2026-10-29');
+assert.equal(prototypePost.dateModified, '2026-11-03');
 assert.equal(prototypeFaq.mainEntity.find(({ name }) => name === onlinePlanQuestion)?.acceptedAnswer.text, onlinePlanAnswer);
 assert.ok(scanGuide.includes(`<h3>${onlinePlanQuestion}</h3>`), 'Prototype guide needs the online-plan FAQ question');
 assert.ok(scanGuide.includes(`<p>${onlinePlanAnswer}</p>`), 'Prototype guide needs the same visible and structured online-plan answer');

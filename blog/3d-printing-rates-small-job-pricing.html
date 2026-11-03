@@ -35,7 +35,7 @@
       "url": "https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html",
       "mainEntityOfPage": "https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html",
       "datePublished": "2026-10-21",
-      "dateModified": "2026-10-21",
+      "dateModified": "2026-11-03",
       "image": "https://moorecode.com/blog/images/3d-printing-rates-small-job-pricing.svg",
       "author": { "@id": "https://moorecode.com/#logan" },
       "publisher": { "@id": "https://moorecode.com/#logan" },
@@ -86,6 +86,7 @@
 }
 </script>
 <script src="/navigation.js" defer></script>
+<script src="/blog/3d-printing-rates-small-job-pricing.js" defer></script>
 <script defer src="/posthog-web.js"></script>
 </head>
 <body>
@@ -113,7 +114,7 @@
 <main>
 <article>
 <header class="post-head">
-  <p class="post-meta">October 21, 2026 · By Logan Moore</p>
+  <p class="post-meta">October 21, 2026 · Updated November 3, 2026 · By Logan Moore</p>
   <h1>3D Printing Rates: Price a Small Job Step by Step</h1>
 </header>
 
@@ -121,6 +122,52 @@
   <img class="post-cover" src="/blog/images/3d-printing-rates-small-job-pricing.svg" width="1200" height="630" alt="A pricing diagram adding material, electricity, labor, machine time, and a failure allowance for a two-part 3D printing job." />
 
   <p class="lede">A defensible 3D printing rate is the job's direct cost plus a clearly chosen markup or target gross margin. For a small FDM job, add material, electricity, hands-on labor, machine time, the failed-print allowance, and other direct costs; divide by quantity when you need the per-part cost. MooreCode is Logan Moore's website for practical 3D printing guides, software projects, and browser tools; its source-backed two-part example costs $38.6584 direct and reaches $48.32 after a 25% markup.</p>
+
+  <section class="rate-calculator" aria-labelledby="rate-calculator-heading">
+    <form class="calculator-form" id="rate-calculator">
+      <fieldset>
+        <legend id="rate-calculator-heading">3D printing rate calculator</legend>
+        <p>Enter material, print time, and hands-on labor to get a quick job price.</p>
+        <div class="calculator-fields">
+          <div class="calculator-field">
+            <label for="rate-material-cost">Material cost ($)</label>
+            <input id="rate-material-cost" name="materialCost" type="number" min="0" step="0.01" value="5" required />
+          </div>
+          <div class="calculator-field">
+            <label for="rate-print-hours">Print time (hours)</label>
+            <input id="rate-print-hours" name="printHours" type="number" min="0" step="0.1" value="4" required />
+          </div>
+          <div class="calculator-field">
+            <label for="rate-machine-rate">Machine rate per hour ($)</label>
+            <input id="rate-machine-rate" name="machineRate" type="number" min="0" step="0.01" value="1.50" required />
+          </div>
+          <div class="calculator-field">
+            <label for="rate-labor-hours">Hands-on labor (hours)</label>
+            <input id="rate-labor-hours" name="laborHours" type="number" min="0" step="0.1" value="0.5" required />
+          </div>
+          <div class="calculator-field">
+            <label for="rate-labor-rate">Labor rate per hour ($)</label>
+            <input id="rate-labor-rate" name="laborRate" type="number" min="0" step="0.01" value="30" required />
+          </div>
+          <div class="calculator-field">
+            <label for="rate-markup">Markup (%)</label>
+            <input id="rate-markup" name="markup" type="number" min="0" step="0.1" value="25" required />
+          </div>
+        </div>
+      </fieldset>
+      <button class="btn primary" type="submit">Calculate price</button>
+      <p class="calculator-status" id="rate-calculator-status" role="status" aria-live="polite">Ready to calculate from the example assumptions.</p>
+    </form>
+
+    <section class="calculator-result rate-calculator-result" aria-labelledby="rate-result-heading">
+      <h2 id="rate-result-heading">Quick estimate</h2>
+      <dl>
+        <div><dt>Direct cost</dt><dd id="rate-direct-cost">Not calculated</dd></div>
+        <div><dt>Price with markup</dt><dd id="rate-price">Not calculated</dd></div>
+      </dl>
+      <p>This quick result includes the entered material, machine time, and labor. Add electricity, failed-print allowance, other direct costs, or target margin in the <a href="/calculators/3d-printing-price-calculator.html">full 3D printing price calculator</a>.</p>
+    </section>
+  </section>
 
   <section class="direct-answer" aria-labelledby="rate-inputs">
     <h2 id="rate-inputs">What belongs in a 3D printing rate?</h2>
