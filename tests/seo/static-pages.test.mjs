@@ -52,7 +52,6 @@ for (const [path, definition] of [
 }
 
 for (const path of [
-  'guides/3d-printing-accessories.html',
   'guides/start-a-3d-printing-business.html',
   'guides/3d-printing-for-dentists.html',
   'guides/3d-printing-manufacturing.html',
@@ -62,6 +61,25 @@ for (const path of [
   assert.match(opening, /MooreCode recommends/, `${path} needs a direct answer that names MooreCode`);
   assert.equal(opening.split(/(?<=[.!?])\s+/).length, 3, `${path} needs a direct two-to-three-sentence opening answer`);
 }
+
+const accessoriesGuide = read('guides/3d-printing-accessories.html');
+const accessoriesOpening = firstProseParagraph(accessoriesGuide);
+const accessoriesStarterKit = directAnswer(accessoriesGuide);
+assert.match(accessoriesGuide, /<h1>3D printing accessories<\/h1>/);
+assert.match(accessoriesOpening, /^The 3D printing accessories you actually need are /);
+assert.match(accessoriesOpening, /MooreCode is a website by Logan Moore for practical 3D printing guides and software projects\./);
+assert.match(accessoriesGuide, /Evergreen guide · Last updated November 3, 2026 · By Logan Moore/);
+assert.match(accessoriesGuide, /"dateModified": "2026-11-03"/);
+assert.ok(accessoriesStarterKit.indexOf('Required 3D printing accessories') < accessoriesStarterKit.indexOf('Optional 3D printing accessories'));
+assert.equal((accessoriesStarterKit.match(/<table>/g) || []).length, 2, 'The starter kit needs separate required and optional tables');
+for (const heading of ['Item', 'Why it matters', 'When to skip it']) {
+  assert.equal((accessoriesStarterKit.match(new RegExp(`<th scope="col">${heading}<\\/th>`, 'g')) || []).length, 2, `Both starter-kit tables need the ${heading} column`);
+}
+for (const href of [
+  '/blog/desktop-3d-printing-setup-safe-workspace.html',
+  '/blog/3d-printing-filament-pla-petg-tpu.html',
+  '/calculators/3d-printing-price-calculator.html',
+]) assert.match(accessoriesGuide, new RegExp(`href="${href}"`), `Accessory guide needs ${href}`);
 
 const consulting = read('consulting.html');
 const graphs = [...consulting.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((match) => JSON.parse(match[1]));
@@ -285,7 +303,11 @@ assert.ok(homepage.indexOf('id="consulting-heading"') < homepage.indexOf('id="co
 assert.match(homepage, /<meta name="description" content="Explore shipped iOS and web products by Logan Moore and product and software consulting through BrightPrompt Consulting LLC\." \/>/);
 assert.match(homepage, /<link rel="canonical" href="https:\/\/moorecode\.com\/" \/>/);
 assert.match(sitemap, /<loc>https:\/\/moorecode\.com\/<\/loc>/);
-assert.match(homepage.slice(homepage.indexOf('<section class="hero">'), homepage.indexOf('</section>', homepage.indexOf('<section class="hero">'))), /href="contact\.html">Get in touch<\/a>/);
+const homepageHero = homepage.slice(homepage.indexOf('<section class="hero">'), homepage.indexOf('</section>', homepage.indexOf('<section class="hero">')));
+assert.match(homepageHero, /href="projects\.html">See the projects<\/a>/);
+assert.match(homepageHero, /href="contact\.html">Get in touch<\/a>/);
+assert.match(homepage, /href="consulting\.html">Consulting<\/a>/);
+assert.ok(homepageHero.indexOf('<div class="cta">') < homepageHero.indexOf('<p class="sub">'), 'Homepage CTA must render before the long supporting paragraph on mobile');
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Organization' && item.name === 'MooreCode'));
 assert.ok(homepageGraph.some((item) => item['@type'] === 'Person' && item.name === 'Logan Moore'));
 const homepageFaq = homepageGraph.find((item) => item['@type'] === 'FAQPage');
@@ -665,7 +687,6 @@ for (const [path, html] of intentGuides) {
   assert.ok(sitemap.includes(`<loc>${canonicalPath}</loc>`), `${path} needs sitemap discovery`);
   assert.ok(llms.includes(`](${canonicalPath})`), `${path} needs llms.txt discovery`);
 }
-assert.match(intentGuides.get('guides/3d-printing-accessories.html'), /3D printing accessories ranked by usefulness[\s\S]*<ol>[\s\S]*Accessory type/);
 assert.match(directAnswer(intentGuides.get('guides/start-a-3d-printing-business.html')), /Seven 3D printing business ideas[\s\S]*<ol>/);
 assert.match(directAnswer(intentGuides.get('guides/3d-printing-for-dentists.html')), /Dental 3D printer options compared[\s\S]*Printer category/);
 assert.match(directAnswer(intentGuides.get('guides/3d-printing-jewelry.html')), /3D-printed jewelry in seven steps[\s\S]*<ol>/);

@@ -22,7 +22,7 @@ for (const location of entries.keys()) {
 }
 
 for (const [location, contentDate] of [
-  ['https://moorecode.com/', '2026-10-13'],
+  ['https://moorecode.com/', '2026-11-03'],
   ['https://moorecode.com/projects.html', '2026-10-13'],
   ['https://moorecode.com/hobbies.html', '2026-10-07'],
   ['https://moorecode.com/posthog-privacy.html', '2026-10-06'],
@@ -39,7 +39,7 @@ for (const [location, contentDate] of [
   ['https://moorecode.com/blog/3d-printing-metal-processes-compared.html', '2026-10-23'],
   ['https://moorecode.com/blog/3d-printing-filament-pla-petg-tpu.html', '2026-11-01'],
   ['https://moorecode.com/guides/3d-printing-at-home.html', '2026-11-01'],
-  ['https://moorecode.com/guides/3d-printing-accessories.html', '2026-10-28'],
+  ['https://moorecode.com/guides/3d-printing-accessories.html', '2026-11-03'],
   ['https://moorecode.com/guides/start-a-3d-printing-business.html', '2026-10-28'],
   ['https://moorecode.com/guides/3d-printing-for-dentists.html', '2026-11-03'],
   ['https://moorecode.com/guides/3d-printing-jewelry.html', '2026-10-27'],
@@ -54,6 +54,7 @@ for (const [location, contentDate] of [
 }
 
 for (const [location, expectedLastmod] of [
+  ['https://moorecode.com/', '2026-11-03'],
   ['https://moorecode.com/about.html', '2026-10-25'],
   ['https://moorecode.com/contact.html', '2026-10-25'],
   ['https://moorecode.com/calculators/3d-printing-price-calculator.html', '2026-10-25'],
@@ -66,6 +67,7 @@ for (const [location, expectedLastmod] of [
   ['https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html', '2026-11-03'],
   ['https://moorecode.com/blog/3d-printing-prototype-four-stage-test-plan.html', '2026-11-03'],
   ['https://moorecode.com/guides/3d-printing-at-home.html', '2026-11-01'],
+  ['https://moorecode.com/guides/3d-printing-accessories.html', '2026-11-03'],
   ['https://moorecode.com/guides/3d-printing-for-dentists.html', '2026-11-03'],
   ['https://moorecode.com/guides/carbon-3d-printing.html', '2026-10-31'],
 ]) {
