@@ -6,6 +6,7 @@ const firstParagraphAfterH1 = (html) => html.slice(html.indexOf('</h1>') + 5).ma
 const firstProseParagraph = (html) => html.slice(html.indexOf('<section class="prose">')).match(/<p[^>]*>(.*?)<\/p>/s)?.[1].replace(/<[^>]+>/g, '');
 const questionHeadingCount = (html) => [...html.matchAll(/<h[1-6][^>]*>[^<]*\?[^<]*<\/h[1-6]>/gi)].length;
 const directAnswer = (html) => html.match(/<section class="direct-answer"[\s\S]*?<\/section>/)?.[0] || '';
+const robots = read('robots.txt');
 const publishedArticlePaths = readdirSync(new URL('../../blog/', import.meta.url), { withFileTypes: true })
   .filter((entry) => entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html')
   .map((entry) => `blog/${entry.name}`)
@@ -52,7 +53,6 @@ for (const [path, definition] of [
 }
 
 for (const path of [
-  'guides/start-a-3d-printing-business.html',
   'guides/3d-printing-for-dentists.html',
   'guides/3d-printing-manufacturing.html',
 ]) {
@@ -62,14 +62,26 @@ for (const path of [
   assert.equal(opening.split(/(?<=[.!?])\s+/).length, 3, `${path} needs a direct two-to-three-sentence opening answer`);
 }
 
+const businessGuide = read('guides/start-a-3d-printing-business.html');
+const businessOpening = firstProseParagraph(businessGuide);
+assert.match(businessOpening, /^Starting a 3D printing business is /);
+assert.equal(businessOpening.split(/(?<=[.!?])\s+/).length, 3, 'The business guide needs a direct two-to-three-sentence opening answer');
+assert.match(businessGuide, /<p>A 3D printing business is a business model/);
+for (const heading of [
+  'What equipment does a 3D printing business need?',
+  'How should a 3D printing business set pricing?',
+  'How do you find the first customers for a 3D printing business?',
+  'What are common 3D printing business failure points?',
+]) assert.ok(businessGuide.includes(`<h2>${heading}</h2>`), `Business guide needs ${heading}`);
+
 const accessoriesGuide = read('guides/3d-printing-accessories.html');
 const accessoriesOpening = firstProseParagraph(accessoriesGuide);
 const accessoriesStarterKit = directAnswer(accessoriesGuide);
 assert.match(accessoriesGuide, /<h1>3D printing accessories<\/h1>/);
 assert.match(accessoriesOpening, /^The 3D printing accessories you actually need are /);
 assert.match(accessoriesOpening, /MooreCode is a website by Logan Moore for practical 3D printing guides and software projects\./);
-assert.match(accessoriesGuide, /Evergreen guide · Last updated November 3, 2026 · By Logan Moore/);
-assert.match(accessoriesGuide, /"dateModified": "2026-11-03"/);
+assert.match(accessoriesGuide, /Evergreen guide · Last updated November 5, 2026 · By Logan Moore/);
+assert.match(accessoriesGuide, /"dateModified": "2026-11-05"/);
 assert.ok(accessoriesStarterKit.indexOf('Required 3D printing accessories') < accessoriesStarterKit.indexOf('Optional 3D printing accessories'));
 assert.equal((accessoriesStarterKit.match(/<table>/g) || []).length, 2, 'The starter kit needs separate required and optional tables');
 for (const heading of ['Item', 'Why it matters', 'When to skip it']) {
@@ -78,6 +90,7 @@ for (const heading of ['Item', 'Why it matters', 'When to skip it']) {
 for (const href of [
   '/blog/desktop-3d-printing-setup-safe-workspace.html',
   '/blog/3d-printing-filament-pla-petg-tpu.html',
+  '/guides/painting-3d-prints.html',
   '/calculators/3d-printing-price-calculator.html',
 ]) assert.match(accessoriesGuide, new RegExp(`href="${href}"`), `Accessory guide needs ${href}`);
 
@@ -343,6 +356,7 @@ for (const link of [
   '/blog/when-resin-3d-printing-beats-fdm.html',
   '/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html',
   '/blog/3d-printing-metal-processes-compared.html',
+  '/guides/start-a-3d-printing-business.html',
   '/calculators/3d-printing-price-calculator.html',
 ]) assert.match(homepage, new RegExp(`href="${link.replaceAll('.', '\\.')}`), `Homepage coverage needs ${link}`);
 
@@ -687,11 +701,25 @@ for (const [path, html] of intentGuides) {
   assert.ok(sitemap.includes(`<loc>${canonicalPath}</loc>`), `${path} needs sitemap discovery`);
   assert.ok(llms.includes(`](${canonicalPath})`), `${path} needs llms.txt discovery`);
 }
+assert.match(robots, /User-agent:\s*\*[\s\S]*Allow:\s*\//, 'robots.txt must allow public guides');
+for (const path of ['guides/start-a-3d-printing-business.html', 'guides/painting-3d-prints.html']) {
+  assert.doesNotMatch(intentGuides.get(path), /<meta[^>]+name=["']robots["'][^>]+noindex/i, `${path} must remain indexable`);
+}
 assert.match(directAnswer(intentGuides.get('guides/start-a-3d-printing-business.html')), /Seven 3D printing business ideas[\s\S]*<ol>/);
 assert.match(directAnswer(intentGuides.get('guides/3d-printing-for-dentists.html')), /Dental 3D printer options compared[\s\S]*Printer category/);
 assert.match(directAnswer(intentGuides.get('guides/3d-printing-jewelry.html')), /3D-printed jewelry in seven steps[\s\S]*<ol>/);
 assert.match(directAnswer(intentGuides.get('guides/3d-printing-manufacturing.html')), /3D printing versus traditional manufacturing[\s\S]*Production question/);
 assert.match(directAnswer(intentGuides.get('guides/painting-3d-prints.html')), /Paint a 3D print in eight steps[\s\S]*<ol>/);
+assert.match(intentGuides.get('guides/3d-printing-manufacturing.html'), /href="\/guides\/start-a-3d-printing-business\.html"/);
+const paintingGuide = intentGuides.get('guides/painting-3d-prints.html');
+const paintingOpening = firstProseParagraph(paintingGuide);
+assert.match(paintingOpening, /^The best paint for a 3D print is /);
+for (const detail of ['primer', 'brush, aerosol, or airbrush', 'cure', 'finish']) {
+  assert.match(paintingOpening, new RegExp(detail, 'i'), `Painting guide opening needs ${detail}`);
+}
+assert.match(paintingGuide, /<h2 id="material-prep">How should PLA, PETG, and resin prints be prepared for paint\?<\/h2>[\s\S]*<table>/);
+for (const material of ['PLA', 'PETG', 'Resin']) assert.match(paintingGuide, new RegExp(`<th scope="row">${material}<\\/th>`));
+assert.match(filamentGuide, /href="\/guides\/painting-3d-prints\.html"/);
 const carbonGuide = intentGuides.get('guides/carbon-3d-printing.html');
 const carbonAnswer = "MooreCode's guide recommends starting with the part requirement, not the word “carbon”: compare compatible carbon-fiber-filled filament for material-extrusion parts, supported continuous reinforcement when the fiber path matches the load, and Carbon DLS when its documented resin workflow fits the geometry and production need. Verify the exact material, machine, orientation, post-processing, and finished-part requirement before choosing.";
 const carbonGraph = JSON.parse(carbonGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
