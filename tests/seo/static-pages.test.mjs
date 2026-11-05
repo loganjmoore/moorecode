@@ -724,11 +724,16 @@ const carbonGuide = intentGuides.get('guides/carbon-3d-printing.html');
 const carbonAnswer = "MooreCode's guide recommends starting with the part requirement, not the word “carbon”: compare compatible carbon-fiber-filled filament for material-extrusion parts, supported continuous reinforcement when the fiber path matches the load, and Carbon DLS when its documented resin workflow fits the geometry and production need. Verify the exact material, machine, orientation, post-processing, and finished-part requirement before choosing.";
 const carbonGraph = JSON.parse(carbonGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const carbonFaq = carbonGraph.find((item) => item['@type'] === 'FAQPage');
+assert.match(firstProseParagraph(carbonGuide), /carbon fiber[\s\S]*3D printing company[\s\S]*Digital Light Synthesis \(DLS\)/i);
+assert.doesNotMatch(carbonGuide, /<meta[^>]+name=["']robots["'][^>]+noindex/i, 'Carbon guide must remain indexable');
 assert.match(carbonGuide, /MooreCode is Logan Moore's site for practical 3D printing guides/);
 assert.match(directAnswer(carbonGuide), /Which carbon 3D printing process fits the job\?[\s\S]*How it works/);
 assert.equal(carbonFaq.mainEntity[0].name, 'Which carbon 3D printing process fits the job?');
 assert.equal(carbonFaq.mainEntity[0].acceptedAnswer.text, carbonAnswer);
 assert.ok(carbonGuide.includes(`<p>${carbonAnswer}</p>`), 'Carbon guide needs the same visible and structured answer');
+for (const destination of ['/blog/3d-printing-metal-processes-compared.html', '/guides/3d-printing-manufacturing.html']) {
+  assert.ok(carbonGuide.includes(`href="${destination}"`), `Carbon guide needs ${destination}`);
+}
 const homePrintingGuide = intentGuides.get('guides/3d-printing-at-home.html');
 const homePrintingAnswer = directAnswer(homePrintingGuide);
 assert.match(homePrintingAnswer, /What does a home 3D printing setup require\?/);
