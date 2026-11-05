@@ -33,7 +33,6 @@
 
 ## Blog
 
-- [Small 3D Printing Setup: Measure the Workbench First](https://moorecode.com/blog/small-3d-printing-setup-measure-workbench-first.html): Plan a small 3D printing setup by measuring the printer envelope, placing ventilation and tools, separating resin work, and testing the first run.
 - [3D Printer Rapid Prototyping: In-House or Outsource?](https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html): Use desktop FDM for fast fit checks. Outsource a prototype when its material, tolerance, finish, size, or inspection exceeds your printer.
 - [3D Printing Materials: Types, Properties & Uses](https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html): Compare thermoplastic filament, photopolymer resin, polymer powder, and metal 3D printing materials by properties, use cases, workflow, and tradeoffs.
 - [3D Printing Rates: Price a Small Job Step by Step](https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html): Calculate 3D printing rates from material, print time, electricity, labor, machine time, failures, and margin. Includes a two-part example.

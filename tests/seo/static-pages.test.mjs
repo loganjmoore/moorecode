@@ -154,7 +154,7 @@ const blogSchema = blogGraph.find((item) => item['@type'] === 'Blog');
 const blogPostIds = new Set(blogSchema.blogPost.map((item) => item['@id']));
 assert.match(blog, /<title>3D Printing Guides and Project Notes · MooreCode<\/title>/);
 assert.match(blog, /<h1>3D printing guides and project notes<\/h1>/);
-assert.match(blog, /The MooreCode blog is a collection of seventeen practical guides/);
+assert.match(blog, /The MooreCode blog is a collection of sixteen practical guides/);
 assert.equal((blog.match(/class="post-card"/g) || []).length, publishedArticlePaths.length);
 for (const path of publishedArticlePaths) {
   const url = `https://moorecode.com/${path}`;
@@ -168,10 +168,10 @@ const newestFeedLinks = [...feed.matchAll(/<item>[\s\S]*?<link>([^<]+)<\/link>[\
   .slice(0, 3)
   .map((match) => match[1]);
 assert.deepEqual(newestFeedLinks, [
-  'https://moorecode.com/blog/small-3d-printing-setup-measure-workbench-first.html',
   'https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html',
   'https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html',
-], 'The November 5 post must lead the feed before the November 1 and October 21 posts');
+  'https://moorecode.com/blog/3d-printing-rates-small-job-pricing.html',
+], 'The November 1 post must lead the feed before the October 21 posts');
 for (const [path, expectedTitle, expectedModified] of [
   ['blog/3d-printing-materials-after-pla-clamp-fails.html', '3D Printing Materials: Types, Properties & Uses', '2026-11-03'],
   ['blog/3d-printing-rates-small-job-pricing.html', '3D Printing Rates: Price a Small Job Step by Step', '2026-11-03'],
