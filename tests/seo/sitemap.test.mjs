@@ -45,7 +45,7 @@ for (const [location, contentDate] of [
   ['https://moorecode.com/guides/3d-printing-jewelry.html', '2026-11-04'],
   ['https://moorecode.com/guides/3d-printing-manufacturing.html', '2026-11-05'],
   ['https://moorecode.com/guides/painting-3d-prints.html', '2026-11-05'],
-  ['https://moorecode.com/guides/carbon-3d-printing.html', '2026-10-31'],
+  ['https://moorecode.com/guides/carbon-3d-printing.html', '2026-11-05'],
   ['https://moorecode.com/blog/what-is-fdm-3d-printing.html', '2026-11-01'],
   ['https://moorecode.com/blog/when-resin-3d-printing-beats-fdm.html', '2026-11-01'],
 ]) {
@@ -72,7 +72,7 @@ for (const [location, expectedLastmod] of [
   ['https://moorecode.com/guides/3d-printing-for-dentists.html', '2026-11-03'],
   ['https://moorecode.com/guides/3d-printing-manufacturing.html', '2026-11-05'],
   ['https://moorecode.com/guides/painting-3d-prints.html', '2026-11-05'],
-  ['https://moorecode.com/guides/carbon-3d-printing.html', '2026-10-31'],
+  ['https://moorecode.com/guides/carbon-3d-printing.html', '2026-11-05'],
 ]) {
   assert.equal(entries.get(location), expectedLastmod, `${location} lastmod must match its verified public-content change`);
 }

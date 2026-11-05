@@ -35,7 +35,7 @@ try {
       assert.equal(await page.locator('h1').count(), 1);
       assert.equal(await page.locator('h1').innerText(), 'What is carbon 3D printing?');
       assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'), 'https://moorecode.com/guides/carbon-3d-printing.html');
-      assert.match(await page.locator('.lede').innerText(), /carbon fiber[\s\S]*Carbon DLS/);
+      assert.match(await page.locator('.lede').innerText(), /carbon fiber[\s\S]*3D printing company[\s\S]*Digital Light Synthesis \(DLS\)/i);
       assert.match(await page.locator('.prose').innerText(), /MooreCode is Logan Moore's site/);
       const answer = page.locator('.direct-answer');
       const graph = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent())['@graph'];
@@ -57,6 +57,10 @@ try {
       await foundation.focus();
       await page.keyboard.press('Enter');
       await page.waitForURL(origin + '/blog/what-is-fdm-3d-printing.html');
+      assert.equal(await page.locator('h1').count(), 1);
+      await page.goBack();
+      await page.getByRole('link', { name: 'metal 3D printing processes', exact: true }).click();
+      await page.waitForURL(origin + '/blog/3d-printing-metal-processes-compared.html');
       assert.equal(await page.locator('h1').count(), 1);
       await page.goBack();
       await page.getByRole('link', { name: '3D printing manufacturing guide', exact: true }).click();
