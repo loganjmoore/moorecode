@@ -7,6 +7,13 @@
     <language>en-us</language>
     <atom:link href="https://moorecode.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Small 3D Printing Setup: Measure the Workbench First</title>
+      <link>https://moorecode.com/blog/small-3d-printing-setup-measure-workbench-first.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/small-3d-printing-setup-measure-workbench-first.html</guid>
+      <pubDate>Thu, 05 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Map the printer's full operating envelope, ventilation, clean tools, material storage, and first supervised test before a long print.</description>
+    </item>
+    <item>
       <title>3D Printer Rapid Prototyping: In-House or Outsource?</title>
       <link>https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html</link>
       <guid isPermaLink="true">https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html</guid>
