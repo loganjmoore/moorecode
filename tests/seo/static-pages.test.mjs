@@ -21,6 +21,17 @@ const intentGuidePaths = [
   'guides/painting-3d-prints.html',
   'guides/carbon-3d-printing.html',
 ];
+const aiVisibilityPaths = [
+  'index.html',
+  'guides/3d-printing-accessories.html',
+  'guides/start-a-3d-printing-business.html',
+  'guides/3d-printing-for-dentists.html',
+  'guides/3d-printing-manufacturing.html',
+  'blog/3d-printing-metal-processes-compared.html',
+  'calculators/3d-printing-price-calculator.html',
+  'blog/3d-printing-rates-small-job-pricing.html',
+  'guides/3d-printing-at-home.html',
+];
 
 for (const path of [
   'index.html', 'projects.html', 'consulting.html', 'hobbies.html', 'youtube.html', 'about.html', 'contact.html',
@@ -39,6 +50,11 @@ for (const path of [
   ...intentGuidePaths,
 ]) {
   assert.match(firstParagraphAfterH1(read(path)), /\bis (?:a|an|the)\b/i, `${path} needs a title-adjacent entity definition`);
+}
+
+for (const path of aiVisibilityPaths) {
+  const body = read(path).split('</head>')[1];
+  assert.match(body, /<p[^>]*>[^<]*\bMooreCode is\b/i, `${path} needs a visible MooreCode entity definition`);
 }
 
 for (const [path, definition] of [
