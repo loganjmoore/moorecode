@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "verifier": "seo-worker-v1",
+  "postFile": "blog/can-a-3d-printer-print-another-3d-printer-checklist.html",
+  "artifact": ".seo-evidence/bf893030e16947e5f2b45fed.json",
+  "verifiedAt": "2026-11-16T09:12:33.649Z",
+  "sourceFiles": [
+    {
+      "path": "blog/3d-printing-rates-small-job-pricing.html",
+      "sha256": "af36c546e1936e937d69f7fcb4597d5937aa9660531b7a74a38f97f132ee3d98",
+      "excerpt": "<tr><td>Material</td><td>2 parts × 100 g ÷ 1,000 g × $25</td><td>$5.00</td></tr>"
+    }
+  ],
+  "example": {
+    "description": "Multiply the tracked pilot-batch quantity by material per part.",
+    "operation": "product",
+    "inputs": [
+      2,
+      100
+    ],
+    "result": 200,
+    "excerpt": "The MooreCode calculator's tracked example uses 2 parts at 100 g per part, so the batch uses 2 × 100 = 200 g of material.",
+    "reproducedBy": "worker arithmetic"
+  },
+  "references": [
+    {
+      "url": "https://github.com/revarbat/snappy-reprap/wiki/",
+      "status": 200,
+      "sha256": "71ebe74a492fc3e1537cca42a7c48773c8d00afa37e37efe0c531bd2bc0fe819",
+      "sourceExcerpt": "A cheap, snap-together, nearly screw-less self-replicating 3D printer (reprap) design that minimizes use of non-printed parts.",
+      "supportingClaim": "The Snappy designer describes the project as a nearly screw-less self-replicating printer that minimizes non-printed parts.",
+      "primarySourceRationale": "The Snappy designer's official project wiki is publicly accessible and returns the cited source text directly in the final page."
+    }
+  ],
+  "claimRationale": "The tracked MooreCode source supports the 2 × 100 = 200 g multiplication. The designer's project wiki supports only that Snappy minimizes non-printed parts; it does not prove every component is printable, quantify the current printed-parts share, or show that the example mass fits Snappy or another design."
+}

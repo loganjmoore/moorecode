@@ -33,6 +33,9 @@
 
 ## Blog
 
+- [Can a 3D Printer Print Another 3D Printer? A Checklist](https://moorecode.com/blog/can-a-3d-printer-print-another-3d-printer-checklist.html): Use this checklist to build a 3D printable 3D printer: verify files, printed parts, purchased hardware, firmware, wiring, calibration, and spares.
+- [Common Build Mistakes in a 3D-Printed 3D Printer](https://moorecode.com/blog/common-build-mistakes-3d-printed-3d-printer.html): Avoid common 3D-printed 3D printer mistakes: mixed revisions, wrong polymers, weak orientation, distorted holes, trapped hardware, and missing spares.
+- [High-Speed 3D Printers: Compare the Numbers That Matter](https://moorecode.com/blog/high-speed-3d-printer-numbers-compared.html): Compare a high-speed 3D printer by print time, acceleration, volumetric flow, cooling, quality, and repeatability instead of top speed alone.
 - [Small 3D Printing Setup: Measure the Workbench First](https://moorecode.com/blog/small-3d-printing-setup-measure-workbench-first.html): Plan a small 3D printing setup by measuring the printer envelope, placing ventilation and tools, separating resin work, and testing the first run.
 - [3D Printer Rapid Prototyping: In-House or Outsource?](https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html): Use desktop FDM for fast fit checks. Outsource a prototype when its material, tolerance, finish, size, or inspection exceeds your printer.
 - [3D Printing Materials: Types, Properties & Uses](https://moorecode.com/blog/3d-printing-materials-after-pla-clamp-fails.html): Compare thermoplastic filament, photopolymer resin, polymer powder, and metal 3D printing materials by properties, use cases, workflow, and tradeoffs.

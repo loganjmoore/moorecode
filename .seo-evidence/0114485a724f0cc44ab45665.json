@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "verifier": "seo-worker-v1",
+  "postFile": "blog/common-build-mistakes-3d-printed-3d-printer.html",
+  "artifact": ".seo-evidence/0114485a724f0cc44ab45665.json",
+  "verifiedAt": "2026-11-16T09:12:33.886Z",
+  "sourceFiles": [
+    {
+      "path": "blog/3d-printing-rates-small-job-pricing.html",
+      "sha256": "af36c546e1936e937d69f7fcb4597d5937aa9660531b7a74a38f97f132ee3d98",
+      "excerpt": "<tr><td>Direct job cost</td><td>$35.144 + $3.5144</td><td>$38.6584</td></tr>"
+    }
+  ],
+  "example": {
+    "description": "Subtract the tracked subtotal from direct cost to isolate the allowance.",
+    "operation": "subtract",
+    "inputs": [
+      38.6584,
+      35.144
+    ],
+    "result": 3.514400000000002,
+    "excerpt": "The difference is $38.6584 - $35.144 = $3.5144.",
+    "reproducedBy": "worker arithmetic"
+  },
+  "references": [
+    {
+      "url": "https://docs.vorondesign.com/materials.html",
+      "status": 200,
+      "sha256": "a01a664110459861e73d7a641b58dc5ff98562fd0ac92de60cf6b22d5d4722b3",
+      "sourceExcerpt": "It is the primary recommended material for Voron printers due to the high temperature rating and moderate ductility.",
+      "supportingClaim": "Voron's material guide names ABS as its primary recommended material because of its heat rating and moderate ductility.",
+      "primarySourceRationale": "Voron Design publishes this official materials guide, and the public page returns the cited sentence directly without login, consent, or a response-size failure."
+    }
+  ],
+  "claimRationale": "The tracked MooreCode source supports $38.6584 - $35.144 = $3.5144. Voron's source supports only its material recommendation for Voron printed parts; it does not establish a universal failure rate, explain why a part failed, or make ABS the correct material for another design."
+}

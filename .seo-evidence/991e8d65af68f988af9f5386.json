@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "verifier": "seo-worker-v1",
+  "postFile": "blog/high-speed-3d-printer-numbers-compared.html",
+  "artifact": ".seo-evidence/991e8d65af68f988af9f5386.json",
+  "verifiedAt": "2026-11-16T09:12:34.274Z",
+  "sourceFiles": [
+    {
+      "path": "blog/3d-printing-rates-small-job-pricing.html",
+      "sha256": "af36c546e1936e937d69f7fcb4597d5937aa9660531b7a74a38f97f132ee3d98",
+      "excerpt": "<tr><td>Electricity</td><td>2 × 4 hours × 120 W ÷ 1,000 × $0.15/kWh</td><td>$0.144</td></tr>"
+    }
+  ],
+  "example": {
+    "description": "Multiply tracked quantity, print hours per part, and average power to obtain batch watt-hours.",
+    "operation": "product",
+    "inputs": [
+      2,
+      4,
+      120
+    ],
+    "result": 960,
+    "excerpt": "MooreCode's tracked calculator example uses 2 parts at 4 hours each and 120 W average power, so its source-backed batch workload is 2 × 4 × 120 = 960 watt-hours, or 0.96 kWh after dividing by 1,000.",
+    "reproducedBy": "worker arithmetic"
+  },
+  "references": [
+    {
+      "url": "https://www.klipper3d.org/Resonance_Compensation.html",
+      "status": 200,
+      "sha256": "8ef721c0f1952d449d98d5d59f23dcea96c0be5650c558b996a5d26f08e82eae",
+      "sourceExcerpt": "In this picture, the acceleration increases left to right, and the gap starts to grow starting from 3500 mm/sec^2 (5-th band from the left). So the good value for max_accel = 3000 (mm/sec^2) in this case to avoid the excessive smoothing.",
+      "supportingClaim": "Klipper's official resonance guide says its example's gap begins widening at 3,500 mm/s² and selects 3,000 mm/s² to avoid excessive smoothing.",
+      "primarySourceRationale": "Klipper publishes this official documentation page, and the final public page returns the cited tuning guidance directly."
+    }
+  ],
+  "claimRationale": "The tracked MooreCode source supports 2 × 4 × 120 = 960 Wh and 960 ÷ 1,000 = 0.96 kWh. Klipper's source supports only its documented tuning method and example limits; neither source proves a particular printer's speed, energy use, or output quality."
+}

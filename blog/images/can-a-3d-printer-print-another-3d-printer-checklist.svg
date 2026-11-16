@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">3D printable 3D printer checklist</title>
+  <desc id="desc">An exploded machine diagram separates printable brackets from purchased motors, electronics, wiring, and the build plate.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b0c10"/><stop offset="1" stop-color="#1b1e26"/></linearGradient><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#f5b942"/></marker></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="70" y="82" fill="#f5b942" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="3">3D PRINTABLE 3D PRINTER</text>
+  <text x="70" y="146" fill="#e8eaef" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800">What prints, what does not</text>
+  <g transform="translate(70 205)" fill="none" stroke-linejoin="round">
+    <rect width="640" height="320" rx="20" fill="#14161c" stroke="#343946" stroke-width="3"/>
+    <path d="M125 250h390M170 220h300V65H170zM210 190l110-88 110 88M320 66V30" stroke="#e8eaef" stroke-width="10"/>
+    <path d="M128 250l42-30M512 250l-42-30" stroke="#e07a5f" stroke-width="18"/>
+    <circle cx="170" cy="220" r="24" stroke="#f5b942" stroke-width="10"/><circle cx="470" cy="220" r="24" stroke="#f5b942" stroke-width="10"/>
+    <path d="M535 90h70M535 145h70M535 200h70" stroke="#f5b942" stroke-width="5" marker-end="url(#a)"/>
+    <text x="320" y="296" text-anchor="middle" fill="#9aa1ad" stroke="none" font-family="Inter,Arial,sans-serif" font-size="17">PRINTABLE STRUCTURE + DUCTS + CLAMPS</text>
+  </g>
+  <g transform="translate(760 205)" font-family="Inter,Arial,sans-serif">
+    <rect width="370" height="320" rx="20" fill="#14161c" stroke="#343946" stroke-width="3"/>
+    <text x="32" y="50" fill="#e07a5f" font-size="17" font-weight="700">PURCHASED SYSTEMS</text>
+    <g fill="#1b1e26" stroke="#f5b942" stroke-width="3"><rect x="32" y="75" width="132" height="72" rx="12"/><rect x="205" y="75" width="132" height="72" rx="12"/><rect x="32" y="180" width="132" height="72" rx="12"/><rect x="205" y="180" width="132" height="72" rx="12"/></g>
+    <g fill="#e8eaef" font-size="17" text-anchor="middle"><text x="98" y="118">MOTORS</text><text x="271" y="118">CONTROL</text><text x="98" y="223">HEATERS</text><text x="271" y="223">WIRING</text></g>
+    <text x="185" y="290" text-anchor="middle" fill="#9aa1ad" font-size="16">One release. One BOM. One configuration.</text>
+  </g>
+  <text x="70" y="585" fill="#9aa1ad" font-family="Inter,Arial,sans-serif" font-size="18">A checklist for files, parts, hardware, firmware, and commissioning.</text>
+</svg>
