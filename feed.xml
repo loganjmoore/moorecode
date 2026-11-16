@@ -7,6 +7,27 @@
     <language>en-us</language>
     <atom:link href="https://moorecode.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Can a 3D Printer Print Another 3D Printer? A Checklist</title>
+      <link>https://moorecode.com/blog/can-a-3d-printer-print-another-3d-printer-checklist.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/can-a-3d-printer-print-another-3d-printer-checklist.html</guid>
+      <pubDate>Mon, 16 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Check the release, printed parts, purchased hardware, firmware, wiring, calibration, and spares before building a printable printer.</description>
+    </item>
+    <item>
+      <title>Common Build Mistakes in a 3D-Printed 3D Printer</title>
+      <link>https://moorecode.com/blog/common-build-mistakes-3d-printed-3d-printer.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/common-build-mistakes-3d-printed-3d-printer.html</guid>
+      <pubDate>Mon, 16 Nov 2026 11:00:00 +0000</pubDate>
+      <description>Diagnose mixed revisions, wrong polymers, weak orientation, distorted holes, excess fastener load, and poor service planning.</description>
+    </item>
+    <item>
+      <title>High-Speed 3D Printers: Compare the Numbers That Matter</title>
+      <link>https://moorecode.com/blog/high-speed-3d-printer-numbers-compared.html</link>
+      <guid isPermaLink="true">https://moorecode.com/blog/high-speed-3d-printer-numbers-compared.html</guid>
+      <pubDate>Mon, 16 Nov 2026 10:00:00 +0000</pubDate>
+      <description>Compare print time, acceleration, hotend flow, cooling, motion control, quality, and repeatability instead of top speed alone.</description>
+    </item>
+    <item>
       <title>Small 3D Printing Setup: Measure the Workbench First</title>
       <link>https://moorecode.com/blog/small-3d-printing-setup-measure-workbench-first.html</link>
       <guid isPermaLink="true">https://moorecode.com/blog/small-3d-printing-setup-measure-workbench-first.html</guid>
