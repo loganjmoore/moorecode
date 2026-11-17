@@ -100,6 +100,32 @@
 <section class="page-head">
   <h1>3D printing guides and project notes</h1>
   <p class="lead">The MooreCode blog is a collection of twenty practical guides from a solo developer and maker. Seventeen cover 3D-printing processes, files, workspaces, materials, pricing, and projects; the other three cover software pricing, rules, and tools with numbers checked against named sources.</p>
+  <section class="filament-hub" aria-labelledby="filament-types">
+    <h2 id="filament-types">3D printing filament types at a glance</h2>
+    <p>Use this category table to shortlist a filament by the job, then confirm the exact spool maker's profile for your printer. Temperature ranges vary by brand, blend, printer, and hot end, so the settings column names the setup to verify instead of inventing universal numbers.</p>
+    <div class="filament-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Filament type</th>
+            <th scope="col">Typical properties</th>
+            <th scope="col">Print setup to verify</th>
+            <th scope="col">Best uses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row"><a href="/blog/3d-printing-filament-pla-petg-tpu.html">PLA</a></th><td>Rigid, detailed, approachable; limited around sustained heat</td><td>Maker's nozzle and bed temperatures; part cooling</td><td>Models, organizers, signs, and visual prototypes</td></tr>
+          <tr><th scope="row"><a href="/blog/3d-printing-filament-pla-petg-tpu.html">PETG</a></th><td>Tough layer bonding and moderate-heat performance; can string</td><td>Drying guidance, retraction, cooling, and build-surface release</td><td>Brackets, holders, boxes, and utility parts</td></tr>
+          <tr><th scope="row"><a href="/blog/3d-printing-filament-pla-petg-tpu.html#tpu-filament">TPU</a></th><td>Flexible and impact-absorbing</td><td>Shore hardness, controlled feed path, and slower print profile</td><td>Feet, seals, grips, bumpers, and sleeves</td></tr>
+          <tr><th scope="row"><a href="/blog/what-is-fdm-3d-printing.html">ABS</a></th><td>Tough and more heat-tolerant than PLA; prone to warping</td><td>Enclosure, ventilation, bed adhesion, and maker temperatures</td><td>Functional housings, fixtures, and workshop parts</td></tr>
+          <tr><th scope="row"><a href="/blog/what-is-fdm-3d-printing.html">ASA</a></th><td>Weather-resistant functional plastic with ABS-like printing demands</td><td>Enclosure, ventilation, bed adhesion, and maker temperatures</td><td>Outdoor housings, mounts, and exposed fixtures</td></tr>
+          <tr><th scope="row"><a href="/blog/what-is-fdm-3d-printing.html">Nylon</a></th><td>Tough and wear-resistant; moisture-sensitive</td><td>Drying and dry storage, hot-end capability, and bed surface</td><td>Gears, hinges, clips, and durable moving parts</td></tr>
+          <tr><th scope="row"><a href="/blog/what-is-fdm-3d-printing.html">PC</a></th><td>Rigid, tough, and heat-resistant; demanding to print</td><td>Printer temperature limits, enclosure, dry storage, and adhesion</td><td>High-load fixtures, guards, and heat-exposed prototypes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="filament-hub-link"><a href="/blog/3d-printing-filament-pla-petg-tpu.html">Compare PLA, PETG, and TPU in detail ›</a></p>
+  </section>
   <nav class="guide-map" aria-labelledby="printing-guide-selector">
     <h2 id="printing-guide-selector">Start with the 3D printing guide that matches your job</h2>
     <p>These are ranked by the question that usually has to be answered first. Each destination is a focused guide or tool, not a section buried inside this index.</p>
@@ -118,54 +144,6 @@
       <li><a href="/blog/best-3d-printing-websites-files-2026.html">Find 3D-printing files</a> — current model libraries compared by use.</li>
     </ol>
   </nav>
-  <section class="filament-hub" aria-labelledby="filament-types">
-    <h2 id="filament-types">3D printing filament types at a glance</h2>
-    <p>Start with the job the part must do, then check that your printer, nozzle, build surface, and ventilation support the material. These six categories organize the material choices mentioned across MooreCode's guides.</p>
-    <div class="filament-table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Filament type</th>
-            <th scope="col">Typical properties</th>
-            <th scope="col">Typical uses</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"><a href="/blog/3d-printing-filament-pla-petg-tpu.html">PLA</a></th>
-            <td>Rigid, detailed, and approachable for first prints; limited around sustained heat</td>
-            <td>Models, organizers, signs, and visual prototypes</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/blog/3d-printing-filament-pla-petg-tpu.html">PETG</a></th>
-            <td>Tougher layer bonding and better moderate-heat performance than ordinary PLA; can string</td>
-            <td>Brackets, holders, boxes, and utility parts</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/blog/3d-printing-filament-pla-petg-tpu.html#tpu-filament">TPU</a></th>
-            <td>Flexible and impact-absorbing; usually needs slower printing and a controlled feed path</td>
-            <td>Feet, seals, grips, bumpers, and protective sleeves</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/blog/what-is-fdm-3d-printing.html">ABS</a></th>
-            <td>Tough and more heat-tolerant than PLA; needs careful temperature, enclosure, and ventilation planning</td>
-            <td>Functional housings, fixtures, and workshop parts</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/blog/what-is-fdm-3d-printing.html">Nylon</a></th>
-            <td>Tough and wear-resistant; moisture control and printer capability matter</td>
-            <td>Gears, hinges, clips, and durable moving parts</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/blog/what-is-fdm-3d-printing.html">Specialty</a></th>
-            <td>Filled, support, or decorative blends whose behavior depends on the base plastic and additives</td>
-            <td>Stiff jigs, soluble supports, visual finishes, and material-specific experiments</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="filament-hub-link"><a href="/blog/3d-printing-filament-pla-petg-tpu.html">Compare PLA, PETG, and TPU in detail ›</a></p>
-  </section>
 </section>
 
 <nav class="topic-groups" aria-label="Articles by topic">
@@ -410,7 +388,7 @@
       <img src="/blog/images/simple-invoicing-app-pricing-service-businesses.png" loading="lazy" width="1200" height="630" alt="Cover for a post on invoicing app pricing for service businesses." />
     </a>
     <div>
-      <h2><a href="/blog/simple-invoicing-app-pricing-service-businesses.html">Invoicing app pricing for service businesses, compared</a></h2>
+      <h2><a href="/blog/simple-invoicing-app-pricing-service-businesses.html">Billing &amp; invoicing software pricing for service businesses</a></h2>
       <p>Five invoicing tools compared on plans, free-plan limits, and what 60 invoices a month cost on each.</p>
       <a class="arrow" href="/blog/simple-invoicing-app-pricing-service-businesses.html">Read the post ›</a>
     </div>
