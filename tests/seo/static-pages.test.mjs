@@ -482,6 +482,8 @@ const calculator = read('calculators/3d-printing-price-calculator.html');
 const calculatorTitle = calculator.match(/<title>([^<]+)<\/title>/)[1].replaceAll('&amp;', '&');
 assert.ok(calculatorTitle.length < 60, `Calculator title must be under 60 characters, got ${calculatorTitle.length}`);
 assert.ok(calculatorTitle.startsWith('3D Print Cost & Price Calculator'));
+assert.match(calculator, /href="\/blog\/3d-printing-rates-small-job-pricing\.html">3D printing rates guide<\/a>/);
+assert.match(read('guides/start-a-3d-printing-business.html'), /href="\/blog\/3d-printing-rates-small-job-pricing\.html">calculating 3D printing rates for a small job<\/a>/);
 assert.match(calculator, /This free browser tool totals your editable/);
 assert.match(calculator, /<link rel="canonical" href="https:\/\/moorecode\.com\/calculators\/3d-printing-price-calculator\.html"/);
 for (const input of ['quantity', 'materialGrams', 'printHours', 'spoolPrice', 'spoolWeight', 'printerWatts', 'energyRate', 'laborHours', 'laborRate', 'machineRate', 'otherCost', 'failureRate', 'pricingPercentage']) {
@@ -760,6 +762,7 @@ for (const destination of ['/blog/desktop-3d-printing-setup-safe-workspace.html'
 assert.match(homePrintingGuide, /Eight useful first projects for home 3D printing[\s\S]*<ol>/);
 
 const invoicingGuide = read('blog/simple-invoicing-app-pricing-service-businesses.html');
+assert.match(invoicingGuide, /<title>Invoicing Software Pricing for Service Businesses \(2026\)<\/title>/);
 assert.match(invoicingGuide, /Assessment method and date:/);
 assert.match(invoicingGuide, /checked all five publishers' primary pricing or help pages on November 17, 2026/);
 assert.match(invoicingGuide, /The example is an illustrative calculation, not a quote/);
