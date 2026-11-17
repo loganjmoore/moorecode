@@ -190,7 +190,7 @@ assert.deepEqual(newestFeedLinks, [
 ], 'The three November 16 posts must lead the feed in requested order');
 for (const [path, expectedTitle, expectedModified] of [
   ['blog/3d-printing-materials-after-pla-clamp-fails.html', '3D Printing Materials: Types, Properties & Uses', '2026-11-03'],
-  ['blog/3d-printing-rates-small-job-pricing.html', '3D Printing Rates: Price a Small Job Step by Step', '2026-11-03'],
+  ['blog/3d-printing-rates-small-job-pricing.html', '3D Printing Price Calculator: Estimate Rates & Margin', '2026-11-17'],
 ]) {
   const article = read(path);
   const title = decodeHtml(article.match(/<title>([^<]+)<\/title>/)?.[1] || '');
@@ -761,8 +761,8 @@ assert.match(homePrintingGuide, /Eight useful first projects for home 3D printin
 
 const invoicingGuide = read('blog/simple-invoicing-app-pricing-service-businesses.html');
 assert.match(invoicingGuide, /Assessment method and date:/);
-assert.match(invoicingGuide, /checked these plans on October 13, 2026/);
-assert.match(invoicingGuide, /The 60-invoice business and its per-invoice results are illustrative calculations, not quotes/);
+assert.match(invoicingGuide, /checked all five publishers' primary pricing or help pages on November 17, 2026/);
+assert.match(invoicingGuide, /The example is an illustrative calculation, not a quote/);
 
 const resinGuide = read('blog/when-resin-3d-printing-beats-fdm.html');
 const resinSchemas = JSON.parse(resinGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
