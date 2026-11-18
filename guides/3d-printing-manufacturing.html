@@ -11,7 +11,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"3D Printing in Manufacturing: Process and Uses","description":"Learn how 3D printing works as a manufacturing process, compare technologies and materials, and decide where additive or traditional production fits.","url":"https://moorecode.com/guides/3d-printing-manufacturing.html","datePublished":"2026-10-27","dateModified":"2026-11-05","author":{"@type":"Person","name":"Logan Moore","url":"https://moorecode.com/"}}</script>
 <script src="/navigation.js" defer></script><script defer src="/posthog-web.js"></script>
 </head>
-<body>
+<body class="worksheet-guide">
 <header class="nav"><a class="brand" href="/"><span class="brand-mark">M</span><span class="brand-text">moorecode</span></a><button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="navlinks" aria-expanded="false"><span></span><span></span><span></span></button><nav class="nav-links" id="navlinks"><a href="/">Home</a><a href="/projects.html">Projects</a><a href="/consulting.html">Consulting</a><a href="/hobbies.html">Hobbies</a><a href="/youtube.html">YouTube</a><a href="/about.html">About</a><a href="/blog/" class="active">Blog</a><a href="/contact.html">Contact</a></nav></header>
 <main><article>
 <header class="post-head"><p class="post-meta">Evergreen guide · Updated November 5, 2026 · By Logan Moore</p><h1>What is 3D printing in manufacturing?</h1></header>
@@ -32,6 +32,57 @@
     </table>
     <p>Related: <a href="/blog/3d-printing-metal-processes-compared.html">compare metal 3D printing processes</a> and <a href="/guides/carbon-3d-printing.html">choose between carbon-fiber printing and Carbon DLS</a>.</p>
   </section>
+
+  <section class="decision-worksheet print-worksheet" aria-labelledby="part-screening-brief">
+    <h2 id="part-screening-brief">Part-screening brief: print, outsource, or use another process</h2>
+    <p>Fill in the evidence before selecting a process. The answer cells are editable in the browser, or you can leave them blank and write on the printed copy.</p>
+    <div class="worksheet-actions">
+      <button type="button" onclick="window.print()">Print this worksheet</button>
+    </div>
+    <table class="worksheet-fields">
+      <thead><tr><th scope="col">Screening field</th><th scope="col">Requirement or evidence</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Part function</th><td class="worksheet-blank" contenteditable="true" aria-label="Part function"></td></tr>
+        <tr><th scope="row">Revision stage</th><td class="worksheet-blank" contenteditable="true" aria-label="Revision stage"></td></tr>
+        <tr><th scope="row">Quantity now and later</th><td class="worksheet-blank" contenteditable="true" aria-label="Quantity now and later"></td></tr>
+        <tr><th scope="row">Material requirement</th><td class="worksheet-blank" contenteditable="true" aria-label="Material requirement"></td></tr>
+        <tr><th scope="row">Load and environment</th><td class="worksheet-blank" contenteditable="true" aria-label="Load and environment"></td></tr>
+        <tr><th scope="row">Tolerance and finish</th><td class="worksheet-blank" contenteditable="true" aria-label="Tolerance and finish"></td></tr>
+        <tr><th scope="row">Inspection method</th><td class="worksheet-blank" contenteditable="true" aria-label="Inspection method"></td></tr>
+        <tr><th scope="row">Deadline</th><td class="worksheet-blank" contenteditable="true" aria-label="Deadline"></td></tr>
+        <tr><th scope="row">Geometry reason for additive manufacturing</th><td class="worksheet-blank" contenteditable="true" aria-label="Geometry reason for additive manufacturing"></td></tr>
+        <tr><th scope="row">Required post-processing</th><td class="worksheet-blank" contenteditable="true" aria-label="Required post processing"></td></tr>
+        <tr><th scope="row">Does a qualified process already exist?</th><td class="worksheet-blank" contenteditable="true" aria-label="Whether a qualified process already exists"></td></tr>
+        <tr><th scope="row">Final decision<br /><small>Prototype in-house / outsource additive / evaluate machining, molding, forming, or casting / stop for missing evidence</small></th><td class="worksheet-blank" contenteditable="true" aria-label="Final process decision"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="worked-example" aria-labelledby="fixture-example">
+      <h3 id="fixture-example">Fictional worked example: assembly fixture fit check</h3>
+      <p><strong>This is not a customer result.</strong> The fixture exists only to show how a team could screen a part whose purpose is to validate fit and task time. Costs and performance results stay blank until the team measures them.</p>
+      <table>
+        <thead><tr><th scope="col">Screening field</th><th scope="col">Fictional example response</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Function and stage</th><td>Early assembly fixture used to locate two existing components while an operator checks access, fit, and the steps in the task.</td></tr>
+          <tr><th scope="row">Quantity and requirements</th><td>One prototype now; later quantity is undecided. Material, load, environment, tolerance, finish, deadline, and required post-processing must be confirmed by the team.</td></tr>
+          <tr><th scope="row">Inspection</th><td>Test with the real components, record whether each interface fits without forcing, and time the defined assembly task. Record the result rather than assuming an improvement.</td></tr>
+          <tr><th scope="row">Decision</th><td>Prototype in-house only if the available process can represent the fit and handling question. Stop for missing evidence if load or environment becomes part of the test; compare outside additive or another process when those requirements are defined.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prototype-request" aria-labelledby="prototype-request-checklist">
+      <h3 id="prototype-request-checklist">What to send with a prototype request</h3>
+      <ul>
+        <li>The revision-controlled model and a drawing that marks critical interfaces.</li>
+        <li>The part function, quantity, material and finish requirements, deadline, and intended test.</li>
+        <li>The pass/fail rule, inspection method, and any evidence from an earlier attempt.</li>
+      </ul>
+      <p><a class="resource-link" href="/resources/prototype-brief.html">Open the printable prototype brief</a> to organize those details without signup.</p>
+    </div>
+  </section>
+
+  <p class="intent-cta"><a href="/consulting.html">Need help designing a product or prototype workflow? Discuss the software workflow.</a></p>
 
   <h2>How the manufacturing workflow works</h2>
   <ol>
