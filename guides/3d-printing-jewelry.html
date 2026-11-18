@@ -11,7 +11,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Make 3D-Printed Jewelry: Design to Finish","description":"Plan the design, choose resin or filament, prepare a castable master, and finish the final piece.","url":"https://moorecode.com/guides/3d-printing-jewelry.html","datePublished":"2026-10-27","dateModified":"2026-11-04","author":{"@type":"Person","name":"Logan Moore","url":"https://moorecode.com/"}}</script>
 <script src="/navigation.js" defer></script><script defer src="/posthog-web.js"></script>
 </head>
-<body>
+<body class="worksheet-guide">
 <header class="nav"><a class="brand" href="/"><span class="brand-mark">M</span><span class="brand-text">moorecode</span></a><button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="navlinks" aria-expanded="false"><span></span><span></span><span></span></button><nav class="nav-links" id="navlinks"><a href="/">Home</a><a href="/projects.html">Projects</a><a href="/consulting.html">Consulting</a><a href="/hobbies.html">Hobbies</a><a href="/youtube.html">YouTube</a><a href="/about.html">About</a><a href="/blog/" class="active">Blog</a><a href="/contact.html">Contact</a></nav></header>
 <main><article>
 <header class="post-head"><p class="post-meta">Evergreen guide · Updated November 4, 2026 · By Logan Moore</p><h1>How to make 3D-printed jewelry</h1></header>
@@ -40,6 +40,48 @@
       <tr><td>Castable printed master</td><td>Pattern for a qualified investment and casting workflow</td><td>Transfers detailed digital geometry into a metal-production path</td><td>Pattern material, preparation, investment, burnout, and casting must work as one system</td></tr>
     </tbody>
   </table>
+
+  <section class="decision-worksheet print-worksheet" aria-labelledby="jewelry-design-review">
+    <h2 id="jewelry-design-review">3D-printed jewelry design review worksheet</h2>
+    <p>Complete this brief before choosing settings or committing to a full build. The answer cells are editable in the browser, or you can leave them blank and write on the printed copy.</p>
+    <div class="worksheet-actions">
+      <button type="button" onclick="window.print()">Print this worksheet</button>
+    </div>
+    <table class="worksheet-fields">
+      <thead><tr><th scope="col">Review field</th><th scope="col">Design evidence or decision</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Intended route<br /><small>Finished plastic, fit prototype, or casting master</small></th><td class="worksheet-blank" contenteditable="true" aria-label="Intended route"></td></tr>
+        <tr><th scope="row">Final dimensions</th><td class="worksheet-blank" contenteditable="true" aria-label="Final dimensions"></td></tr>
+        <tr><th scope="row">Smallest critical feature</th><td class="worksheet-blank" contenteditable="true" aria-label="Smallest critical feature"></td></tr>
+        <tr><th scope="row">Openings or stone seats</th><td class="worksheet-blank" contenteditable="true" aria-label="Openings or stone seats"></td></tr>
+        <tr><th scope="row">Visible surfaces</th><td class="worksheet-blank" contenteditable="true" aria-label="Visible surfaces"></td></tr>
+        <tr><th scope="row">Support-sensitive surfaces</th><td class="worksheet-blank" contenteditable="true" aria-label="Support-sensitive surfaces"></td></tr>
+        <tr><th scope="row">Mirrored or paired parts</th><td class="worksheet-blank" contenteditable="true" aria-label="Mirrored or paired parts"></td></tr>
+        <tr><th scope="row">Target weight</th><td class="worksheet-blank" contenteditable="true" aria-label="Target weight"></td></tr>
+        <tr><th scope="row">Material and printer compatibility evidence</th><td class="worksheet-blank" contenteditable="true" aria-label="Material and printer compatibility evidence"></td></tr>
+        <tr><th scope="row">Required cleanup</th><td class="worksheet-blank" contenteditable="true" aria-label="Required cleanup"></td></tr>
+        <tr><th scope="row">Skin-contact status</th><td class="worksheet-blank" contenteditable="true" aria-label="Skin contact status"></td></tr>
+        <tr><th scope="row">Caster and material confirmation<br /><small>When applicable</small></th><td class="worksheet-blank" contenteditable="true" aria-label="Caster and material confirmation"></td></tr>
+        <tr><th scope="row">Pass/fail test for the first small print</th><td class="worksheet-blank" contenteditable="true" aria-label="Pass or fail test for the first small print"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="worked-example" aria-labelledby="pendant-example">
+      <h3 id="pendant-example">Fictional worked example: pendant fit prototype</h3>
+      <p><strong>This is a planning example, not a customer result.</strong> It shows how to define the review without inventing printer settings, resin values, tolerances, or casting instructions.</p>
+      <table>
+        <thead><tr><th scope="col">Review field</th><th scope="col">Fictional example response</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Route and purpose</th><td>Fit prototype to check scale, chain clearance, orientation, and how the pendant sits. It is not a casting master or a skin-contact approval.</td></tr>
+          <tr><th scope="row">Geometry review</th><td>Use the final-size CAD file. Mark the chain opening as the critical feature, the front face as visible, and the rear edge as support-sensitive. There is one part, not a mirrored pair.</td></tr>
+          <tr><th scope="row">Material, cleanup, and safety</th><td>Choose only after confirming the candidate material is supported by the available printer. Record support removal and surface cleanup. Do not approve prolonged skin contact from this fit test.</td></tr>
+          <tr><th scope="row">First-print decision</th><td>Pass only if the intended chain moves through the opening, the pendant hangs in the intended orientation, the visible face survives cleanup, and the recorded dimensions match the team's drawing. Otherwise revise and repeat the small test.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="intent-cta"><a href="/consulting.html">Need a software workflow for a configurable product or design-review tool? Discuss the product workflow.</a></p>
 
   <h2>Design from the final surface backward</h2>
   <p>Place seams, supports, and connection points where cleanup will not erase the most visible texture. Check openings, sharp points, thin sections, stone seats, and mating parts at the intended size. A strong screen rendering does not prove that a tiny feature will print, survive cleanup, cast, or wear safely.</p>
