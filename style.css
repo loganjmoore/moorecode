@@ -715,6 +715,46 @@ section h2 {
   background: var(--bg-elev);
 }
 
+.decision-worksheet {
+  margin: 34px 0;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+}
+
+.prose .decision-worksheet h2 { margin-top: 0; }
+.prose .decision-worksheet h3 { margin: 24px 0 8px; }
+.decision-worksheet .worksheet-blank { min-width: 190px; color: var(--text); }
+.prose .resource-link,
+.prose .intent-cta a { font-weight: 700; }
+.prose .intent-cta { margin-top: 32px; }
+
+@media (max-width: 760px) {
+  .decision-worksheet { margin-inline: -8px; padding: 18px 14px; }
+  .decision-worksheet table { font-size: 13px; }
+  .decision-worksheet th,
+  .decision-worksheet td { min-width: 150px; padding: 9px 10px; }
+  .decision-worksheet th:first-child,
+  .decision-worksheet td:first-child { min-width: 130px; }
+}
+
+@media print {
+  .decision-worksheet {
+    break-before: page;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #fff;
+  }
+
+  .decision-worksheet table { display: table; overflow: visible; font-size: 9pt; }
+  .decision-worksheet th,
+  .decision-worksheet td { padding: 5pt; border-color: #999; color: #111; }
+  .decision-worksheet th { background: #eee; }
+  .decision-worksheet tr { break-inside: avoid; }
+}
+
 /* ---------- Prototype test-plan builder ---------- */
 .prototype-route-choices {
   margin: 32px 0;

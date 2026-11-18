@@ -21,13 +21,25 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Best 3D Printing Accessories: Ranked Starter Kit",
-  "description": "Compare 3D printing accessories by priority: nozzles, build surfaces, filament dryers, measuring tools, cleanup tools, and safety equipment.",
-  "url": "https://moorecode.com/guides/3d-printing-accessories.html",
-  "datePublished": "2026-10-27",
-  "dateModified": "2026-11-05",
-  "author": { "@type": "Person", "name": "Logan Moore", "url": "https://moorecode.com/" }
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Best 3D Printing Accessories: Ranked Starter Kit",
+      "description": "Compare 3D printing accessories by priority: nozzles, build surfaces, filament dryers, measuring tools, cleanup tools, and safety equipment.",
+      "url": "https://moorecode.com/guides/3d-printing-accessories.html",
+      "datePublished": "2026-10-27",
+      "dateModified": "2026-11-17",
+      "author": { "@type": "Person", "name": "Logan Moore", "url": "https://moorecode.com/" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What accessories do I need before my first 3D print?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Before a first 3D print, use the printer's included tools and approved build-surface cleaning method. Have a measuring tool for the fit check and a supported cleanup tool only if the model needs supports or edge cleanup. Defer a new nozzle, build surface, dryer, enclosure, and duplicate tools until the printer documentation or a diagnosed job requires them." }
+      }]
+    }
+  ]
 }
 </script>
 <script src="/navigation.js" defer></script>
@@ -42,7 +54,7 @@
 <main>
 <article>
 <header class="post-head">
-  <p class="post-meta">Evergreen guide · Last updated November 5, 2026 · By Logan Moore</p>
+  <p class="post-meta">Evergreen guide · Last updated November 17, 2026 · By Logan Moore</p>
   <h1>3D printing accessories</h1>
 </header>
 <section class="prose">
@@ -73,6 +85,43 @@
     </table>
   </section>
 
+  <section class="decision-worksheet" aria-labelledby="accessory-checklist">
+    <h2 id="accessory-checklist">Buy now, diagnose first, or skip</h2>
+    <p>Use this 3D printing accessories checklist before buying a bundle. Every item needs a specific first-print task, a diagnosed material or maintenance problem, or a job the current setup cannot complete.</p>
+
+    <h3>First print</h3>
+    <table>
+      <thead><tr><th scope="col">Accessory</th><th scope="col">Task that justifies it</th><th scope="col">Check in the printer documentation</th><th scope="col">Safe skip condition</th></tr></thead>
+      <tbody>
+        <tr><td>Digital calipers</td><td>Measure a named dimension or compare a fit-check part with the model.</td><td>Expected calibration or dimensional-check procedure.</td><td>Reuse an accurate measuring tool when the first print has no critical fit.</td></tr>
+        <tr><td>Flush cutters or deburring tool</td><td>Remove documented supports or clean an edge that blocks the fit check.</td><td>Included tools and the approved support-removal method.</td><td>Skip a purchase when the printer includes a suitable tool or the model needs no cleanup.</td></tr>
+        <tr><td>Build-surface cleaning supplies</td><td>Prepare the supplied surface before the first print.</td><td>The exact cleaner, concentration, cloth, and cleaning sequence allowed for that surface.</td><td>Skip a separate product when the maker specifies supplies already on hand.</td></tr>
+        <tr><td>Closed filament storage</td><td>Store an opened spool between prints.</td><td>Material storage guidance and whether the spool must stay in a controlled container.</td><td>Reuse a clean closed container when it meets the material guidance.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>After a diagnosed material or maintenance problem</h3>
+    <table>
+      <thead><tr><th scope="col">Accessory</th><th scope="col">Symptom that justifies it</th><th scope="col">Check in the printer documentation</th><th scope="col">Safe skip condition</th></tr></thead>
+      <tbody>
+        <tr><td>Filament dryer</td><td>Moisture is identified after checking the material, slicer profile, and machine condition.</td><td>Supported drying method plus the filament maker's time and temperature instructions.</td><td>Skip when the material is dry or the symptom has another confirmed cause.</td></tr>
+        <tr><td>Replacement build surface</td><td>The supplied surface is damaged, worn, or unsupported for the selected material.</td><td>Compatible surface, preparation, release, and temperature instructions.</td><td>Keep the supplied surface while it is undamaged and the approved profile works.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Job-specific upgrade</h3>
+    <table>
+      <thead><tr><th scope="col">Accessory</th><th scope="col">Task that justifies it</th><th scope="col">Check in the printer documentation</th><th scope="col">Safe skip condition</th></tr></thead>
+      <tbody>
+        <tr><td>Material-specific nozzle</td><td>Print an abrasive supported material or a line width the current nozzle cannot produce.</td><td>Supported nozzle material and diameter, installation, and matching slicer profile.</td><td>Keep the general-purpose nozzle for ordinary supported filament and line widths.</td></tr>
+        <tr><td>Enclosure</td><td>Run a supported material whose documented workflow calls for controlled build conditions.</td><td>Whether the printer may be enclosed, temperature limits, and ventilation requirements.</td><td>Skip when the printer or material maker does not call for one; an enclosure does not replace ventilation.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <h2>A fictional first PLA fit-check</h2>
+  <p>Suppose the first job is a small PLA cover used only to check whether two tabs align. The maker reuses a household container for closed spool storage, the printer's included cleanup tool, and an accurate measuring tool already on hand. The supplied build surface is cleaned exactly as its documentation says. A dryer, different nozzle, replacement surface, enclosure, painting tools, and duplicate cutters are deferred because this fit check has not produced a symptom or task that requires them.</p>
+
   <h2>Which nozzle belongs in a starter kit?</h2>
   <p>Keep the printer's supported general-purpose nozzle until a real job requires another one. A smaller opening can trade speed for finer paths; a larger opening can trade detail for wider, faster paths. Abrasive filled materials may require a wear-resistant nozzle. Change the slicer profile to match the installed diameter and use only nozzle types the printer maker supports.</p>
 
@@ -84,6 +133,16 @@
 
   <h2>Build the kit from the job backward</h2>
   <p>Choose the printer and material first, read their current instructions, then list the measurements, storage, support removal, surface preparation, and safety controls the job needs. Plan the workspace with the <a href="/blog/desktop-3d-printing-setup-safe-workspace.html">desktop 3D printing setup guide</a>, narrow the material choice with the <a href="/blog/3d-printing-filament-pla-petg-tpu.html">PLA, PETG, and TPU guide</a>, follow the <a href="/guides/painting-3d-prints.html">3D print painting guide</a> when surface preparation is part of the job, and estimate direct job costs with the <a href="/calculators/3d-printing-price-calculator.html">3D printing price calculator</a>.</p>
+
+  <section aria-labelledby="accessories-faq">
+    <h2 id="accessories-faq">3D printing accessories FAQ</h2>
+    <div class="faq-list">
+      <div>
+        <h3>What accessories do I need before my first 3D print?</h3>
+        <p>Before a first 3D print, use the printer's included tools and approved build-surface cleaning method. Have a measuring tool for the fit check and a supported cleanup tool only if the model needs supports or edge cleanup. Defer a new nozzle, build surface, dryer, enclosure, and duplicate tools until the printer documentation or a diagnosed job requires them.</p>
+      </div>
+    </div>
+  </section>
 </section>
 </article>
 </main>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prototype Brief | MooreCode</title>
+<meta name="robots" content="noindex" />
+<link rel="stylesheet" href="/style.css" />
+<style>
+  .prototype-brief { max-width: 820px; margin: 0 auto; padding: 32px 24px 56px; }
+  .prototype-brief h1 { margin: 0 0 6px; }
+  .prototype-brief .example-note { color: var(--accent); font-weight: 700; }
+  .brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; margin: 24px 0; }
+  .brief-field { padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .brief-field strong { display: block; margin-bottom: 5px; color: var(--text); }
+  .brief-field span { color: var(--text-dim); }
+  .brief-field.wide { grid-column: 1 / -1; }
+  .print-action { display: inline-flex; min-height: 44px; align-items: center; margin-top: 18px; color: var(--accent); font: inherit; font-weight: 700; background: none; border: 0; border-bottom: 1px solid currentColor; cursor: pointer; }
+  .print-action:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  @media (max-width: 620px) { .brief-grid { grid-template-columns: 1fr; } .brief-field.wide { grid-column: auto; } }
+  @media print {
+    @page { size: letter; margin: 0.45in; }
+    body { background: #fff; color: #111; }
+    .prototype-brief { max-width: none; padding: 0; font-size: 10pt; }
+    .prototype-brief h1, .prototype-brief h2, .brief-field strong { color: #111; }
+    .prototype-brief h1 { font-size: 22pt; }
+    .prototype-brief h2 { margin: 14pt 0 5pt; font-size: 13pt; }
+    .prototype-brief p { margin: 5pt 0; line-height: 1.35; }
+    .brief-grid { gap: 8pt 18pt; margin: 12pt 0; }
+    .brief-field { padding-bottom: 5pt; border-color: #777; break-inside: avoid; }
+    .brief-field span { color: #111; }
+    .print-action { display: none; }
+  }
+</style>
+</head>
+<body>
+<main class="prototype-brief">
+  <p class="example-note">Fictional example: handheld electronics enclosure</p>
+  <h1>Prototype brief</h1>
+  <p>Write the question before choosing the process. Replace this fictional example with the evidence your team needs.</p>
+  <div class="brief-grid">
+    <div class="brief-field"><strong>Revision</strong><span>A · fit-check model</span></div>
+    <div class="brief-field"><strong>Quantity</strong><span>1 test part</span></div>
+    <div class="brief-field wide"><strong>Test question</strong><span>Do the board mounts and two cover tabs align, and can a user reach the side button?</span></div>
+    <div class="brief-field wide"><strong>Critical dimensions and tolerances</strong><span>Record the board-mount spacing, tab engagement, and button clearance from the controlled drawing. Add numeric tolerances only after the team defines them.</span></div>
+    <div class="brief-field"><strong>Material and finish</strong><span>PLA for this fictional form-and-fit check; finish is not evaluated.</span></div>
+    <div class="brief-field"><strong>Due date</strong><span>Team to enter</span></div>
+    <div class="brief-field wide"><strong>Pass/fail checks</strong><span>Board installs without forcing; both tabs engage; the real button remains reachable; measurements are recorded against the drawing.</span></div>
+    <div class="brief-field wide"><strong>Inspection record</strong><span>File revision, printer/profile, material, orientation, measuring tool, named measurements, photos, result, reviewer, and date.</span></div>
+  </div>
+  <h2>Route-change note</h2>
+  <p>If the next revision tests functional load or a required production material, replace the fit-check question with that requirement. Name the load direction, material and finish, critical tolerances, quantity, pass/fail checks, and inspection record. Outsource when the local process cannot represent or document that evidence.</p>
+  <button class="print-action" type="button" onclick="window.print()">Print or save as PDF</button>
+</main>
+</body>
+</html>

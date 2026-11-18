@@ -96,8 +96,8 @@ const accessoriesStarterKit = directAnswer(accessoriesGuide);
 assert.match(accessoriesGuide, /<h1>3D printing accessories<\/h1>/);
 assert.match(accessoriesOpening, /^The 3D printing accessories you actually need are /);
 assert.match(accessoriesOpening, /MooreCode is a website by Logan Moore for practical 3D printing guides and software projects\./);
-assert.match(accessoriesGuide, /Evergreen guide · Last updated November 5, 2026 · By Logan Moore/);
-assert.match(accessoriesGuide, /"dateModified": "2026-11-05"/);
+assert.match(accessoriesGuide, /Evergreen guide · Last updated November 17, 2026 · By Logan Moore/);
+assert.match(accessoriesGuide, /"dateModified": "2026-11-17"/);
 assert.ok(accessoriesStarterKit.indexOf('Required 3D printing accessories') < accessoriesStarterKit.indexOf('Optional 3D printing accessories'));
 assert.equal((accessoriesStarterKit.match(/<table>/g) || []).length, 2, 'The starter kit needs separate required and optional tables');
 for (const heading of ['Item', 'Why it matters', 'When to skip it']) {
@@ -109,6 +109,25 @@ for (const href of [
   '/guides/painting-3d-prints.html',
   '/calculators/3d-printing-price-calculator.html',
 ]) assert.match(accessoriesGuide, new RegExp(`href="${href}"`), `Accessory guide needs ${href}`);
+assert.match(accessoriesGuide, /<h2 id="accessory-checklist">Buy now, diagnose first, or skip<\/h2>/);
+assert.match(accessoriesGuide, /What accessories do I need before my first 3D print\?/);
+const accessoriesGraph = JSON.parse(accessoriesGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const accessoriesFaq = accessoriesGraph.find((item) => item['@type'] === 'FAQPage').mainEntity[0];
+assert.ok(accessoriesGuide.includes(`<p>${accessoriesFaq.acceptedAnswer.text}</p>`), 'Accessory FAQ schema must exactly match visible copy');
+
+const dentistsGuide = read('guides/3d-printing-for-dentists.html');
+assert.match(dentistsGuide, /<h2 id="dental-buying-worksheet">Dental 3D printer buying worksheet<\/h2>/);
+for (const row of ['Intended appliance or item', 'Patient-contact status', 'Current outsourced cost and turnaround', 'Expected monthly volume', 'Owner of validation and records']) {
+  assert.ok(dentistsGuide.includes(`<td>${row}</td>`), `Dental worksheet needs ${row}`);
+}
+const dentistsGraph = JSON.parse(dentistsGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const costsFaq = dentistsGraph.find((item) => item['@type'] === 'FAQPage').mainEntity.find((item) => item.name === 'What costs belong in a dental 3D printer buying decision?');
+assert.ok(dentistsGuide.includes(`<p>${costsFaq.acceptedAnswer.text}</p>`), 'Dental cost FAQ schema must exactly match visible copy');
+
+const rapidPrototypeGuide = read('blog/3d-printer-rapid-prototyping-in-house-or-outsource.html');
+assert.match(rapidPrototypeGuide, /Download the prototype brief/);
+assert.match(rapidPrototypeGuide, /Need help turning a product question into a testable prototype brief\?/);
+assert.ok(existsSync(new URL('../../resources/prototype-brief.html', import.meta.url)), 'Downloadable prototype brief must exist');
 
 const consulting = read('consulting.html');
 const graphs = [...consulting.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((match) => JSON.parse(match[1]));
@@ -254,10 +273,10 @@ const dentistGuide = read('guides/3d-printing-for-dentists.html');
 const dentistGraph = JSON.parse(dentistGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const dentistArticle = dentistGraph.find((item) => item['@type'] === 'Article');
 const dentistFaq = dentistGraph.find((item) => item['@type'] === 'FAQPage');
-assert.equal(dentistArticle.dateModified, '2026-11-03');
-assert.equal(dentistFaq.mainEntity.length, 3);
+assert.equal(dentistArticle.dateModified, '2026-11-17');
+assert.equal(dentistFaq.mainEntity.length, 4);
 assert.match(dentistGuide, /<h2 id="dental-questions">Dental 3D printing questions<\/h2>/);
-assert.doesNotMatch(dentistGuide, /Questions to answer before buying a printer/);
+assert.match(dentistGuide, /<h2>What should a dental practice decide before buying a printer\?<\/h2>/);
 for (const item of dentistFaq.mainEntity) {
   assert.ok(dentistGuide.includes(`<h3>${item.name}</h3>`), `Dentist guide must show FAQ question: ${item.name}`);
   assert.ok(dentistGuide.includes(`<p>${item.acceptedAnswer.text}</p>`), `Dentist guide must keep visible and structured FAQ answers aligned`);
@@ -291,7 +310,7 @@ const rapidPrototypingFaq = rapidPrototypingGraph.find((item) => item['@type'] =
 assert.equal(decodeHtml(rapidPrototypingGuide.match(/<title>([^<]+)<\/title>/)[1]), '3D Printer Rapid Prototyping: In-House or Outsource?');
 assert.ok(rapidPrototypingDescription.length <= 160);
 assert.equal(rapidPrototypingPost.datePublished, '2026-11-01');
-assert.equal(rapidPrototypingPost.dateModified, '2026-11-01');
+assert.equal(rapidPrototypingPost.dateModified, '2026-11-17');
 assert.equal(rapidPrototypingPost.image, 'https://moorecode.com/blog/images/3d-printer-rapid-prototyping-in-house-or-outsource.svg');
 assert.equal(firstProseParagraph(rapidPrototypingGuide).split(/(?<=[.!?])\s+/).length, 3);
 assert.equal(rapidPrototypingFaq.mainEntity.length, 4);
