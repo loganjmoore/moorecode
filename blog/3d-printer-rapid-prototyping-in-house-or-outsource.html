@@ -35,7 +35,7 @@
       "url": "https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html",
       "mainEntityOfPage": "https://moorecode.com/blog/3d-printer-rapid-prototyping-in-house-or-outsource.html",
       "datePublished": "2026-11-01",
-      "dateModified": "2026-11-01",
+      "dateModified": "2026-11-17",
       "image": "https://moorecode.com/blog/images/3d-printer-rapid-prototyping-in-house-or-outsource.svg",
       "author": { "@id": "https://moorecode.com/#logan" },
       "publisher": { "@id": "https://moorecode.com/#logan" },
@@ -122,6 +122,23 @@
 
   <p class="lede">3D printer rapid prototyping is the fast cycle of printing, checking, and revising physical parts from a digital model. Use a desktop FDM printer when the part fits the build volume and the next question concerns shape, fit, handling, or a low-risk function its material can represent. Outsource when material, tolerance, finish, size, inspection, or load evidence exceeds what that machine can demonstrate.</p>
 
+  <section class="decision-worksheet" aria-labelledby="prototype-route-table">
+    <h2 id="prototype-route-table">Choose a prototype route from the test goal</h2>
+    <table>
+      <thead><tr><th scope="col">Test goal</th><th scope="col">Suitable starting route</th><th scope="col">Evidence to request</th><th scope="col">Condition that triggers outsourcing</th></tr></thead>
+      <tbody>
+        <tr><td>Fit and ergonomics</td><td>Desktop FDM fit coupon or handling model</td><td>Named interfaces, actual mating parts, measurements, and user observations</td><td>The printer cannot represent a critical interface, weight, flexibility, or surface safely enough for the test.</td></tr>
+        <tr><td>Visual presentation</td><td>In-house form model when layer lines and simple finishing do not affect the decision</td><td>Approved viewing distance, color or finish target, and stakeholder acceptance notes</td><td>Fine detail, transparency, exact color, or presentation finish controls approval.</td></tr>
+        <tr><td>Functional load</td><td>In-house only when material, orientation, fixture, and load can represent the service question</td><td>Load direction, fixture, test method, failure mode, and measured result</td><td>The required final material behavior, isotropy, process, or safety evidence is unavailable in-house.</td></tr>
+        <tr><td>Tight tolerance</td><td>Small in-house coupon for the critical feature</td><td>Controlled measurements, instrument, repeat print, and required tolerance</td><td>A controlled repeat misses the requirement or formal dimensional inspection is required.</td></tr>
+        <tr><td>Special material</td><td>Form model in a supported substitute only when material behavior is not the current question</td><td>Required property, intended environment, and supplier documentation for the proposed material</td><td>The test depends on a material or process the desktop printer cannot reproduce.</td></tr>
+        <tr><td>Large size</td><td>Scaled model or representative section when it answers the named question</td><td>Scale, split locations, full-size interfaces, and assembly method</td><td>Full-scale geometry, an uninterrupted part, or the real assembly behavior is required.</td></tr>
+        <tr><td>Documented inspection</td><td>In-house only for an informal learning print with records you can produce</td><td>Inspection plan, measured features, instrument, report format, and traceability</td><td>A customer, regulator, or test plan requires independent or supplier inspection documentation.</td></tr>
+      </tbody>
+    </table>
+    <p><a class="resource-link" href="/resources/prototype-brief.html" download="prototype-brief.html">Download the prototype brief</a> to define the test before choosing a printer or outside process. It is a one-page fictional example that works without signup.</p>
+  </section>
+
   <section class="direct-answer" aria-labelledby="rapid-prototyping-decision">
     <h2 id="rapid-prototyping-decision">When is a desktop FDM printer enough for rapid prototyping?</h2>
     <p>A desktop FDM printer is enough when its output can answer the next design question with a measurement you trust.</p>
@@ -192,6 +209,12 @@
   <p>Filament price alone can make an in-house part look cheap. Count setup, machine occupancy, cleanup, measurement, and the time spent diagnosing misses. For the outside quote, count lead time, shipping, supplier communication, and the possibility of another revision. A service part that arrives later but closes the material or tolerance question can be faster than a week of local reprints.</p>
 
   <p>I use a simple gate: keep printing locally while each iteration produces new evidence the desktop process can represent. Send the part out when another local print would repeat a known limit. That keeps rapid prototyping focused on learning instead of keeping a printer busy.</p>
+
+  <h2>Worked example: from FDM fit check to outsourced functional part</h2>
+  <p>The downloadable brief uses a clearly fictional electronics enclosure. For the first pass, its revision A question is narrow: do the mounting tabs align and can a user reach the button? The team can print a PLA shell in-house, reuse the real board and fasteners, measure the named interfaces, and ignore presentation finish. Pass or fail is recorded against fit and access, not against strength.</p>
+  <p>After fit passes, revision B changes the question to whether the enclosure survives its defined service load in the required material. The brief now names the material and finish requirement, quantity, load direction, critical dimensions and tolerances, pass/fail checks, and requested inspection record. If the desktop process cannot represent those requirements, the same brief becomes the basis for an outside quote. The route changes because the evidence changed, not because outsourcing is automatically better.</p>
+
+  <p class="intent-cta"><a href="/consulting.html">Need help turning a product question into a testable prototype brief?</a></p>
 
   <h2>What do people ask about 3D printer rapid prototyping?</h2>
 
