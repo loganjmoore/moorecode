@@ -781,7 +781,7 @@ for (const destination of ['/blog/desktop-3d-printing-setup-safe-workspace.html'
 assert.match(homePrintingGuide, /Eight useful first projects for home 3D printing[\s\S]*<ol>/);
 
 const invoicingGuide = read('blog/simple-invoicing-app-pricing-service-businesses.html');
-assert.match(invoicingGuide, /<title>Invoicing Software Pricing for Service Businesses \(2026\)<\/title>/);
+assert.match(invoicingGuide, /<title>Billing Software Pricing: 5 Tools Compared \(2026\)<\/title>/);
 assert.match(invoicingGuide, /Assessment method and date:/);
 assert.match(invoicingGuide, /checked all five publishers' primary pricing or help pages on November 17, 2026/);
 assert.match(invoicingGuide, /The example is an illustrative calculation, not a quote/);
