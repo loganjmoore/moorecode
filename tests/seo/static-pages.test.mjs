@@ -273,7 +273,7 @@ const dentistGuide = read('guides/3d-printing-for-dentists.html');
 const dentistGraph = JSON.parse(dentistGuide.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const dentistArticle = dentistGraph.find((item) => item['@type'] === 'Article');
 const dentistFaq = dentistGraph.find((item) => item['@type'] === 'FAQPage');
-assert.equal(dentistArticle.dateModified, '2026-11-17');
+assert.equal(dentistArticle.dateModified, '2026-11-24');
 assert.equal(dentistFaq.mainEntity.length, 4);
 assert.match(dentistGuide, /<h2 id="dental-questions">Dental 3D printing questions<\/h2>/);
 assert.match(dentistGuide, /<h2>What should a dental practice decide before buying a printer\?<\/h2>/);
@@ -331,7 +331,7 @@ for (const match of llms.matchAll(/^- \[([^\]]+)\]\(https:\/\/moorecode\.com\/([
 for (const [path, expectedTitle] of [
   ['blog/desktop-3d-printing-setup-safe-workspace.html', 'Desktop 3D Printing: Types, Materials & Uses | MooreCode'],
   ['guides/3d-printing-at-home.html', '3D Printing at Home: Setup, Safety & Projects | MooreCode'],
-  ['guides/3d-printing-for-dentists.html', '3D Printing for Dentists: Materials & Workflow | MooreCode'],
+  ['guides/3d-printing-for-dentists.html', '3D Printing in Dentistry: Uses & Materials | MooreCode'],
   ['guides/painting-3d-prints.html', 'How to Paint 3D Prints: Prep to Finish | MooreCode'],
 ]) {
   const html = read(path);
