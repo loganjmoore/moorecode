@@ -42,7 +42,7 @@ for (const [location, contentDate] of [
   ['https://moorecode.com/guides/3d-printing-accessories.html', '2026-11-17'],
   ['https://moorecode.com/guides/start-a-3d-printing-business.html', '2026-11-05'],
   ['https://moorecode.com/guides/3d-printing-for-dentists.html', '2026-11-24'],
-  ['https://moorecode.com/guides/3d-printing-jewelry.html', '2026-11-04'],
+  ['https://moorecode.com/guides/3d-printing-jewelry.html', '2026-11-24'],
   ['https://moorecode.com/guides/3d-printing-manufacturing.html', '2026-11-05'],
   ['https://moorecode.com/guides/painting-3d-prints.html', '2026-11-05'],
   ['https://moorecode.com/guides/carbon-3d-printing.html', '2026-11-05'],

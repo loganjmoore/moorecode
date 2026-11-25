@@ -443,7 +443,8 @@ assert.match(filamentGuide, /href="\/blog\/#printing-guide-selector">3D printing
 assert.match(filamentGuide, /<h1>PLA 3D printing:/);
 const filamentLedeEnd = filamentGuide.indexOf('</p>', filamentGuide.indexOf('<p class="lede">')) + 4;
 const filamentFirstSection = filamentGuide.indexOf('<section', filamentLedeEnd);
-assert.equal(filamentFirstSection, filamentGuide.indexOf('<section class="direct-answer"', filamentLedeEnd), 'PLA quick start must sit directly under the intro');
+assert.equal(filamentFirstSection, filamentGuide.indexOf('<section aria-labelledby="what-is-pla">', filamentLedeEnd), 'PLA definition must sit directly under the intro');
+assert.match(filamentGuide.slice(filamentFirstSection, filamentGuide.indexOf('</section>', filamentFirstSection)), /What is PLA filament\?[\s\S]*polylactic acid[\s\S]*Properties:[\s\S]*Printing behavior:[\s\S]*Limits:/);
 const filamentQuickAnswer = directAnswer(filamentGuide);
 assert.match(filamentQuickAnswer, /<h2 id="filament-quick-answer">Should you choose PLA, PETG, or TPU\?<\/h2>/);
 assert.match(filamentQuickAnswer, /MooreCode's filament comparison recommends PLA/);
@@ -478,9 +479,9 @@ for (const routeLabel of [
   'Choose 3D printing accessories',
   'Start a 3D printing business',
   'Calculate 3D printing rates',
-  'Paint a 3D print',
+  '3D printing paint: a step-by-step guide',
   'Plan 3D printing for a dental practice or lab',
-  'Make a 3D-printed jewelry master',
+  '3D printing for jewelry explained',
   'Understand 3D printing in manufacturing',
   'Understand carbon 3D printing',
   'Compare desktop 3D printer categories',
