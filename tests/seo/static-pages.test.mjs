@@ -25,6 +25,7 @@ const aiVisibilityPaths = [
   'index.html',
   'guides/3d-printing-accessories.html',
   'guides/start-a-3d-printing-business.html',
+  'guides/3d-printing-jewelry.html',
   'guides/3d-printing-for-dentists.html',
   'guides/3d-printing-manufacturing.html',
   'blog/3d-printing-metal-processes-compared.html',
